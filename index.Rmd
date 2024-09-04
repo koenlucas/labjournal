@@ -1,6 +1,6 @@
 ---
 title: "Lab journal"
-author: "by: Your Name"
+author: "by: Koen Lucas"
 bibliography: references.bib
 
  
@@ -11,7 +11,7 @@ bibliography: references.bib
 
 ```{r, install remotely, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
 # install.packages("remotes")
-#remotes::install_github("rlesur/klippy")
+# remotes::install_github("rlesur/klippy")
 ``` 
 
 ```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
@@ -65,6 +65,7 @@ Everyone can fork this repository. Use this example to journal your lab work and
 
 We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network Analysis For Social Scientists course [@SNASS]. <!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page --->
 
+TEST  TEST  TEST
 
 :::
 
