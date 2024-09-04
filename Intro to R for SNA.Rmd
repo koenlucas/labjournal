@@ -1,0 +1,127 @@
+---
+title: "Tutorial"
+output: html_document
+date: "2024-09-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# A.3
+```{r}
+
+# start with clean workspace
+rm(list = ls())
+
+# install.packages I will need later here
+install.packages("installr")  # you  first install packages
+require(installr)  # then you will need to load them. This package is used to simply update R
+install.packages("foreign")
+require(foreign)  # used to read in spss data files
+require(tidyverse)
+require(haven)
+require(labelled)
+
+```
+#A.6
+```{r}
+# ignore the warnings ?read.spss note that I have saved the data files in a folder called
+# 'addfiles'.
+
+cv08 <- foreign::read.spss("tutorial_data\\Cultural_Changes_2008.sav", use.value.labels = T, to.data.frame = T)
+cv10 <- foreign::read.spss("tutorial_data\\Cultural_Changes_2010.sav", use.value.labels = T, to.data.frame = T)
+
+# normally I think setting use.value.labels=F is more convenient. Thus lets load the data again but
+# now without labels
+cv08_nolab <- foreign::read.spss("tutorial_data\\Cultural_Changes_2008.sav", use.value.labels = F, to.data.frame = T)
+cv10_nolab <- foreign::read.spss("tutorial_data\\Cultural_Changes_2010.sav", use.value.labels = F, to.data.frame = T)
+
+# finally, import the data using haven
+cv08_haven <- haven::read_spss("tutorial_data\\Cultural_Changes_2008.sav")
+cv10_haven <- haven::read_spss("tutorial_data\\Cultural_Changes_2010.sav")
+
+str(cv08)
+str(cv08_nolab)
+str(cv08_haven)
+
+
+
+names(cv08_haven)
+summary(cv08_haven)
+head(cv08_haven)
+# fix(cv08_haven) #will produce an error
+fix(cv08)
+View(cv08_haven)
+```
+
+
+#A.7 Define missings
+```{r}
+str(cv08_haven$lftop)
+summary(cv08_haven$lftop)
+attr(cv08_haven$lftop, "labels")
+table(cv08_haven$lftop, useNA = "always")
+
+#creating new variable
+cv08$lftop_new <- cv08$lftop
+
+#changing onbekend to NA
+cv08$lftop_new[cv08$lftop_new == "Onbekend"] <- NA
+
+#Did it work?
+table(cv08$lftop_new, useNA = "always")
+
+levels(cv08$lftop_new)
+
+#change to numeric
+str(cv08$lftop_new)
+
+cv08$agen <- as.numeric(as.character(cv08$lftop_new))  # how clumsy. we first convert the factor to a string and then to a numeric variable.
+table(cv08$agen, useNA = "always")
+
+str(cv08$agen)
+
+cv08_haven <- mutate(cv08_haven, lftop_new = na_if(lftop, 99))
+
+```
+
+
+#A.8 recoding variables
+```{r}
+
+levels(cv08$var006n)
+table(cv08$var006n, useNA = "always")
+
+# lets make it a numeric var first
+cv08$educn <- as.numeric(cv08$var006n)
+# check
+table(cv08$educn, useNA = "always")
+
+
+# start with an empty variable
+cv08$educ3 <- NA
+# fill category by category
+cv08$educ3[cv08$educn == 2 | cv08$educn == 3] <- 1
+cv08$educ3[cv08$educn > 3 & cv08$educn < 8] <- 2
+cv08$educ3[cv08$educn > 7 & cv08$educn < 11] <- 3
+
+prop.table(table(cv08$educ3, useNA = "always"))
+
+# check
+table(cv08$educ3, useNA = "always")
+
+
+#create labels
+levels(cv08$educ3) <- c("primary", "secondary", "tertiary")
+table(cv08$educ3, useNA = "always")
+
+### A.8.2 Tidy
+
+# inspect variable
+str(cv08_haven$var006n)
+attr(cv08_haven$var006n, "labels")
+table(cv08_haven$var006n, useNA = "always")
+
+```
+
