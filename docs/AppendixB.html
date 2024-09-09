@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2024-09-04" />
+
+<title>AppendixB</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lab1.html">Page 1</a>
+    </li>
+    <li>
+      <a href="Week_1.html">Week 1</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown-header">My project</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">AppendixB</h1>
+<h4 class="date">2024-09-04</h4>
+
+</div>
+
+
+<div id="b2.1" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> B2.1</h1>
+<pre class="r"><code>#simulating data
+
+require(MASS)</code></pre>
+<pre><code>## Loading required package: MASS</code></pre>
+<pre class="r"><code>set.seed(9864)  # We set a seed. In this we the random numbers we will generate be the same and we thus end up with the same dataset. Please not that to be absolutely sure to get the same dataset, we need to run the same R version (and packages).
+
+# let us start with simulating the opinion of both partners.
+Sigma &lt;- matrix(c(10, 4, 4, 5), 2, 2)
+opinions &lt;- mvrnorm(n = 1000, mu = c(4, 5), Sigma)
+opinion_W &lt;- opinions[, 1]
+opinion_M &lt;- opinions[, 2]
+dyad_id &lt;- 1:1000
+
+# and let&#39;s put everything together
+data &lt;- data.frame(dyad_id, opinion_W, opinion_M)
+# add some description to the data
+attr(data, &quot;description&quot;) &lt;- &quot;This is a simulated dataset to illustrate interdependencies of observations within dyads (i.e. heterosexual couples). The dataset is in wide-format: one row refers to one couple. Variables with \&quot;_W\&quot; refer to women,\&quot;_M\&quot; refer to men.&quot;
+
+# I don&#39;t think the variables need any further description.
+data$dyadbar &lt;- data$opinion_M + data$opinion_W </code></pre>
+</div>
+<div id="b-1.2.1-describe-data" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> B 1.2.1 describe
+data</h1>
+<pre class="r"><code>require(psych)</code></pre>
+<pre><code>## Loading required package: psych</code></pre>
+<pre class="r"><code>head(data)</code></pre>
+<pre><code>##   dyad_id opinion_W opinion_M   dyadbar
+## 1       1  1.180285  3.651525  4.831810
+## 2       2  9.930618  7.117465 17.048083
+## 3       3  4.022491  2.205877  6.228368
+## 4       4  2.990720  7.485650 10.476370
+## 5       5  3.024059  8.292194 11.316253
+## 6       6  8.408048  4.720610 13.128658</code></pre>
+<pre class="r"><code>str(data)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1000 obs. of  4 variables:
+##  $ dyad_id  : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ opinion_W: num  1.18 9.93 4.02 2.99 3.02 ...
+##  $ opinion_M: num  3.65 7.12 2.21 7.49 8.29 ...
+##  $ dyadbar  : num  4.83 17.05 6.23 10.48 11.32 ...
+##  - attr(*, &quot;description&quot;)= chr &quot;This is a simulated dataset to illustrate interdependencies of observations within dyads (i.e. heterosexual cou&quot;| __truncated__</code></pre>
+<pre class="r"><code>summary(data)</code></pre>
+<pre><code>##     dyad_id         opinion_W        opinion_M         dyadbar      
+##  Min.   :   1.0   Min.   :-5.337   Min.   :-2.992   Min.   :-6.674  
+##  1st Qu.: 250.8   1st Qu.: 2.141   1st Qu.: 3.517   1st Qu.: 6.000  
+##  Median : 500.5   Median : 4.222   Median : 5.013   Median : 9.307  
+##  Mean   : 500.5   Mean   : 4.201   Mean   : 5.006   Mean   : 9.206  
+##  3rd Qu.: 750.2   3rd Qu.: 6.170   3rd Qu.: 6.545   3rd Qu.:12.467  
+##  Max.   :1000.0   Max.   :14.476   Max.   :11.670   Max.   :23.211</code></pre>
+<pre class="r"><code>attr(data, &quot;description&quot;)</code></pre>
+<pre><code>## [1] &quot;This is a simulated dataset to illustrate interdependencies of observations within dyads (i.e. heterosexual couples). The dataset is in wide-format: one row refers to one couple. Variables with \&quot;_W\&quot; refer to women,\&quot;_M\&quot; refer to men.&quot;</code></pre>
+<pre class="r"><code>describe(data)</code></pre>
+<pre><code>##           vars    n   mean     sd median trimmed    mad   min     max  range
+## dyad_id      1 1000 500.50 288.82 500.50  500.50 370.65  1.00 1000.00 999.00
+## opinion_W    2 1000   4.20   3.18   4.22    4.19   3.01 -5.34   14.48  19.81
+## opinion_M    3 1000   5.01   2.27   5.01    5.02   2.25 -2.99   11.67  14.66
+## dyadbar      4 1000   9.21   4.86   9.31    9.22   4.82 -6.67   23.21  29.89
+##            skew kurtosis   se
+## dyad_id    0.00    -1.20 9.13
+## opinion_W  0.05     0.01 0.10
+## opinion_M -0.06    -0.03 0.07
+## dyadbar   -0.02    -0.02 0.15</code></pre>
+</div>
+<div id="b-2.1.2-interdependencies-correlation" class="section level1"
+number="3">
+<h1><span class="header-section-number">3</span> B 2.1.2
+interdependencies: correlation</h1>
+<pre class="r"><code>cov(data$opinion_M, data$opinion_W)  # the covariance between the two variables. Have a look at the simulation. This is indeed what we have put into the data.</code></pre>
+<pre><code>## [1] 4.154203</code></pre>
+<pre class="r"><code>cov(scale(data$opinion_M), scale(data$opinion_W))  # the covariance between the two standardized variables. That is the correlation.</code></pre>
+<pre><code>##           [,1]
+## [1,] 0.5741921</code></pre>
+<pre class="r"><code>cor.test(data$opinion_M, data$opinion_W)  # See, same value. Now also with significance.</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  data$opinion_M and data$opinion_W
+## t = 22.156, df = 998, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.5311041 0.6143179
+## sample estimates:
+##       cor 
+## 0.5741921</code></pre>
+<pre class="r"><code># correlation in a long dataset (instead of wide)
+var1 &lt;- c(data$opinion_M, data$opinion_W)
+var2 &lt;- c(data$opinion_W, data$opinion_M)
+cor.test(var1, var2)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  var1 and var2
+## t = 26.576, df = 1998, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.4779248 0.5427243
+## sample estimates:
+##       cor 
+## 0.5110503</code></pre>
+</div>
+<div id="b-2.1.3-intraclass-correlation" class="section level1"
+number="4">
+<h1><span class="header-section-number">4</span> B 2.1.3 Intraclass
+correlation</h1>
+<pre class="r"><code>#translate formulas into R
+
+MSB &lt;- var((data$opinion_M + data$opinion_W)/2) * 2
+MSW &lt;- (sum((data$opinion_M - data$opinion_W)^2))/(2 * length(data$opinion_W))
+ICC_anova &lt;- (MSB - MSW)/(MSB + MSW)
+ICC_anova</code></pre>
+<pre><code>## [1] 0.5114198</code></pre>
+<pre class="r"><code># first make a dataset in longformat.
+dyadmean &lt;- (data$opinion_M + data$opinion_W)/2
+data_long &lt;- rbind(data, data)
+data_long$partner_id &lt;- rep(1:2, each = 1000)
+data_long$dyad_id &lt;- rep(1:1000, times = 2)
+data_long$dyadmean &lt;- c(dyadmean, dyadmean)
+
+# lets the first dyad entry refer to the women and the second to the men
+data_long$opinion &lt;- ifelse(data_long$partner_id == 1, data_long$opinion_W, data_long$opinion_M)
+
+# also define the opinion of the partner
+data_long$opinion_P &lt;- ifelse(data_long$partner_id == 2, data_long$opinion_W, data_long$opinion_M)
+
+head(data_long)</code></pre>
+<pre><code>##   dyad_id opinion_W opinion_M   dyadbar partner_id dyadmean  opinion opinion_P
+## 1       1  1.180285  3.651525  4.831810          1 2.415905 1.180285  3.651525
+## 2       2  9.930618  7.117465 17.048083          1 8.524041 9.930618  7.117465
+## 3       3  4.022491  2.205877  6.228368          1 3.114184 4.022491  2.205877
+## 4       4  2.990720  7.485650 10.476370          1 5.238185 2.990720  7.485650
+## 5       5  3.024059  8.292194 11.316253          1 5.658127 3.024059  8.292194
+## 6       6  8.408048  4.720610 13.128658          1 6.564329 8.408048  4.720610</code></pre>
+<pre class="r"><code># first calculate the between variance of our sample. Note that this we only need observations of
+# the dyads once (thus N_dyads=1000)
+S_B &lt;- var(data_long$dyadmean[1:1000])
+# within variance
+SW &lt;- sum((data_long$opinion - data_long$dyadmean)^2)/1000  # we divide by the number of dyads
+# We now need to correct the observed between variance to reflect the population between variance.
+S_B_E &lt;- S_B - SW/2
+ICC_ML &lt;- S_B_E/(S_B_E + SW)
+ICC_ML</code></pre>
+<pre><code>## [1] 0.5114198</code></pre>
+</div>
+<div id="section" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> </h1>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFwcGVuZGl4QiINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KZGF0ZTogIjIwMjQtMDktMDQiDQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpgYGANCg0KDQojIEIyLjEgDQpgYGB7cn0NCiNzaW11bGF0aW5nIGRhdGENCg0KcmVxdWlyZShNQVNTKQ0Kc2V0LnNlZWQoOTg2NCkgICMgV2Ugc2V0IGEgc2VlZC4gSW4gdGhpcyB3ZSB0aGUgcmFuZG9tIG51bWJlcnMgd2Ugd2lsbCBnZW5lcmF0ZSBiZSB0aGUgc2FtZSBhbmQgd2UgdGh1cyBlbmQgdXAgd2l0aCB0aGUgc2FtZSBkYXRhc2V0LiBQbGVhc2Ugbm90IHRoYXQgdG8gYmUgYWJzb2x1dGVseSBzdXJlIHRvIGdldCB0aGUgc2FtZSBkYXRhc2V0LCB3ZSBuZWVkIHRvIHJ1biB0aGUgc2FtZSBSIHZlcnNpb24gKGFuZCBwYWNrYWdlcykuDQoNCiMgbGV0IHVzIHN0YXJ0IHdpdGggc2ltdWxhdGluZyB0aGUgb3BpbmlvbiBvZiBib3RoIHBhcnRuZXJzLg0KU2lnbWEgPC0gbWF0cml4KGMoMTAsIDQsIDQsIDUpLCAyLCAyKQ0Kb3BpbmlvbnMgPC0gbXZybm9ybShuID0gMTAwMCwgbXUgPSBjKDQsIDUpLCBTaWdtYSkNCm9waW5pb25fVyA8LSBvcGluaW9uc1ssIDFdDQpvcGluaW9uX00gPC0gb3BpbmlvbnNbLCAyXQ0KZHlhZF9pZCA8LSAxOjEwMDANCg0KIyBhbmQgbGV0J3MgcHV0IGV2ZXJ5dGhpbmcgdG9nZXRoZXINCmRhdGEgPC0gZGF0YS5mcmFtZShkeWFkX2lkLCBvcGluaW9uX1csIG9waW5pb25fTSkNCiMgYWRkIHNvbWUgZGVzY3JpcHRpb24gdG8gdGhlIGRhdGENCmF0dHIoZGF0YSwgImRlc2NyaXB0aW9uIikgPC0gIlRoaXMgaXMgYSBzaW11bGF0ZWQgZGF0YXNldCB0byBpbGx1c3RyYXRlIGludGVyZGVwZW5kZW5jaWVzIG9mIG9ic2VydmF0aW9ucyB3aXRoaW4gZHlhZHMgKGkuZS4gaGV0ZXJvc2V4dWFsIGNvdXBsZXMpLiBUaGUgZGF0YXNldCBpcyBpbiB3aWRlLWZvcm1hdDogb25lIHJvdyByZWZlcnMgdG8gb25lIGNvdXBsZS4gVmFyaWFibGVzIHdpdGggXCJfV1wiIHJlZmVyIHRvIHdvbWVuLFwiX01cIiByZWZlciB0byBtZW4uIg0KDQojIEkgZG9uJ3QgdGhpbmsgdGhlIHZhcmlhYmxlcyBuZWVkIGFueSBmdXJ0aGVyIGRlc2NyaXB0aW9uLg0KZGF0YSRkeWFkYmFyIDwtIGRhdGEkb3Bpbmlvbl9NICsgZGF0YSRvcGluaW9uX1cgDQpgYGANCiMgQiAxLjIuMSBkZXNjcmliZSBkYXRhDQpgYGB7cn0NCg0KcmVxdWlyZShwc3ljaCkNCmhlYWQoZGF0YSkNCnN0cihkYXRhKQ0Kc3VtbWFyeShkYXRhKQ0KYXR0cihkYXRhLCAiZGVzY3JpcHRpb24iKQ0KZGVzY3JpYmUoZGF0YSkNCg0KYGBgDQojIEIgMi4xLjIgaW50ZXJkZXBlbmRlbmNpZXM6IGNvcnJlbGF0aW9uDQpgYGB7cn0NCmNvdihkYXRhJG9waW5pb25fTSwgZGF0YSRvcGluaW9uX1cpICAjIHRoZSBjb3ZhcmlhbmNlIGJldHdlZW4gdGhlIHR3byB2YXJpYWJsZXMuIEhhdmUgYSBsb29rIGF0IHRoZSBzaW11bGF0aW9uLiBUaGlzIGlzIGluZGVlZCB3aGF0IHdlIGhhdmUgcHV0IGludG8gdGhlIGRhdGEuDQoNCmNvdihzY2FsZShkYXRhJG9waW5pb25fTSksIHNjYWxlKGRhdGEkb3Bpbmlvbl9XKSkgICMgdGhlIGNvdmFyaWFuY2UgYmV0d2VlbiB0aGUgdHdvIHN0YW5kYXJkaXplZCB2YXJpYWJsZXMuIFRoYXQgaXMgdGhlIGNvcnJlbGF0aW9uLg0KDQpjb3IudGVzdChkYXRhJG9waW5pb25fTSwgZGF0YSRvcGluaW9uX1cpICAjIFNlZSwgc2FtZSB2YWx1ZS4gTm93IGFsc28gd2l0aCBzaWduaWZpY2FuY2UuDQoNCiMgY29ycmVsYXRpb24gaW4gYSBsb25nIGRhdGFzZXQgKGluc3RlYWQgb2Ygd2lkZSkNCnZhcjEgPC0gYyhkYXRhJG9waW5pb25fTSwgZGF0YSRvcGluaW9uX1cpDQp2YXIyIDwtIGMoZGF0YSRvcGluaW9uX1csIGRhdGEkb3Bpbmlvbl9NKQ0KY29yLnRlc3QodmFyMSwgdmFyMikNCg0KYGBgDQojIEIgMi4xLjMgSW50cmFjbGFzcyBjb3JyZWxhdGlvbg0KYGBge3J9DQojdHJhbnNsYXRlIGZvcm11bGFzIGludG8gUg0KDQpNU0IgPC0gdmFyKChkYXRhJG9waW5pb25fTSArIGRhdGEkb3Bpbmlvbl9XKS8yKSAqIDINCk1TVyA8LSAoc3VtKChkYXRhJG9waW5pb25fTSAtIGRhdGEkb3Bpbmlvbl9XKV4yKSkvKDIgKiBsZW5ndGgoZGF0YSRvcGluaW9uX1cpKQ0KSUNDX2Fub3ZhIDwtIChNU0IgLSBNU1cpLyhNU0IgKyBNU1cpDQpJQ0NfYW5vdmENCg0KDQojIGZpcnN0IG1ha2UgYSBkYXRhc2V0IGluIGxvbmdmb3JtYXQuDQpkeWFkbWVhbiA8LSAoZGF0YSRvcGluaW9uX00gKyBkYXRhJG9waW5pb25fVykvMg0KZGF0YV9sb25nIDwtIHJiaW5kKGRhdGEsIGRhdGEpDQpkYXRhX2xvbmckcGFydG5lcl9pZCA8LSByZXAoMToyLCBlYWNoID0gMTAwMCkNCmRhdGFfbG9uZyRkeWFkX2lkIDwtIHJlcCgxOjEwMDAsIHRpbWVzID0gMikNCmRhdGFfbG9uZyRkeWFkbWVhbiA8LSBjKGR5YWRtZWFuLCBkeWFkbWVhbikNCg0KIyBsZXRzIHRoZSBmaXJzdCBkeWFkIGVudHJ5IHJlZmVyIHRvIHRoZSB3b21lbiBhbmQgdGhlIHNlY29uZCB0byB0aGUgbWVuDQpkYXRhX2xvbmckb3BpbmlvbiA8LSBpZmVsc2UoZGF0YV9sb25nJHBhcnRuZXJfaWQgPT0gMSwgZGF0YV9sb25nJG9waW5pb25fVywgZGF0YV9sb25nJG9waW5pb25fTSkNCg0KIyBhbHNvIGRlZmluZSB0aGUgb3BpbmlvbiBvZiB0aGUgcGFydG5lcg0KZGF0YV9sb25nJG9waW5pb25fUCA8LSBpZmVsc2UoZGF0YV9sb25nJHBhcnRuZXJfaWQgPT0gMiwgZGF0YV9sb25nJG9waW5pb25fVywgZGF0YV9sb25nJG9waW5pb25fTSkNCg0KaGVhZChkYXRhX2xvbmcpDQoNCiMgZmlyc3QgY2FsY3VsYXRlIHRoZSBiZXR3ZWVuIHZhcmlhbmNlIG9mIG91ciBzYW1wbGUuIE5vdGUgdGhhdCB0aGlzIHdlIG9ubHkgbmVlZCBvYnNlcnZhdGlvbnMgb2YNCiMgdGhlIGR5YWRzIG9uY2UgKHRodXMgTl9keWFkcz0xMDAwKQ0KU19CIDwtIHZhcihkYXRhX2xvbmckZHlhZG1lYW5bMToxMDAwXSkNCiMgd2l0aGluIHZhcmlhbmNlDQpTVyA8LSBzdW0oKGRhdGFfbG9uZyRvcGluaW9uIC0gZGF0YV9sb25nJGR5YWRtZWFuKV4yKS8xMDAwICAjIHdlIGRpdmlkZSBieSB0aGUgbnVtYmVyIG9mIGR5YWRzDQojIFdlIG5vdyBuZWVkIHRvIGNvcnJlY3QgdGhlIG9ic2VydmVkIGJldHdlZW4gdmFyaWFuY2UgdG8gcmVmbGVjdCB0aGUgcG9wdWxhdGlvbiBiZXR3ZWVuIHZhcmlhbmNlLg0KU19CX0UgPC0gU19CIC0gU1cvMg0KSUNDX01MIDwtIFNfQl9FLyhTX0JfRSArIFNXKQ0KSUNDX01MDQoNCmBgYA0KIw0K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("AppendixB.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

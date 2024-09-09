@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="by: Koen Lucas" />
 
+<meta name="date" content="2024-09-08" />
 
-<title>Lab journal</title>
+<title>Week 1</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -38,10 +38,6 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
-<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -376,10 +372,11 @@ div.tocify {
       <a href="lab1.html">Page 1</a>
     </li>
     <li>
-      <a href="tutorial.html">Week 1</a>
+      <a href="Week_1.html">Week 1</a>
     </li>
   </ul>
 </li>
+<li class="dropdown-header">My project</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -407,72 +404,59 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab journal</h1>
-<h4 class="author">by: Koen Lucas</h4>
+<h1 class="title toc-ignore">Week 1</h1>
+<h4 class="date">2024-09-08</h4>
 
 </div>
 
 
-<script>
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
-<hr />
-<!--- This is the best way to write a comment. 
-It also demonstrate, you can add html directly in your rmarkdown file. See: https://www.w3schools.com/html/html_comments.asp --->
-<!--- to use a multi column page we use Pandoc's fenced Div. 
-see here: https://bookdown.org/yihui/rmarkdown-cookbook/multi-column.html 
-But please note, we are not here to make a beautiful website, our intention is just to have a quick lab journal up and running --->
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="my-lab-journal" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> My Lab Journal</h1>
-<p>Last compiled on september, 2024</p>
-<p><em>Describe lab journal here.</em></p>
-<p><br></p>
-<hr />
-<div id="open-science" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Open Science</h2>
-<p>Everyone can fork this repository. Use this example to journal your
-lab work and assignments.</p>
-<p>We, Jochem Tolsma and Bas Hofstra, use this repository for our Social
-Network Analysis For Social Scientists course <span
-class="citation">(Tolsma and Hofstra 2022)</span>.
-<!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page ---></p>
-<p>TEST TEST TEST</p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><img src="images/cover.jpg" /></p>
-</div>
-</div>
-<div id="how-to-use" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> How to use</h2>
-<ol style="list-style-type: decimal">
-<li><p>Fork the repository for this website and follow instructions on
-<code>README</code> to get started <a
-href="https://github.com/JochemTolsma/labjournal">here</a>.</p></li>
-<li><p>Journal your work, by editing the .Rmd-files</p></li>
-<li><p>…</p></li>
-<li><p>Change everything to make it your own!</p></li>
-</ol>
-<p><br></p>
-<p>Use the top menu to navigate through the journal.</p>
-<hr />
-</div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="unnumbered">References</h1>
+<div id="week-1---research-question" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Week 1 - Research
+question</h1>
+<p>It has often been argued that scientific achievement exhibits a
+‘Matthew effect’, meaning that previous success is an indication of
+later success, furthering the increase in distinction <span
+class="citation">(Bol, Vaan, and Rijt 2018)</span>. The ‘Matthew effect’
+can therefore be seen as a self-reinforcing mechanism turning past
+success into future success. For instance, if only one of two equally
+talented young scholars authored a successful publication, this scholar
+is predicted to have a more successful career. To clarify, a successful
+scholar can often accumulate more ‘credit’ over time than unknown
+researchers, even if their work is of similar quality.</p>
+<p>The ‘Matthew effect’ is often explained through preferential
+attachment. In the case of co-authorship this means that those who were
+successful before are a preferential collaboration partner to those
+without those early successes. As a result, previously successful
+scholars attract more opportunities for more success in the future while
+unsuccessful scholars attract less resources, decreasing their chances
+of becoming successful in the future. We can thus presume that
+collaboration networks hold a preference to connect with those who are
+already well-connected. Hence, we can expect that highly visible/already
+established researchers have more opportunities of co-authorship <span
+class="citation">(Hâncean and Perc 2016)</span>. Consequently, it can be
+argued that scholars who have higher prestige/citations/etc. have an
+increased network size compared to scholars with less
+prestige/citations/etc.</p>
+<p><em>To what extent does a scholar’s ‘prestige’ influence a scholar’s
+network size?</em></p>
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
-<div id="ref-SNASS" class="csl-entry">
-Tolsma, Jochem, and Bas Hofstra. 2022. <em>Social Network Analysis for
-Social Scientists</em>. <a
-href="https://jtolsma.nl/SNASS/">https://jtolsma.nl/SNASS/</a>.
+<div id="ref-bol2018" class="csl-entry">
+Bol, Thijs, Mathijs de Vaan, and Arnout van de Rijt. 2018. <span>“The
+Matthew Effect in Science Funding.”</span> <em>Proceedings of the
+National Academy of Sciences</em> 115 (19): 4887–90. <a
+href="https://doi.org/10.1073/pnas.1719557115">https://doi.org/10.1073/pnas.1719557115</a>.
+</div>
+<div id="ref-hâncean2016" class="csl-entry">
+Hâncean, Marian-Gabriel, and Matjaž Perc. 2016. <span>“Homophily in
+Coauthorship Networks of East European Sociologists.”</span>
+<em>Scientific Reports</em> 6 (1). <a
+href="https://doi.org/10.1038/srep36152">https://doi.org/10.1038/srep36152</a>.
 </div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIg0KYXV0aG9yOiAiYnk6IEtvZW4gTHVjYXMiDQpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQoNCiANCi0tLQ0KDQoNCg0KDQpgYGB7ciwgaW5zdGFsbCByZW1vdGVseSwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KIyBpbnN0YWxsLnBhY2thZ2VzKCJyZW1vdGVzIikNCiMgcmVtb3Rlczo6aW5zdGFsbF9naXRodWIoInJsZXN1ci9rbGlwcHkiKQ0KYGBgIA0KDQpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KbGlicmFyeShrbml0cikNCg0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0Kb3B0c19jaHVuayRzZXQodGlkeS5vcHRzPWxpc3Qod2lkdGguY3V0b2ZmPTEwMCksdGlkeT1UUlVFLCB3YXJuaW5nID0gRkFMU0UsIG1lc3NhZ2UgPSBGQUxTRSxjb21tZW50ID0gIiM+IiwgY2FjaGU9VFJVRSwgY2xhc3Muc291cmNlPWMoInRlc3QiKSwgY2xhc3Mub3V0cHV0PWMoInRlc3QyIikpDQpvcHRpb25zKHdpZHRoID0gMTAwKQ0KcmdsOjpzZXR1cEtuaXRyKCkNCg0KDQoNCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9DQoNCmBgYA0KDQpgYGB7ciBrbGlwcHksIGVjaG89RkFMU0UsIGluY2x1ZGU9VFJVRX0NCmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpDQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpDQoja2xpcHB5OjprbGlwcHkodG9vbHRpcF9tZXNzYWdlID0gJ0NsaWNrIHRvIGNvcHknLCB0b29sdGlwX3N1Y2Nlc3MgPSAnRG9uZScpDQpgYGANCg0KDQoNCg0KLS0tLQ0KDQo8IS0tLSBUaGlzIGlzIHRoZSBiZXN0IHdheSB0byB3cml0ZSBhIGNvbW1lbnQuIA0KSXQgYWxzbyBkZW1vbnN0cmF0ZSwgeW91IGNhbiBhZGQgaHRtbCBkaXJlY3RseSBpbiB5b3VyIHJtYXJrZG93biBmaWxlLiBTZWU6IGh0dHBzOi8vd3d3Lnczc2Nob29scy5jb20vaHRtbC9odG1sX2NvbW1lbnRzLmFzcCAtLS0+IA0KDQoNCjwhLS0tIHRvIHVzZSBhIG11bHRpIGNvbHVtbiBwYWdlIHdlIHVzZSBQYW5kb2MncyBmZW5jZWQgRGl2LiANCnNlZSBoZXJlOiBodHRwczovL2Jvb2tkb3duLm9yZy95aWh1aS9ybWFya2Rvd24tY29va2Jvb2svbXVsdGktY29sdW1uLmh0bWwgDQpCdXQgcGxlYXNlIG5vdGUsIHdlIGFyZSBub3QgaGVyZSB0byBtYWtlIGEgYmVhdXRpZnVsIHdlYnNpdGUsIG91ciBpbnRlbnRpb24gaXMganVzdCB0byBoYXZlIGEgcXVpY2sgbGFiIGpvdXJuYWwgdXAgYW5kIHJ1bm5pbmcgLS0tPiANCg0KOjo6OiB7LmNvbHVtbnN9DQo6Ojogey5jb2x1bW4gd2lkdGg9IjUwJSJ9DQoNCiMgTXkgTGFiIEpvdXJuYWwNCkxhc3QgY29tcGlsZWQgb24gYHIgZm9ybWF0KFN5cy50aW1lKCksICclQiwgJVknKWAgIA0KDQoqRGVzY3JpYmUgbGFiIGpvdXJuYWwgaGVyZS4qDQoNCjxicj4NCg0KLS0tLQ0KDQojIyBPcGVuIFNjaWVuY2UgIA0KDQpFdmVyeW9uZSBjYW4gZm9yayB0aGlzIHJlcG9zaXRvcnkuIFVzZSB0aGlzIGV4YW1wbGUgdG8gam91cm5hbCB5b3VyIGxhYiB3b3JrIGFuZCBhc3NpZ25tZW50cy4gDQoNCldlLCBKb2NoZW0gVG9sc21hIGFuZCBCYXMgSG9mc3RyYSwgdXNlIHRoaXMgcmVwb3NpdG9yeSBmb3Igb3VyIFNvY2lhbCBOZXR3b3JrIEFuYWx5c2lzIEZvciBTb2NpYWwgU2NpZW50aXN0cyBjb3Vyc2UgW0BTTkFTU10uIDwhLS0tIHRoaXMgaXMgYSByZWZlcmVuY2UsIHN0b3JlZCBpbiByZWZlcmVuY2VzLmJpYi4gSXQgd2lsbCBiZSBhdXRvbWF0aWNhbGx5IGFkZGVkIGF0IHRoZSBib3R0b20gb2YgdGhlIHBhZ2UgLS0tPg0KDQpURVNUICBURVNUICBURVNUDQoNCjo6Og0KDQo6Ojogey5jb2x1bW4gd2lkdGg9IjUwJSJ9DQoNCg0KDQoNCiFbXShpbWFnZXMvY292ZXIuanBnKQ0KDQoNCjo6Og0KOjo6Og0KDQoNCiMjIEhvdyB0byB1c2UNCg0KMS4gRm9yayB0aGUgcmVwb3NpdG9yeSBmb3IgdGhpcyB3ZWJzaXRlIGFuZCBmb2xsb3cgaW5zdHJ1Y3Rpb25zIG9uIGBSRUFETUVgIHRvIGdldCBzdGFydGVkIFtoZXJlXShodHRwczovL2dpdGh1Yi5jb20vSm9jaGVtVG9sc21hL2xhYmpvdXJuYWwpLiAgDQoNCjIuIEpvdXJuYWwgeW91ciB3b3JrLCBieSBlZGl0aW5nIHRoZSAuUm1kLWZpbGVzDQoNCjMuIC4uLg0KDQo0LiBDaGFuZ2UgZXZlcnl0aGluZyB0byBtYWtlIGl0IHlvdXIgb3duIQ0KDQoNCjxicj4NCg0KVXNlIHRoZSB0b3AgbWVudSB0byBuYXZpZ2F0ZSB0aHJvdWdoIHRoZSBqb3VybmFsLg0KDQoNCi0tLS0NCg0KIyBSZWZlcmVuY2VzDQoNCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWsgMSINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KZGF0ZTogIjIwMjQtMDktMDgiDQpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpgYGANCg0KIyBXZWVrIDEgLSBSZXNlYXJjaCBxdWVzdGlvbg0KDQpJdCBoYXMgb2Z0ZW4gYmVlbiBhcmd1ZWQgdGhhdCBzY2llbnRpZmljIGFjaGlldmVtZW50IGV4aGliaXRzIGEg4oCYTWF0dGhldyBlZmZlY3TigJksIG1lYW5pbmcgdGhhdCBwcmV2aW91cyBzdWNjZXNzIGlzIGFuIGluZGljYXRpb24gb2YgbGF0ZXIgc3VjY2VzcywgZnVydGhlcmluZyB0aGUgaW5jcmVhc2UgaW4gZGlzdGluY3Rpb24gW0Bib2wyMDE4XS4gVGhlIOKAmE1hdHRoZXcgZWZmZWN04oCZIGNhbiB0aGVyZWZvcmUgYmUgc2VlbiBhcyBhIHNlbGYtcmVpbmZvcmNpbmcgbWVjaGFuaXNtIHR1cm5pbmcgcGFzdCBzdWNjZXNzIGludG8gZnV0dXJlIHN1Y2Nlc3MuIEZvciBpbnN0YW5jZSwgaWYgb25seSBvbmUgb2YgdHdvIGVxdWFsbHkgdGFsZW50ZWQgeW91bmcgc2Nob2xhcnMgYXV0aG9yZWQgYSBzdWNjZXNzZnVsIHB1YmxpY2F0aW9uLCB0aGlzIHNjaG9sYXIgaXMgcHJlZGljdGVkIHRvIGhhdmUgYSBtb3JlIHN1Y2Nlc3NmdWwgY2FyZWVyLiBUbyBjbGFyaWZ5LCBhIHN1Y2Nlc3NmdWwgc2Nob2xhciBjYW4gb2Z0ZW4gYWNjdW11bGF0ZSBtb3JlIOKAmGNyZWRpdOKAmSBvdmVyIHRpbWUgdGhhbiB1bmtub3duIHJlc2VhcmNoZXJzLCBldmVuIGlmIHRoZWlyIHdvcmsgaXMgb2Ygc2ltaWxhciBxdWFsaXR5Lg0KDQpUaGUg4oCYTWF0dGhldyBlZmZlY3TigJkgaXMgb2Z0ZW4gZXhwbGFpbmVkIHRocm91Z2ggcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQuIEluIHRoZSBjYXNlIG9mIGNvLWF1dGhvcnNoaXAgdGhpcyBtZWFucyB0aGF0IHRob3NlIHdobyB3ZXJlIHN1Y2Nlc3NmdWwgYmVmb3JlIGFyZSBhIHByZWZlcmVudGlhbCBjb2xsYWJvcmF0aW9uIHBhcnRuZXIgdG8gdGhvc2Ugd2l0aG91dCB0aG9zZSBlYXJseSBzdWNjZXNzZXMuIEFzIGEgcmVzdWx0LCBwcmV2aW91c2x5IHN1Y2Nlc3NmdWwgc2Nob2xhcnMgYXR0cmFjdCBtb3JlIG9wcG9ydHVuaXRpZXMgZm9yIG1vcmUgc3VjY2VzcyBpbiB0aGUgZnV0dXJlIHdoaWxlIHVuc3VjY2Vzc2Z1bCBzY2hvbGFycyBhdHRyYWN0IGxlc3MgcmVzb3VyY2VzLCBkZWNyZWFzaW5nIHRoZWlyIGNoYW5jZXMgb2YgYmVjb21pbmcgc3VjY2Vzc2Z1bCBpbiB0aGUgZnV0dXJlLiBXZSBjYW4gdGh1cyBwcmVzdW1lIHRoYXQgY29sbGFib3JhdGlvbiBuZXR3b3JrcyBob2xkIGEgcHJlZmVyZW5jZSB0byBjb25uZWN0IHdpdGggdGhvc2Ugd2hvIGFyZSBhbHJlYWR5IHdlbGwtY29ubmVjdGVkLiBIZW5jZSwgd2UgY2FuIGV4cGVjdCB0aGF0IGhpZ2hseSB2aXNpYmxlL2FscmVhZHkgZXN0YWJsaXNoZWQgcmVzZWFyY2hlcnMgaGF2ZSBtb3JlIG9wcG9ydHVuaXRpZXMgb2YgY28tYXV0aG9yc2hpcCBbQGjDom5jZWFuMjAxNl0uIENvbnNlcXVlbnRseSwgaXQgY2FuIGJlIGFyZ3VlZCB0aGF0IHNjaG9sYXJzIHdobyBoYXZlIGhpZ2hlciBwcmVzdGlnZS9jaXRhdGlvbnMvZXRjLiBoYXZlIGFuIGluY3JlYXNlZCBuZXR3b3JrIHNpemUgY29tcGFyZWQgdG8gc2Nob2xhcnMgd2l0aCBsZXNzIHByZXN0aWdlL2NpdGF0aW9ucy9ldGMuDQoNCipUbyB3aGF0IGV4dGVudCBkb2VzIGEgc2Nob2xhcuKAmXMg4oCYcHJlc3RpZ2XigJkgaW5mbHVlbmNlIGEgc2Nob2xhcuKAmXMgbmV0d29yayBzaXplPyoNCg==</div>
 
 
 </div>
@@ -510,7 +494,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("index.Rmd");
+  window.initializeSourceEmbed("Week_1.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

@@ -1,0 +1,18 @@
+---
+title: "Week 1"
+output: html_document
+date: "2024-09-08"
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Week 1 - Research question
+
+It has often been argued that scientific achievement exhibits a ‘Matthew effect’, meaning that previous success is an indication of later success, furthering the increase in distinction [@bol2018]. The ‘Matthew effect’ can therefore be seen as a self-reinforcing mechanism turning past success into future success. For instance, if only one of two equally talented young scholars authored a successful publication, this scholar is predicted to have a more successful career. To clarify, a successful scholar can often accumulate more ‘credit’ over time than unknown researchers, even if their work is of similar quality.
+
+The ‘Matthew effect’ is often explained through preferential attachment. In the case of co-authorship this means that those who were successful before are a preferential collaboration partner to those without those early successes. As a result, previously successful scholars attract more opportunities for more success in the future while unsuccessful scholars attract less resources, decreasing their chances of becoming successful in the future. We can thus presume that collaboration networks hold a preference to connect with those who are already well-connected. Hence, we can expect that highly visible/already established researchers have more opportunities of co-authorship [@hâncean2016]. Consequently, it can be argued that scholars who have higher prestige/citations/etc. have an increased network size compared to scholars with less prestige/citations/etc.
+
+*To what extent does a scholar’s ‘prestige’ influence a scholar’s network size?*

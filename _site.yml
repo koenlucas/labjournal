@@ -15,7 +15,10 @@ navbar:
       - text: "Page 1"
         href: lab1.html
       - text: "Week 1"
-        href: tutorial.html
+        href: Week_1.html
+    - text: "My project"
+      menu: 
+      
         
         # here, other .Rmds can be added
 

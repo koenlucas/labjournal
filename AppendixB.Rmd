@@ -1,0 +1,95 @@
+---
+title: "AppendixB"
+output: html_document
+date: "2024-09-04"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# B2.1 
+```{r}
+#simulating data
+
+require(MASS)
+set.seed(9864)  # We set a seed. In this we the random numbers we will generate be the same and we thus end up with the same dataset. Please not that to be absolutely sure to get the same dataset, we need to run the same R version (and packages).
+
+# let us start with simulating the opinion of both partners.
+Sigma <- matrix(c(10, 4, 4, 5), 2, 2)
+opinions <- mvrnorm(n = 1000, mu = c(4, 5), Sigma)
+opinion_W <- opinions[, 1]
+opinion_M <- opinions[, 2]
+dyad_id <- 1:1000
+
+# and let's put everything together
+data <- data.frame(dyad_id, opinion_W, opinion_M)
+# add some description to the data
+attr(data, "description") <- "This is a simulated dataset to illustrate interdependencies of observations within dyads (i.e. heterosexual couples). The dataset is in wide-format: one row refers to one couple. Variables with \"_W\" refer to women,\"_M\" refer to men."
+
+# I don't think the variables need any further description.
+data$dyadbar <- data$opinion_M + data$opinion_W 
+```
+# B 1.2.1 describe data
+```{r}
+
+require(psych)
+head(data)
+str(data)
+summary(data)
+attr(data, "description")
+describe(data)
+
+```
+# B 2.1.2 interdependencies: correlation
+```{r}
+cov(data$opinion_M, data$opinion_W)  # the covariance between the two variables. Have a look at the simulation. This is indeed what we have put into the data.
+
+cov(scale(data$opinion_M), scale(data$opinion_W))  # the covariance between the two standardized variables. That is the correlation.
+
+cor.test(data$opinion_M, data$opinion_W)  # See, same value. Now also with significance.
+
+# correlation in a long dataset (instead of wide)
+var1 <- c(data$opinion_M, data$opinion_W)
+var2 <- c(data$opinion_W, data$opinion_M)
+cor.test(var1, var2)
+
+```
+# B 2.1.3 Intraclass correlation
+```{r}
+#translate formulas into R
+
+MSB <- var((data$opinion_M + data$opinion_W)/2) * 2
+MSW <- (sum((data$opinion_M - data$opinion_W)^2))/(2 * length(data$opinion_W))
+ICC_anova <- (MSB - MSW)/(MSB + MSW)
+ICC_anova
+
+
+# first make a dataset in longformat.
+dyadmean <- (data$opinion_M + data$opinion_W)/2
+data_long <- rbind(data, data)
+data_long$partner_id <- rep(1:2, each = 1000)
+data_long$dyad_id <- rep(1:1000, times = 2)
+data_long$dyadmean <- c(dyadmean, dyadmean)
+
+# lets the first dyad entry refer to the women and the second to the men
+data_long$opinion <- ifelse(data_long$partner_id == 1, data_long$opinion_W, data_long$opinion_M)
+
+# also define the opinion of the partner
+data_long$opinion_P <- ifelse(data_long$partner_id == 2, data_long$opinion_W, data_long$opinion_M)
+
+head(data_long)
+
+# first calculate the between variance of our sample. Note that this we only need observations of
+# the dyads once (thus N_dyads=1000)
+S_B <- var(data_long$dyadmean[1:1000])
+# within variance
+SW <- sum((data_long$opinion - data_long$dyadmean)^2)/1000  # we divide by the number of dyads
+# We now need to correct the observed between variance to reflect the population between variance.
+S_B_E <- S_B - SW/2
+ICC_ML <- S_B_E/(S_B_E + SW)
+ICC_ML
+
+```
+#
