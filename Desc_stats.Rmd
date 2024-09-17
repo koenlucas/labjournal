@@ -1,0 +1,54 @@
+---
+title: "Descriptive statistics"
+output: html_document
+date: "2024-09-11"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+matrix <- matrix(c(0,1,0,0,
+                   0,0,0,0,
+                   0,0,0,0,
+                   0,0,0,0), nrow = 4, ncol = 4)
+
+require(igraph)
+
+graph <- graph_from_adjacency_matrix(matrix)
+
+triad_census(graph)
+
+```
+```{r}
+
+require(RSiena)
+
+network <- s501[1:10, 1:10]
+dim(network) #size of network
+
+graph_network <- graph_from_adjacency_matrix(network)
+
+plot(graph_network)
+
+
+degrees <- degree(graph_network, 
+       mode = c("out"),
+       normalized = FALSE)# calculation degree
+
+max(degrees) #maximum degrees in network
+min(degrees) #minimum degrees in network
+
+degrees_n <- (degrees-min(degrees))/(max(degrees)-min(degrees)) #normalised degree centrality
+degrees_n
+
+
+closeness(graph_network,
+          mode = c("out"),
+          normalized = FALSE) #closeness centrality
+betweenness(graph_network) #betweenness centrality
+transitivity(graph_network) #clustering
+
+```
+

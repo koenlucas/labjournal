@@ -1,0 +1,24 @@
+---
+title: "Week 2 - Introduction"
+output: html_document
+date: "2024-09-14"
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Week 2 - Introduction
+
+It has often been argued that scientific achievement exhibits a ‘Matthew effect’, meaning that previous success is an indication of later success, furthering the increase in distinction [@bol2018]. First introduced by Merton (1968), the ‘Matthew effect’ can therefore be seen as a self-reinforcing mechanism turning past success into future success. For instance, if only one of two equally talented young scholars authored a successful publication, this scholar is predicted to have a more successful career. To clarify, a successful scholar can often accumulate more ‘credit’ over time than unknown researchers, even if their work is of similar quality. This mechanism, often synonymously called accumulative advantage [@barabasi2002; @perc2010], is consequently causing inequality in the success of academics as it basically comes down to ‘winner takes all’ [@diprete2006]. As argued by Merton (1968), scientific contribution is more visible for community when introduced by high-ranking scientist. Thus, when early success is a predictor for future success, inequality between these scholars continues to grow.
+
+The ‘Matthew effect’ is often explained through preferential attachment. In the case of co-authorship this means that those who were successful before are a preferential collaboration partner to those without those early successes. As a result, previously successful scholars attract more opportunities for more success in the future while unsuccessful scholars attract less resources, decreasing their chances of becoming successful in the future. We can thus presume that collaboration networks hold a preference to connect with those who are already well-connected. Hence, we can expect that highly visible/already established researchers have more opportunities of co-authorship [@hancean2016]. Consequently, it can be argued that scholars who have higher prestige. have an increased network size compared to scholars with less prestige.
+
+Matthew effects in science have been found in multiple aspects of the scientific domain such as institutional prestige [@medoff2006], funding [@bol2018], and citations [@wang2014]. Additionally, preferential attachment mechanisms in the growth of collaboration networks has been found in previous research [@barabasi2002; @perc2010], however evidence concerning preferential attachment as the driving mechanism of co-authorship is mixed [@ferligoj2015]. Furthermore, little is known about the implications of the ‘Matthew effect’ in creating co-authorship ties considering the prestige of a scholar rather than only looking at the role of already existing co-authorship ties. This way it is possible to disentangle whether it is the existing collaboration network or the ego-focused prestige of a scientist that shapes co-authorship ties in future collaboration networks. Ergo, this study will look into this phenomenon by focusing on how the prestige (i.e. citation scores) and the number of co-authorship ties of a scientist at one point accumulates into more co-authorship ties on a later timepoint. I therefore propose the following two research questions:
+
+(1) *To what extent does an author’s number of co-authorship ties at T1 impact the increase in co- authorship ties at T2?*
+
+(2) *To what extent does an author’s citation score at T1 impact the increase in in co-authorship ties at T2?*
+
+## References

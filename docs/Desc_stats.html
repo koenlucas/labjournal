@@ -9,10 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Your Name" />
 
+<meta name="date" content="2024-09-11" />
 
-<title>Journal 1</title>
+<title>Descriptive statistics</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -38,10 +38,6 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
-<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -394,27 +390,64 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Journal 1</h1>
-<h4 class="author">Your Name</h4>
+<h1 class="title toc-ignore">Descriptive statistics</h1>
+<h4 class="date">2024-09-11</h4>
 
 </div>
 
 
-<script>
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
-<p>Last compiled on september, 2024</p>
-<p><br></p>
-<hr />
-<p>This is just an example page of your <span style="color: red;">lab
-journal</span>. You can journal the assignments of the first day
-here.</p>
-<hr />
-<pre class="r test"><code>print(&quot;Hello Lab Journal&quot;)</code></pre>
-<pre class="test2"><code>#&gt; [1] &quot;Hello Lab Journal&quot;</code></pre>
+<pre class="r"><code>matrix &lt;- matrix(c(0,1,0,0,
+                   0,0,0,0,
+                   0,0,0,0,
+                   0,0,0,0), nrow = 4, ncol = 4)
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkpvdXJuYWwgMSINCiNiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQphdXRob3I6ICJZb3VyIE5hbWUiDQotLS0NCg0KDQoNCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9DQpsaWJyYXJ5KGtuaXRyKQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KDQoNCg0KY29sb3JpemUgPC0gZnVuY3Rpb24oeCwgY29sb3IpIHtzcHJpbnRmKCI8c3BhbiBzdHlsZT0nY29sb3I6ICVzOyc+JXM8L3NwYW4+IiwgY29sb3IsIHgpIH0NCg0KYGBgDQoNCmBgYHtyIGtsaXBweSwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQ0Ka2xpcHB5OjprbGlwcHkocG9zaXRpb24gPSBjKCd0b3AnLCAncmlnaHQnKSkNCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykNCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykNCmBgYA0KDQpMYXN0IGNvbXBpbGVkIG9uIGByIGZvcm1hdChTeXMudGltZSgpLCAnJUIsICVZJylgDQoNCjxicj4NCg0KLS0tLQ0KICANClRoaXMgaXMganVzdCBhbiBleGFtcGxlIHBhZ2Ugb2YgeW91ciBgciBjb2xvcml6ZSgibGFiIGpvdXJuYWwiLCAicmVkIilgLg0KWW91IGNhbiBqb3VybmFsIHRoZSBhc3NpZ25tZW50cyBvZiB0aGUgZmlyc3QgZGF5IGhlcmUuDQogIA0KDQotLS0tDQoNCg0KYGBge3J9DQpwcmludCgiSGVsbG8gTGFiIEpvdXJuYWwiKQ0KYGBgDQoNCg0KDQo=</div>
+require(igraph)</code></pre>
+<pre><code>## Loading required package: igraph</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code>graph &lt;- graph_from_adjacency_matrix(matrix)
+
+triad_census(graph)</code></pre>
+<pre><code>##  [1] 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
+<pre class="r"><code>require(RSiena)</code></pre>
+<pre><code>## Loading required package: RSiena</code></pre>
+<pre class="r"><code>network &lt;- s501[1:10, 1:10]
+dim(network) #size of network</code></pre>
+<pre><code>## [1] 10 10</code></pre>
+<pre class="r"><code>graph_network &lt;- graph_from_adjacency_matrix(network)
+
+plot(graph_network)</code></pre>
+<p><img src="Desc_stats_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>degrees &lt;- degree(graph_network, 
+       mode = c(&quot;out&quot;),
+       normalized = FALSE)# calculation degree
+
+max(degrees) #maximum degrees in network</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>min(degrees) #minimum degrees in network</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>degrees_n &lt;- (degrees-min(degrees))/(max(degrees)-min(degrees)) #normalised degree centrality
+degrees_n</code></pre>
+<pre><code>##  V1  V2  V3  V4  V5  V6  V7  V8  V9 V10 
+## 0.0 0.5 1.0 1.0 0.0 0.5 0.5 0.5 1.0 0.0</code></pre>
+<pre class="r"><code>closeness(graph_network,
+          mode = c(&quot;out&quot;),
+          normalized = FALSE) #closeness centrality</code></pre>
+<pre><code>##  V1  V2  V3  V4  V5  V6  V7  V8  V9 V10 
+## NaN 1.0 0.5 0.5 NaN 1.0 1.0 1.0 0.5 NaN</code></pre>
+<pre class="r"><code>betweenness(graph_network) #betweenness centrality</code></pre>
+<pre><code>##  V1  V2  V3  V4  V5  V6  V7  V8  V9 V10 
+##   0   0   0   0   0   0   0   0   0   0</code></pre>
+<pre class="r"><code>transitivity(graph_network) #clustering</code></pre>
+<pre><code>## [1] 1</code></pre>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkRlc2NyaXB0aXZlIHN0YXRpc3RpY3MiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCmRhdGU6ICIyMDI0LTA5LTExIg0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCmBgYHtyfQ0KbWF0cml4IDwtIG1hdHJpeChjKDAsMSwwLDAsDQogICAgICAgICAgICAgICAgICAgMCwwLDAsMCwNCiAgICAgICAgICAgICAgICAgICAwLDAsMCwwLA0KICAgICAgICAgICAgICAgICAgIDAsMCwwLDApLCBucm93ID0gNCwgbmNvbCA9IDQpDQoNCnJlcXVpcmUoaWdyYXBoKQ0KDQpncmFwaCA8LSBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgobWF0cml4KQ0KDQp0cmlhZF9jZW5zdXMoZ3JhcGgpDQoNCmBgYA0KYGBge3J9DQoNCnJlcXVpcmUoUlNpZW5hKQ0KDQpuZXR3b3JrIDwtIHM1MDFbMToxMCwgMToxMF0NCmRpbShuZXR3b3JrKSAjc2l6ZSBvZiBuZXR3b3JrDQoNCmdyYXBoX25ldHdvcmsgPC0gZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KG5ldHdvcmspDQoNCnBsb3QoZ3JhcGhfbmV0d29yaykNCg0KDQpkZWdyZWVzIDwtIGRlZ3JlZShncmFwaF9uZXR3b3JrLCANCiAgICAgICBtb2RlID0gYygib3V0IiksDQogICAgICAgbm9ybWFsaXplZCA9IEZBTFNFKSMgY2FsY3VsYXRpb24gZGVncmVlDQoNCm1heChkZWdyZWVzKSAjbWF4aW11bSBkZWdyZWVzIGluIG5ldHdvcmsNCm1pbihkZWdyZWVzKSAjbWluaW11bSBkZWdyZWVzIGluIG5ldHdvcmsNCg0KZGVncmVlc19uIDwtIChkZWdyZWVzLW1pbihkZWdyZWVzKSkvKG1heChkZWdyZWVzKS1taW4oZGVncmVlcykpICNub3JtYWxpc2VkIGRlZ3JlZSBjZW50cmFsaXR5DQpkZWdyZWVzX24NCg0KDQpjbG9zZW5lc3MoZ3JhcGhfbmV0d29yaywNCiAgICAgICAgICBtb2RlID0gYygib3V0IiksDQogICAgICAgICAgbm9ybWFsaXplZCA9IEZBTFNFKSAjY2xvc2VuZXNzIGNlbnRyYWxpdHkNCmJldHdlZW5uZXNzKGdyYXBoX25ldHdvcmspICNiZXR3ZWVubmVzcyBjZW50cmFsaXR5DQp0cmFuc2l0aXZpdHkoZ3JhcGhfbmV0d29yaykgI2NsdXN0ZXJpbmcNCg0KYGBgDQoNCg==</div>
 
 
 </div>
@@ -452,7 +485,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("lab1.Rmd");
+  window.initializeSourceEmbed("Desc_stats.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

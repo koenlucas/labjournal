@@ -51,8 +51,8 @@ names(cv08_haven)
 summary(cv08_haven)
 head(cv08_haven)
 # fix(cv08_haven) #will produce an error
-fix(cv08)
-View(cv08_haven)
+#fix(cv08)
+#View(cv08_haven)
 ```
 
 
