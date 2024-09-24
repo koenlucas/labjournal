@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Koen Lucas" />
+
+<meta name="date" content="2024-09-18" />
+
+<title>Tutorial webscraping</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="Week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Introduction</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Tutorial webscraping</h1>
+<h4 class="author">Koen Lucas</h4>
+<h4 class="date">2024-09-18</h4>
+
+</div>
+
+
+<p>#packages</p>
+<pre class="r"><code>######################################### Title: Webscraping in R Author: Bas Hofstra Version:
+######################################### 29-07-2021
+
+# start with clean workspace
+rm(list = ls())
+
+# install.packages(&#39;data.table&#39;)
+library(data.table)  # mainly for faster data handling</code></pre>
+<pre><code>## 
+## Attaching package: &#39;data.table&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:lubridate&#39;:
+## 
+##     hour, isoweek, mday, minute, month, quarter, second, wday, week, yday, year</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     between, first, last</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     transpose</code></pre>
+<pre class="r"><code>library(tidyverse)  # I assume you already installed this one!
+# install.packages(&#39;httr&#39;) # we don&#39;t need this for now require(httr)
+#install.packages(&quot;xml2&quot;)
+require(xml2)</code></pre>
+<pre><code>## Loading required package: xml2</code></pre>
+<pre class="r"><code>#install.packages(&quot;rvest&quot;)
+require(rvest)</code></pre>
+<pre><code>## Loading required package: rvest</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rvest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     guess_encoding</code></pre>
+<pre class="r"><code>#install.packages(&quot;devtools&quot;)
+require(devtools)</code></pre>
+<pre><code>## Loading required package: devtools</code></pre>
+<pre><code>## Loading required package: usethis</code></pre>
+<pre class="r"><code># Note we&#39;re doing something different here. We&#39;re installing a *latest* version directly from
+# GitHub This is because the released version of this packages contains some errors!
+devtools::install_github(&quot;jkeirstead/scholar&quot;)</code></pre>
+<pre><code>## Using GitHub PAT from the git credential store.</code></pre>
+<pre><code>## Skipping install of &#39;scholar&#39; from a github remote, the SHA1 (2d38dcc3) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
+<pre class="r"><code>require(scholar)</code></pre>
+<pre><code>## Loading required package: scholar</code></pre>
+<pre class="r"><code># define workdirectory, note the double *backslashes* if you&#39;re on windows setwd(&#39;/yourpathhere)&#39;</code></pre>
+<pre class="r"><code>soc_staff &lt;- read_html(&quot;https://web.archive.org/web/20230528153336/https://www.ru.nl/sociology/research/staff/&quot;)
+
+head(soc_staff)</code></pre>
+<pre><code>## $node
+## &lt;pointer: 0x0000013e58ffd950&gt;
+## 
+## $doc
+## &lt;pointer: 0x0000013e56354470&gt;</code></pre>
+<pre class="r"><code>class(soc_staff)</code></pre>
+<pre><code>## [1] &quot;xml_document&quot; &quot;xml_node&quot;</code></pre>
+<pre class="r"><code># so we need to find WHERE the table is located in the html &#39;inspect element&#39; in mozilla firefox or
+# &#39;view page source&#39; and you see that everything AFTER /td in the &#39;body&#39; of the page seems to be
+# the table we do need
+soc_staff_2 &lt;- soc_staff %&gt;%
+    rvest::html_element(&quot;body&quot;) %&gt;%
+    rvest::html_elements(&quot;td&quot;) %&gt;%
+    rvest::html_text()
+
+soc_staff_2</code></pre>
+<pre><code>##   [1] &quot;Staff:&quot;                                                                                                                                                      
+##   [2] &quot;Expertise:&quot;                                                                                                                                                  
+##   [3] &quot;Batenburg, prof. dr. R. (Ronald)&quot;                                                                                                                            
+##   [4] &quot;Healthcare, labour market and healthcare professions and training&quot;                                                                                           
+##   [5] &quot;Begall, dr. K.H. (Katia)&quot;                                                                                                                                    
+##   [6] &quot;Family, life course, labour market participation, division of household tasks and gender norms&quot;                                                              
+##   [7] &quot;Bekhuis, dr. H. (Hidde)&quot;                                                                                                                                     
+##   [8] &quot;Welfare state, nationalism and sports&quot;                                                                                                                       
+##   [9] &quot;Berg, dr. L. van den (Lonneke)&quot;                                                                                                                              
+##  [10] &quot;Family, life course and transition to adulthood&quot;                                                                                                             
+##  [11] &quot;Blommaert, dr. L. (Lieselotte)&quot;                                                                                                                              
+##  [12] &quot;Discrimination and inequality on the labour market&quot;                                                                                                          
+##  [13] &quot;Eisinga, prof. dr. R.N. (Rob)&quot;                                                                                                                               
+##  [14] &quot;Methods of research and statistics&quot;                                                                                                                          
+##  [15] &quot;Gesthuizen, dr. M.J.W. (Maurice)&quot;                                                                                                                            
+##  [16] &quot;\n                                Poverty en social cohesion\n                              &quot;                                                                
+##  [17] &quot;Geurts, dr. P.G. (Nella)&quot;                                                                                                                                    
+##  [18] &quot;\n                                Integration and migration\n                              &quot;                                                                 
+##  [19] &quot;Glas, dr. S. (Saskia)&quot;                                                                                                                                       
+##  [20] &quot;Islam, gender attitudes and sexuality&quot;                                                                                                                       
+##  [21] &quot;Hek, dr. M. van (Margriet)&quot;                                                                                                                                  
+##  [22] &quot;Educational inequality, gender inequality, organizational sociology and culture&quot;                                                                             
+##  [23] &quot;Hoekman, dr. R. H. A.(Remco)&quot;                                                                                                                                
+##  [24] &quot;Sports and policy sociology&quot;                                                                                                                                 
+##  [25] &quot;Hofstra, dr. B. (Bas)&quot;                                                                                                                                       
+##  [26] &quot;Diversity, inequality and innovation&quot;                                                                                                                        
+##  [27] &quot;Koops, dr. J. (Judith)&quot;                                                                                                                                      
+##  [28] &quot;Family sociology and demography&quot;                                                                                                                             
+##  [29] &quot;Kraaykamp, prof. dr. G.L.M. (Gerbert)&quot;                                                                                                                       
+##  [30] &quot;Educational inequality, culture and health&quot;                                                                                                                  
+##  [31] &quot;Meuleman, dr. (Roza)&quot;                                                                                                                                        
+##  [32] &quot;Culture and nationalism&quot;                                                                                                                                     
+##  [33] &quot;Savelkoul, dr. M.J. (Michael)&quot;                                                                                                                               
+##  [34] &quot;Ethnic diversity, prejudice and social cohesion&quot;                                                                                                             
+##  [35] &quot;Scheepers, prof. dr. P.L.H. (Peer)&quot;                                                                                                                          
+##  [36] &quot;Comparative research, social cohesion and diversity&quot;                                                                                                         
+##  [37] &quot;Spierings, dr. C.H.B.M. (Niels)&quot;                                                                                                                             
+##  [38] &quot;Islam, gender, populism, social media, Middle East and migration&quot;                                                                                            
+##  [39] &quot;Tolsma, dr. J. (Jochem)&quot;                                                                                                                                     
+##  [40] &quot;Inequality, criminology and ethnic diversity&quot;                                                                                                                
+##  [41] &quot;\n                                Verbakel, prof. dr. C.M.C. (Ellen)\n                                Head of the department\n                              &quot;
+##  [42] &quot;Health, family and work&quot;                                                                                                                                     
+##  [43] &quot;Visser, dr. M. (Mark)&quot;                                                                                                                                       
+##  [44] &quot;Older workers, radicalism and social cohesion&quot;                                                                                                               
+##  [45] &quot;Wolbers, prof. dr. M.H.J. (Maarten)&quot;                                                                                                                         
+##  [46] &quot;Educational inequality and labour market inequality&quot;                                                                                                         
+##  [47] &quot;PhD:&quot;                                                                                                                                                        
+##  [48] &quot;Expertise:&quot;                                                                                                                                                  
+##  [49] &quot;Bussemakers, C. (Carlijn) MSc&quot;                                                                                                                               
+##  [50] &quot;Adverse youth experiences and social inequality&quot;                                                                                                             
+##  [51] &quot;Franken, R. (Rob) MSc&quot;                                                                                                                                       
+##  [52] &quot;Sport networks and motivation for sustainable sports participation&quot;                                                                                          
+##  [53] &quot;Firat, M. (Mustafa) MSc&quot;                                                                                                                                     
+##  [54] &quot;Social inequality, older workers, life course and retirement&quot;                                                                                                
+##  [55] &quot;\n                                Güneyli, A. (Ayşegül)\n                              &quot;                                                                     
+##  [56] &quot;Work-care&quot;                                                                                                                                                   
+##  [57] &quot;Hendriks, I.P. (Inge) MSc&quot;                                                                                                                                   
+##  [58] &quot;Resistance to refugees and social cohesion&quot;                                                                                                                  
+##  [59] &quot;Jeroense, T.M.G. (Thijmen) MSc&quot;                                                                                                                              
+##  [60] &quot;Political participation, segregation, opinion polarization and voting behaviour&quot;                                                                             
+##  [61] &quot;Kollar, R. (Rachel)&quot;                                                                                                                                         
+##  [62] &quot;Spirit project&quot;                                                                                                                                              
+##  [63] &quot;Linders, N. (Nik) MSc&quot;                                                                                                                                       
+##  [64] &quot;Populism, gender, masculinity and sexuality&quot;                                                                                                                 
+##  [65] &quot;Loh, S.M. (Renae) MSc&quot;                                                                                                                                       
+##  [66] &quot;Educational sociology, social stratification, gender inequality and information communication technology (ICT)&quot;                                              
+##  [67] &quot;Meijeren, M. (Maikel) MSc&quot;                                                                                                                                   
+##  [68] &quot;Social capital, volunteer work and diversity&quot;                                                                                                                
+##  [69] &quot;Mensvoort, C.A. van (Carly) MSc&quot;                                                                                                                             
+##  [70] &quot;Gender, leadership and social norms&quot;                                                                                                                         
+##  [71] &quot;\n                                Mulders, A.M. (Anne Maaike) MSc\n                              &quot;                                                           
+##  [72] &quot;Social inequality in science&quot;                                                                                                                                
+##  [73] &quot;Müller, K. (Katrin) MSc&quot;                                                                                                                                     
+##  [74] &quot;Opinions about discrimination, migration and inequality&quot;                                                                                                     
+##  [75] &quot;Raiber, K. (Klara) MSc&quot;                                                                                                                                      
+##  [76] &quot;Informal care, employment, social inequality and gender&quot;                                                                                                     
+##  [77] &quot;Ramaekers, M.J.M. (Marlou) MSc&quot;                                                                                                                              
+##  [78] &quot;Prosocial behaviour and family&quot;                                                                                                                              
+##  [79] &quot;Wiertsema, S. (Sara) MSc&quot;                                                                                                                                    
+##  [80] &quot;Inequality in sports and physical activity, school-to-work transition and employment&quot;                                                                        
+##  [81] &quot;External PhD:&quot;                                                                                                                                               
+##  [82] &quot;Expertise:&quot;                                                                                                                                                  
+##  [83] &quot;Betkó, drs. J.G. (János)&quot;                                                                                                                                    
+##  [84] &quot;Social assistance benefit, poverty, reintegration, RCT and social experiment&quot;                                                                                
+##  [85] &quot;Middendorp J. (Jansje) van MSc&quot;                                                                                                                              
+##  [86] &quot;Home administration&quot;                                                                                                                                         
+##  [87] &quot;Vis, E. (Elize) MSc&quot;                                                                                                                                         
+##  [88] &quot;Healthcare, labour market, healthcare professions and training, health and social capital&quot;                                                                   
+##  [89] &quot;Weber, T. (Tijmen) MSc&quot;                                                                                                                                      
+##  [90] &quot;International student mobility and the internationalization of higher education&quot;                                                                             
+##  [91] &quot;Guest researchers:&quot;                                                                                                                                          
+##  [92] &quot;Expertise:&quot;                                                                                                                                                  
+##  [93] &quot;Khawli, E. el (Elissa) post-doc, Dr.&quot;                                                                                                                        
+##  [94] &quot;Inequality in older age&quot;                                                                                                                                     
+##  [95] &quot;Sterkens, dr. C.J.A. (Carl)&quot;                                                                                                                                 
+##  [96] &quot;Religious conflicts, cohesion, religion and the philosophy of life&quot;                                                                                          
+##  [97] &quot;Vermeer, dr. P.A.D.M. (Paul)&quot;                                                                                                                                
+##  [98] &quot;Socialization processes, secularisation, religion and the philosophy of life&quot;                                                                                
+##  [99] &quot;Other researchers:&quot;                                                                                                                                          
+## [100] &quot;Expertise:&quot;                                                                                                                                                  
+## [101] &quot;Grubben, M. (Malou)&quot;                                                                                                                                         
+## [102] &quot;Inequality in sports and movement&quot;</code></pre>
+<pre class="r"><code>soc_staff_3 &lt;- soc_staff %&gt;% 
+  rvest::html_element(&quot;body&quot;) %&gt;% 
+  rvest::html_table() 
+
+soc_staff_3</code></pre>
+<pre><code>## # A tibble: 51 × 2
+##    X1                               X2                                                              
+##    &lt;chr&gt;                            &lt;chr&gt;                                                           
+##  1 Staff:                           Expertise:                                                      
+##  2 Batenburg, prof. dr. R. (Ronald) Healthcare, labour market and healthcare professions and traini…
+##  3 Begall, dr. K.H. (Katia)         Family, life course, labour market participation, division of h…
+##  4 Bekhuis, dr. H. (Hidde)          Welfare state, nationalism and sports                           
+##  5 Berg, dr. L. van den (Lonneke)   Family, life course and transition to adulthood                 
+##  6 Blommaert, dr. L. (Lieselotte)   Discrimination and inequality on the labour market              
+##  7 Eisinga, prof. dr. R.N. (Rob)    Methods of research and statistics                              
+##  8 Gesthuizen, dr. M.J.W. (Maurice) Poverty en social cohesion                                      
+##  9 Geurts, dr. P.G. (Nella)         Integration and migration                                       
+## 10 Glas, dr. S. (Saskia)            Islam, gender attitudes and sexuality                           
+## # ℹ 41 more rows</code></pre>
+<div id="leiden-staff" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> leiden staff</h1>
+<pre class="r"><code>Leiden_staff &lt;- read_html(&quot;https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1&quot;)
+
+
+Leiden_staff_2 &lt;- Leiden_staff %&gt;% 
+  rvest::html_element(&quot;body&quot;) %&gt;% 
+  rvest::html_elements(&quot;strong&quot;) %&gt;% 
+  rvest::html_text() 
+
+view(Leiden_staff_2)
+
+Leiden_staff_3 &lt;- Leiden_staff %&gt;% 
+  rvest::html_element(&quot;body&quot;) %&gt;% 
+  rvest::html_elements(&quot;li&quot;) %&gt;% 
+  rvest::html_elements(&quot;div&quot;) %&gt;% 
+  rvest::html_elements(&quot;span&quot;) %&gt;% 
+  rvest::html_text()
+
+view(Leiden_staff_3)</code></pre>
+</div>
+<div id="rselenium" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> RSelenium</h1>
+<pre class="r"><code>fpackage.check &lt;- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave &lt;- function(x, file, location = &quot;./local/&quot;, ...) {
+    if (!dir.exists(location))
+        dir.create(location)
+    datename &lt;- substr(gsub(&quot;[:-]&quot;, &quot;&quot;, Sys.time()), 1, 8)
+    totalname &lt;- paste(location, datename, file, sep = &quot;&quot;)
+    print(paste(&quot;SAVED: &quot;, totalname, sep = &quot;&quot;))
+    save(x, file = totalname)
+}
+
+fload &lt;- function(fileName) {
+    load(fileName)
+    get(ls()[ls() != &quot;fileName&quot;])
+}
+
+fshowdf &lt;- function(x, digits = 2, ...) {
+    knitr::kable(x, digits = digits, &quot;html&quot;, ...) %&gt;%
+        kableExtra::kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+        kableExtra::scroll_box(width = &quot;100%&quot;, height = &quot;300px&quot;)
+}</code></pre>
+<pre class="r"><code>packages = c(&quot;RSelenium&quot;, &quot;rvest&quot;, &quot;tidyverse&quot;, &quot;netstat&quot;, &quot;pingr&quot;, &quot;stringr&quot;)
+fpackage.check(packages)</code></pre>
+<pre><code>## Loading required package: RSelenium</code></pre>
+<pre><code>## Loading required package: netstat</code></pre>
+<pre><code>## Loading required package: pingr</code></pre>
+<pre><code>## [[1]]
+## NULL
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## NULL
+## 
+## [[4]]
+## NULL
+## 
+## [[5]]
+## NULL
+## 
+## [[6]]
+## NULL</code></pre>
+<pre class="r"><code>rm(packages)</code></pre>
+</div>
+<div id="open-alex" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Open Alex</h1>
+<pre class="r"><code>options(openalexR.mailto = &quot;jan.uca.jr@gmail.com&quot;)  #please Please replace with your own emailadress
+
+jt &lt;- read_html(&quot;https://api.openalex.org/authors?search=Jochem+Tolsma&quot;) %&gt;%
+    html_text2()
+
+require(openalexR)</code></pre>
+<pre><code>## Loading required package: openalexR</code></pre>
+<pre><code>## Thank you for using openalexR!
+## To acknowledge our work, please cite the package by calling `citation(&quot;openalexR&quot;)`.
+## To suppress this message, add `openalexR.message = suppressed` to your .Renviron file.</code></pre>
+<pre class="r"><code>df &lt;- oa_fetch(entity = &quot;author&quot;, search = &quot;Jochem Tolsma&quot;)
+fshowdf(df)</code></pre>
+<div
+style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+id
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+display_name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+display_name_alternatives
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+relevance_score
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ids
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+orcid
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+works_count
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+cited_by_count
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+counts_by_year
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+affiliation_display_name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+affiliation_id
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+affiliation_ror
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+affiliation_country_code
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+affiliation_type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+affiliation_lineage
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+affiliations_other
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+topics
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+works_api_url
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://openalex.org/A5087380803"
+class="uri">https://openalex.org/A5087380803</a>
+</td>
+<td style="text-align:left;">
+Jochem Tolsma
+</td>
+<td style="text-align:left;">
+J. Tolsma , Jochem Tolsma, J L Tolsma
+</td>
+<td style="text-align:right;">
+8817.3
+</td>
+<td style="text-align:left;">
+<a href="https://openalex.org/A5087380803"
+class="uri">https://openalex.org/A5087380803</a> , <a
+href="https://orcid.org/0000-0002-4411-6932"
+class="uri">https://orcid.org/0000-0002-4411-6932</a>
+</td>
+<td style="text-align:left;">
+<a href="https://orcid.org/0000-0002-4411-6932"
+class="uri">https://orcid.org/0000-0002-4411-6932</a>
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+1996
+</td>
+<td style="text-align:left;">
+2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013,
+2012, 8, 5, 4, 3, 2, 2, 3, 4, 12, 4, 8, 7, 1, 212, 263, 202, 248, 241,
+165, 190, 134, 177, 141, 122, 99, 65
+</td>
+<td style="text-align:left;">
+Radboud University Nijmegen
+</td>
+<td style="text-align:left;">
+<a href="https://openalex.org/I145872427"
+class="uri">https://openalex.org/I145872427</a>
+</td>
+<td style="text-align:left;">
+<a href="https://ror.org/016xsfp80"
+class="uri">https://ror.org/016xsfp80</a>
+</td>
+<td style="text-align:left;">
+NL
+</td>
+<td style="text-align:left;">
+education
+</td>
+<td style="text-align:left;">
+<a href="https://openalex.org/I145872427"
+class="uri">https://openalex.org/I145872427</a>
+</td>
+<td style="text-align:left;">
+<a href="https://openalex.org/I169381384"
+class="uri">https://openalex.org/I169381384</a> , <a
+href="https://openalex.org/I4210087716"
+class="uri">https://openalex.org/I4210087716</a>
+</td>
+<td style="text-align:left;">
+1 , 1 , 1 , 1 , 2 , 2 , 2 , 2 , 3 , 3 , 3 , 3 , 4 , 4 , 4 , 4 , 5 , 5 ,
+5 , 5 , 6 , 6 , 6 , 6 , 7 , 7 , 7 , 7 , 8 , 8 , 8 , 8 , 9 , 9 , 9 , 9 ,
+10 , 10 , 10 , 10 , 11 , 11 , 11 , 11 , 12 , 12 , 12 , 12 , 13 , 13 , 13
+, 13 , 14 , 14 , 14 , 14 , 15 , 15 , 15 , 15 , 16 , 16 , 16 , 16 , 17 ,
+17 , 17 , 17 , 18 , 18 , 18 , 18 , 19 , 19 , 19 , 19 , 20 , 20 , 20 , 20
+, 21 , 21 , 21 , 21 , 22 , 22 , 22 , 22 , 23 , 23 , 23 , 23 , 24 , 24 ,
+24 , 24 , 25 , 25 , 25 , 25 , 15 , 15 , 15 , 15 , 12 , 12 , 12 , 12 , 9
+, 9 , 9 , 9 , 8 , 8 , 8 , 8 , 8 , 8 , 8 , 8 , 8 , 8 , 8 , 8 , 7 , 7 , 7
+, 7 , 7 , 7 , 7 , 7 , 6 , 6 , 6 , 6 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 5
+, 5 , 5 , 5 , 5 , 5 , 5 , 5 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4
+, 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 4 , 3 , 3 , 3 , 3 , 3
+, 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 3 , 2 , 2 , 2
+, 2 , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , topic , subfield , field ,
+domain , topic , subfield , field , domain , <a
+href="https://openalex.org/T11239"
+class="uri">https://openalex.org/T11239</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T11645"
+class="uri">https://openalex.org/T11645</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T12088"
+class="uri">https://openalex.org/T12088</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10216"
+class="uri">https://openalex.org/T10216</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10108"
+class="uri">https://openalex.org/T10108</a> , <a
+href="https://openalex.org/subfields/3320"
+class="uri">https://openalex.org/subfields/3320</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10349"
+class="uri">https://openalex.org/T10349</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10314"
+class="uri">https://openalex.org/T10314</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10235"
+class="uri">https://openalex.org/T10235</a> , <a
+href="https://openalex.org/subfields/3306"
+class="uri">https://openalex.org/subfields/3306</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T13064"
+class="uri">https://openalex.org/T13064</a> , <a
+href="https://openalex.org/subfields/3304"
+class="uri">https://openalex.org/subfields/3304</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T13709"
+class="uri">https://openalex.org/T13709</a> , <a
+href="https://openalex.org/subfields/3304"
+class="uri">https://openalex.org/subfields/3304</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10574"
+class="uri">https://openalex.org/T10574</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10557"
+class="uri">https://openalex.org/T10557</a> , <a
+href="https://openalex.org/subfields/3315"
+class="uri">https://openalex.org/subfields/3315</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10443"
+class="uri">https://openalex.org/T10443</a> , <a
+href="https://openalex.org/subfields/3320"
+class="uri">https://openalex.org/subfields/3320</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10652"
+class="uri">https://openalex.org/T10652</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T11397"
+class="uri">https://openalex.org/T11397</a> , <a
+href="https://openalex.org/subfields/3320"
+class="uri">https://openalex.org/subfields/3320</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10674"
+class="uri">https://openalex.org/T10674</a> , <a
+href="https://openalex.org/subfields/3304"
+class="uri">https://openalex.org/subfields/3304</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T12592"
+class="uri">https://openalex.org/T12592</a> , <a
+href="https://openalex.org/subfields/3109"
+class="uri">https://openalex.org/subfields/3109</a> , <a
+href="https://openalex.org/fields/31"
+class="uri">https://openalex.org/fields/31</a> , <a
+href="https://openalex.org/domains/3"
+class="uri">https://openalex.org/domains/3</a> , <a
+href="https://openalex.org/T10762"
+class="uri">https://openalex.org/T10762</a> , <a
+href="https://openalex.org/subfields/3203"
+class="uri">https://openalex.org/subfields/3203</a> , <a
+href="https://openalex.org/fields/32"
+class="uri">https://openalex.org/fields/32</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T13532"
+class="uri">https://openalex.org/T13532</a> , <a
+href="https://openalex.org/subfields/3304"
+class="uri">https://openalex.org/subfields/3304</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T11076"
+class="uri">https://openalex.org/T11076</a> , <a
+href="https://openalex.org/subfields/3320"
+class="uri">https://openalex.org/subfields/3320</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T12714"
+class="uri">https://openalex.org/T12714</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10208"
+class="uri">https://openalex.org/T10208</a> , <a
+href="https://openalex.org/subfields/2002"
+class="uri">https://openalex.org/subfields/2002</a> , <a
+href="https://openalex.org/fields/20"
+class="uri">https://openalex.org/fields/20</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T10064"
+class="uri">https://openalex.org/T10064</a> , <a
+href="https://openalex.org/subfields/3109"
+class="uri">https://openalex.org/subfields/3109</a> , <a
+href="https://openalex.org/fields/31"
+class="uri">https://openalex.org/fields/31</a> , <a
+href="https://openalex.org/domains/3"
+class="uri">https://openalex.org/domains/3</a> , <a
+href="https://openalex.org/T10182"
+class="uri">https://openalex.org/T10182</a> , <a
+href="https://openalex.org/subfields/3203"
+class="uri">https://openalex.org/subfields/3203</a> , <a
+href="https://openalex.org/fields/32"
+class="uri">https://openalex.org/fields/32</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , <a
+href="https://openalex.org/T11120"
+class="uri">https://openalex.org/T11120</a> , <a
+href="https://openalex.org/subfields/3312"
+class="uri">https://openalex.org/subfields/3312</a> , <a
+href="https://openalex.org/fields/33"
+class="uri">https://openalex.org/fields/33</a> , <a
+href="https://openalex.org/domains/2"
+class="uri">https://openalex.org/domains/2</a> , Social Capital and
+Trust in Communities , Sociology and Political Science , Social Sciences
+, Social Sciences , Effects of Residential Segregation on Communities
+and Individuals , Sociology and Political Science , Social Sciences ,
+Social Sciences , Intergenerational Mobility and Social Stratification ,
+Sociology and Political Science , Social Sciences , Social Sciences ,
+Politics and Social Implications of Immigration , Sociology and
+Political Science , Social Sciences , Social Sciences , Empirical
+Analysis of Political Behavior and Institutions , Political Science and
+International Relations , Social Sciences , Social Sciences , Migration
+Networks and Impacts on Labor Market , Sociology and Political Science ,
+Social Sciences , Social Sciences , Intergroup Relations and Social
+Identity Theories , Sociology and Political Science , Social Sciences ,
+Social Sciences , Impact of Social Factors on Health Outcomes , Health ,
+Social Sciences , Social Sciences , Education and Research Methods in
+Social Sciences , Education , Social Sciences , Social Sciences ,
+Education Policy and Social Development , Education , Social Sciences ,
+Social Sciences , Impact of Social Structure on Crime and Delinquency ,
+Sociology and Political Science , Social Sciences , Social Sciences ,
+The Impact of Digital Media on Public Discourse , Communication , Social
+Sciences , Social Sciences , Politics and Economics of Welfare State ,
+Political Science and International Relations , Social Sciences , Social
+Sciences , Racial Discrimination and Health Inequities , Sociology and
+Political Science , Social Sciences , Social Sciences , Populism in
+Contemporary Politics , Political Science and International Relations ,
+Social Sciences , Social Sciences , Inequality in Education: Impact of
+Socioeconomic Status , Education , Social Sciences , Social Sciences ,
+Statistical Physics of Opinion Dynamics , Statistical and Nonlinear
+Physics , Physics and Astronomy , Physical Sciences , Mental Health of
+Refugees and Immigrants , Clinical Psychology , Psychology , Social
+Sciences , Vocational Education and Training in Australia , Education ,
+Social Sciences , Social Sciences , Impact of Procedural Justice on
+Police Legitimacy , Political Science and International Relations ,
+Social Sciences , Social Sciences , Youth Transitions and Social
+Inequality , Sociology and Political Science , Social Sciences , Social
+Sciences , Labor Market Dynamics and Inequality , Economics and
+Econometrics , Economics, Econometrics and Finance , Social Sciences ,
+Statistical Mechanics of Complex Networks , Statistical and Nonlinear
+Physics , Physics and Astronomy , Physical Sciences , Emotion Regulation
+and Psychopathology in Children and Adolescents, Clinical Psychology ,
+Psychology , Social Sciences , Multilevel Perspectives on Prosocial
+Behavior and Volunteering , Sociology and Political Science , Social
+Sciences , Social Sciences
+</td>
+<td style="text-align:left;">
+<a href="https://api.openalex.org/works?filter=author.id:A5087380803"
+class="uri">https://api.openalex.org/works?filter=author.id:A5087380803</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="r"><code>df_papers &lt;- oa_fetch(entity = &quot;works&quot;, author.id = df$id)
+df_papers$author[1]</code></pre>
+<pre><code>## [[1]]
+##                              au_id  au_display_name                              au_orcid
+## 1 https://openalex.org/A5010780363 Tom van der Meer https://orcid.org/0000-0002-6164-2926
+## 2 https://openalex.org/A5087380803    Jochem Tolsma https://orcid.org/0000-0002-4411-6932
+##   author_position is_corresponding
+## 1           first            FALSE
+## 2            last            FALSE
+##                                                                              au_affiliation_raw
+## 1 Department of Political Science, University of Amsterdam, 1012 DL Amsterdam, The Netherlands;
+## 2               Department of Sociology, Radboud University, 6500 HE Nijmegen, The Netherlands;
+##                    institution_id    institution_display_name           institution_ror
+## 1 https://openalex.org/I887064364     University of Amsterdam https://ror.org/04dkp9463
+## 2 https://openalex.org/I145872427 Radboud University Nijmegen https://ror.org/016xsfp80
+##   institution_country_code institution_type             institution_lineage
+## 1                       NL        education https://openalex.org/I887064364
+## 2                       NL        education https://openalex.org/I145872427</code></pre>
+<pre class="r"><code>df_institution &lt;- oa_fetch(entity = &quot;institutions&quot;, search = &quot;radboud university nijmegen&quot;)$id[1]
+
+df_author &lt;- oa_fetch(entity = &quot;author&quot;, search = &quot;Tolsma&quot;)
+
+
+#Jochem Tolsma
+#Tom van der Meer
+#Maurice Gesthuizen
+#Michael Savelkoul
+
+
+JT &lt;- oa_fetch(entity = &quot;author&quot;, search = &quot;Jochem Tolsma&quot;)
+MG &lt;- oa_fetch(entity = &quot;author&quot;, search = &quot;Maurice Gesthuizen&quot;)
+MS &lt;- oa_fetch(entity = &quot;author&quot;, search = &quot;Michael Savelkoul&quot;)
+TM &lt;- oa_fetch(entity = &quot;author&quot;, search = &quot;Tom van der Meer&quot;)
+
+
+works &lt;- oa_fetch(entity = &quot;works&quot;, author.id = c(JT$id[1], MG$id[1], MS$id[1], TM$id[1]))
+MG_works &lt;- oa_fetch(entity = &quot;works&quot;, author.id = MG$id)
+MS_works &lt;- oa_fetch(entity = &quot;works&quot;, author.id = MS$id)
+TM_works &lt;- oa_fetch(entity = &quot;works&quot;, author.id = TM$id[1])
+
+#filter only for 2019-2023
+works_19_23 &lt;- works %&gt;% filter(publication_year &gt;= 2019 &amp; publication_year &lt;= 2023)</code></pre>
+<pre class="r"><code>wave1 &lt;- matrix(c(NA,NA,NA,NA,
+                  NA,NA,NA,NA,
+                  NA,NA,NA,NA,
+                  NA,NA,NA,NA), nrow = 4, ncol = 4)
+
+row.names(wave1) &lt;- c(JT$id, MG$id, MS$id, TM$id[1])
+colnames(wave1) &lt;- c(JT$id, MG$id, MS$id, TM$id[1])
+
+wave2 &lt;- matrix(0, nrow = 4, ncol = 4)
+
+row.names(wave2) &lt;- c(JT$id, MG$id, MS$id, TM$id[1])
+colnames(wave2) &lt;- c(JT$id, MG$id, MS$id, TM$id[1])
+
+ego &lt;- works[1,]$author[[1]]$au_id[1]
+alters &lt;- works[1,]$author[[1]]$au_id[-1]
+
+wave2[ego, alters] &lt;- wave2[ego, alters] + 1
+wave2</code></pre>
+<pre><code>##                                  https://openalex.org/A5087380803 https://openalex.org/A5007673492
+## https://openalex.org/A5087380803                                0                                0
+## https://openalex.org/A5007673492                                0                                0
+## https://openalex.org/A5048988743                                0                                0
+## https://openalex.org/A5010780363                                1                                0
+##                                  https://openalex.org/A5048988743 https://openalex.org/A5010780363
+## https://openalex.org/A5087380803                                0                                0
+## https://openalex.org/A5007673492                                0                                0
+## https://openalex.org/A5048988743                                0                                0
+## https://openalex.org/A5010780363                                0                                0</code></pre>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlR1dG9yaWFsIHdlYnNjcmFwaW5nIg0KYXV0aG9yOiAiS29lbiBMdWNhcyINCmRhdGU6ICIyMDI0LTA5LTE4Ig0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpgYGANCg0KI3BhY2thZ2VzDQpgYGB7cn0NCg0KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgVGl0bGU6IFdlYnNjcmFwaW5nIGluIFIgQXV0aG9yOiBCYXMgSG9mc3RyYSBWZXJzaW9uOg0KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgMjktMDctMjAyMQ0KDQojIHN0YXJ0IHdpdGggY2xlYW4gd29ya3NwYWNlDQpybShsaXN0ID0gbHMoKSkNCg0KIyBpbnN0YWxsLnBhY2thZ2VzKCdkYXRhLnRhYmxlJykNCmxpYnJhcnkoZGF0YS50YWJsZSkgICMgbWFpbmx5IGZvciBmYXN0ZXIgZGF0YSBoYW5kbGluZw0KbGlicmFyeSh0aWR5dmVyc2UpICAjIEkgYXNzdW1lIHlvdSBhbHJlYWR5IGluc3RhbGxlZCB0aGlzIG9uZSENCiMgaW5zdGFsbC5wYWNrYWdlcygnaHR0cicpICMgd2UgZG9uJ3QgbmVlZCB0aGlzIGZvciBub3cgcmVxdWlyZShodHRyKQ0KI2luc3RhbGwucGFja2FnZXMoInhtbDIiKQ0KcmVxdWlyZSh4bWwyKQ0KI2luc3RhbGwucGFja2FnZXMoInJ2ZXN0IikNCnJlcXVpcmUocnZlc3QpDQojaW5zdGFsbC5wYWNrYWdlcygiZGV2dG9vbHMiKQ0KcmVxdWlyZShkZXZ0b29scykNCiMgTm90ZSB3ZSdyZSBkb2luZyBzb21ldGhpbmcgZGlmZmVyZW50IGhlcmUuIFdlJ3JlIGluc3RhbGxpbmcgYSAqbGF0ZXN0KiB2ZXJzaW9uIGRpcmVjdGx5IGZyb20NCiMgR2l0SHViIFRoaXMgaXMgYmVjYXVzZSB0aGUgcmVsZWFzZWQgdmVyc2lvbiBvZiB0aGlzIHBhY2thZ2VzIGNvbnRhaW5zIHNvbWUgZXJyb3JzIQ0KZGV2dG9vbHM6Omluc3RhbGxfZ2l0aHViKCJqa2VpcnN0ZWFkL3NjaG9sYXIiKQ0KDQpyZXF1aXJlKHNjaG9sYXIpDQoNCiMgZGVmaW5lIHdvcmtkaXJlY3RvcnksIG5vdGUgdGhlIGRvdWJsZSAqYmFja3NsYXNoZXMqIGlmIHlvdSdyZSBvbiB3aW5kb3dzIHNldHdkKCcveW91cnBhdGhoZXJlKScNCg0KDQpgYGANCg0KDQpgYGB7cn0NCnNvY19zdGFmZiA8LSByZWFkX2h0bWwoImh0dHBzOi8vd2ViLmFyY2hpdmUub3JnL3dlYi8yMDIzMDUyODE1MzMzNi9odHRwczovL3d3dy5ydS5ubC9zb2Npb2xvZ3kvcmVzZWFyY2gvc3RhZmYvIikNCg0KaGVhZChzb2Nfc3RhZmYpDQoNCmNsYXNzKHNvY19zdGFmZikNCg0KYGBgDQoNCg0KYGBge3J9DQoNCiMgc28gd2UgbmVlZCB0byBmaW5kIFdIRVJFIHRoZSB0YWJsZSBpcyBsb2NhdGVkIGluIHRoZSBodG1sICdpbnNwZWN0IGVsZW1lbnQnIGluIG1vemlsbGEgZmlyZWZveCBvcg0KIyAndmlldyBwYWdlIHNvdXJjZScgYW5kIHlvdSBzZWUgdGhhdCBldmVyeXRoaW5nIEFGVEVSIC90ZCBpbiB0aGUgJ2JvZHknIG9mIHRoZSBwYWdlIHNlZW1zIHRvIGJlDQojIHRoZSB0YWJsZSB3ZSBkbyBuZWVkDQpzb2Nfc3RhZmZfMiA8LSBzb2Nfc3RhZmYgJT4lDQogICAgcnZlc3Q6Omh0bWxfZWxlbWVudCgiYm9keSIpICU+JQ0KICAgIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJ0ZCIpICU+JQ0KICAgIHJ2ZXN0OjpodG1sX3RleHQoKQ0KDQpzb2Nfc3RhZmZfMg0KDQpzb2Nfc3RhZmZfMyA8LSBzb2Nfc3RhZmYgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50KCJib2R5IikgJT4lIA0KICBydmVzdDo6aHRtbF90YWJsZSgpIA0KDQpzb2Nfc3RhZmZfMw0KDQpgYGANCg0KIyBsZWlkZW4gc3RhZmYNCmBgYHtyfQ0KTGVpZGVuX3N0YWZmIDwtIHJlYWRfaHRtbCgiaHR0cHM6Ly93d3cudW5pdmVyc2l0ZWl0bGVpZGVuLm5sL2VuL3NvY2lhbC1iZWhhdmlvdXJhbC1zY2llbmNlcy9wb2xpdGljYWwtc2NpZW5jZS9zdGFmZiN0YWItMSIpDQoNCg0KTGVpZGVuX3N0YWZmXzIgPC0gTGVpZGVuX3N0YWZmICU+JSANCiAgcnZlc3Q6Omh0bWxfZWxlbWVudCgiYm9keSIpICU+JSANCiAgcnZlc3Q6Omh0bWxfZWxlbWVudHMoInN0cm9uZyIpICU+JSANCiAgcnZlc3Q6Omh0bWxfdGV4dCgpIA0KDQp2aWV3KExlaWRlbl9zdGFmZl8yKQ0KDQpMZWlkZW5fc3RhZmZfMyA8LSBMZWlkZW5fc3RhZmYgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50KCJib2R5IikgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50cygibGkiKSAlPiUgDQogIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJkaXYiKSAlPiUgDQogIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJzcGFuIikgJT4lIA0KICBydmVzdDo6aHRtbF90ZXh0KCkNCg0KdmlldyhMZWlkZW5fc3RhZmZfMykNCg0KYGBgDQoNCg0KDQojIFJTZWxlbml1bQ0KYGBge3J9DQoNCmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7DQogICAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7DQogICAgICAgIGlmICghcmVxdWlyZSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpKSB7DQogICAgICAgICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpDQogICAgICAgICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkNCiAgICAgICAgfQ0KICAgIH0pDQp9DQoNCmZzYXZlIDwtIGZ1bmN0aW9uKHgsIGZpbGUsIGxvY2F0aW9uID0gIi4vbG9jYWwvIiwgLi4uKSB7DQogICAgaWYgKCFkaXIuZXhpc3RzKGxvY2F0aW9uKSkNCiAgICAgICAgZGlyLmNyZWF0ZShsb2NhdGlvbikNCiAgICBkYXRlbmFtZSA8LSBzdWJzdHIoZ3N1YigiWzotXSIsICIiLCBTeXMudGltZSgpKSwgMSwgOCkNCiAgICB0b3RhbG5hbWUgPC0gcGFzdGUobG9jYXRpb24sIGRhdGVuYW1lLCBmaWxlLCBzZXAgPSAiIikNCiAgICBwcmludChwYXN0ZSgiU0FWRUQ6ICIsIHRvdGFsbmFtZSwgc2VwID0gIiIpKQ0KICAgIHNhdmUoeCwgZmlsZSA9IHRvdGFsbmFtZSkNCn0NCg0KZmxvYWQgPC0gZnVuY3Rpb24oZmlsZU5hbWUpIHsNCiAgICBsb2FkKGZpbGVOYW1lKQ0KICAgIGdldChscygpW2xzKCkgIT0gImZpbGVOYW1lIl0pDQp9DQoNCmZzaG93ZGYgPC0gZnVuY3Rpb24oeCwgZGlnaXRzID0gMiwgLi4uKSB7DQogICAga25pdHI6OmthYmxlKHgsIGRpZ2l0cyA9IGRpZ2l0cywgImh0bWwiLCAuLi4pICU+JQ0KICAgICAgICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gYygic3RyaXBlZCIsICJob3ZlciIpKSAlPiUNCiAgICAgICAga2FibGVFeHRyYTo6c2Nyb2xsX2JveCh3aWR0aCA9ICIxMDAlIiwgaGVpZ2h0ID0gIjMwMHB4IikNCn0NCg0KYGBgDQoNCmBgYHtyfQ0KcGFja2FnZXMgPSBjKCJSU2VsZW5pdW0iLCAicnZlc3QiLCAidGlkeXZlcnNlIiwgIm5ldHN0YXQiLCAicGluZ3IiLCAic3RyaW5nciIpDQpmcGFja2FnZS5jaGVjayhwYWNrYWdlcykNCnJtKHBhY2thZ2VzKQ0KYGBgDQojIE9wZW4gQWxleA0KYGBge3J9DQoNCm9wdGlvbnMob3BlbmFsZXhSLm1haWx0byA9ICJqYW4udWNhLmpyQGdtYWlsLmNvbSIpICAjcGxlYXNlIFBsZWFzZSByZXBsYWNlIHdpdGggeW91ciBvd24gZW1haWxhZHJlc3MNCg0KanQgPC0gcmVhZF9odG1sKCJodHRwczovL2FwaS5vcGVuYWxleC5vcmcvYXV0aG9ycz9zZWFyY2g9Sm9jaGVtK1RvbHNtYSIpICU+JQ0KICAgIGh0bWxfdGV4dDIoKQ0KDQpyZXF1aXJlKG9wZW5hbGV4UikNCg0KZGYgPC0gb2FfZmV0Y2goZW50aXR5ID0gImF1dGhvciIsIHNlYXJjaCA9ICJKb2NoZW0gVG9sc21hIikNCmZzaG93ZGYoZGYpDQoNCmRmX3BhcGVycyA8LSBvYV9mZXRjaChlbnRpdHkgPSAid29ya3MiLCBhdXRob3IuaWQgPSBkZiRpZCkNCmRmX3BhcGVycyRhdXRob3JbMV0NCg0KZGZfaW5zdGl0dXRpb24gPC0gb2FfZmV0Y2goZW50aXR5ID0gImluc3RpdHV0aW9ucyIsIHNlYXJjaCA9ICJyYWRib3VkIHVuaXZlcnNpdHkgbmlqbWVnZW4iKSRpZFsxXQ0KDQpkZl9hdXRob3IgPC0gb2FfZmV0Y2goZW50aXR5ID0gImF1dGhvciIsIHNlYXJjaCA9ICJUb2xzbWEiKQ0KDQoNCiNKb2NoZW0gVG9sc21hDQojVG9tIHZhbiBkZXIgTWVlcg0KI01hdXJpY2UgR2VzdGh1aXplbg0KI01pY2hhZWwgU2F2ZWxrb3VsDQoNCg0KSlQgPC0gb2FfZmV0Y2goZW50aXR5ID0gImF1dGhvciIsIHNlYXJjaCA9ICJKb2NoZW0gVG9sc21hIikNCk1HIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJhdXRob3IiLCBzZWFyY2ggPSAiTWF1cmljZSBHZXN0aHVpemVuIikNCk1TIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJhdXRob3IiLCBzZWFyY2ggPSAiTWljaGFlbCBTYXZlbGtvdWwiKQ0KVE0gPC0gb2FfZmV0Y2goZW50aXR5ID0gImF1dGhvciIsIHNlYXJjaCA9ICJUb20gdmFuIGRlciBNZWVyIikNCg0KDQp3b3JrcyA8LSBvYV9mZXRjaChlbnRpdHkgPSAid29ya3MiLCBhdXRob3IuaWQgPSBjKEpUJGlkWzFdLCBNRyRpZFsxXSwgTVMkaWRbMV0sIFRNJGlkWzFdKSkNCk1HX3dvcmtzIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJ3b3JrcyIsIGF1dGhvci5pZCA9IE1HJGlkKQ0KTVNfd29ya3MgPC0gb2FfZmV0Y2goZW50aXR5ID0gIndvcmtzIiwgYXV0aG9yLmlkID0gTVMkaWQpDQpUTV93b3JrcyA8LSBvYV9mZXRjaChlbnRpdHkgPSAid29ya3MiLCBhdXRob3IuaWQgPSBUTSRpZFsxXSkNCg0KI2ZpbHRlciBvbmx5IGZvciAyMDE5LTIwMjMNCndvcmtzXzE5XzIzIDwtIHdvcmtzICU+JSBmaWx0ZXIocHVibGljYXRpb25feWVhciA+PSAyMDE5ICYgcHVibGljYXRpb25feWVhciA8PSAyMDIzKQ0KDQoNCmBgYA0KDQoNCg0KYGBge3J9DQp3YXZlMSA8LSBtYXRyaXgoYyhOQSxOQSxOQSxOQSwNCiAgICAgICAgICAgICAgICAgIE5BLE5BLE5BLE5BLA0KICAgICAgICAgICAgICAgICAgTkEsTkEsTkEsTkEsDQogICAgICAgICAgICAgICAgICBOQSxOQSxOQSxOQSksIG5yb3cgPSA0LCBuY29sID0gNCkNCg0Kcm93Lm5hbWVzKHdhdmUxKSA8LSBjKEpUJGlkLCBNRyRpZCwgTVMkaWQsIFRNJGlkWzFdKQ0KY29sbmFtZXMod2F2ZTEpIDwtIGMoSlQkaWQsIE1HJGlkLCBNUyRpZCwgVE0kaWRbMV0pDQoNCndhdmUyIDwtIG1hdHJpeCgwLCBucm93ID0gNCwgbmNvbCA9IDQpDQoNCnJvdy5uYW1lcyh3YXZlMikgPC0gYyhKVCRpZCwgTUckaWQsIE1TJGlkLCBUTSRpZFsxXSkNCmNvbG5hbWVzKHdhdmUyKSA8LSBjKEpUJGlkLCBNRyRpZCwgTVMkaWQsIFRNJGlkWzFdKQ0KDQplZ28gPC0gd29ya3NbMSxdJGF1dGhvcltbMV1dJGF1X2lkWzFdDQphbHRlcnMgPC0gd29ya3NbMSxdJGF1dGhvcltbMV1dJGF1X2lkWy0xXQ0KDQp3YXZlMltlZ28sIGFsdGVyc10gPC0gd2F2ZTJbZWdvLCBhbHRlcnNdICsgMQ0Kd2F2ZTINCmBgYA0KDQo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("tutorialWebScraping.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

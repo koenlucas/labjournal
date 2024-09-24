@@ -17,6 +17,8 @@ navbar:
         href: Week1.html
       - text: "Week 2"
         href: Week2.html
+      - text: "Week 3 - web scraping"  
+        href: tutorialWebScraping.html
     - text: "My project"
       menu: 
       - text: "Introduction"

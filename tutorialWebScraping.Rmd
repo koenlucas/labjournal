@@ -1,0 +1,203 @@
+---
+title: "Tutorial webscraping"
+author: "Koen Lucas"
+date: "2024-09-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#packages
+```{r}
+
+######################################### Title: Webscraping in R Author: Bas Hofstra Version:
+######################################### 29-07-2021
+
+# start with clean workspace
+rm(list = ls())
+
+# install.packages('data.table')
+library(data.table)  # mainly for faster data handling
+library(tidyverse)  # I assume you already installed this one!
+# install.packages('httr') # we don't need this for now require(httr)
+#install.packages("xml2")
+require(xml2)
+#install.packages("rvest")
+require(rvest)
+#install.packages("devtools")
+require(devtools)
+# Note we're doing something different here. We're installing a *latest* version directly from
+# GitHub This is because the released version of this packages contains some errors!
+devtools::install_github("jkeirstead/scholar")
+
+require(scholar)
+
+# define workdirectory, note the double *backslashes* if you're on windows setwd('/yourpathhere)'
+
+
+```
+
+
+```{r}
+soc_staff <- read_html("https://web.archive.org/web/20230528153336/https://www.ru.nl/sociology/research/staff/")
+
+head(soc_staff)
+
+class(soc_staff)
+
+```
+
+
+```{r}
+
+# so we need to find WHERE the table is located in the html 'inspect element' in mozilla firefox or
+# 'view page source' and you see that everything AFTER /td in the 'body' of the page seems to be
+# the table we do need
+soc_staff_2 <- soc_staff %>%
+    rvest::html_element("body") %>%
+    rvest::html_elements("td") %>%
+    rvest::html_text()
+
+soc_staff_2
+
+soc_staff_3 <- soc_staff %>% 
+  rvest::html_element("body") %>% 
+  rvest::html_table() 
+
+soc_staff_3
+
+```
+
+# leiden staff
+```{r}
+Leiden_staff <- read_html("https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1")
+
+
+Leiden_staff_2 <- Leiden_staff %>% 
+  rvest::html_element("body") %>% 
+  rvest::html_elements("strong") %>% 
+  rvest::html_text() 
+
+view(Leiden_staff_2)
+
+Leiden_staff_3 <- Leiden_staff %>% 
+  rvest::html_element("body") %>% 
+  rvest::html_elements("li") %>% 
+  rvest::html_elements("div") %>% 
+  rvest::html_elements("span") %>% 
+  rvest::html_text()
+
+view(Leiden_staff_3)
+
+```
+
+
+
+# RSelenium
+```{r}
+
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave <- function(x, file, location = "./local/", ...) {
+    if (!dir.exists(location))
+        dir.create(location)
+    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+    totalname <- paste(location, datename, file, sep = "")
+    print(paste("SAVED: ", totalname, sep = ""))
+    save(x, file = totalname)
+}
+
+fload <- function(fileName) {
+    load(fileName)
+    get(ls()[ls() != "fileName"])
+}
+
+fshowdf <- function(x, digits = 2, ...) {
+    knitr::kable(x, digits = digits, "html", ...) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+        kableExtra::scroll_box(width = "100%", height = "300px")
+}
+
+```
+
+```{r}
+packages = c("RSelenium", "rvest", "tidyverse", "netstat", "pingr", "stringr")
+fpackage.check(packages)
+rm(packages)
+```
+# Open Alex
+```{r}
+
+options(openalexR.mailto = "jan.uca.jr@gmail.com")  #please Please replace with your own emailadress
+
+jt <- read_html("https://api.openalex.org/authors?search=Jochem+Tolsma") %>%
+    html_text2()
+
+require(openalexR)
+
+df <- oa_fetch(entity = "author", search = "Jochem Tolsma")
+fshowdf(df)
+
+df_papers <- oa_fetch(entity = "works", author.id = df$id)
+df_papers$author[1]
+
+df_institution <- oa_fetch(entity = "institutions", search = "radboud university nijmegen")$id[1]
+
+df_author <- oa_fetch(entity = "author", search = "Tolsma")
+
+
+#Jochem Tolsma
+#Tom van der Meer
+#Maurice Gesthuizen
+#Michael Savelkoul
+
+
+JT <- oa_fetch(entity = "author", search = "Jochem Tolsma")
+MG <- oa_fetch(entity = "author", search = "Maurice Gesthuizen")
+MS <- oa_fetch(entity = "author", search = "Michael Savelkoul")
+TM <- oa_fetch(entity = "author", search = "Tom van der Meer")
+
+
+works <- oa_fetch(entity = "works", author.id = c(JT$id[1], MG$id[1], MS$id[1], TM$id[1]))
+MG_works <- oa_fetch(entity = "works", author.id = MG$id)
+MS_works <- oa_fetch(entity = "works", author.id = MS$id)
+TM_works <- oa_fetch(entity = "works", author.id = TM$id[1])
+
+#filter only for 2019-2023
+works_19_23 <- works %>% filter(publication_year >= 2019 & publication_year <= 2023)
+
+
+```
+
+
+
+```{r}
+wave1 <- matrix(c(NA,NA,NA,NA,
+                  NA,NA,NA,NA,
+                  NA,NA,NA,NA,
+                  NA,NA,NA,NA), nrow = 4, ncol = 4)
+
+row.names(wave1) <- c(JT$id, MG$id, MS$id, TM$id[1])
+colnames(wave1) <- c(JT$id, MG$id, MS$id, TM$id[1])
+
+wave2 <- matrix(0, nrow = 4, ncol = 4)
+
+row.names(wave2) <- c(JT$id, MG$id, MS$id, TM$id[1])
+colnames(wave2) <- c(JT$id, MG$id, MS$id, TM$id[1])
+
+ego <- works[1,]$author[[1]]$au_id[1]
+alters <- works[1,]$author[[1]]$au_id[-1]
+
+wave2[ego, alters] <- wave2[ego, alters] + 1
+wave2
+```
+
