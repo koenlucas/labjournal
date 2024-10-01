@@ -130,7 +130,8 @@ fshowdf <- function(x, digits = 2, ...) {
 ```
 
 ```{r}
-packages = c("RSelenium", "rvest", "tidyverse", "netstat", "pingr", "stringr")
+packages = c(#"RSelenium", 
+             "rvest", "tidyverse", "netstat", "pingr", "stringr")
 fpackage.check(packages)
 rm(packages)
 ```

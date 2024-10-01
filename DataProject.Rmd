@@ -1,0 +1,704 @@
+---
+title: "Data project"
+author: "Koen Lucas"
+date: "2024-09-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+rm(list = ls())
+
+
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+    ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+    ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+    if (is.null(file))
+        file = deparse(substitute(x))
+    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+    totalname <- paste(location, file, "_", datename, ".rda", sep = "")
+    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload <- function(filename) {
+    load(filename)
+    get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+    knitr::kable(x, digits = 2, "html", ...) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+        kableExtra::scroll_box(width = "100%", height = "300px")
+}
+
+packages <- c("tidyverse", "scholar", "openalexR", "rvest", "jsonlite", "igraph")
+fpackage.check(packages)
+```
+
+```{r load data, include=FALSE}
+
+scholars <- fload("./data/scholars_20240924.rda")
+
+```
+
+```{r step 1: select scholars, include=FALSE}
+
+# (sociology, RU)
+demographics <- do.call(rbind.data.frame, scholars$demographics)
+demographics <- demographics %>%
+    mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+        is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+        ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+        is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+sample <- which((demographics$Universiteit1.22 == "RU" | demographics$Universiteit2.22 == "RU" | demographics$Universiteit1.24 ==
+    "RU" | demographics$Universiteit2.24 == "RU") & (demographics$discipline.22 == "sociology" | demographics$discipline.24 ==
+    "sociology"))
+
+demographics_soc <- demographics[sample, ]
+scholars_sel <- lapply(scholars, "[", sample)
+
+```
+
+```{r step 2: construct the empty adjecency matrix, include=FALSE}
+ids <- demographics_soc$au_id
+wave2 <- wave1 <- matrix(0, nrow = length(ids), ncol = length(ids), dimnames = list(ids, ids))
+
+```
+
+```{r step 3: filter works, include=FALSE}
+works <- scholars_sel$work
+
+works_id <- unlist(lapply(works, function(l) l$id))
+works_author <- unlist(lapply(works, function(l) l$author), recursive = FALSE)
+works_year <- unlist(lapply(works, function(l) l$publication_year), recursive = FALSE)
+
+df_works <- tibble(works_id, works_author, works_year)
+
+dups <- which(duplicated(works_id))
+# why are there some many papers of Batenburg duplicates
+
+df_works <- df_works[-dups, ]
+df_works_w2 <- df_works[df_works$works_year > 2019, ]
+
+```
+
+```{r step 4: fill the matrix, include=FALSE}
+
+# first to others
+for (i in 1:nrow(df_works_w2)) {
+    ego <- df_works_w2$works_author[i][[1]]$au_id[1]
+    alters <- df_works_w2$works_author[i][[1]]$au_id[-1]
+
+    if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+        wave2[which(ids %in% ego), which(ids %in% alters)] <- 1
+    }
+}
+
+# last to others
+for (i in 1:nrow(df_works_w2)) {
+    ego <- rev(df_works_w2$works_author[i][[1]]$au_id)[1]
+    alters <- rev(df_works_w2$works_author[i][[1]]$au_id)[-1]
+
+    if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+        wave2[which(ids %in% ego), which(ids %in% alters)] <- 1
+    }
+}
+
+# undirected
+for (i in 1:nrow(df_works_w2)) {
+    egos <- df_works_w2$works_author[i][[1]]$au_id
+
+    if (sum(ids %in% egos) > 0) {
+        wave2[which(ids %in% egos), which(ids %in% egos)] <- 1
+    }
+}
+
+```
+
+```{r function, include = FALSE}
+fcolnet <- function(data = scholars, university = "RU", discipline = "sociology", waves = list(c(2015,
+    2018), c(2019, 2023)), type = c("first")) {
+
+    # step 1
+    demographics <- do.call(rbind.data.frame, data$demographics)
+    demographics <- demographics %>%
+        mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+            is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+            ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+            is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+    sample <- which((demographics$Universiteit1.22 %in% university | demographics$Universiteit2.22 %in%
+        university | demographics$Universiteit1.24 %in% university | demographics$Universiteit2.24 %in%
+        university) & (demographics$discipline.22 %in% discipline | demographics$discipline.24 %in% discipline))
+
+    demographics_soc <- demographics[sample, ]
+    scholars_sel <- lapply(scholars, "[", sample)
+
+    # step 2
+    ids <- demographics_soc$au_id
+    nwaves <- length(waves)
+    nets <- array(0, dim = c(nwaves, length(ids), length(ids)), dimnames = list(wave = 1:nwaves, ids,
+        ids))
+    dimnames(nets)
+
+    # step 3
+    df_works <- tibble(works_id = unlist(lapply(scholars_sel$work, function(l) l$id)), works_author = unlist(lapply(scholars_sel$work,
+        function(l) l$author), recursive = FALSE), works_year = unlist(lapply(scholars_sel$work, function(l) l$publication_year),
+        recursive = FALSE))
+
+    df_works <- df_works[!duplicated(df_works), ]
+
+    # step 4
+    if (type == "first") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- df_works_w$works_author[i][[1]]$au_id[1]
+                alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "last") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+                alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "all") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                egos <- df_works_w$works_author[i][[1]]$au_id
+                if (sum(ids %in% egos) > 0) {
+                  nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+                }
+            }
+        }
+    }
+    output <- list()
+    output$data <- scholars_sel
+    output$nets <- nets
+    return(output)
+}
+
+
+```
+
+# Only RU sociology
+
+```{r creating own dataset RU, include = FALSE}
+
+data <- fcolnet(data = scholars,
+                university = "RU",
+                discipline = "sociology",
+                waves = list(c(2015, 2018), c(2019, 2023)),
+                type = c("first"))
+
+
+
+df <- data$data
+
+df_ego <- do.call(rbind.data.frame, df$demographics)
+df_works <- do.call(rbind.data.frame, df$works)
+
+
+df_career_age <- df_works %>%
+  unnest(author) %>%
+  filter(au_id %in% df_ego$au_id == TRUE) %>%
+  group_by(au_id) %>%
+  mutate(first_year_pub = min(publication_year, na.rm = TRUE)) %>%
+  select(au_id, first_year_pub) %>%
+  distinct(au_id, first_year_pub, .keep_all = TRUE)
+
+df_ego <- merge(df_ego, df_career_age, by = "au_id", all.x = TRUE)
+
+```
+
+## Descriptives and visualisation
+
+### plot wave 1 and 2
+
+```{r, warning=FALSE, echo=FALSE, fig.show="hold", out.width="50%"}
+
+# wave 1
+network_w1 <- igraph::graph_from_adjacency_matrix(
+  data$nets[1,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave1 <- simplify(network_w1)
+
+plot(wave1,
+     vertex.label = NA,
+     vertex.size = 4,
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1)
+
+
+# wave 2
+network_w2 <- igraph::graph_from_adjacency_matrix(
+  data$nets[2,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave2 <- simplify(network_w2)
+
+plot(wave2,
+     vertex.label = NA,
+     vertex.size = 4,
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1)
+
+
+```
+
+### Descriptives
+
+```{r, include=TRUE}
+
+# number of nodes
+vcount(network_w1) # 50
+
+# number of edges
+ecount(network_w1) # wave 1: 39
+ecount(network_w2) # wave 2: 76
+
+# degrees
+# igraph::degree(network_w1)
+# igraph::degree(network_w2)
+
+
+#betweeness
+# igraph::betweenness(network_w1, directed = TRUE)
+# igraph::betweenness(network_w2, directed = TRUE)
+
+#dyad census
+# wave 1
+igraph::dyad_census(network_w1) #4 mutual, 31 asymmetric
+# wave 2
+igraph::dyad_census(network_w2) #6 mutual, 64 asymmetric
+
+#triad census
+# wave 1
+igraph::triad_census(network_w1) # 0 full triads
+# wave 2
+igraph::triad_census(network_w2) # 1 full triads
+
+# transitivity global
+igraph::transitivity(network_w1, type = c("global")) # wave1: 0.0826
+igraph::transitivity(network_w2, type = c("global")) # wave2: 0.2339
+
+# edge density
+igraph::edge_density(network_w1) # wave 1: 0.016
+igraph::edge_density(network_w2) # wave 2: 0.031
+
+```
+
+### indegree distribution
+
+```{r, echo=FALSE}
+
+indegr_w1 <- degree(network_w1, mode = "in")
+indegr_w2 <- degree(network_w2, mode = "in")
+
+hist(indegr_w1,
+     main = "Distribution of indegrees - wave 1",
+     xlab = "indegrees",
+     ylab = "Frequency",
+     col = "blue",
+     border = "black")
+
+hist(indegr_w2,
+     main = "Distribution of indegrees - wave 2",
+     xlab = "indegrees",
+     ylab = "Frequency",
+     col = "blue",
+     border = "black")
+
+```
+
+### network plots
+
+```{r, echo=FALSE}
+
+node_labels <- 1:vcount(wave1)
+
+plot(wave1,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 1")
+
+plot(wave2,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 2")
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+
+V(wave1)$color <- ifelse(indegr_w1 > 3, "green", "orange" )
+
+plot(wave1,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 1")
+
+V(wave2)$color <- ifelse(indegr_w1 > 3, "green", "orange" )
+
+plot(wave2,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 2")
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+# wave 1
+# Identifying isolates
+degree_tot_w1 <- degree(wave1, mode = "in")
+
+# Remove isolates
+noisolates_w1 <- delete_vertices(wave1, which(degree_tot_w1 == 0))
+
+# indegrees noisolates
+indegr_w1_ni <- degree(noisolates_w1, mode = "in")
+
+plot(noisolates_w1,
+     vertex.label = node_labels[V(noisolates_w1)],
+     vertex.size = indegr_w1_ni * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "no isolates wave 1")
+
+# wave 2
+# Identifying isolates
+degree_tot_w2 <- degree(wave2, mode = "in")
+
+# Remove isolates
+noisolates_w2 <- delete_vertices(wave2, which(degree_tot_w2 == 0))
+
+# indegrees noisolates
+indegr_w2_ni <- degree(noisolates_w2, mode = "in")
+
+plot(noisolates_w2,
+     vertex.label = node_labels[V(noisolates_w2)],
+     vertex.size = indegr_w2_ni * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "no isolates wave 2")
+
+
+```
+
+
+
+# Full data
+
+```{r creating own dataset, include = FALSE}
+
+data <- fcolnet(data = scholars,
+                university = c("RU", "UU", "RUG", "EUR", "UvA", "UvT", "VU"),
+                discipline = "sociology",
+                waves = list(c(2015, 2018), c(2019, 2023)),
+                type = c("first"))
+
+
+df <- data$data
+df_ego <- do.call(rbind.data.frame, df$demographics)
+
+```
+
+## Descriptives and visualisation
+
+### plot wave 1 and 2
+
+```{r plotwaves, warning=FALSE, echo=FALSE, fig.show="hold", out.width="50%"}
+
+# wave 1
+network_w1 <- igraph::graph_from_adjacency_matrix(
+  data$nets[1,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave1 <- simplify(network_w1)
+
+plot(wave1,
+     vertex.label = NA,
+     vertex.size = 4,
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1)
+
+
+# wave 2
+network_w2 <- igraph::graph_from_adjacency_matrix(
+  data$nets[2,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave2 <- simplify(network_w2)
+
+plot(wave2,
+     vertex.label = NA,
+     vertex.size = 4,
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1)
+
+
+```
+
+### Descriptives
+
+```{r, include=TRUE}
+
+# number of nodes
+vcount(network_w1) # 385
+
+# number of edges
+ecount(network_w1) # wave 1: 217
+ecount(network_w2) # wave 2: 410
+
+# degrees
+# igraph::degree(network_w1)
+# igraph::degree(network_w2)
+
+
+#betweeness
+# igraph::betweenness(network_w1, directed = TRUE)
+# igraph::betweenness(network_w2, directed = TRUE)
+
+#dyad census
+# wave 1
+igraph::dyad_census(network_w1) #27 mutual, 163 asymmetric
+# wave 2
+igraph::dyad_census(network_w2) #42 mutual, 326 asymmetric
+
+#triad census
+# wave 1
+igraph::triad_census(network_w1) # 0 full triads
+# wave 2
+igraph::triad_census(network_w2) # 1 full triads
+
+# transitivity global
+igraph::transitivity(network_w1, type = c("global")) # wave1: 0.229
+igraph::transitivity(network_w2, type = c("global")) # wave2: 0.204
+
+# edge density
+igraph::edge_density(network_w1) # wave 1: 0.0014
+igraph::edge_density(network_w2) # wave 2: 0.0028
+
+```
+
+### indegree distribution
+
+```{r, echo=FALSE}
+
+indegr_w1 <- degree(network_w1, mode = "in")
+indegr_w2 <- degree(network_w2, mode = "in")
+
+hist(indegr_w1,
+     main = "Distribution of indegrees - wave 1",
+     xlab = "indegrees",
+     ylab = "Frequency",
+     col = "blue",
+     border = "black")
+
+hist(indegr_w2,
+     main = "Distribution of indegrees - wave 2",
+     xlab = "indegrees",
+     ylab = "Frequency",
+     col = "blue",
+     border = "black")
+
+```
+
+### network plots
+
+```{r, echo=FALSE}
+
+node_labels <- 1:vcount(wave1)
+
+plot(wave1,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 1")
+
+plot(wave2,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 2")
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+
+V(wave1)$color <- ifelse(indegr_w1 > 3, "green", "orange" )
+
+plot(wave1,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 1")
+
+V(wave2)$color <- ifelse(indegr_w1 > 3, "green", "orange" )
+
+plot(wave2,
+     vertex.label = node_labels,
+     vertex.size = indegr_w1 * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "Node size based on indegrees - wave 2")
+
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+# wave 1
+# Identifying isolates
+degree_tot_w1 <- degree(wave1, mode = "in")
+
+# Remove isolates
+noisolates_w1 <- delete_vertices(wave1, which(degree_tot_w1 == 0))
+
+# indegrees noisolates
+indegr_w1_ni <- degree(noisolates_w1, mode = "in")
+
+plot(noisolates_w1,
+     vertex.label = node_labels[V(noisolates_w1)],
+     vertex.size = indegr_w1_ni * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "no isolates wave 1")
+
+# wave 2
+# Identifying isolates
+degree_tot_w2 <- degree(wave2, mode = "in")
+
+# Remove isolates
+noisolates_w2 <- delete_vertices(wave2, which(degree_tot_w2 == 0))
+
+
+# indegrees noisolates
+indegr_w2_ni <- degree(noisolates_w2, mode = "in")
+
+plot(noisolates_w2,
+     vertex.label = node_labels[V(noisolates_w2)],
+     vertex.size = indegr_w2_ni * 3 + 5,  
+     vertex.frame.color = "gray",  
+     vertex.label.color = "black",  
+     vertex.label.family = "Helvetica", 
+     vertex.label.cex = 0.4,  
+     vertex.label.dist = 0.5,  
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1, 
+     main = "no isolates wave 2")
+
+```
+
