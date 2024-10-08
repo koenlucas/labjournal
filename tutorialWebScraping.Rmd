@@ -38,14 +38,14 @@ require(scholar)
 
 
 ```
-
+Webarchive is not available so these parts of the code are commented.
 
 ```{r}
-soc_staff <- read_html("https://web.archive.org/web/20230528153336/https://www.ru.nl/sociology/research/staff/")
-
-head(soc_staff)
-
-class(soc_staff)
+# soc_staff <- read_html("https://web.archive.org/web/20230528153336/https://www.ru.nl/sociology/research/staff/")
+# 
+# head(soc_staff)
+# 
+# class(soc_staff)
 
 ```
 
@@ -55,18 +55,18 @@ class(soc_staff)
 # so we need to find WHERE the table is located in the html 'inspect element' in mozilla firefox or
 # 'view page source' and you see that everything AFTER /td in the 'body' of the page seems to be
 # the table we do need
-soc_staff_2 <- soc_staff %>%
-    rvest::html_element("body") %>%
-    rvest::html_elements("td") %>%
-    rvest::html_text()
-
-soc_staff_2
-
-soc_staff_3 <- soc_staff %>% 
-  rvest::html_element("body") %>% 
-  rvest::html_table() 
-
-soc_staff_3
+# soc_staff_2 <- soc_staff %>%
+#     rvest::html_element("body") %>%
+#     rvest::html_elements("td") %>%
+#     rvest::html_text()
+# 
+# soc_staff_2
+# 
+# soc_staff_3 <- soc_staff %>% 
+#   rvest::html_element("body") %>% 
+#   rvest::html_table() 
+# 
+# soc_staff_3
 
 ```
 

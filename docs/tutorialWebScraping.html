@@ -358,7 +358,10 @@ div.tocify {
       <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
     </li>
     <li>
-      <a href="DataProject.html">Week 4 - data visualisation</a>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
     </li>
   </ul>
 </li>
@@ -446,146 +449,28 @@ devtools::install_github(&quot;jkeirstead/scholar&quot;)</code></pre>
 <pre class="r"><code>require(scholar)
 
 # define workdirectory, note the double *backslashes* if you&#39;re on windows setwd(&#39;/yourpathhere)&#39;</code></pre>
-<pre class="r"><code>soc_staff &lt;- read_html(&quot;https://web.archive.org/web/20230528153336/https://www.ru.nl/sociology/research/staff/&quot;)
-
-head(soc_staff)</code></pre>
-<pre><code>## $node
-## &lt;pointer: 0x0000024d168fefd0&gt;
-## 
-## $doc
-## &lt;pointer: 0x0000024d157fe680&gt;</code></pre>
-<pre class="r"><code>class(soc_staff)</code></pre>
-<pre><code>## [1] &quot;xml_document&quot; &quot;xml_node&quot;</code></pre>
+<p>Webarchive is not available so these parts of the code are
+commented.</p>
+<pre class="r"><code># soc_staff &lt;- read_html(&quot;https://web.archive.org/web/20230528153336/https://www.ru.nl/sociology/research/staff/&quot;)
+# 
+# head(soc_staff)
+# 
+# class(soc_staff)</code></pre>
 <pre class="r"><code># so we need to find WHERE the table is located in the html &#39;inspect element&#39; in mozilla firefox or
 # &#39;view page source&#39; and you see that everything AFTER /td in the &#39;body&#39; of the page seems to be
 # the table we do need
-soc_staff_2 &lt;- soc_staff %&gt;%
-    rvest::html_element(&quot;body&quot;) %&gt;%
-    rvest::html_elements(&quot;td&quot;) %&gt;%
-    rvest::html_text()
-
-soc_staff_2</code></pre>
-<pre><code>##   [1] &quot;Staff:&quot;                                                                                                                                                      
-##   [2] &quot;Expertise:&quot;                                                                                                                                                  
-##   [3] &quot;Batenburg, prof. dr. R. (Ronald)&quot;                                                                                                                            
-##   [4] &quot;Healthcare, labour market and healthcare professions and training&quot;                                                                                           
-##   [5] &quot;Begall, dr. K.H. (Katia)&quot;                                                                                                                                    
-##   [6] &quot;Family, life course, labour market participation, division of household tasks and gender norms&quot;                                                              
-##   [7] &quot;Bekhuis, dr. H. (Hidde)&quot;                                                                                                                                     
-##   [8] &quot;Welfare state, nationalism and sports&quot;                                                                                                                       
-##   [9] &quot;Berg, dr. L. van den (Lonneke)&quot;                                                                                                                              
-##  [10] &quot;Family, life course and transition to adulthood&quot;                                                                                                             
-##  [11] &quot;Blommaert, dr. L. (Lieselotte)&quot;                                                                                                                              
-##  [12] &quot;Discrimination and inequality on the labour market&quot;                                                                                                          
-##  [13] &quot;Eisinga, prof. dr. R.N. (Rob)&quot;                                                                                                                               
-##  [14] &quot;Methods of research and statistics&quot;                                                                                                                          
-##  [15] &quot;Gesthuizen, dr. M.J.W. (Maurice)&quot;                                                                                                                            
-##  [16] &quot;\n                                Poverty en social cohesion\n                              &quot;                                                                
-##  [17] &quot;Geurts, dr. P.G. (Nella)&quot;                                                                                                                                    
-##  [18] &quot;\n                                Integration and migration\n                              &quot;                                                                 
-##  [19] &quot;Glas, dr. S. (Saskia)&quot;                                                                                                                                       
-##  [20] &quot;Islam, gender attitudes and sexuality&quot;                                                                                                                       
-##  [21] &quot;Hek, dr. M. van (Margriet)&quot;                                                                                                                                  
-##  [22] &quot;Educational inequality, gender inequality, organizational sociology and culture&quot;                                                                             
-##  [23] &quot;Hoekman, dr. R. H. A.(Remco)&quot;                                                                                                                                
-##  [24] &quot;Sports and policy sociology&quot;                                                                                                                                 
-##  [25] &quot;Hofstra, dr. B. (Bas)&quot;                                                                                                                                       
-##  [26] &quot;Diversity, inequality and innovation&quot;                                                                                                                        
-##  [27] &quot;Koops, dr. J. (Judith)&quot;                                                                                                                                      
-##  [28] &quot;Family sociology and demography&quot;                                                                                                                             
-##  [29] &quot;Kraaykamp, prof. dr. G.L.M. (Gerbert)&quot;                                                                                                                       
-##  [30] &quot;Educational inequality, culture and health&quot;                                                                                                                  
-##  [31] &quot;Meuleman, dr. (Roza)&quot;                                                                                                                                        
-##  [32] &quot;Culture and nationalism&quot;                                                                                                                                     
-##  [33] &quot;Savelkoul, dr. M.J. (Michael)&quot;                                                                                                                               
-##  [34] &quot;Ethnic diversity, prejudice and social cohesion&quot;                                                                                                             
-##  [35] &quot;Scheepers, prof. dr. P.L.H. (Peer)&quot;                                                                                                                          
-##  [36] &quot;Comparative research, social cohesion and diversity&quot;                                                                                                         
-##  [37] &quot;Spierings, dr. C.H.B.M. (Niels)&quot;                                                                                                                             
-##  [38] &quot;Islam, gender, populism, social media, Middle East and migration&quot;                                                                                            
-##  [39] &quot;Tolsma, dr. J. (Jochem)&quot;                                                                                                                                     
-##  [40] &quot;Inequality, criminology and ethnic diversity&quot;                                                                                                                
-##  [41] &quot;\n                                Verbakel, prof. dr. C.M.C. (Ellen)\n                                Head of the department\n                              &quot;
-##  [42] &quot;Health, family and work&quot;                                                                                                                                     
-##  [43] &quot;Visser, dr. M. (Mark)&quot;                                                                                                                                       
-##  [44] &quot;Older workers, radicalism and social cohesion&quot;                                                                                                               
-##  [45] &quot;Wolbers, prof. dr. M.H.J. (Maarten)&quot;                                                                                                                         
-##  [46] &quot;Educational inequality and labour market inequality&quot;                                                                                                         
-##  [47] &quot;PhD:&quot;                                                                                                                                                        
-##  [48] &quot;Expertise:&quot;                                                                                                                                                  
-##  [49] &quot;Bussemakers, C. (Carlijn) MSc&quot;                                                                                                                               
-##  [50] &quot;Adverse youth experiences and social inequality&quot;                                                                                                             
-##  [51] &quot;Franken, R. (Rob) MSc&quot;                                                                                                                                       
-##  [52] &quot;Sport networks and motivation for sustainable sports participation&quot;                                                                                          
-##  [53] &quot;Firat, M. (Mustafa) MSc&quot;                                                                                                                                     
-##  [54] &quot;Social inequality, older workers, life course and retirement&quot;                                                                                                
-##  [55] &quot;\n                                Güneyli, A. (Ayşegül)\n                              &quot;                                                                     
-##  [56] &quot;Work-care&quot;                                                                                                                                                   
-##  [57] &quot;Hendriks, I.P. (Inge) MSc&quot;                                                                                                                                   
-##  [58] &quot;Resistance to refugees and social cohesion&quot;                                                                                                                  
-##  [59] &quot;Jeroense, T.M.G. (Thijmen) MSc&quot;                                                                                                                              
-##  [60] &quot;Political participation, segregation, opinion polarization and voting behaviour&quot;                                                                             
-##  [61] &quot;Kollar, R. (Rachel)&quot;                                                                                                                                         
-##  [62] &quot;Spirit project&quot;                                                                                                                                              
-##  [63] &quot;Linders, N. (Nik) MSc&quot;                                                                                                                                       
-##  [64] &quot;Populism, gender, masculinity and sexuality&quot;                                                                                                                 
-##  [65] &quot;Loh, S.M. (Renae) MSc&quot;                                                                                                                                       
-##  [66] &quot;Educational sociology, social stratification, gender inequality and information communication technology (ICT)&quot;                                              
-##  [67] &quot;Meijeren, M. (Maikel) MSc&quot;                                                                                                                                   
-##  [68] &quot;Social capital, volunteer work and diversity&quot;                                                                                                                
-##  [69] &quot;Mensvoort, C.A. van (Carly) MSc&quot;                                                                                                                             
-##  [70] &quot;Gender, leadership and social norms&quot;                                                                                                                         
-##  [71] &quot;\n                                Mulders, A.M. (Anne Maaike) MSc\n                              &quot;                                                           
-##  [72] &quot;Social inequality in science&quot;                                                                                                                                
-##  [73] &quot;Müller, K. (Katrin) MSc&quot;                                                                                                                                     
-##  [74] &quot;Opinions about discrimination, migration and inequality&quot;                                                                                                     
-##  [75] &quot;Raiber, K. (Klara) MSc&quot;                                                                                                                                      
-##  [76] &quot;Informal care, employment, social inequality and gender&quot;                                                                                                     
-##  [77] &quot;Ramaekers, M.J.M. (Marlou) MSc&quot;                                                                                                                              
-##  [78] &quot;Prosocial behaviour and family&quot;                                                                                                                              
-##  [79] &quot;Wiertsema, S. (Sara) MSc&quot;                                                                                                                                    
-##  [80] &quot;Inequality in sports and physical activity, school-to-work transition and employment&quot;                                                                        
-##  [81] &quot;External PhD:&quot;                                                                                                                                               
-##  [82] &quot;Expertise:&quot;                                                                                                                                                  
-##  [83] &quot;Betkó, drs. J.G. (János)&quot;                                                                                                                                    
-##  [84] &quot;Social assistance benefit, poverty, reintegration, RCT and social experiment&quot;                                                                                
-##  [85] &quot;Middendorp J. (Jansje) van MSc&quot;                                                                                                                              
-##  [86] &quot;Home administration&quot;                                                                                                                                         
-##  [87] &quot;Vis, E. (Elize) MSc&quot;                                                                                                                                         
-##  [88] &quot;Healthcare, labour market, healthcare professions and training, health and social capital&quot;                                                                   
-##  [89] &quot;Weber, T. (Tijmen) MSc&quot;                                                                                                                                      
-##  [90] &quot;International student mobility and the internationalization of higher education&quot;                                                                             
-##  [91] &quot;Guest researchers:&quot;                                                                                                                                          
-##  [92] &quot;Expertise:&quot;                                                                                                                                                  
-##  [93] &quot;Khawli, E. el (Elissa) post-doc, Dr.&quot;                                                                                                                        
-##  [94] &quot;Inequality in older age&quot;                                                                                                                                     
-##  [95] &quot;Sterkens, dr. C.J.A. (Carl)&quot;                                                                                                                                 
-##  [96] &quot;Religious conflicts, cohesion, religion and the philosophy of life&quot;                                                                                          
-##  [97] &quot;Vermeer, dr. P.A.D.M. (Paul)&quot;                                                                                                                                
-##  [98] &quot;Socialization processes, secularisation, religion and the philosophy of life&quot;                                                                                
-##  [99] &quot;Other researchers:&quot;                                                                                                                                          
-## [100] &quot;Expertise:&quot;                                                                                                                                                  
-## [101] &quot;Grubben, M. (Malou)&quot;                                                                                                                                         
-## [102] &quot;Inequality in sports and movement&quot;</code></pre>
-<pre class="r"><code>soc_staff_3 &lt;- soc_staff %&gt;% 
-  rvest::html_element(&quot;body&quot;) %&gt;% 
-  rvest::html_table() 
-
-soc_staff_3</code></pre>
-<pre><code>## # A tibble: 51 × 2
-##    X1                               X2                                                              
-##    &lt;chr&gt;                            &lt;chr&gt;                                                           
-##  1 Staff:                           Expertise:                                                      
-##  2 Batenburg, prof. dr. R. (Ronald) Healthcare, labour market and healthcare professions and traini…
-##  3 Begall, dr. K.H. (Katia)         Family, life course, labour market participation, division of h…
-##  4 Bekhuis, dr. H. (Hidde)          Welfare state, nationalism and sports                           
-##  5 Berg, dr. L. van den (Lonneke)   Family, life course and transition to adulthood                 
-##  6 Blommaert, dr. L. (Lieselotte)   Discrimination and inequality on the labour market              
-##  7 Eisinga, prof. dr. R.N. (Rob)    Methods of research and statistics                              
-##  8 Gesthuizen, dr. M.J.W. (Maurice) Poverty en social cohesion                                      
-##  9 Geurts, dr. P.G. (Nella)         Integration and migration                                       
-## 10 Glas, dr. S. (Saskia)            Islam, gender attitudes and sexuality                           
-## # ℹ 41 more rows</code></pre>
+# soc_staff_2 &lt;- soc_staff %&gt;%
+#     rvest::html_element(&quot;body&quot;) %&gt;%
+#     rvest::html_elements(&quot;td&quot;) %&gt;%
+#     rvest::html_text()
+# 
+# soc_staff_2
+# 
+# soc_staff_3 &lt;- soc_staff %&gt;% 
+#   rvest::html_element(&quot;body&quot;) %&gt;% 
+#   rvest::html_table() 
+# 
+# soc_staff_3</code></pre>
 <div id="leiden-staff" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> leiden staff</h1>
 <pre class="r"><code>Leiden_staff &lt;- read_html(&quot;https://www.universiteitleiden.nl/en/social-behavioural-sciences/political-science/staff#tab-1&quot;)
@@ -743,7 +628,7 @@ Jochem Tolsma
 J. Tolsma , Jochem Tolsma, J L Tolsma
 </td>
 <td style="text-align:right;">
-8931.88
+8948.15
 </td>
 <td style="text-align:left;">
 <a href="https://openalex.org/A5087380803"
@@ -1142,7 +1027,7 @@ wave2</code></pre>
 ## https://openalex.org/A5010780363                                0                                0</code></pre>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlR1dG9yaWFsIHdlYnNjcmFwaW5nIg0KYXV0aG9yOiAiS29lbiBMdWNhcyINCmRhdGU6ICIyMDI0LTA5LTE4Ig0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpgYGANCg0KI3BhY2thZ2VzDQpgYGB7cn0NCg0KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgVGl0bGU6IFdlYnNjcmFwaW5nIGluIFIgQXV0aG9yOiBCYXMgSG9mc3RyYSBWZXJzaW9uOg0KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgMjktMDctMjAyMQ0KDQojIHN0YXJ0IHdpdGggY2xlYW4gd29ya3NwYWNlDQpybShsaXN0ID0gbHMoKSkNCg0KIyBpbnN0YWxsLnBhY2thZ2VzKCdkYXRhLnRhYmxlJykNCmxpYnJhcnkoZGF0YS50YWJsZSkgICMgbWFpbmx5IGZvciBmYXN0ZXIgZGF0YSBoYW5kbGluZw0KbGlicmFyeSh0aWR5dmVyc2UpICAjIEkgYXNzdW1lIHlvdSBhbHJlYWR5IGluc3RhbGxlZCB0aGlzIG9uZSENCiMgaW5zdGFsbC5wYWNrYWdlcygnaHR0cicpICMgd2UgZG9uJ3QgbmVlZCB0aGlzIGZvciBub3cgcmVxdWlyZShodHRyKQ0KI2luc3RhbGwucGFja2FnZXMoInhtbDIiKQ0KcmVxdWlyZSh4bWwyKQ0KI2luc3RhbGwucGFja2FnZXMoInJ2ZXN0IikNCnJlcXVpcmUocnZlc3QpDQojaW5zdGFsbC5wYWNrYWdlcygiZGV2dG9vbHMiKQ0KcmVxdWlyZShkZXZ0b29scykNCiMgTm90ZSB3ZSdyZSBkb2luZyBzb21ldGhpbmcgZGlmZmVyZW50IGhlcmUuIFdlJ3JlIGluc3RhbGxpbmcgYSAqbGF0ZXN0KiB2ZXJzaW9uIGRpcmVjdGx5IGZyb20NCiMgR2l0SHViIFRoaXMgaXMgYmVjYXVzZSB0aGUgcmVsZWFzZWQgdmVyc2lvbiBvZiB0aGlzIHBhY2thZ2VzIGNvbnRhaW5zIHNvbWUgZXJyb3JzIQ0KZGV2dG9vbHM6Omluc3RhbGxfZ2l0aHViKCJqa2VpcnN0ZWFkL3NjaG9sYXIiKQ0KDQpyZXF1aXJlKHNjaG9sYXIpDQoNCiMgZGVmaW5lIHdvcmtkaXJlY3RvcnksIG5vdGUgdGhlIGRvdWJsZSAqYmFja3NsYXNoZXMqIGlmIHlvdSdyZSBvbiB3aW5kb3dzIHNldHdkKCcveW91cnBhdGhoZXJlKScNCg0KDQpgYGANCg0KDQpgYGB7cn0NCnNvY19zdGFmZiA8LSByZWFkX2h0bWwoImh0dHBzOi8vd2ViLmFyY2hpdmUub3JnL3dlYi8yMDIzMDUyODE1MzMzNi9odHRwczovL3d3dy5ydS5ubC9zb2Npb2xvZ3kvcmVzZWFyY2gvc3RhZmYvIikNCg0KaGVhZChzb2Nfc3RhZmYpDQoNCmNsYXNzKHNvY19zdGFmZikNCg0KYGBgDQoNCg0KYGBge3J9DQoNCiMgc28gd2UgbmVlZCB0byBmaW5kIFdIRVJFIHRoZSB0YWJsZSBpcyBsb2NhdGVkIGluIHRoZSBodG1sICdpbnNwZWN0IGVsZW1lbnQnIGluIG1vemlsbGEgZmlyZWZveCBvcg0KIyAndmlldyBwYWdlIHNvdXJjZScgYW5kIHlvdSBzZWUgdGhhdCBldmVyeXRoaW5nIEFGVEVSIC90ZCBpbiB0aGUgJ2JvZHknIG9mIHRoZSBwYWdlIHNlZW1zIHRvIGJlDQojIHRoZSB0YWJsZSB3ZSBkbyBuZWVkDQpzb2Nfc3RhZmZfMiA8LSBzb2Nfc3RhZmYgJT4lDQogICAgcnZlc3Q6Omh0bWxfZWxlbWVudCgiYm9keSIpICU+JQ0KICAgIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJ0ZCIpICU+JQ0KICAgIHJ2ZXN0OjpodG1sX3RleHQoKQ0KDQpzb2Nfc3RhZmZfMg0KDQpzb2Nfc3RhZmZfMyA8LSBzb2Nfc3RhZmYgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50KCJib2R5IikgJT4lIA0KICBydmVzdDo6aHRtbF90YWJsZSgpIA0KDQpzb2Nfc3RhZmZfMw0KDQpgYGANCg0KIyBsZWlkZW4gc3RhZmYNCmBgYHtyfQ0KTGVpZGVuX3N0YWZmIDwtIHJlYWRfaHRtbCgiaHR0cHM6Ly93d3cudW5pdmVyc2l0ZWl0bGVpZGVuLm5sL2VuL3NvY2lhbC1iZWhhdmlvdXJhbC1zY2llbmNlcy9wb2xpdGljYWwtc2NpZW5jZS9zdGFmZiN0YWItMSIpDQoNCg0KTGVpZGVuX3N0YWZmXzIgPC0gTGVpZGVuX3N0YWZmICU+JSANCiAgcnZlc3Q6Omh0bWxfZWxlbWVudCgiYm9keSIpICU+JSANCiAgcnZlc3Q6Omh0bWxfZWxlbWVudHMoInN0cm9uZyIpICU+JSANCiAgcnZlc3Q6Omh0bWxfdGV4dCgpIA0KDQp2aWV3KExlaWRlbl9zdGFmZl8yKQ0KDQpMZWlkZW5fc3RhZmZfMyA8LSBMZWlkZW5fc3RhZmYgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50KCJib2R5IikgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50cygibGkiKSAlPiUgDQogIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJkaXYiKSAlPiUgDQogIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJzcGFuIikgJT4lIA0KICBydmVzdDo6aHRtbF90ZXh0KCkNCg0KdmlldyhMZWlkZW5fc3RhZmZfMykNCg0KYGBgDQoNCg0KDQojIFJTZWxlbml1bQ0KYGBge3J9DQoNCmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7DQogICAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7DQogICAgICAgIGlmICghcmVxdWlyZSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpKSB7DQogICAgICAgICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpDQogICAgICAgICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkNCiAgICAgICAgfQ0KICAgIH0pDQp9DQoNCmZzYXZlIDwtIGZ1bmN0aW9uKHgsIGZpbGUsIGxvY2F0aW9uID0gIi4vbG9jYWwvIiwgLi4uKSB7DQogICAgaWYgKCFkaXIuZXhpc3RzKGxvY2F0aW9uKSkNCiAgICAgICAgZGlyLmNyZWF0ZShsb2NhdGlvbikNCiAgICBkYXRlbmFtZSA8LSBzdWJzdHIoZ3N1YigiWzotXSIsICIiLCBTeXMudGltZSgpKSwgMSwgOCkNCiAgICB0b3RhbG5hbWUgPC0gcGFzdGUobG9jYXRpb24sIGRhdGVuYW1lLCBmaWxlLCBzZXAgPSAiIikNCiAgICBwcmludChwYXN0ZSgiU0FWRUQ6ICIsIHRvdGFsbmFtZSwgc2VwID0gIiIpKQ0KICAgIHNhdmUoeCwgZmlsZSA9IHRvdGFsbmFtZSkNCn0NCg0KZmxvYWQgPC0gZnVuY3Rpb24oZmlsZU5hbWUpIHsNCiAgICBsb2FkKGZpbGVOYW1lKQ0KICAgIGdldChscygpW2xzKCkgIT0gImZpbGVOYW1lIl0pDQp9DQoNCmZzaG93ZGYgPC0gZnVuY3Rpb24oeCwgZGlnaXRzID0gMiwgLi4uKSB7DQogICAga25pdHI6OmthYmxlKHgsIGRpZ2l0cyA9IGRpZ2l0cywgImh0bWwiLCAuLi4pICU+JQ0KICAgICAgICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gYygic3RyaXBlZCIsICJob3ZlciIpKSAlPiUNCiAgICAgICAga2FibGVFeHRyYTo6c2Nyb2xsX2JveCh3aWR0aCA9ICIxMDAlIiwgaGVpZ2h0ID0gIjMwMHB4IikNCn0NCg0KYGBgDQoNCmBgYHtyfQ0KcGFja2FnZXMgPSBjKCMiUlNlbGVuaXVtIiwgDQogICAgICAgICAgICAgInJ2ZXN0IiwgInRpZHl2ZXJzZSIsICJuZXRzdGF0IiwgInBpbmdyIiwgInN0cmluZ3IiKQ0KZnBhY2thZ2UuY2hlY2socGFja2FnZXMpDQpybShwYWNrYWdlcykNCmBgYA0KIyBPcGVuIEFsZXgNCmBgYHtyfQ0KDQpvcHRpb25zKG9wZW5hbGV4Ui5tYWlsdG8gPSAiamFuLnVjYS5qckBnbWFpbC5jb20iKSAgI3BsZWFzZSBQbGVhc2UgcmVwbGFjZSB3aXRoIHlvdXIgb3duIGVtYWlsYWRyZXNzDQoNCmp0IDwtIHJlYWRfaHRtbCgiaHR0cHM6Ly9hcGkub3BlbmFsZXgub3JnL2F1dGhvcnM/c2VhcmNoPUpvY2hlbStUb2xzbWEiKSAlPiUNCiAgICBodG1sX3RleHQyKCkNCg0KcmVxdWlyZShvcGVuYWxleFIpDQoNCmRmIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJhdXRob3IiLCBzZWFyY2ggPSAiSm9jaGVtIFRvbHNtYSIpDQpmc2hvd2RmKGRmKQ0KDQpkZl9wYXBlcnMgPC0gb2FfZmV0Y2goZW50aXR5ID0gIndvcmtzIiwgYXV0aG9yLmlkID0gZGYkaWQpDQpkZl9wYXBlcnMkYXV0aG9yWzFdDQoNCmRmX2luc3RpdHV0aW9uIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJpbnN0aXR1dGlvbnMiLCBzZWFyY2ggPSAicmFkYm91ZCB1bml2ZXJzaXR5IG5pam1lZ2VuIikkaWRbMV0NCg0KZGZfYXV0aG9yIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJhdXRob3IiLCBzZWFyY2ggPSAiVG9sc21hIikNCg0KDQojSm9jaGVtIFRvbHNtYQ0KI1RvbSB2YW4gZGVyIE1lZXINCiNNYXVyaWNlIEdlc3RodWl6ZW4NCiNNaWNoYWVsIFNhdmVsa291bA0KDQoNCkpUIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJhdXRob3IiLCBzZWFyY2ggPSAiSm9jaGVtIFRvbHNtYSIpDQpNRyA8LSBvYV9mZXRjaChlbnRpdHkgPSAiYXV0aG9yIiwgc2VhcmNoID0gIk1hdXJpY2UgR2VzdGh1aXplbiIpDQpNUyA8LSBvYV9mZXRjaChlbnRpdHkgPSAiYXV0aG9yIiwgc2VhcmNoID0gIk1pY2hhZWwgU2F2ZWxrb3VsIikNClRNIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJhdXRob3IiLCBzZWFyY2ggPSAiVG9tIHZhbiBkZXIgTWVlciIpDQoNCg0Kd29ya3MgPC0gb2FfZmV0Y2goZW50aXR5ID0gIndvcmtzIiwgYXV0aG9yLmlkID0gYyhKVCRpZFsxXSwgTUckaWRbMV0sIE1TJGlkWzFdLCBUTSRpZFsxXSkpDQpNR193b3JrcyA8LSBvYV9mZXRjaChlbnRpdHkgPSAid29ya3MiLCBhdXRob3IuaWQgPSBNRyRpZCkNCk1TX3dvcmtzIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJ3b3JrcyIsIGF1dGhvci5pZCA9IE1TJGlkKQ0KVE1fd29ya3MgPC0gb2FfZmV0Y2goZW50aXR5ID0gIndvcmtzIiwgYXV0aG9yLmlkID0gVE0kaWRbMV0pDQoNCiNmaWx0ZXIgb25seSBmb3IgMjAxOS0yMDIzDQp3b3Jrc18xOV8yMyA8LSB3b3JrcyAlPiUgZmlsdGVyKHB1YmxpY2F0aW9uX3llYXIgPj0gMjAxOSAmIHB1YmxpY2F0aW9uX3llYXIgPD0gMjAyMykNCg0KDQpgYGANCg0KDQoNCmBgYHtyfQ0Kd2F2ZTEgPC0gbWF0cml4KGMoTkEsTkEsTkEsTkEsDQogICAgICAgICAgICAgICAgICBOQSxOQSxOQSxOQSwNCiAgICAgICAgICAgICAgICAgIE5BLE5BLE5BLE5BLA0KICAgICAgICAgICAgICAgICAgTkEsTkEsTkEsTkEpLCBucm93ID0gNCwgbmNvbCA9IDQpDQoNCnJvdy5uYW1lcyh3YXZlMSkgPC0gYyhKVCRpZCwgTUckaWQsIE1TJGlkLCBUTSRpZFsxXSkNCmNvbG5hbWVzKHdhdmUxKSA8LSBjKEpUJGlkLCBNRyRpZCwgTVMkaWQsIFRNJGlkWzFdKQ0KDQp3YXZlMiA8LSBtYXRyaXgoMCwgbnJvdyA9IDQsIG5jb2wgPSA0KQ0KDQpyb3cubmFtZXMod2F2ZTIpIDwtIGMoSlQkaWQsIE1HJGlkLCBNUyRpZCwgVE0kaWRbMV0pDQpjb2xuYW1lcyh3YXZlMikgPC0gYyhKVCRpZCwgTUckaWQsIE1TJGlkLCBUTSRpZFsxXSkNCg0KZWdvIDwtIHdvcmtzWzEsXSRhdXRob3JbWzFdXSRhdV9pZFsxXQ0KYWx0ZXJzIDwtIHdvcmtzWzEsXSRhdXRob3JbWzFdXSRhdV9pZFstMV0NCg0Kd2F2ZTJbZWdvLCBhbHRlcnNdIDwtIHdhdmUyW2VnbywgYWx0ZXJzXSArIDENCndhdmUyDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlR1dG9yaWFsIHdlYnNjcmFwaW5nIg0KYXV0aG9yOiAiS29lbiBMdWNhcyINCmRhdGU6ICIyMDI0LTA5LTE4Ig0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg0KYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9DQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpgYGANCg0KI3BhY2thZ2VzDQpgYGB7cn0NCg0KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgVGl0bGU6IFdlYnNjcmFwaW5nIGluIFIgQXV0aG9yOiBCYXMgSG9mc3RyYSBWZXJzaW9uOg0KIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMgMjktMDctMjAyMQ0KDQojIHN0YXJ0IHdpdGggY2xlYW4gd29ya3NwYWNlDQpybShsaXN0ID0gbHMoKSkNCg0KIyBpbnN0YWxsLnBhY2thZ2VzKCdkYXRhLnRhYmxlJykNCmxpYnJhcnkoZGF0YS50YWJsZSkgICMgbWFpbmx5IGZvciBmYXN0ZXIgZGF0YSBoYW5kbGluZw0KbGlicmFyeSh0aWR5dmVyc2UpICAjIEkgYXNzdW1lIHlvdSBhbHJlYWR5IGluc3RhbGxlZCB0aGlzIG9uZSENCiMgaW5zdGFsbC5wYWNrYWdlcygnaHR0cicpICMgd2UgZG9uJ3QgbmVlZCB0aGlzIGZvciBub3cgcmVxdWlyZShodHRyKQ0KI2luc3RhbGwucGFja2FnZXMoInhtbDIiKQ0KcmVxdWlyZSh4bWwyKQ0KI2luc3RhbGwucGFja2FnZXMoInJ2ZXN0IikNCnJlcXVpcmUocnZlc3QpDQojaW5zdGFsbC5wYWNrYWdlcygiZGV2dG9vbHMiKQ0KcmVxdWlyZShkZXZ0b29scykNCiMgTm90ZSB3ZSdyZSBkb2luZyBzb21ldGhpbmcgZGlmZmVyZW50IGhlcmUuIFdlJ3JlIGluc3RhbGxpbmcgYSAqbGF0ZXN0KiB2ZXJzaW9uIGRpcmVjdGx5IGZyb20NCiMgR2l0SHViIFRoaXMgaXMgYmVjYXVzZSB0aGUgcmVsZWFzZWQgdmVyc2lvbiBvZiB0aGlzIHBhY2thZ2VzIGNvbnRhaW5zIHNvbWUgZXJyb3JzIQ0KZGV2dG9vbHM6Omluc3RhbGxfZ2l0aHViKCJqa2VpcnN0ZWFkL3NjaG9sYXIiKQ0KDQpyZXF1aXJlKHNjaG9sYXIpDQoNCiMgZGVmaW5lIHdvcmtkaXJlY3RvcnksIG5vdGUgdGhlIGRvdWJsZSAqYmFja3NsYXNoZXMqIGlmIHlvdSdyZSBvbiB3aW5kb3dzIHNldHdkKCcveW91cnBhdGhoZXJlKScNCg0KDQpgYGANCldlYmFyY2hpdmUgaXMgbm90IGF2YWlsYWJsZSBzbyB0aGVzZSBwYXJ0cyBvZiB0aGUgY29kZSBhcmUgY29tbWVudGVkLg0KDQpgYGB7cn0NCiMgc29jX3N0YWZmIDwtIHJlYWRfaHRtbCgiaHR0cHM6Ly93ZWIuYXJjaGl2ZS5vcmcvd2ViLzIwMjMwNTI4MTUzMzM2L2h0dHBzOi8vd3d3LnJ1Lm5sL3NvY2lvbG9neS9yZXNlYXJjaC9zdGFmZi8iKQ0KIyANCiMgaGVhZChzb2Nfc3RhZmYpDQojIA0KIyBjbGFzcyhzb2Nfc3RhZmYpDQoNCmBgYA0KDQoNCmBgYHtyfQ0KDQojIHNvIHdlIG5lZWQgdG8gZmluZCBXSEVSRSB0aGUgdGFibGUgaXMgbG9jYXRlZCBpbiB0aGUgaHRtbCAnaW5zcGVjdCBlbGVtZW50JyBpbiBtb3ppbGxhIGZpcmVmb3ggb3INCiMgJ3ZpZXcgcGFnZSBzb3VyY2UnIGFuZCB5b3Ugc2VlIHRoYXQgZXZlcnl0aGluZyBBRlRFUiAvdGQgaW4gdGhlICdib2R5JyBvZiB0aGUgcGFnZSBzZWVtcyB0byBiZQ0KIyB0aGUgdGFibGUgd2UgZG8gbmVlZA0KIyBzb2Nfc3RhZmZfMiA8LSBzb2Nfc3RhZmYgJT4lDQojICAgICBydmVzdDo6aHRtbF9lbGVtZW50KCJib2R5IikgJT4lDQojICAgICBydmVzdDo6aHRtbF9lbGVtZW50cygidGQiKSAlPiUNCiMgICAgIHJ2ZXN0OjpodG1sX3RleHQoKQ0KIyANCiMgc29jX3N0YWZmXzINCiMgDQojIHNvY19zdGFmZl8zIDwtIHNvY19zdGFmZiAlPiUgDQojICAgcnZlc3Q6Omh0bWxfZWxlbWVudCgiYm9keSIpICU+JSANCiMgICBydmVzdDo6aHRtbF90YWJsZSgpIA0KIyANCiMgc29jX3N0YWZmXzMNCg0KYGBgDQoNCiMgbGVpZGVuIHN0YWZmDQpgYGB7cn0NCkxlaWRlbl9zdGFmZiA8LSByZWFkX2h0bWwoImh0dHBzOi8vd3d3LnVuaXZlcnNpdGVpdGxlaWRlbi5ubC9lbi9zb2NpYWwtYmVoYXZpb3VyYWwtc2NpZW5jZXMvcG9saXRpY2FsLXNjaWVuY2Uvc3RhZmYjdGFiLTEiKQ0KDQoNCkxlaWRlbl9zdGFmZl8yIDwtIExlaWRlbl9zdGFmZiAlPiUgDQogIHJ2ZXN0OjpodG1sX2VsZW1lbnQoImJvZHkiKSAlPiUgDQogIHJ2ZXN0OjpodG1sX2VsZW1lbnRzKCJzdHJvbmciKSAlPiUgDQogIHJ2ZXN0OjpodG1sX3RleHQoKSANCg0KdmlldyhMZWlkZW5fc3RhZmZfMikNCg0KTGVpZGVuX3N0YWZmXzMgPC0gTGVpZGVuX3N0YWZmICU+JSANCiAgcnZlc3Q6Omh0bWxfZWxlbWVudCgiYm9keSIpICU+JSANCiAgcnZlc3Q6Omh0bWxfZWxlbWVudHMoImxpIikgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50cygiZGl2IikgJT4lIA0KICBydmVzdDo6aHRtbF9lbGVtZW50cygic3BhbiIpICU+JSANCiAgcnZlc3Q6Omh0bWxfdGV4dCgpDQoNCnZpZXcoTGVpZGVuX3N0YWZmXzMpDQoNCmBgYA0KDQoNCg0KIyBSU2VsZW5pdW0NCmBgYHtyfQ0KDQpmcGFja2FnZS5jaGVjayA8LSBmdW5jdGlvbihwYWNrYWdlcykgew0KICAgIGxhcHBseShwYWNrYWdlcywgRlVOID0gZnVuY3Rpb24oeCkgew0KICAgICAgICBpZiAoIXJlcXVpcmUoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKSkgew0KICAgICAgICAgICAgaW5zdGFsbC5wYWNrYWdlcyh4LCBkZXBlbmRlbmNpZXMgPSBUUlVFKQ0KICAgICAgICAgICAgbGlicmFyeSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpDQogICAgICAgIH0NCiAgICB9KQ0KfQ0KDQpmc2F2ZSA8LSBmdW5jdGlvbih4LCBmaWxlLCBsb2NhdGlvbiA9ICIuL2xvY2FsLyIsIC4uLikgew0KICAgIGlmICghZGlyLmV4aXN0cyhsb2NhdGlvbikpDQogICAgICAgIGRpci5jcmVhdGUobG9jYXRpb24pDQogICAgZGF0ZW5hbWUgPC0gc3Vic3RyKGdzdWIoIls6LV0iLCAiIiwgU3lzLnRpbWUoKSksIDEsIDgpDQogICAgdG90YWxuYW1lIDwtIHBhc3RlKGxvY2F0aW9uLCBkYXRlbmFtZSwgZmlsZSwgc2VwID0gIiIpDQogICAgcHJpbnQocGFzdGUoIlNBVkVEOiAiLCB0b3RhbG5hbWUsIHNlcCA9ICIiKSkNCiAgICBzYXZlKHgsIGZpbGUgPSB0b3RhbG5hbWUpDQp9DQoNCmZsb2FkIDwtIGZ1bmN0aW9uKGZpbGVOYW1lKSB7DQogICAgbG9hZChmaWxlTmFtZSkNCiAgICBnZXQobHMoKVtscygpICE9ICJmaWxlTmFtZSJdKQ0KfQ0KDQpmc2hvd2RmIDwtIGZ1bmN0aW9uKHgsIGRpZ2l0cyA9IDIsIC4uLikgew0KICAgIGtuaXRyOjprYWJsZSh4LCBkaWdpdHMgPSBkaWdpdHMsICJodG1sIiwgLi4uKSAlPiUNCiAgICAgICAga2FibGVFeHRyYTo6a2FibGVfc3R5bGluZyhib290c3RyYXBfb3B0aW9ucyA9IGMoInN0cmlwZWQiLCAiaG92ZXIiKSkgJT4lDQogICAgICAgIGthYmxlRXh0cmE6OnNjcm9sbF9ib3god2lkdGggPSAiMTAwJSIsIGhlaWdodCA9ICIzMDBweCIpDQp9DQoNCmBgYA0KDQpgYGB7cn0NCnBhY2thZ2VzID0gYygjIlJTZWxlbml1bSIsIA0KICAgICAgICAgICAgICJydmVzdCIsICJ0aWR5dmVyc2UiLCAibmV0c3RhdCIsICJwaW5nciIsICJzdHJpbmdyIikNCmZwYWNrYWdlLmNoZWNrKHBhY2thZ2VzKQ0Kcm0ocGFja2FnZXMpDQpgYGANCiMgT3BlbiBBbGV4DQpgYGB7cn0NCg0Kb3B0aW9ucyhvcGVuYWxleFIubWFpbHRvID0gImphbi51Y2EuanJAZ21haWwuY29tIikgICNwbGVhc2UgUGxlYXNlIHJlcGxhY2Ugd2l0aCB5b3VyIG93biBlbWFpbGFkcmVzcw0KDQpqdCA8LSByZWFkX2h0bWwoImh0dHBzOi8vYXBpLm9wZW5hbGV4Lm9yZy9hdXRob3JzP3NlYXJjaD1Kb2NoZW0rVG9sc21hIikgJT4lDQogICAgaHRtbF90ZXh0MigpDQoNCnJlcXVpcmUob3BlbmFsZXhSKQ0KDQpkZiA8LSBvYV9mZXRjaChlbnRpdHkgPSAiYXV0aG9yIiwgc2VhcmNoID0gIkpvY2hlbSBUb2xzbWEiKQ0KZnNob3dkZihkZikNCg0KZGZfcGFwZXJzIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJ3b3JrcyIsIGF1dGhvci5pZCA9IGRmJGlkKQ0KZGZfcGFwZXJzJGF1dGhvclsxXQ0KDQpkZl9pbnN0aXR1dGlvbiA8LSBvYV9mZXRjaChlbnRpdHkgPSAiaW5zdGl0dXRpb25zIiwgc2VhcmNoID0gInJhZGJvdWQgdW5pdmVyc2l0eSBuaWptZWdlbiIpJGlkWzFdDQoNCmRmX2F1dGhvciA8LSBvYV9mZXRjaChlbnRpdHkgPSAiYXV0aG9yIiwgc2VhcmNoID0gIlRvbHNtYSIpDQoNCg0KI0pvY2hlbSBUb2xzbWENCiNUb20gdmFuIGRlciBNZWVyDQojTWF1cmljZSBHZXN0aHVpemVuDQojTWljaGFlbCBTYXZlbGtvdWwNCg0KDQpKVCA8LSBvYV9mZXRjaChlbnRpdHkgPSAiYXV0aG9yIiwgc2VhcmNoID0gIkpvY2hlbSBUb2xzbWEiKQ0KTUcgPC0gb2FfZmV0Y2goZW50aXR5ID0gImF1dGhvciIsIHNlYXJjaCA9ICJNYXVyaWNlIEdlc3RodWl6ZW4iKQ0KTVMgPC0gb2FfZmV0Y2goZW50aXR5ID0gImF1dGhvciIsIHNlYXJjaCA9ICJNaWNoYWVsIFNhdmVsa291bCIpDQpUTSA8LSBvYV9mZXRjaChlbnRpdHkgPSAiYXV0aG9yIiwgc2VhcmNoID0gIlRvbSB2YW4gZGVyIE1lZXIiKQ0KDQoNCndvcmtzIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJ3b3JrcyIsIGF1dGhvci5pZCA9IGMoSlQkaWRbMV0sIE1HJGlkWzFdLCBNUyRpZFsxXSwgVE0kaWRbMV0pKQ0KTUdfd29ya3MgPC0gb2FfZmV0Y2goZW50aXR5ID0gIndvcmtzIiwgYXV0aG9yLmlkID0gTUckaWQpDQpNU193b3JrcyA8LSBvYV9mZXRjaChlbnRpdHkgPSAid29ya3MiLCBhdXRob3IuaWQgPSBNUyRpZCkNClRNX3dvcmtzIDwtIG9hX2ZldGNoKGVudGl0eSA9ICJ3b3JrcyIsIGF1dGhvci5pZCA9IFRNJGlkWzFdKQ0KDQojZmlsdGVyIG9ubHkgZm9yIDIwMTktMjAyMw0Kd29ya3NfMTlfMjMgPC0gd29ya3MgJT4lIGZpbHRlcihwdWJsaWNhdGlvbl95ZWFyID49IDIwMTkgJiBwdWJsaWNhdGlvbl95ZWFyIDw9IDIwMjMpDQoNCg0KYGBgDQoNCg0KDQpgYGB7cn0NCndhdmUxIDwtIG1hdHJpeChjKE5BLE5BLE5BLE5BLA0KICAgICAgICAgICAgICAgICAgTkEsTkEsTkEsTkEsDQogICAgICAgICAgICAgICAgICBOQSxOQSxOQSxOQSwNCiAgICAgICAgICAgICAgICAgIE5BLE5BLE5BLE5BKSwgbnJvdyA9IDQsIG5jb2wgPSA0KQ0KDQpyb3cubmFtZXMod2F2ZTEpIDwtIGMoSlQkaWQsIE1HJGlkLCBNUyRpZCwgVE0kaWRbMV0pDQpjb2xuYW1lcyh3YXZlMSkgPC0gYyhKVCRpZCwgTUckaWQsIE1TJGlkLCBUTSRpZFsxXSkNCg0Kd2F2ZTIgPC0gbWF0cml4KDAsIG5yb3cgPSA0LCBuY29sID0gNCkNCg0Kcm93Lm5hbWVzKHdhdmUyKSA8LSBjKEpUJGlkLCBNRyRpZCwgTVMkaWQsIFRNJGlkWzFdKQ0KY29sbmFtZXMod2F2ZTIpIDwtIGMoSlQkaWQsIE1HJGlkLCBNUyRpZCwgVE0kaWRbMV0pDQoNCmVnbyA8LSB3b3Jrc1sxLF0kYXV0aG9yW1sxXV0kYXVfaWRbMV0NCmFsdGVycyA8LSB3b3Jrc1sxLF0kYXV0aG9yW1sxXV0kYXVfaWRbLTFdDQoNCndhdmUyW2VnbywgYWx0ZXJzXSA8LSB3YXZlMltlZ28sIGFsdGVyc10gKyAxDQp3YXZlMg0KYGBgDQoNCg==</div>
 
 
 </div>

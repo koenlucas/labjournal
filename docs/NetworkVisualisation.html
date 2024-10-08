@@ -356,7 +356,10 @@ div.tocify {
       <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
     </li>
     <li>
-      <a href="DataProject.html">Week 4 - data visualisation</a>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
     </li>
   </ul>
 </li>
@@ -544,14 +547,15 @@ igraph::betweenness(g, directed = FALSE)</code></pre>
 ## [33]  76.6904762 160.5515873</code></pre>
 <pre class="r"><code># dyad-census
 igraph::dyad.census(g)</code></pre>
-<pre><code>## Warning: `dyad.census()` was deprecated in igraph
-## 2.0.0.
+<pre><code>## Warning: `dyad.census()` was deprecated in
+## igraph 2.0.0.
 ## ℹ Please use `dyad_census()` instead.
 ## This warning is displayed once every 8
 ## hours.
 ## Call
 ## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was generated.</code></pre>
+## to see where this warning was
+## generated.</code></pre>
 <pre><code>## Warning: `dyad_census()` requires a directed graph.</code></pre>
 <pre><code>## $mut
 ## [1] 78
@@ -570,7 +574,8 @@ igraph::triad.census(g)</code></pre>
 ## hours.
 ## Call
 ## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was generated.</code></pre>
+## to see where this warning was
+## generated.</code></pre>
 <pre><code>## Warning in triad_census(graph = graph): At vendor/cigraph/src/misc/motifs.c:1140 : Triad census
 ## called on an undirected graph. All connections will be treated as mutual.</code></pre>
 <pre><code>##  [1] 3971    0 1575    0    0    0    0    0    0    0  393    0    0    0    0   45</code></pre>
@@ -2162,7 +2167,8 @@ edges &lt;- get.adjacency(G_w)</code></pre>
 ## hours.
 ## Call
 ## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was generated.</code></pre>
+## to see where this warning was
+## generated.</code></pre>
 <pre class="r"><code>edges_mat &lt;- matrix(as.numeric(edges), nrow = nrow(edges))
 # edges_mat
 
@@ -2235,8 +2241,27 @@ soc_collabs_unique &lt;- unique(soc_collabs_unique)
 
 # so this is a very important step, we join the unique soc collaborators to the collaborators of
 # collaborators
-require(tidyverse)
-onefivedegree &lt;- left_join(collabs_1deep, soc_collabs_unique, by = c(coauth_id = &quot;soc_collabs_unique&quot;))
+require(tidyverse)</code></pre>
+<pre><code>## Loading required package: tidyverse</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ──────────────────────────
+## ✖ lubridate::%--%()      masks igraph::%--%()
+## ✖ ggplot2::%+%()         masks psych::%+%()
+## ✖ ggplot2::alpha()       masks psych::alpha()
+## ✖ dplyr::as_data_frame() masks tibble::as_data_frame(), igraph::as_data_frame()
+## ✖ purrr::compose()       masks igraph::compose()
+## ✖ tidyr::crossing()      masks igraph::crossing()
+## ✖ dplyr::filter()        masks stats::filter()
+## ✖ dplyr::lag()           masks stats::lag()
+## ✖ dplyr::select()        masks MASS::select()
+## ✖ purrr::simplify()      masks igraph::simplify()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>onefivedegree &lt;- left_join(collabs_1deep, soc_collabs_unique, by = c(coauth_id = &quot;soc_collabs_unique&quot;))
 
 # Then, we drop those that are not among sociology collaborators and who don&#39;t lsit coauthors
 # regardless
@@ -2335,7 +2360,8 @@ net_sel &lt;- induced.subgraph(net1_un, vids = (in_network$vcol == &quot;#56B4E9
 ## hours.
 ## Call
 ## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was generated.</code></pre>
+## to see where this warning was
+## generated.</code></pre>
 <pre class="r"><code>plot(net_sel)</code></pre>
 <p><img src="NetworkVisualisation_files/figure-html/only%20soc%20RU-1.png" width="672" /></p>
 <pre class="r"><code>clp &lt;- cluster_optimal(net_sel)

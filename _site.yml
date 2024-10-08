@@ -6,6 +6,8 @@ exclude:
   - "data"
   - "_test"
   - "tutorial"
+  - "Data_construction"
+  - "Week5Rsiena"
 bibliography: references.bib
 navbar:
   left:
@@ -20,7 +22,9 @@ navbar:
       - text: "Week 3 - web scraping"  
         href: tutorialWebScraping.html
       - text: "Week 4 - data visualisation"
-        href: DataProject.html
+        href: Week4Visual.html
+      - text: "Week 5 - first model"
+        href: Week5-firstmodel.html
     - text: "My project"
       menu: 
       - text: "Introduction"

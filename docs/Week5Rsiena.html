@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Koen Lucas" />
+
+<meta name="date" content="2024-10-02" />
+
+<title>Week 5</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="Week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
+    </li>
+    <li>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My project
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Introduction</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Week 5</h1>
+<h4 class="author">Koen Lucas</h4>
+<h4 class="date">2024-10-02</h4>
+
+</div>
+
+
+<pre class="r"><code>rm(list = ls())
+
+fpackage.check &lt;- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave &lt;- function(x, file = NULL, location = &quot;./data/processed/&quot;) {
+    ifelse(!dir.exists(&quot;data&quot;), dir.create(&quot;data&quot;), FALSE)
+    ifelse(!dir.exists(&quot;data/processed&quot;), dir.create(&quot;data/processed&quot;), FALSE)
+    if (is.null(file))
+        file = deparse(substitute(x))
+    datename &lt;- substr(gsub(&quot;[:-]&quot;, &quot;&quot;, Sys.time()), 1, 8)
+    totalname &lt;- paste(location, datename, file, &quot;.rda&quot;, sep = &quot;&quot;)
+    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload &lt;- function(filename) {
+    load(filename)
+    get(ls()[ls() != &quot;filename&quot;])
+}
+
+fshowdf &lt;- function(x, ...) {
+    knitr::kable(x, digits = 2, &quot;html&quot;, ...) %&gt;%
+        kableExtra::kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+        kableExtra::scroll_box(width = &quot;100%&quot;, height = &quot;300px&quot;)
+}
+
+
+packages = c(&quot;RSiena&quot;, &quot;devtools&quot;, &quot;igraph&quot;)
+fpackage.check(packages)</code></pre>
+<pre><code>## [[1]]
+## NULL
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## NULL</code></pre>
+<pre class="r"><code>devtools::install_github(&#39;JochemTolsma/RsienaTwoStep&#39;, build_vignettes=TRUE)</code></pre>
+<pre><code>## Using GitHub PAT from the git credential store.</code></pre>
+<pre><code>## Skipping install of &#39;RsienaTwoStep&#39; from a github remote, the SHA1 (f43e4f6e) has not changed since last install.
+##   Use `force = TRUE` to force installation</code></pre>
+<pre class="r"><code>packages = c(&quot;RsienaTwoStep&quot;)
+fpackage.check(packages)</code></pre>
+<pre><code>## [[1]]
+## NULL</code></pre>
+<pre class="r"><code>ts_net1</code></pre>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    0    0    0    0    0     0
+##  [2,]    0    0    1    0    0    0    0    0    0     0
+##  [3,]    1    0    0    0    0    1    0    0    0     0
+##  [4,]    0    0    0    0    0    0    0    0    1     0
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    1    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     1
+##  [9,]    0    0    0    1    0    0    0    1    0     0
+## [10,]    0    0    0    0    0    0    0    1    1     0</code></pre>
+<pre class="r"><code>net1g &lt;- graph_from_adjacency_matrix(ts_net1, mode = &quot;directed&quot;)
+coords &lt;- layout_(net1g, nicely())  #let us keep the layout
+par(mar = c(0.1, 0.1, 0.1, 0.1))
+{
+    plot.igraph(net1g, layout = coords)
+    graphics::box()
+}</code></pre>
+<p><img src="Week5Rsiena_files/figure-html/the%20network-1.png" width="672" /></p>
+<pre class="r"><code>set.seed(24553253)
+ego &lt;- ts_select(net = ts_net1, steps = 1)  #in rsienatwostep two actors may make a change together but here not
+ego</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>options &lt;- ts_alternatives_ministep(net = ts_net1, ego = ego)
+# options
+plots &lt;- lapply(options, graph_from_adjacency_matrix, mode = &quot;directed&quot;)
+par(mar = c(0, 0, 0, 0) + 0.1)
+par(mfrow = c(1, 2))
+
+fplot &lt;- function(x) {
+    plot.igraph(x, layout = coords, margin = 0)
+    graphics::box()
+}
+
+# lapply(plots, fplot)</code></pre>
+<pre class="r"><code>### counting seding ties
+ts_degree(net = options[[1]], ego = ego)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code># or for all options
+lapply(options, ts_degree, ego = ego)</code></pre>
+<pre><code>## [[1]]
+## [1] 2
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 2
+## 
+## [[4]]
+## [1] 1
+## 
+## [[5]]
+## [1] 2
+## 
+## [[6]]
+## [1] 2
+## 
+## [[7]]
+## [1] 2
+## 
+## [[8]]
+## [1] 2
+## 
+## [[9]]
+## [1] 0
+## 
+## [[10]]
+## [1] 2</code></pre>
+<pre class="r"><code>### reciprocated ties
+lapply(options, ts_recip, ego = ego)</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 1
+## 
+## [[3]]
+## [1] 1
+## 
+## [[4]]
+## [1] 1
+## 
+## [[5]]
+## [1] 1
+## 
+## [[6]]
+## [1] 1
+## 
+## [[7]]
+## [1] 1
+## 
+## [[8]]
+## [1] 1
+## 
+## [[9]]
+## [1] 0
+## 
+## [[10]]
+## [1] 1</code></pre>
+<pre class="r"><code># Evaluation single actor 4 and option 4
+option &lt;- 4
+ts_degree(options[[option]], ego = ego) * -1 + ts_recip(options[[option]], ego = ego) * 1.5</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<pre class="r"><code># or
+eval &lt;- ts_eval(net = options[[option]], ego = ego, statistics = list(ts_degree, ts_recip), parameters = c(-1,
+    1.5))
+eval</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<pre class="r"><code># calculate evaluation score for all posible networks
+eval &lt;- sapply(options, FUN = ts_eval, ego = ego, statistics = list(ts_degree, ts_recip), parameters = c(-1,
+    1.5))
+eval</code></pre>
+<pre><code>##  [1] -0.5 -0.5 -0.5  0.5 -0.5 -0.5 -0.5 -0.5  0.0 -0.5</code></pre>
+<pre class="r"><code>print(&quot;network with maximum evaluation score:&quot;)</code></pre>
+<pre><code>## [1] &quot;network with maximum evaluation score:&quot;</code></pre>
+<pre class="r"><code>which.max(eval)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code># choice function
+choice &lt;- sample(1:length(eval), size = 1, prob = exp(eval)/sum(exp(eval)))
+print(&quot;choice:&quot;)</code></pre>
+<pre><code>## [1] &quot;choice:&quot;</code></pre>
+<pre class="r"><code>choice</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code># print(&#39;network:&#39;) options[[choice]]</code></pre>
+<pre class="r"><code>rate &lt;- 2
+degree &lt;- -1
+recip &lt;- 1.5
+ts_sims(nsims = 1, net = ts_net1, startvalues = c(rate, degree, recip), statistics = list(ts_degree,
+    ts_recip), p2step = c(1, 0, 0), chain = FALSE)  #not that rate parameter is automatically included. </code></pre>
+<pre><code>## [1] &quot;nsim: 1&quot;</code></pre>
+<pre><code>## [[1]]
+##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    0    0    0    0    1    1    0    0    0     0
+##  [2,]    0    0    1    0    0    1    0    0    0     0
+##  [3,]    0    0    0    0    1    1    0    0    0     0
+##  [4,]    0    0    0    0    0    1    0    0    1     1
+##  [5,]    0    0    0    0    0    0    0    0    0     0
+##  [6,]    0    0    0    0    0    0    0    0    1     1
+##  [7,]    0    0    0    0    0    0    0    0    0     0
+##  [8,]    0    0    0    0    0    0    0    0    0     0
+##  [9,]    1    0    0    1    0    0    0    0    0     0
+## [10,]    0    0    0    0    0    0    0    1    0     0</code></pre>
+<pre class="r"><code># we do not calculate SE for now.
+# ans &lt;- ts_estim(net1 = s501, net2 = s502, statistics = list(ts_degree, ts_recip), p2step = c(1, 0, 0),
+#     conv = 0.01, phase3 = TRUE, itef3 = 50, verbose = TRUE, startvalues = c(5-2, 2)) ### error in startvalues
+# 
+# ans</code></pre>
+<pre class="r"><code># dependent on t1
+# Rsiena calculates at ego level
+# need to calculate relative importance</code></pre>
+<pre class="r"><code>rm(list = ls())</code></pre>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWsgNSINCmF1dGhvcjogIktvZW4gTHVjYXMiDQpkYXRlOiAiMjAyNC0xMC0wMiINCm91dHB1dDogaHRtbF9kb2N1bWVudA0KLS0tDQoNCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQ0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQ0KYGBgDQoNCg0KYGBge3IgZ2V0dGluZyBzdGFydGVkfQ0Kcm0obGlzdCA9IGxzKCkpDQoNCmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7DQogICAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7DQogICAgICAgIGlmICghcmVxdWlyZSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpKSB7DQogICAgICAgICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpDQogICAgICAgICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkNCiAgICAgICAgfQ0KICAgIH0pDQp9DQoNCmZzYXZlIDwtIGZ1bmN0aW9uKHgsIGZpbGUgPSBOVUxMLCBsb2NhdGlvbiA9ICIuL2RhdGEvcHJvY2Vzc2VkLyIpIHsNCiAgICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEiKSwgZGlyLmNyZWF0ZSgiZGF0YSIpLCBGQUxTRSkNCiAgICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEvcHJvY2Vzc2VkIiksIGRpci5jcmVhdGUoImRhdGEvcHJvY2Vzc2VkIiksIEZBTFNFKQ0KICAgIGlmIChpcy5udWxsKGZpbGUpKQ0KICAgICAgICBmaWxlID0gZGVwYXJzZShzdWJzdGl0dXRlKHgpKQ0KICAgIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQ0KICAgIHRvdGFsbmFtZSA8LSBwYXN0ZShsb2NhdGlvbiwgZGF0ZW5hbWUsIGZpbGUsICIucmRhIiwgc2VwID0gIiIpDQogICAgc2F2ZSh4LCBmaWxlID0gdG90YWxuYW1lKSAgI25lZWQgdG8gZml4IGlmIGZpbGUgaXMgcmVsb2FkZWQgYXMgaW5wdXQgbmFtZSwgbm90IGFzIHguIA0KfQ0KDQpmbG9hZCA8LSBmdW5jdGlvbihmaWxlbmFtZSkgew0KICAgIGxvYWQoZmlsZW5hbWUpDQogICAgZ2V0KGxzKClbbHMoKSAhPSAiZmlsZW5hbWUiXSkNCn0NCg0KZnNob3dkZiA8LSBmdW5jdGlvbih4LCAuLi4pIHsNCiAgICBrbml0cjo6a2FibGUoeCwgZGlnaXRzID0gMiwgImh0bWwiLCAuLi4pICU+JQ0KICAgICAgICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gYygic3RyaXBlZCIsICJob3ZlciIpKSAlPiUNCiAgICAgICAga2FibGVFeHRyYTo6c2Nyb2xsX2JveCh3aWR0aCA9ICIxMDAlIiwgaGVpZ2h0ID0gIjMwMHB4IikNCn0NCg0KDQpwYWNrYWdlcyA9IGMoIlJTaWVuYSIsICJkZXZ0b29scyIsICJpZ3JhcGgiKQ0KZnBhY2thZ2UuY2hlY2socGFja2FnZXMpDQpkZXZ0b29sczo6aW5zdGFsbF9naXRodWIoJ0pvY2hlbVRvbHNtYS9Sc2llbmFUd29TdGVwJywgYnVpbGRfdmlnbmV0dGVzPVRSVUUpDQpwYWNrYWdlcyA9IGMoIlJzaWVuYVR3b1N0ZXAiKQ0KZnBhY2thZ2UuY2hlY2socGFja2FnZXMpDQoNCmBgYA0KDQpgYGB7ciB0aGUgbmV0d29ya30NCnRzX25ldDENCg0KbmV0MWcgPC0gZ3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KHRzX25ldDEsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KY29vcmRzIDwtIGxheW91dF8obmV0MWcsIG5pY2VseSgpKSAgI2xldCB1cyBrZWVwIHRoZSBsYXlvdXQNCnBhcihtYXIgPSBjKDAuMSwgMC4xLCAwLjEsIDAuMSkpDQp7DQogICAgcGxvdC5pZ3JhcGgobmV0MWcsIGxheW91dCA9IGNvb3JkcykNCiAgICBncmFwaGljczo6Ym94KCkNCn0NCg0KYGBgDQoNCmBgYHtyIHNhbXBsZSBhbiBlZ299DQoNCnNldC5zZWVkKDI0NTUzMjUzKQ0KZWdvIDwtIHRzX3NlbGVjdChuZXQgPSB0c19uZXQxLCBzdGVwcyA9IDEpICAjaW4gcnNpZW5hdHdvc3RlcCB0d28gYWN0b3JzIG1heSBtYWtlIGEgY2hhbmdlIHRvZ2V0aGVyIGJ1dCBoZXJlIG5vdA0KZWdvDQoNCg0KYGBgDQoNCmBgYHtyIG5ldHdvcmtzIGFmdGVyIG1pbmlzdGVwfQ0KDQpvcHRpb25zIDwtIHRzX2FsdGVybmF0aXZlc19taW5pc3RlcChuZXQgPSB0c19uZXQxLCBlZ28gPSBlZ28pDQojIG9wdGlvbnMNCnBsb3RzIDwtIGxhcHBseShvcHRpb25zLCBncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgsIG1vZGUgPSAiZGlyZWN0ZWQiKQ0KcGFyKG1hciA9IGMoMCwgMCwgMCwgMCkgKyAwLjEpDQpwYXIobWZyb3cgPSBjKDEsIDIpKQ0KDQpmcGxvdCA8LSBmdW5jdGlvbih4KSB7DQogICAgcGxvdC5pZ3JhcGgoeCwgbGF5b3V0ID0gY29vcmRzLCBtYXJnaW4gPSAwKQ0KICAgIGdyYXBoaWNzOjpib3goKQ0KfQ0KDQojIGxhcHBseShwbG90cywgZnBsb3QpDQoNCmBgYA0KDQoNCmBgYHtyIG5ldHdvcmsgc3RhdGlzdGljc30NCg0KIyMjIGNvdW50aW5nIHNlZGluZyB0aWVzDQp0c19kZWdyZWUobmV0ID0gb3B0aW9uc1tbMV1dLCBlZ28gPSBlZ28pDQojIG9yIGZvciBhbGwgb3B0aW9ucw0KbGFwcGx5KG9wdGlvbnMsIHRzX2RlZ3JlZSwgZWdvID0gZWdvKQ0KIyMjIHJlY2lwcm9jYXRlZCB0aWVzDQpsYXBwbHkob3B0aW9ucywgdHNfcmVjaXAsIGVnbyA9IGVnbykNCg0KYGBgDQoNCmBgYHtyIGV2YWx1YXRpb24gZnVuY3Rpb259DQoNCiMgRXZhbHVhdGlvbiBzaW5nbGUgYWN0b3IgNCBhbmQgb3B0aW9uIDQNCm9wdGlvbiA8LSA0DQp0c19kZWdyZWUob3B0aW9uc1tbb3B0aW9uXV0sIGVnbyA9IGVnbykgKiAtMSArIHRzX3JlY2lwKG9wdGlvbnNbW29wdGlvbl1dLCBlZ28gPSBlZ28pICogMS41DQoNCiMgb3INCmV2YWwgPC0gdHNfZXZhbChuZXQgPSBvcHRpb25zW1tvcHRpb25dXSwgZWdvID0gZWdvLCBzdGF0aXN0aWNzID0gbGlzdCh0c19kZWdyZWUsIHRzX3JlY2lwKSwgcGFyYW1ldGVycyA9IGMoLTEsDQogICAgMS41KSkNCmV2YWwNCg0KIyBjYWxjdWxhdGUgZXZhbHVhdGlvbiBzY29yZSBmb3IgYWxsIHBvc2libGUgbmV0d29ya3MNCmV2YWwgPC0gc2FwcGx5KG9wdGlvbnMsIEZVTiA9IHRzX2V2YWwsIGVnbyA9IGVnbywgc3RhdGlzdGljcyA9IGxpc3QodHNfZGVncmVlLCB0c19yZWNpcCksIHBhcmFtZXRlcnMgPSBjKC0xLA0KICAgIDEuNSkpDQpldmFsDQpwcmludCgibmV0d29yayB3aXRoIG1heGltdW0gZXZhbHVhdGlvbiBzY29yZToiKQ0Kd2hpY2gubWF4KGV2YWwpDQoNCiMgY2hvaWNlIGZ1bmN0aW9uDQpjaG9pY2UgPC0gc2FtcGxlKDE6bGVuZ3RoKGV2YWwpLCBzaXplID0gMSwgcHJvYiA9IGV4cChldmFsKS9zdW0oZXhwKGV2YWwpKSkNCnByaW50KCJjaG9pY2U6IikNCmNob2ljZQ0KIyBwcmludCgnbmV0d29yazonKSBvcHRpb25zW1tjaG9pY2VdXQ0KDQpgYGANCg0KYGBge3Igc2ltdWxhdGlvbn0NCg0KcmF0ZSA8LSAyDQpkZWdyZWUgPC0gLTENCnJlY2lwIDwtIDEuNQ0KdHNfc2ltcyhuc2ltcyA9IDEsIG5ldCA9IHRzX25ldDEsIHN0YXJ0dmFsdWVzID0gYyhyYXRlLCBkZWdyZWUsIHJlY2lwKSwgc3RhdGlzdGljcyA9IGxpc3QodHNfZGVncmVlLA0KICAgIHRzX3JlY2lwKSwgcDJzdGVwID0gYygxLCAwLCAwKSwgY2hhaW4gPSBGQUxTRSkgICNub3QgdGhhdCByYXRlIHBhcmFtZXRlciBpcyBhdXRvbWF0aWNhbGx5IGluY2x1ZGVkLiANCg0KYGBgDQoNCmBgYHtyIGVzdGltYXRpb259DQojIHdlIGRvIG5vdCBjYWxjdWxhdGUgU0UgZm9yIG5vdy4NCiMgYW5zIDwtIHRzX2VzdGltKG5ldDEgPSBzNTAxLCBuZXQyID0gczUwMiwgc3RhdGlzdGljcyA9IGxpc3QodHNfZGVncmVlLCB0c19yZWNpcCksIHAyc3RlcCA9IGMoMSwgMCwgMCksDQojICAgICBjb252ID0gMC4wMSwgcGhhc2UzID0gVFJVRSwgaXRlZjMgPSA1MCwgdmVyYm9zZSA9IFRSVUUsIHN0YXJ0dmFsdWVzID0gYyg1LTIsIDIpKSAjIyMgZXJyb3IgaW4gc3RhcnR2YWx1ZXMNCiMgDQojIGFucw0KDQpgYGANCg0KYGBge3IgaW50ZXJwcmV0YXRpb24gb2YgcGFyYW1ldGVyc30NCg0KIyBkZXBlbmRlbnQgb24gdDENCiMgUnNpZW5hIGNhbGN1bGF0ZXMgYXQgZWdvIGxldmVsDQojIG5lZWQgdG8gY2FsY3VsYXRlIHJlbGF0aXZlIGltcG9ydGFuY2UNCg0KYGBgDQoNCg0KDQpgYGB7ciBSU2llbmEgZXhhbXBsZX0NCg0Kcm0obGlzdCA9IGxzKCkpDQoNCmBgYA0KDQo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("Week5Rsiena.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

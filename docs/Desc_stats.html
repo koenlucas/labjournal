@@ -355,7 +355,10 @@ div.tocify {
       <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
     </li>
     <li>
-      <a href="DataProject.html">Week 4 - data visualisation</a>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
     </li>
   </ul>
 </li>
@@ -407,9 +410,17 @@ div.tocify {
                    0,0,0,0,
                    0,0,0,0), nrow = 4, ncol = 4)
 
-require(igraph)
-
-graph &lt;- graph_from_adjacency_matrix(matrix)
+require(igraph)</code></pre>
+<pre><code>## Loading required package: igraph</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code>graph &lt;- graph_from_adjacency_matrix(matrix)
 
 triad_census(graph)</code></pre>
 <pre><code>##  [1] 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
