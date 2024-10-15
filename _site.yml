@@ -28,7 +28,7 @@ navbar:
     - text: "Project - Concept"
       menu:
       - text: "Introduction"
-        href: 1-introduction-concept.html
+        href: 1-Introduction-concept.html
       - text: "Theory"
         href: 2-theory-concept.html
       - text: "Data"

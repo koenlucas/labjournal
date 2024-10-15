@@ -6,7 +6,7 @@ Filename is ./results/first_model.txt.
 
 This file contains primary output for SIENA project <<./results/first_model>>.
 
-Date and time: 15/10/2024 21:12:20 
+Date and time: 15/10/2024 21:23:16 
 
 RSiena version 1.4.7 (20 02 2024)
 
