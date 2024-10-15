@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Koen Lucas" />
+
+<meta name="date" content="2024-10-15" />
+
+<title>Results - descriptives</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="Week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
+    </li>
+    <li>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Concept
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-introduction-concept.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-concept.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-concept.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-concept.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-concept.html">Results - RSiena</a>
+    </li>
+    <li class="dropdown-header">Conclusion</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Final
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Introduction</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Results - descriptives</h1>
+<h4 class="author">Koen Lucas</h4>
+<h4 class="date">2024-10-15</h4>
+
+</div>
+
+
+<div id="results---descriptives" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Results -
+descriptives</h1>
+<style>
+body {
+text-align: justify}
+</style>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div id="descriptive-statistics" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> descriptive
+statistics</h2>
+<div id="wave-1" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Wave 1</h3>
+<pre class="r test"><code># number of nodes vcount(network_w1) # 234
+
+# number of edges
+ecount(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; [1] 145</code></pre>
+<pre class="r test"><code>### wave 1 dyad-census
+igraph::dyad_census(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; $mut
+#&gt; [1] 19
+#&gt; 
+#&gt; $asym
+#&gt; [1] 107
+#&gt; 
+#&gt; $null
+#&gt; [1] 27135</code></pre>
+<pre class="r test"><code># triad-census
+igraph::triad_census(network_w1)</code></pre>
+<pre class="test2"><code>#&gt;  [1] 2079308   24231    4312      50     120      63      47      26      12       0       4       4
+#&gt; [13]       1       3       2       1</code></pre>
+<pre class="r test"><code># edge density
+igraph::edge_density(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.002659477</code></pre>
+<p>The networks consist of 234 scholars. In wave 1 there are 145 edges,
+consisting of 19 reciprocated ties and 107 asymmetric ties. The edge
+density is 0,003, indicating that the total number of edges can be
+interpreted as relatively low compared to the total possible number of
+edges. Looking at the triadic relations, there is only one complete
+triad. A triad with no relations between each other (003) appears the
+most in this network.</p>
+</div>
+<div id="wave-2" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Wave 2</h3>
+<pre class="r test"><code>### wave 2
+
+# number of edges
+ecount(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; [1] 258</code></pre>
+<pre class="r test"><code># dyad-census
+igraph::dyad_census(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; $mut
+#&gt; [1] 30
+#&gt; 
+#&gt; $asym
+#&gt; [1] 198
+#&gt; 
+#&gt; $null
+#&gt; [1] 27033</code></pre>
+<pre class="r test"><code># triad-census
+igraph::triad_census(network_w2)</code></pre>
+<pre class="test2"><code>#&gt;  [1] 2056059   44637    6764      93     326      96     123      34      26       0       5       9
+#&gt; [13]       5       1       4       2</code></pre>
+<pre class="r test"><code># edge density
+igraph::edge_density(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.004732035</code></pre>
+<p>In wave 2 there are 258, which is a relatively steep increase
+compared to wave 1. The network consists of 30 reciprocated ties and 198
+assymetric ties. The edge density is 0,005 and is only slightly higher
+than in wave 1, thus meaning that the number of edges is low compared to
+all posible edges within the network. Furthermore, inspecting the
+triadic relations, the number of complete triads increased from 1 to 2.
+The 003 triad (no relations between the three nodes) still occurs the
+most.</p>
+</div>
+<div id="transitivity" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Transitivity</h3>
+<pre class="r test"><code># wave 1
+igraph::transitivity(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.182058</code></pre>
+<pre class="r test"><code># wave 2
+igraph::transitivity(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.1723716</code></pre>
+<p>The transitivity effect illustrates whether different co-authors of a
+scholar become co-authors. In wave 1 this index is 0,182. This means
+that a scholar who co-authors with two other scholars, the probability
+that these two scholars also become co-authors is 0,182. In wave 2 the
+transitivity index is 0,172, which is a slight (and probably
+insignificant) decrease compared to wave 1.</p>
+</div>
+</div>
+<div id="scale-free-network---wave-1" class="section level2"
+number="1.2">
+<h2><span class="header-section-number">1.2</span> Scale-free network -
+Wave 1</h2>
+<p>A network can be considered scale-free when the network’s degree
+distribution follows a power-law (ref.):</p>
+<p><span class="math display">\[P(k) \sim k^{-\gamma}\]</span></p>
+<p>Where <span class="math inline">\(P(k)\)</span> is the probability,
+<span class="math inline">\(k\)</span> the degrees, and <span
+class="math inline">\(\gamma\)</span> is the scaling exponent. A
+distribution is considered scale-free when <span
+class="math inline">\(\gamma\)</span> is between 2 and 3.</p>
+<p>In the case of preferential attachment in co-authorship this can be
+explained as the probability of a node having a certain number of
+co-authors decreases as the number of co-authors increases. In other
+words, when a node has a lot of co-authorship ties, it is less likely to
+find nodes with a similar high number of co-authorship ties. On the
+other hand, the probability of a node having only a small number of
+co-authorship ties is relatively high. Determining whether the networks
+exhibit a scale-free distribution is interesting when investigating a
+‘Matthew effect’ in science. As preferential attachment can be seen as a
+mechanism driving scale-free networks, it shows that new connections are
+more likely to be formed with those who are already well-connected. This
+parallels an effect of cumulative advantage based on the indegrees of a
+node.</p>
+<div id="degree-distribution-wave-1---including-isolates"
+class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Degree distribution
+wave 1 - including isolates</h3>
+<p><img src="4-results-descriptives-concept_files/figure-html/wave%201%20indegree%20distribution-1.png" width="672" /></p>
+<p>The indegree distribution above show a right-skewed distribution,
+which would be expected in a scale-free network. A lot of nodes of have
+no or only a few indegrees, while a small number of nodes have a lot of
+indegrees.</p>
+</div>
+<div id="indegree-distribution-wave-1---excluding-isolates"
+class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Indegree
+distribution wave 1 - excluding isolates</h3>
+<p><img src="4-results-descriptives-concept_files/figure-html/wave%201%20degree%20distribution%20excluding%20isolates-1.png" width="672" /></p>
+</div>
+<div id="estimating-the-scaling-exponent-gamma" class="section level3"
+number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Estimating the
+scaling exponent <span class="math inline">\(\gamma\)</span></h3>
+<p>To estimate the <span class="math inline">\(\gamma\)</span> parameter
+isolates have to be disregarded. The indegree distribution excluding
+isolates shown above still shows a right-skewed distribution. The
+distribution is still in line with what is expected for a scale-free
+network. The <span class="math inline">\(\gamma\)</span> can be
+estimated using the R-package ‘poweRlaw’. The <span
+class="math inline">\(\gamma\)</span> is estimated at roughly 4,82 (see
+below). As this value is not between 2 and 3 the network does not
+exhibits scale-free characteristics and, thus, can likely not be
+interpreted as such. Another property of a power-law distribution is
+that it looks like a straight line when plotted in a log-log plot (a
+plot in which both the x-axis and y-axis is represented using a
+logarithmic scale). This plot can be observed below and does actually
+present a straight line. However, this is due to the nature of plotting
+the powerlaw in a log-log plot. It can however be observed that the
+steep slope of this line indicates a more uniform indegree distribution.
+Altogether, in wave 1 there is likely not yet a preferential attachment
+mechanism in place. This is, however, likely to be the case due to the
+large amount of isolates in wave 1 due to a lot of the scholars not
+being active in wave 1, making it hard to distinguish any distinct
+‘hubs’ of co-authorship in this timepoint.</p>
+<pre class="r test"><code>degree_df_w1 &lt;- as.data.frame(table(indegr_w1))
+degree_df_w1$indegr_w1 &lt;- as.numeric(as.character(degree_df_w1$indegr_w1))
+
+degree_df_w1 &lt;- degree_df_w1[degree_df_w1$indegr_w1 &gt; 0, ] # exclude isolates
+
+pl &lt;- displ$new(degree_df_w1$indegr_w1) # fit power law to distribution
+
+estimate_w1 &lt;- estimate_xmin(pl)
+pl$setXmin(estimate_w1)
+
+estimate &lt;- estimate_xmin(pl)
+pl$setXmin(estimate)
+
+gamma &lt;- pl$pars
+gamma</code></pre>
+<pre class="test2"><code>#&gt; [1] 2.749952</code></pre>
+<p><img src="4-results-descriptives-concept_files/figure-html/log%20log%20graph-1.png" width="672" /></p>
+</div>
+</div>
+<div id="scale-free-network---wave-2" class="section level2"
+number="1.3">
+<h2><span class="header-section-number">1.3</span> Scale-free network -
+Wave 2</h2>
+<div id="degree-distribution-wave-2---including-isolates"
+class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Degree distribution
+wave 2 - including isolates</h3>
+<p><img src="4-results-descriptives-concept_files/figure-html/wave%202%20indegree%20distribution-1.png" width="672" /></p>
+</div>
+<div id="indegree-distribution-wave-2---excluding-isolates"
+class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Indegree
+distribution wave 2 - excluding isolates</h3>
+<p>The indegree distribution above show a right-skewed distribution,
+which would be expected in a scale-free network. A lot of nodes of have
+no or only a few indegrees, while a small number of nodes have a lot of
+indegrees.</p>
+<p><img src="4-results-descriptives-concept_files/figure-html/wave%202%20degree%20distribution%20excluding%20isolates-1.png" width="672" /></p>
+</div>
+<div id="estimating-the-scaling-exponent-gamma-1" class="section level3"
+number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Estimating the
+scaling exponent <span class="math inline">\(\gamma\)</span></h3>
+<p>The indegree distribution excluding isolates shown above still shows
+a right-skewed distribution. The distribution is still in line with what
+is expected for a scale-free network. The <span
+class="math inline">\(\gamma\)</span> is again estimated using the
+R-package ‘poweRlaw’. The <span class="math inline">\(\gamma\)</span> is
+estimated at roughly 2,75 (see below). As this value is between 2 and 3
+the network exhibits scale-free characteristics and can likely be
+interpreted as such. Below, in the log-log plot a straight line can be
+observed, in line with the characteristics of a power law distribution.
+The slope of this line more evidently indicates the presence of hubs, as
+one would expect in a scale-free network. Altogether, this would suggest
+a likely preferential attachment mechanism at play in the network at
+timepoint 2, meaning that already established authors with a lot of
+indegrees are more attractive to other authors than authors with less
+indegrees.</p>
+<pre class="r test"><code>degree_df_w2 &lt;- as.data.frame(table(indegr_w2))
+degree_df_w2$indegr_w2 &lt;- as.numeric(as.character(degree_df_w2$indegr_w2))
+
+degree_df_w2 &lt;- degree_df_w2[degree_df_w2$indegr_w2 &gt; 0, ] # exclude isolates
+
+pl &lt;- displ$new(degree_df_w2$indegr_w2) # fit power law to distribution
+
+estimate_w2 &lt;- estimate_xmin(pl)
+pl$setXmin(estimate_w2)
+
+estimate &lt;- estimate_xmin(pl)
+pl$setXmin(estimate)
+
+gamma &lt;- pl$pars
+gamma</code></pre>
+<pre class="test2"><code>#&gt; [1] 2.749952</code></pre>
+<p><img src="4-results-descriptives-concept_files/figure-html/log%20log%20graph%20wave%202-1.png" width="672" /></p>
+</div>
+</div>
+<div id="network-visualisation" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Network
+visualisation</h2>
+<p><img src="4-results-descriptives-concept_files/figure-html/initial%20plots-1.png" width="50%" /><img src="4-results-descriptives-concept_files/figure-html/initial%20plots-2.png" width="50%" /><img src="4-results-descriptives-concept_files/figure-html/initial%20plots-3.png" width="50%" /><img src="4-results-descriptives-concept_files/figure-html/initial%20plots-4.png" width="50%" /></p>
+<p>Above, plots of both waves are presented, both with and without
+isolates. These plots show the networks before tampering with shape,
+size and position of the nodes. Furthermore, the plots show that the
+number of co-authorship ties has increased between timepoint 1 and
+timepoint 2.</p>
+<div id="plots-by-h-index-and-indegrees" class="section level3"
+number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Plots by H-index
+and indegrees</h3>
+<p><img src="4-results-descriptives-concept_files/figure-html/pretty%20plot%20wave%201-1.png" width="672" /></p>
+<p><img src="4-results-descriptives-concept_files/figure-html/pretty%20plot%20wave%202-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlJlc3VsdHMgLSBkZXNjcmlwdGl2ZXMiDQphdXRob3I6ICJLb2VuIEx1Y2FzIg0KZGF0ZTogImByIFN5cy5EYXRlKClgIg0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQotLS0NCg0KIyBSZXN1bHRzIC0gZGVzY3JpcHRpdmVzDQoNCmBgYHs9aHRtbH0NCjxzdHlsZT4NCmJvZHkgew0KdGV4dC1hbGlnbjoganVzdGlmeX0NCjwvc3R5bGU+DQpgYGANCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9DQoNCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KGZvcm1hdFIpDQoNCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkNCm9wdHNfY2h1bmskc2V0KHRpZHkub3B0cz1saXN0KHdpZHRoLmN1dG9mZj0xMDApLHRpZHk9VFJVRSwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UsY29tbWVudCA9ICIjPiIsIGNhY2hlPVRSVUUsIGNsYXNzLnNvdXJjZT1jKCJ0ZXN0IiksIGNsYXNzLm91dHB1dD1jKCJ0ZXN0MiIpKQ0Kb3B0aW9ucyh3aWR0aCA9IDEwMCkNCnJnbDo6c2V0dXBLbml0cigpDQoNCg0KY29sb3JpemUgPC0gZnVuY3Rpb24oeCwgY29sb3IpIHtzcHJpbnRmKCI8c3BhbiBzdHlsZT0nY29sb3I6ICVzOyc+JXM8L3NwYW4+IiwgY29sb3IsIHgpIH0NCmBgYA0KDQpgYGB7ciBrbGlwcHksIGVjaG89RkFMU0UsIGluY2x1ZGU9VFJVRX0NCmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpDQpgYGANCg0KYGBge3IgY2xlYW4gd29ya3NwYWNlLCBpbmNsdWRlID0gRkFMU0V9DQoNCnJtKGxpc3QgPSBscygpKQ0KDQpgYGANCg0KYGBge3IgbG9hZCBmdW5jdGlvbnMsIGluY2x1ZGU9RkFMU0V9DQoNCmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7DQogICAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7DQogICAgICAgIGlmICghcmVxdWlyZSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpKSB7DQogICAgICAgICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpDQogICAgICAgICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkNCiAgICAgICAgfQ0KICAgIH0pDQp9DQoNCmZzYXZlIDwtIGZ1bmN0aW9uKHgsIGZpbGUgPSBOVUxMLCBsb2NhdGlvbiA9ICIuL2RhdGEvcHJvY2Vzc2VkLyIpIHsNCiAgICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEiKSwgZGlyLmNyZWF0ZSgiZGF0YSIpLCBGQUxTRSkNCiAgICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEvcHJvY2Vzc2VkIiksIGRpci5jcmVhdGUoImRhdGEvcHJvY2Vzc2VkIiksIEZBTFNFKQ0KICAgIGlmIChpcy5udWxsKGZpbGUpKQ0KICAgICAgICBmaWxlID0gZGVwYXJzZShzdWJzdGl0dXRlKHgpKQ0KICAgIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQ0KICAgIHRvdGFsbmFtZSA8LSBwYXN0ZShsb2NhdGlvbiwgZmlsZSwgIl8iLCBkYXRlbmFtZSwgIi5yZGEiLCBzZXAgPSAiIikNCiAgICBzYXZlKHgsIGZpbGUgPSB0b3RhbG5hbWUpICAjbmVlZCB0byBmaXggaWYgZmlsZSBpcyByZWxvYWRlZCBhcyBpbnB1dCBuYW1lLCBub3QgYXMgeC4gDQp9DQoNCmZsb2FkIDwtIGZ1bmN0aW9uKGZpbGVuYW1lKSB7DQogICAgbG9hZChmaWxlbmFtZSkNCiAgICBnZXQobHMoKVtscygpICE9ICJmaWxlbmFtZSJdKQ0KfQ0KDQpmc2hvd2RmIDwtIGZ1bmN0aW9uKHgsIC4uLikgew0KICAgIGtuaXRyOjprYWJsZSh4LCBkaWdpdHMgPSAyLCAiaHRtbCIsIC4uLikgJT4lDQogICAgICAgIGthYmxlRXh0cmE6OmthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSBjKCJzdHJpcGVkIiwgImhvdmVyIikpICU+JQ0KICAgICAgICBrYWJsZUV4dHJhOjpzY3JvbGxfYm94KHdpZHRoID0gIjEwMCUiLCBoZWlnaHQgPSAiMzAwcHgiKQ0KfQ0KDQoNCmBgYA0KDQpgYGB7ciBsb2FkIHBhY2thZ2VzLCBpbmNsdWRlPUZBTFNFfQ0KDQpwYWNrYWdlcyA8LSBjKCJ0aWR5dmVyc2UiLCANCiAgICAgICAgICAgICAgInNjaG9sYXIiLCANCiAgICAgICAgICAgICAgIlJTaWVuYSIsIA0KICAgICAgICAgICAgICAiUnNpZW5hVHdvU3RlcCIsIA0KICAgICAgICAgICAgICAiaWdyYXBoIiwNCiAgICAgICAgICAgICAgInBvd2VSbGF3IiwNCiAgICAgICAgICAgICAgImdncmFwaCIpDQoNCmZwYWNrYWdlLmNoZWNrKHBhY2thZ2VzKQ0KDQpgYGANCg0KYGBge3IgbG9hZCBkYXRhLCBpbmNsdWRlPUZBTFNFfQ0KDQpmdWxsZGF0YSA8LSBmbG9hZCgiLi9EYXRhL2Z1bGxfZGF0YS5SZGF0YSIpDQoNCmRmX2VnbyA8LSBmbG9hZCgiLi9EYXRhL2RmX2Vnby5SZGF0YSIpDQogIA0KZGZfd29ya3MgPC0gZmxvYWQoIi4vRGF0YS9kZl93b3Jrcy5SZGF0YSIpDQoNCmBgYA0KDQpgYGB7ciBjcmVhdGUgZ3JhcGggb2JqZWN0cywgaW5jbHVkZT1GQUxTRX0NCg0KIyB3YXZlIDENCm5ldHdvcmtfdzEgPC0gaWdyYXBoOjpncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoDQogIGZ1bGxkYXRhJG5ldHNbMSwsXSwNCiAgbW9kZSA9IGMoImRpcmVjdGVkIiksDQogIHdlaWdodGVkID0gTlVMTCwNCiAgZGlhZyA9IEZBTFNFLA0KICBhZGQuY29sbmFtZXMgPSBOVUxMLA0KICBhZGQucm93bmFtZXMgPSBOVUxMKQ0KDQp3YXZlMSA8LSBzaW1wbGlmeShuZXR3b3JrX3cxKQ0KDQojIHdhdmUgMg0KbmV0d29ya193MiA8LSBpZ3JhcGg6OmdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeCgNCiAgZnVsbGRhdGEkbmV0c1syLCxdLA0KICBtb2RlID0gYygiZGlyZWN0ZWQiKSwNCiAgd2VpZ2h0ZWQgPSBOVUxMLA0KICBkaWFnID0gRkFMU0UsDQogIGFkZC5jb2xuYW1lcyA9IE5VTEwsDQogIGFkZC5yb3duYW1lcyA9IE5VTEwpDQoNCndhdmUyIDwtIHNpbXBsaWZ5KG5ldHdvcmtfdzIpDQoNCiAgICAgICAgICAgICAgICAgIA0KYGBgDQoNCiMjIGRlc2NyaXB0aXZlIHN0YXRpc3RpY3MNCg0KIyMjIFdhdmUgMQ0KDQpgYGB7ciBkZXNjcmlwdGl2ZSBzdGF0cyB3YXZlIDF9DQojIG51bWJlciBvZiBub2Rlcw0KIyB2Y291bnQobmV0d29ya193MSkgIyAyMzQNCg0KIyBudW1iZXIgb2YgZWRnZXMNCmVjb3VudChuZXR3b3JrX3cxKQ0KDQojIyMgd2F2ZSAxDQojIGR5YWQtY2Vuc3VzDQppZ3JhcGg6OmR5YWRfY2Vuc3VzKG5ldHdvcmtfdzEpDQoNCiMgdHJpYWQtY2Vuc3VzDQppZ3JhcGg6OnRyaWFkX2NlbnN1cyhuZXR3b3JrX3cxKQ0KDQojIGVkZ2UgZGVuc2l0eQ0KaWdyYXBoOjplZGdlX2RlbnNpdHkobmV0d29ya193MSkNCg0KYGBgDQoNClRoZSBuZXR3b3JrcyBjb25zaXN0IG9mIDIzNCBzY2hvbGFycy4gSW4gd2F2ZSAxIHRoZXJlIGFyZSAxNDUgZWRnZXMsIGNvbnNpc3Rpbmcgb2YgMTkgcmVjaXByb2NhdGVkIHRpZXMgYW5kIDEwNyBhc3ltbWV0cmljIHRpZXMuIFRoZSBlZGdlIGRlbnNpdHkgaXMgMCwwMDMsIGluZGljYXRpbmcgdGhhdCB0aGUgdG90YWwgbnVtYmVyIG9mIGVkZ2VzIGNhbiBiZSBpbnRlcnByZXRlZCBhcyByZWxhdGl2ZWx5IGxvdyBjb21wYXJlZCB0byB0aGUgdG90YWwgcG9zc2libGUgbnVtYmVyIG9mIGVkZ2VzLiBMb29raW5nIGF0IHRoZSB0cmlhZGljIHJlbGF0aW9ucywgdGhlcmUgaXMgb25seSBvbmUgY29tcGxldGUgdHJpYWQuIEEgdHJpYWQgd2l0aCBubyByZWxhdGlvbnMgYmV0d2VlbiBlYWNoIG90aGVyICgwMDMpIGFwcGVhcnMgdGhlIG1vc3QgaW4gdGhpcyBuZXR3b3JrLg0KDQoNCiMjIyBXYXZlIDINCg0KYGBge3IgZGVzY3JpcHRpdmUgc3RhdHMgd2F2ZSAyfQ0KDQojIyMgd2F2ZSAyDQoNCiNudW1iZXIgb2YgZWRnZXMNCmVjb3VudChuZXR3b3JrX3cyKSANCiMgZHlhZC1jZW5zdXMNCmlncmFwaDo6ZHlhZF9jZW5zdXMobmV0d29ya193MikNCg0KIyB0cmlhZC1jZW5zdXMNCmlncmFwaDo6dHJpYWRfY2Vuc3VzKG5ldHdvcmtfdzIpDQoNCiMgZWRnZSBkZW5zaXR5DQppZ3JhcGg6OmVkZ2VfZGVuc2l0eShuZXR3b3JrX3cyKQ0KDQpgYGANCg0KSW4gd2F2ZSAyIHRoZXJlIGFyZSAyNTgsIHdoaWNoIGlzIGEgcmVsYXRpdmVseSBzdGVlcCBpbmNyZWFzZSBjb21wYXJlZCB0byB3YXZlIDEuIFRoZSBuZXR3b3JrIGNvbnNpc3RzIG9mIDMwIHJlY2lwcm9jYXRlZCB0aWVzIGFuZCAxOTggYXNzeW1ldHJpYyB0aWVzLiBUaGUgZWRnZSBkZW5zaXR5IGlzIDAsMDA1IGFuZCBpcyBvbmx5IHNsaWdodGx5IGhpZ2hlciB0aGFuIGluIHdhdmUgMSwgdGh1cyBtZWFuaW5nIHRoYXQgdGhlIG51bWJlciBvZiBlZGdlcyBpcyBsb3cgY29tcGFyZWQgdG8gYWxsIHBvc2libGUgZWRnZXMgd2l0aGluIHRoZSBuZXR3b3JrLiBGdXJ0aGVybW9yZSwgaW5zcGVjdGluZyB0aGUgdHJpYWRpYyByZWxhdGlvbnMsIHRoZSBudW1iZXIgb2YgY29tcGxldGUgdHJpYWRzIGluY3JlYXNlZCBmcm9tIDEgdG8gMi4gVGhlIDAwMyB0cmlhZCAobm8gcmVsYXRpb25zIGJldHdlZW4gdGhlIHRocmVlIG5vZGVzKSBzdGlsbCBvY2N1cnMgdGhlIG1vc3QuIA0KDQojIyMgVHJhbnNpdGl2aXR5DQoNCmBgYHtyIHRyYW5zaXRpdml0eX0NCiMgd2F2ZSAxDQppZ3JhcGg6OnRyYW5zaXRpdml0eShuZXR3b3JrX3cxKQ0KIyB3YXZlIDINCmlncmFwaDo6dHJhbnNpdGl2aXR5KG5ldHdvcmtfdzIpDQoNCmBgYA0KDQpUaGUgdHJhbnNpdGl2aXR5IGVmZmVjdCBpbGx1c3RyYXRlcyB3aGV0aGVyIGRpZmZlcmVudCBjby1hdXRob3JzIG9mIGEgc2Nob2xhciBiZWNvbWUgY28tYXV0aG9ycy4gSW4gd2F2ZSAxIHRoaXMgaW5kZXggaXMgMCwxODIuIFRoaXMgbWVhbnMgdGhhdCBhIHNjaG9sYXIgd2hvIGNvLWF1dGhvcnMgd2l0aCB0d28gb3RoZXIgc2Nob2xhcnMsIHRoZSBwcm9iYWJpbGl0eSB0aGF0IHRoZXNlIHR3byBzY2hvbGFycyBhbHNvIGJlY29tZSBjby1hdXRob3JzIGlzIDAsMTgyLiBJbiB3YXZlIDIgdGhlIHRyYW5zaXRpdml0eSBpbmRleCBpcyAwLDE3Miwgd2hpY2ggaXMgYSBzbGlnaHQgKGFuZCBwcm9iYWJseSBpbnNpZ25pZmljYW50KSBkZWNyZWFzZSBjb21wYXJlZCB0byB3YXZlIDEuDQoNCiMjIFNjYWxlLWZyZWUgbmV0d29yayAtIFdhdmUgMQ0KDQpBIG5ldHdvcmsgY2FuIGJlIGNvbnNpZGVyZWQgc2NhbGUtZnJlZSB3aGVuIHRoZSBuZXR3b3JrJ3MgZGVncmVlIGRpc3RyaWJ1dGlvbiBmb2xsb3dzIGEgcG93ZXItbGF3IChyZWYuKToNCg0KJCRQKGspIFxzaW0ga157LVxnYW1tYX0kJA0KDQpXaGVyZSAkUChrKSQgaXMgdGhlIHByb2JhYmlsaXR5LCAkayQgdGhlIGRlZ3JlZXMsIGFuZCAkXGdhbW1hJCBpcyB0aGUgc2NhbGluZyBleHBvbmVudC4gQSBkaXN0cmlidXRpb24gaXMgY29uc2lkZXJlZCBzY2FsZS1mcmVlIHdoZW4gJFxnYW1tYSQgaXMgYmV0d2VlbiAyIGFuZCAzLg0KDQpJbiB0aGUgY2FzZSBvZiBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBpbiBjby1hdXRob3JzaGlwIHRoaXMgY2FuIGJlIGV4cGxhaW5lZCBhcyB0aGUgcHJvYmFiaWxpdHkgb2YgYSBub2RlIGhhdmluZyBhIGNlcnRhaW4gbnVtYmVyIG9mIGNvLWF1dGhvcnMgZGVjcmVhc2VzIGFzIHRoZSBudW1iZXIgb2YgY28tYXV0aG9ycyBpbmNyZWFzZXMuIEluIG90aGVyIHdvcmRzLCB3aGVuIGEgbm9kZSBoYXMgYSBsb3Qgb2YgY28tYXV0aG9yc2hpcCB0aWVzLCBpdCBpcyBsZXNzIGxpa2VseSB0byBmaW5kIG5vZGVzIHdpdGggYSBzaW1pbGFyIGhpZ2ggbnVtYmVyIG9mIGNvLWF1dGhvcnNoaXAgdGllcy4gT24gdGhlIG90aGVyIGhhbmQsIHRoZSBwcm9iYWJpbGl0eSBvZiBhIG5vZGUgaGF2aW5nIG9ubHkgYSBzbWFsbCBudW1iZXIgb2YgY28tYXV0aG9yc2hpcCB0aWVzIGlzIHJlbGF0aXZlbHkgaGlnaC4gRGV0ZXJtaW5pbmcgd2hldGhlciB0aGUgbmV0d29ya3MgZXhoaWJpdCBhIHNjYWxlLWZyZWUgZGlzdHJpYnV0aW9uIGlzIGludGVyZXN0aW5nIHdoZW4gaW52ZXN0aWdhdGluZyBhICdNYXR0aGV3IGVmZmVjdCcgaW4gc2NpZW5jZS4gQXMgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgY2FuIGJlIHNlZW4gYXMgYSBtZWNoYW5pc20gZHJpdmluZyBzY2FsZS1mcmVlIG5ldHdvcmtzLCBpdCBzaG93cyB0aGF0IG5ldyBjb25uZWN0aW9ucyBhcmUgbW9yZSBsaWtlbHkgdG8gYmUgZm9ybWVkIHdpdGggdGhvc2Ugd2hvIGFyZSBhbHJlYWR5IHdlbGwtY29ubmVjdGVkLiBUaGlzIHBhcmFsbGVscyBhbiBlZmZlY3Qgb2YgY3VtdWxhdGl2ZSBhZHZhbnRhZ2UgYmFzZWQgb24gdGhlIGluZGVncmVlcyBvZiBhIG5vZGUuDQoNCiMjIyBEZWdyZWUgZGlzdHJpYnV0aW9uIHdhdmUgMSAtIGluY2x1ZGluZyBpc29sYXRlcw0KDQpgYGB7ciB3YXZlIDEgaW5kZWdyZWUgZGlzdHJpYnV0aW9uLCBlY2hvPUZBTFNFfQ0KIyB3YXZlIDENCmluZGVncl93MSA8LSBkZWdyZWUobmV0d29ya193MSwgbW9kZSA9ICJpbiIpICMgY2FsY3VsYXRlIGluZGVncmVlcw0KDQojIGNyZWF0ZSBkYXRhZnJhbWUgZm9yIGluZGVncmVlcw0KZGVncmVlX3RhYmxlX3cxIDwtIGFzLmRhdGEuZnJhbWUodGFibGUoaW5kZWdyX3cxKSkNCmNvbG5hbWVzKGRlZ3JlZV90YWJsZV93MSkgPC0gYygiSW5kZWdyZWUiLCAiRnJlcXVlbmN5IikNCmRlZ3JlZV90YWJsZV93MSRJbmRlZ3JlZSA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihkZWdyZWVfdGFibGVfdzEkSW5kZWdyZWUpKQ0KIyBDcmVhdGUgYSBjb21wbGV0ZSBpbmRlZ3JlZSByYW5nZQ0KY29tcGxldGVfaW5kZWdyZWUgPC0gZGF0YS5mcmFtZShJbmRlZ3JlZSA9IDA6bWF4KGRlZ3JlZV90YWJsZV93MSRJbmRlZ3JlZSkpDQpkZWdyZWVfdGFibGVfdzEgPC0gbWVyZ2UoY29tcGxldGVfaW5kZWdyZWUsIGRlZ3JlZV90YWJsZV93MSwgYnkgPSAiSW5kZWdyZWUiLCBhbGwueCA9IFRSVUUpDQojIENhbGN1bGF0ZSBwZXJjZW50YWdlIGZvciBlYWNoIGluZGVncmVlDQpkZWdyZWVfdGFibGVfdzEkRnJlcXVlbmN5W2lzLm5hKGRlZ3JlZV90YWJsZV93MSRGcmVxdWVuY3kpXSA8LSAwDQpkZWdyZWVfdGFibGVfdzEkUGVyY2VudGFnZSA8LSAoZGVncmVlX3RhYmxlX3cxJEZyZXF1ZW5jeSAvIHN1bShkZWdyZWVfdGFibGVfdzEkRnJlcXVlbmN5KSkgKiAxMDANCg0KDQojIGluZGVncmVlIGRpc3RyaWJ1dGlvbiAtIGluY2x1ZGluZyBpc29sYXRlcw0KZ2dwbG90KGRlZ3JlZV90YWJsZV93MSwgYWVzKHggPSBJbmRlZ3JlZSwgeSA9IFBlcmNlbnRhZ2UpKSArDQogIGdlb21fYmFyKHN0YXQgPSAiaWRlbnRpdHkiLCBmaWxsID0gImJsdWUiLCBjb2xvciA9ICJibGFjayIsIGFscGhhID0gMC43KSArDQogIGxhYnModGl0bGUgPSAiRGlzdHJpYnV0aW9uIG9mIGluZGVncmVlcyAtIFdhdmUgMSAocGVyY2VudGFnZSkiLCANCiAgICAgICB4ID0gIkluZGVncmVlcyIsIA0KICAgICAgIHkgPSAiUGVyY2VudGFnZSIpICsNCiAgc2NhbGVfeF9jb250aW51b3VzKGJyZWFrcyA9IHNlcSgwLCAxNSwgMSkpICsgDQogIHNjYWxlX3lfY29udGludW91cyhsaW1pdHMgPSBjKDAsIG1heChkZWdyZWVfdGFibGVfdzEkUGVyY2VudGFnZSkgKyA1KSkgKw0KICB0aGVtZV9taW5pbWFsKCkNCg0KYGBgDQoNClRoZSBpbmRlZ3JlZSBkaXN0cmlidXRpb24gYWJvdmUgc2hvdyBhIHJpZ2h0LXNrZXdlZCBkaXN0cmlidXRpb24sIHdoaWNoIHdvdWxkIGJlIGV4cGVjdGVkIGluIGEgc2NhbGUtZnJlZSBuZXR3b3JrLiBBIGxvdCBvZiBub2RlcyBvZiBoYXZlIG5vIG9yIG9ubHkgYSBmZXcgaW5kZWdyZWVzLCB3aGlsZSBhIHNtYWxsIG51bWJlciBvZiBub2RlcyBoYXZlIGEgbG90IG9mIGluZGVncmVlcy4NCg0KIyMjIEluZGVncmVlIGRpc3RyaWJ1dGlvbiB3YXZlIDEgLSBleGNsdWRpbmcgaXNvbGF0ZXMNCg0KYGBge3Igd2F2ZSAxIGRlZ3JlZSBkaXN0cmlidXRpb24gZXhjbHVkaW5nIGlzb2xhdGVzLCBlY2hvPUZBTFNFfQ0KIyBmaWx0ZXIgb3V0IGlzb2xhdGVzDQpkZWdyZWVfdGFibGVfdzFfeCA8LSBkZWdyZWVfdGFibGVfdzFbZGVncmVlX3RhYmxlX3cxJEluZGVncmVlID4gMCwgXQ0KZGVncmVlX3RhYmxlX3cxX3gkUGVyY2VudGFnZSA8LSAoZGVncmVlX3RhYmxlX3cxX3gkRnJlcXVlbmN5IC8gc3VtKGRlZ3JlZV90YWJsZV93MV94JEZyZXF1ZW5jeSkpICogMTAwDQoNCiMgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIC0gZXhjbHVkaW5nIGlzb2xhdGVzDQpnZ3Bsb3QoZGVncmVlX3RhYmxlX3cxX3gsIGFlcyh4ID0gSW5kZWdyZWUsIHkgPSBQZXJjZW50YWdlKSkgKw0KICBnZW9tX2JhcihzdGF0ID0gImlkZW50aXR5IiwgZmlsbCA9ICJibHVlIiwgY29sb3IgPSAiYmxhY2siLCBhbHBoYSA9IDAuNykgKw0KICBsYWJzKHRpdGxlID0gIkRpc3RyaWJ1dGlvbiBvZiBpbmRlZ3JlZXMgLSBXYXZlIDEgKHBlcmNlbnRhZ2UpIiwgDQogICAgICAgeCA9ICJJbmRlZ3JlZXMiLCANCiAgICAgICB5ID0gIlBlcmNlbnRhZ2UiKSArDQogIHNjYWxlX3hfY29udGludW91cyhicmVha3MgPSBzZXEoMSwgMTUsIDEpKSArIA0KICBzY2FsZV95X2NvbnRpbnVvdXMobGltaXRzID0gYygwLCBtYXgoZGVncmVlX3RhYmxlX3cxJFBlcmNlbnRhZ2UpICsgNSkpICsNCiAgdGhlbWVfbWluaW1hbCgpDQpgYGANCg0KIyMjIEVzdGltYXRpbmcgdGhlIHNjYWxpbmcgZXhwb25lbnQgJFxnYW1tYSQNCg0KVG8gZXN0aW1hdGUgdGhlICRcZ2FtbWEkIHBhcmFtZXRlciBpc29sYXRlcyBoYXZlIHRvIGJlIGRpc3JlZ2FyZGVkLiBUaGUgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIGV4Y2x1ZGluZyBpc29sYXRlcyBzaG93biBhYm92ZSBzdGlsbCBzaG93cyBhIHJpZ2h0LXNrZXdlZCBkaXN0cmlidXRpb24uIFRoZSBkaXN0cmlidXRpb24gaXMgc3RpbGwgaW4gbGluZSB3aXRoIHdoYXQgaXMgZXhwZWN0ZWQgZm9yIGEgc2NhbGUtZnJlZSBuZXR3b3JrLiBUaGUgJFxnYW1tYSQgY2FuIGJlIGVzdGltYXRlZCB1c2luZyB0aGUgUi1wYWNrYWdlICdwb3dlUmxhdycuIFRoZSAkXGdhbW1hJCBpcyBlc3RpbWF0ZWQgYXQgcm91Z2hseSA0LDgyIChzZWUgYmVsb3cpLiBBcyB0aGlzIHZhbHVlIGlzIG5vdCBiZXR3ZWVuIDIgYW5kIDMgdGhlIG5ldHdvcmsgZG9lcyBub3QgZXhoaWJpdHMgc2NhbGUtZnJlZSBjaGFyYWN0ZXJpc3RpY3MgYW5kLCB0aHVzLCBjYW4gbGlrZWx5IG5vdCBiZSBpbnRlcnByZXRlZCBhcyBzdWNoLiBBbm90aGVyIHByb3BlcnR5IG9mIGEgcG93ZXItbGF3IGRpc3RyaWJ1dGlvbiBpcyB0aGF0IGl0IGxvb2tzIGxpa2UgYSBzdHJhaWdodCBsaW5lIHdoZW4gcGxvdHRlZCBpbiBhIGxvZy1sb2cgcGxvdCAoYSBwbG90IGluIHdoaWNoIGJvdGggdGhlIHgtYXhpcyBhbmQgeS1heGlzIGlzIHJlcHJlc2VudGVkIHVzaW5nIGEgbG9nYXJpdGhtaWMgc2NhbGUpLiBUaGlzIHBsb3QgY2FuIGJlIG9ic2VydmVkIGJlbG93IGFuZCBkb2VzIGFjdHVhbGx5IHByZXNlbnQgYSBzdHJhaWdodCBsaW5lLiBIb3dldmVyLCB0aGlzIGlzIGR1ZSB0byB0aGUgbmF0dXJlIG9mIHBsb3R0aW5nIHRoZSBwb3dlcmxhdyBpbiBhIGxvZy1sb2cgcGxvdC4gSXQgY2FuIGhvd2V2ZXIgYmUgb2JzZXJ2ZWQgdGhhdCB0aGUgc3RlZXAgc2xvcGUgb2YgdGhpcyBsaW5lIGluZGljYXRlcyBhIG1vcmUgdW5pZm9ybSBpbmRlZ3JlZSBkaXN0cmlidXRpb24uIEFsdG9nZXRoZXIsIGluIHdhdmUgMSB0aGVyZSBpcyBsaWtlbHkgbm90IHlldCBhIHByZWZlcmVudGlhbCBhdHRhY2htZW50IG1lY2hhbmlzbSBpbiBwbGFjZS4gVGhpcyBpcywgaG93ZXZlciwgbGlrZWx5IHRvIGJlIHRoZSBjYXNlIGR1ZSB0byB0aGUgbGFyZ2UgYW1vdW50IG9mIGlzb2xhdGVzIGluIHdhdmUgMSBkdWUgdG8gYSBsb3Qgb2YgdGhlIHNjaG9sYXJzIG5vdCBiZWluZyBhY3RpdmUgaW4gd2F2ZSAxLCBtYWtpbmcgaXQgaGFyZCB0byBkaXN0aW5ndWlzaCBhbnkgZGlzdGluY3QgJ2h1YnMnIG9mIGNvLWF1dGhvcnNoaXAgaW4gdGhpcyB0aW1lcG9pbnQuDQoNCmBgYHtyIGVzdGltYXRlIHBvd2VybGF3fQ0KDQpkZWdyZWVfZGZfdzEgPC0gYXMuZGF0YS5mcmFtZSh0YWJsZShpbmRlZ3JfdzEpKQ0KZGVncmVlX2RmX3cxJGluZGVncl93MSA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihkZWdyZWVfZGZfdzEkaW5kZWdyX3cxKSkNCg0KZGVncmVlX2RmX3cxIDwtIGRlZ3JlZV9kZl93MVtkZWdyZWVfZGZfdzEkaW5kZWdyX3cxID4gMCwgXSAjIGV4Y2x1ZGUgaXNvbGF0ZXMNCg0KcGwgPC0gZGlzcGwkbmV3KGRlZ3JlZV9kZl93MSRpbmRlZ3JfdzEpICMgZml0IHBvd2VyIGxhdyB0byBkaXN0cmlidXRpb24NCg0KZXN0aW1hdGVfdzEgPC0gZXN0aW1hdGVfeG1pbihwbCkNCnBsJHNldFhtaW4oZXN0aW1hdGVfdzEpDQoNCmVzdGltYXRlIDwtIGVzdGltYXRlX3htaW4ocGwpDQpwbCRzZXRYbWluKGVzdGltYXRlKQ0KDQpnYW1tYSA8LSBwbCRwYXJzDQpnYW1tYQ0KDQpgYGANCg0KYGBge3IgbG9nIGxvZyBncmFwaCwgZWNobz1GQUxTRX0NCg0KY2xlYW5fZGF0YSA8LSBkZWdyZWVfdGFibGVfdzFfeCAlPiUgDQogIGZpbHRlcihGcmVxdWVuY3kgPiAwKQ0KDQpsb2dfZml0IDwtIGxtKGxvZyhGcmVxdWVuY3kpIH4gbG9nKEluZGVncmVlKSwgZGF0YSA9IGNsZWFuX2RhdGEpDQoNCmdncGxvdChjbGVhbl9kYXRhLCBhZXMoeCA9IEluZGVncmVlLCB5ID0gRnJlcXVlbmN5KSkgKw0KICBnZW9tX3BvaW50KCkgKyANCiAgbGFicyh0aXRsZSA9ICJMb2ctTG9nIHBsb3Qgb2YgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIC0gV2F2ZSAxIiwgDQogICAgICAgeCA9ICJJbmRlZ3JlZXMgKGxvZy1zY2FsZSkiLCANCiAgICAgICB5ID0gIkZyZXF1ZW5jaWVzIChsb2ctc2NhbGUiKSArDQogIGdlb21fc21vb3RoKG1ldGhvZCA9ICJsbSIsIGNvbG9yID0gICJibHVlIiwgc2UgPSBGQUxTRSkgKyANCiAgc2NhbGVfeF9sb2cxMCgpICsgDQogIHNjYWxlX3lfbG9nMTAoKSArDQogIGdlb21fY3VydmUoeCA9IDcsIHkgPSAxOSwgeGVuZCA9IDUsIHllbmQgPSAxMywNCiAgICAgICAgICAgICBhcnJvdyA9IGFycm93KGxlbmd0aCA9IHVuaXQoMC41LCAiaW5jaGVzIikpLCBzaXplID0gMSwNCiAgICAgICAgICAgICBjb2xvciA9ICJibGFjayIsIGN1cnZhdHVyZSA9IDAuMCkgKw0KICAgICBhbm5vdGF0ZSgidGV4dCIsIHggPSA2LCB5ID0gMjAsIGxhYmVsID0gInRoZSBzdGVlcGVyIHNsb3BlIFxuIHN1Z2dlc3RzIGEgbW9yZSB1bmlmb3JtIFxuIGRlZ3JlZSBkaXN0cmlidXRpb24iLCBzaXplID0gNCkgKw0KICB0aGVtZV9taW5pbWFsKCkNCg0KDQpgYGANCg0KIyMgU2NhbGUtZnJlZSBuZXR3b3JrIC0gV2F2ZSAyDQoNCiMjIyBEZWdyZWUgZGlzdHJpYnV0aW9uIHdhdmUgMiAtIGluY2x1ZGluZyBpc29sYXRlcw0KDQpgYGB7ciB3YXZlIDIgaW5kZWdyZWUgZGlzdHJpYnV0aW9uLCBlY2hvPUZBTFNFfQ0KIyB3YXZlIDINCmluZGVncl93MiA8LSBkZWdyZWUobmV0d29ya193MiwgbW9kZSA9ICJpbiIpICMgY2FsY3VsYXRlIGluZGVncmVlcw0KDQojIGNyZWF0ZSBkYXRhZnJhbWUgZm9yIGluZGVncmVlcw0KZGVncmVlX3RhYmxlX3cyIDwtIGFzLmRhdGEuZnJhbWUodGFibGUoaW5kZWdyX3cyKSkNCmNvbG5hbWVzKGRlZ3JlZV90YWJsZV93MikgPC0gYygiSW5kZWdyZWUiLCAiRnJlcXVlbmN5IikNCmRlZ3JlZV90YWJsZV93MiRJbmRlZ3JlZSA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihkZWdyZWVfdGFibGVfdzIkSW5kZWdyZWUpKQ0KIyBDcmVhdGUgYSBjb21wbGV0ZSBpbmRlZ3JlZSByYW5nZQ0KY29tcGxldGVfaW5kZWdyZWUgPC0gZGF0YS5mcmFtZShJbmRlZ3JlZSA9IDA6bWF4KGRlZ3JlZV90YWJsZV93MiRJbmRlZ3JlZSkpDQpkZWdyZWVfdGFibGVfdzIgPC0gbWVyZ2UoY29tcGxldGVfaW5kZWdyZWUsIGRlZ3JlZV90YWJsZV93MiwgYnkgPSAiSW5kZWdyZWUiLCBhbGwueCA9IFRSVUUpDQojIENhbGN1bGF0ZSBwZXJjZW50YWdlIGZvciBlYWNoIGluZGVncmVlDQpkZWdyZWVfdGFibGVfdzIkRnJlcXVlbmN5W2lzLm5hKGRlZ3JlZV90YWJsZV93MiRGcmVxdWVuY3kpXSA8LSAwDQpkZWdyZWVfdGFibGVfdzIkUGVyY2VudGFnZSA8LSAoZGVncmVlX3RhYmxlX3cyJEZyZXF1ZW5jeSAvIHN1bShkZWdyZWVfdGFibGVfdzIkRnJlcXVlbmN5KSkgKiAxMDANCg0KDQojIGluZGVncmVlIGRpc3RyaWJ1dGlvbiAtIGluY2x1ZGluZyBpc29sYXRlcw0KZ2dwbG90KGRlZ3JlZV90YWJsZV93MiwgYWVzKHggPSBJbmRlZ3JlZSwgeSA9IFBlcmNlbnRhZ2UpKSArDQogIGdlb21fYmFyKHN0YXQgPSAiaWRlbnRpdHkiLCBmaWxsID0gImJsdWUiLCBjb2xvciA9ICJibGFjayIsIGFscGhhID0gMC43KSArDQogIGxhYnModGl0bGUgPSAiRGlzdHJpYnV0aW9uIG9mIGluZGVncmVlcyAtIFdhdmUgMiAocGVyY2VudGFnZSkiLCANCiAgICAgICB4ID0gIkluZGVncmVlcyIsIA0KICAgICAgIHkgPSAiUGVyY2VudGFnZSIpICsNCiAgc2NhbGVfeF9jb250aW51b3VzKGJyZWFrcyA9IHNlcSgwLCAxNSwgMSkpICsgDQogIHNjYWxlX3lfY29udGludW91cyhsaW1pdHMgPSBjKDAsIG1heChkZWdyZWVfdGFibGVfdzIkUGVyY2VudGFnZSkgKyA1KSkgKw0KICB0aGVtZV9taW5pbWFsKCkNCg0KYGBgDQoNCiMjIyBJbmRlZ3JlZSBkaXN0cmlidXRpb24gd2F2ZSAyIC0gZXhjbHVkaW5nIGlzb2xhdGVzDQoNClRoZSBpbmRlZ3JlZSBkaXN0cmlidXRpb24gYWJvdmUgc2hvdyBhIHJpZ2h0LXNrZXdlZCBkaXN0cmlidXRpb24sIHdoaWNoIHdvdWxkIGJlIGV4cGVjdGVkIGluIGEgc2NhbGUtZnJlZSBuZXR3b3JrLiBBIGxvdCBvZiBub2RlcyBvZiBoYXZlIG5vIG9yIG9ubHkgYSBmZXcgaW5kZWdyZWVzLCB3aGlsZSBhIHNtYWxsIG51bWJlciBvZiBub2RlcyBoYXZlIGEgbG90IG9mIGluZGVncmVlcy4NCg0KYGBge3Igd2F2ZSAyIGRlZ3JlZSBkaXN0cmlidXRpb24gZXhjbHVkaW5nIGlzb2xhdGVzLCBlY2hvPUZBTFNFfQ0KIyBmaWx0ZXIgb3V0IGlzb2xhdGVzDQpkZWdyZWVfdGFibGVfdzJfeCA8LSBkZWdyZWVfdGFibGVfdzJbZGVncmVlX3RhYmxlX3cyJEluZGVncmVlID4gMCwgXQ0KZGVncmVlX3RhYmxlX3cyX3gkUGVyY2VudGFnZSA8LSAoZGVncmVlX3RhYmxlX3cyX3gkRnJlcXVlbmN5IC8gc3VtKGRlZ3JlZV90YWJsZV93Ml94JEZyZXF1ZW5jeSkpICogMTAwDQoNCiMgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIC0gZXhjbHVkaW5nIGlzb2xhdGVzDQpnZ3Bsb3QoZGVncmVlX3RhYmxlX3cyX3gsIGFlcyh4ID0gSW5kZWdyZWUsIHkgPSBQZXJjZW50YWdlKSkgKw0KICBnZW9tX2JhcihzdGF0ID0gImlkZW50aXR5IiwgZmlsbCA9ICJibHVlIiwgY29sb3IgPSAiYmxhY2siLCBhbHBoYSA9IDAuNykgKw0KICBsYWJzKHRpdGxlID0gIkRpc3RyaWJ1dGlvbiBvZiBpbmRlZ3JlZXMgLSBXYXZlIDIgKHBlcmNlbnRhZ2UpIiwgDQogICAgICAgeCA9ICJJbmRlZ3JlZXMiLCANCiAgICAgICB5ID0gIlBlcmNlbnRhZ2UiKSArDQogIHNjYWxlX3hfY29udGludW91cyhicmVha3MgPSBzZXEoMSwgMTUsIDEpKSArIA0KICBzY2FsZV95X2NvbnRpbnVvdXMobGltaXRzID0gYygwLCBtYXgoZGVncmVlX3RhYmxlX3cyJFBlcmNlbnRhZ2UpICsgNSkpICsNCiAgdGhlbWVfbWluaW1hbCgpDQpgYGANCg0KIyMjIEVzdGltYXRpbmcgdGhlIHNjYWxpbmcgZXhwb25lbnQgJFxnYW1tYSQNCg0KVGhlIGluZGVncmVlIGRpc3RyaWJ1dGlvbiBleGNsdWRpbmcgaXNvbGF0ZXMgc2hvd24gYWJvdmUgc3RpbGwgc2hvd3MgYSByaWdodC1za2V3ZWQgZGlzdHJpYnV0aW9uLiBUaGUgZGlzdHJpYnV0aW9uIGlzIHN0aWxsIGluIGxpbmUgd2l0aCB3aGF0IGlzIGV4cGVjdGVkIGZvciBhIHNjYWxlLWZyZWUgbmV0d29yay4gVGhlICRcZ2FtbWEkIGlzIGFnYWluIGVzdGltYXRlZCB1c2luZyB0aGUgUi1wYWNrYWdlICdwb3dlUmxhdycuIFRoZSAkXGdhbW1hJCBpcyBlc3RpbWF0ZWQgYXQgcm91Z2hseSAyLDc1IChzZWUgYmVsb3cpLiBBcyB0aGlzIHZhbHVlIGlzIGJldHdlZW4gMiBhbmQgMyB0aGUgbmV0d29yayBleGhpYml0cyBzY2FsZS1mcmVlIGNoYXJhY3RlcmlzdGljcyBhbmQgY2FuIGxpa2VseSBiZSBpbnRlcnByZXRlZCBhcyBzdWNoLiBCZWxvdywgaW4gdGhlIGxvZy1sb2cgcGxvdCBhIHN0cmFpZ2h0IGxpbmUgY2FuIGJlIG9ic2VydmVkLCBpbiBsaW5lIHdpdGggdGhlIGNoYXJhY3RlcmlzdGljcyBvZiBhIHBvd2VyIGxhdyBkaXN0cmlidXRpb24uIFRoZSBzbG9wZSBvZiB0aGlzIGxpbmUgbW9yZSBldmlkZW50bHkgaW5kaWNhdGVzIHRoZSBwcmVzZW5jZSBvZiBodWJzLCBhcyBvbmUgd291bGQgZXhwZWN0IGluIGEgc2NhbGUtZnJlZSBuZXR3b3JrLiBBbHRvZ2V0aGVyLCB0aGlzIHdvdWxkIHN1Z2dlc3QgYSBsaWtlbHkgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgbWVjaGFuaXNtIGF0IHBsYXkgaW4gdGhlIG5ldHdvcmsgYXQgdGltZXBvaW50IDIsIG1lYW5pbmcgdGhhdCBhbHJlYWR5IGVzdGFibGlzaGVkIGF1dGhvcnMgd2l0aCBhIGxvdCBvZiBpbmRlZ3JlZXMgYXJlIG1vcmUgYXR0cmFjdGl2ZSB0byBvdGhlciBhdXRob3JzIHRoYW4gYXV0aG9ycyB3aXRoIGxlc3MgaW5kZWdyZWVzLg0KDQpgYGB7ciBlc3RpbWF0ZSBwb3dlcmxhdyB3YXZlIDJ9DQoNCmRlZ3JlZV9kZl93MiA8LSBhcy5kYXRhLmZyYW1lKHRhYmxlKGluZGVncl93MikpDQpkZWdyZWVfZGZfdzIkaW5kZWdyX3cyIDwtIGFzLm51bWVyaWMoYXMuY2hhcmFjdGVyKGRlZ3JlZV9kZl93MiRpbmRlZ3JfdzIpKQ0KDQpkZWdyZWVfZGZfdzIgPC0gZGVncmVlX2RmX3cyW2RlZ3JlZV9kZl93MiRpbmRlZ3JfdzIgPiAwLCBdICMgZXhjbHVkZSBpc29sYXRlcw0KDQpwbCA8LSBkaXNwbCRuZXcoZGVncmVlX2RmX3cyJGluZGVncl93MikgIyBmaXQgcG93ZXIgbGF3IHRvIGRpc3RyaWJ1dGlvbg0KDQplc3RpbWF0ZV93MiA8LSBlc3RpbWF0ZV94bWluKHBsKQ0KcGwkc2V0WG1pbihlc3RpbWF0ZV93MikNCg0KZXN0aW1hdGUgPC0gZXN0aW1hdGVfeG1pbihwbCkNCnBsJHNldFhtaW4oZXN0aW1hdGUpDQoNCmdhbW1hIDwtIHBsJHBhcnMNCmdhbW1hDQoNCmBgYA0KDQpgYGB7ciBsb2cgbG9nIGdyYXBoIHdhdmUgMiwgZWNobz1GQUxTRX0NCg0KY2xlYW5fZGF0YSA8LSBkZWdyZWVfdGFibGVfdzJfeCAlPiUgDQogIGZpbHRlcihGcmVxdWVuY3kgPiAwKQ0KDQpsb2dfZml0IDwtIGxtKGxvZyhGcmVxdWVuY3kpIH4gbG9nKEluZGVncmVlKSwgZGF0YSA9IGNsZWFuX2RhdGEpDQoNCmdncGxvdChjbGVhbl9kYXRhLCBhZXMoeCA9IEluZGVncmVlLCB5ID0gRnJlcXVlbmN5KSkgKw0KICBnZW9tX3BvaW50KCkgKyANCiAgbGFicyh0aXRsZSA9ICJMb2ctTG9nIHBsb3Qgb2YgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIC0gV2F2ZSAyIiwgDQogICAgICAgeCA9ICJJbmRlZ3JlZXMgKGxvZy1zY2FsZSkiLCANCiAgICAgICB5ID0gIkZyZXF1ZW5jaWVzIChsb2ctc2NhbGUpIikgKw0KICBnZW9tX3Ntb290aChtZXRob2QgPSAibG0iLCBjb2xvciA9ICAiYmx1ZSIsIHNlID0gRkFMU0UpICsgDQogIHNjYWxlX3hfbG9nMTAoKSArIA0KICBzY2FsZV95X2xvZzEwKCkgKw0KICBnZW9tX2N1cnZlKHggPSA3LCB5ID0gMTksIHhlbmQgPSA1LCB5ZW5kID0gMTMsDQogICAgICAgICAgICAgYXJyb3cgPSBhcnJvdyhsZW5ndGggPSB1bml0KDAuNSwgImluY2hlcyIpKSwgc2l6ZSA9IDEsDQogICAgICAgICAgICAgY29sb3IgPSAiYmxhY2siLCBjdXJ2YXR1cmUgPSAwLjApICsNCiAgICAgYW5ub3RhdGUoInRleHQiLCB4ID0gNywgeSA9IDI0LCBsYWJlbCA9ICJ0aGUgbW9yZSBncmFkdWFsIHNsb3BlIFxuIHN1Z2dlc3RzIHRoZSBleGlzdGVuY2Ugb2YgXG4gYSBmZXcgaHVicyBpbiB0aGUgbmV0d29yayIsIHNpemUgPSA0KSArDQogIHRoZW1lX21pbmltYWwoKQ0KDQoNCmBgYA0KDQoNCiMjIE5ldHdvcmsgdmlzdWFsaXNhdGlvbg0KDQpgYGB7ciBjbGVhbiB3b3Jrc3BhY2UgMiwgaW5jbHVkZT1GQUxTRX0NCg0Kcm0obGlzdCA9IHNldGRpZmYobHMoKSwgYygiZnVsbGRhdGEiLCAiZGZfZWdvIiwgImRmX3dvcmtzIikpKQ0KDQpgYGANCg0KYGBge3IgY3JlYXRpbmcgbmV0d29yayBvYmplY3RzLCBpbmNsdWRlPUZBTFNFfQ0KDQojIHdhdmUgMQ0KbmV0d29ya193MSA8LSBpZ3JhcGg6OmdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeCgNCiAgZnVsbGRhdGEkbmV0c1sxLCxdLA0KICBtb2RlID0gYygiZGlyZWN0ZWQiKSwNCiAgd2VpZ2h0ZWQgPSBOVUxMLA0KICBkaWFnID0gRkFMU0UsDQogIGFkZC5jb2xuYW1lcyA9IE5VTEwsDQogIGFkZC5yb3duYW1lcyA9IE5VTEwpDQoNCndhdmUxIDwtIHNpbXBsaWZ5KG5ldHdvcmtfdzEpDQoNCg0KIyB3YXZlIDINCm5ldHdvcmtfdzIgPC0gaWdyYXBoOjpncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoDQogIGZ1bGxkYXRhJG5ldHNbMiwsXSwNCiAgbW9kZSA9IGMoImRpcmVjdGVkIiksDQogIHdlaWdodGVkID0gTlVMTCwNCiAgZGlhZyA9IEZBTFNFLA0KICBhZGQuY29sbmFtZXMgPSBOVUxMLA0KICBhZGQucm93bmFtZXMgPSBOVUxMKQ0KDQp3YXZlMiA8LSBzaW1wbGlmeShuZXR3b3JrX3cyKQ0KDQpgYGANCg0KYGBge3IgaW5pdGlhbCBwbG90cywgd2FybmluZz1GQUxTRSwgZWNobz1GQUxTRSwgZmlnLnNob3c9ImhvbGQiLCBvdXQud2lkdGg9IjUwJSJ9DQoNCnBsb3Qod2F2ZTEsDQogICAgIHZlcnRleC5sYWJlbCA9IE5BLA0KICAgICB2ZXJ0ZXguc2l6ZSA9IDcsDQogICAgIGVkZ2UuY3VydmVkID0gMC4yLA0KICAgICBlZGdlLmFycm93LnNpemUgPSAwLjEsDQogICAgIG1haW4gPSAiTmV0d29yayBhdCB3YXZlIDEiKQ0KDQpwbG90KHdhdmUyLA0KICAgICB2ZXJ0ZXgubGFiZWwgPSBOQSwNCiAgICAgdmVydGV4LnNpemUgPSA3LA0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwNCiAgICAgZWRnZS5hcnJvdy5zaXplID0gMC4xLA0KICAgICBtYWluID0gIk5ldHdvcmsgYXQgd2F2ZSAyIikNCg0KaW5kZWdyX3cxIDwtIGRlZ3JlZSh3YXZlMSwgbW9kZSA9ICJpbiIpDQppbmRlZ3JfdzIgPC0gZGVncmVlKHdhdmUyLCBtb2RlID0gImluIikNCg0KaXNvbGF0ZXNfdzEgPC0gVih3YXZlMSlbZGVncmVlKHdhdmUxLCBtb2RlID0gImFsbCIpID09IDBdDQoNCm5vaXNvbGF0ZXNfdzEgPC0gZGVsZXRlX3ZlcnRpY2VzKHdhdmUxLCBpc29sYXRlc193MSkNCg0KcGxvdChub2lzb2xhdGVzX3cxLA0KICAgICB2ZXJ0ZXgubGFiZWwgPSBOQSwNCiAgICAgdmVydGV4LnNpemUgPSAxMCwNCiAgICAgdmVydGV4LmNvbG9yID0gImJsdWUiLA0KICAgICB2ZXJ0ZXguZnJhbWUuY29sb3IgPSAiYmxhY2siLA0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwNCiAgICAgZWRnZS5hcnJvdy5zaXplID0gMC40LA0KICAgICBlZGdlLmNvbG9yID0gImdyYXkiLA0KICAgICBlZGdlLndpZHRoID0gMC4zLA0KICAgICBtYWluID0gIk5ldHdvcmsgYXQgd2F2ZSAxIHdpdGhvdXQgaXNvbGF0ZXMiKQ0KDQoNCmlzb2xhdGVzX3cyIDwtIFYod2F2ZTIpW2RlZ3JlZSh3YXZlMiwgbW9kZSA9ICJhbGwiKSA9PSAwXQ0KDQpub2lzb2xhdGVzX3cyIDwtIGRlbGV0ZV92ZXJ0aWNlcyh3YXZlMiwgaXNvbGF0ZXNfdzIpDQoNCnBsb3Qobm9pc29sYXRlc193MSwNCiAgICAgdmVydGV4LmxhYmVsID0gTkEsDQogICAgIHZlcnRleC5zaXplID0gMTAsDQogICAgIHZlcnRleC5jb2xvciA9ICJibHVlIiwNCiAgICAgdmVydGV4LmZyYW1lLmNvbG9yID0gImJsYWNrIiwNCiAgICAgZWRnZS5jdXJ2ZWQgPSAwLjIsDQogICAgIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuNCwNCiAgICAgZWRnZS5jb2xvciA9ICJncmF5IiwNCiAgICAgZWRnZS53aWR0aCA9IDAuMywNCiAgICAgbWFpbiA9ICJOZXR3b3JrIGF0IHdhdmUgMiB3aXRob3V0IGlzb2xhdGVzIikNCg0KYGBgDQoNCkFib3ZlLCBwbG90cyBvZiBib3RoIHdhdmVzIGFyZSBwcmVzZW50ZWQsIGJvdGggd2l0aCBhbmQgd2l0aG91dCBpc29sYXRlcy4gVGhlc2UgcGxvdHMgc2hvdyB0aGUgbmV0d29ya3MgYmVmb3JlIHRhbXBlcmluZyB3aXRoIHNoYXBlLCBzaXplIGFuZCBwb3NpdGlvbiBvZiB0aGUgbm9kZXMuIEZ1cnRoZXJtb3JlLCB0aGUgcGxvdHMgc2hvdyB0aGF0IHRoZSBudW1iZXIgb2YgY28tYXV0aG9yc2hpcCB0aWVzIGhhcyBpbmNyZWFzZWQgYmV0d2VlbiB0aW1lcG9pbnQgMSBhbmQgdGltZXBvaW50IDIuDQoNCiMjIyBQbG90cyBieSBILWluZGV4IGFuZCBpbmRlZ3JlZXMNCg0KYGBge3IgcHJldHR5IHBsb3Qgd2F2ZSAxLCBlY2hvPUZBTFNFfQ0KDQojIyMgd2F2ZSAxDQoNCmluZGVncl93MSA8LSBkZWdyZWUod2F2ZTEsIG1vZGUgPSAiaW4iKQ0KDQojIGFzc2lnbiBoLWluZGV4IHRvIHNjaG9sYXINClYod2F2ZTEpJGhfaW5kZXggPC0gZGZfZWdvJGhfaW5kZXgNClYod2F2ZTEpJGluZGVncmVlIDwtIGluZGVncl93MQ0KDQojcmVtb3ZlIGlzb2xhdGVzDQpub2lzb2xhdGVzX3cxIDwtIGRlbGV0ZS52ZXJ0aWNlcyh3YXZlMSwgVih3YXZlMSlbZGVncmVlKHdhdmUxKSA9PSAwXSkNCg0KI3NldCBzaXplIG9mIHBsb3QNCm9wdGlvbnMocmVwci5wbG90LndpZHRoID0gMjAsIHJlcHIucGxvdC5oZWlnaHQgPSAyMCkNCg0KI3Bsb3Qgd2F2ZSAxDQpnZ3JhcGgobm9pc29sYXRlc193MSwNCiAgICAgICBsYXlvdXQgPSAiZnIiKSArDQogIGdlb21fZWRnZV9saW5rKGNvbG9yID0gImdyYXkiLCB3aWR0aCA9IDAuNSkgKw0KICBnZW9tX25vZGVfcG9pbnQoYWVzKHNpemUgPSBpbmRlZ3JlZSwgY29sb3IgPSBoX2luZGV4KSkgKyANCiAgc2NhbGVfc2l6ZShyYW5nZSA9IGMoMywgMTApKSArIA0KICBzY2FsZV9jb2xvcl9ncmFkaWVudChsb3cgPSAibGlnaHRibHVlIiwgaGlnaCA9ICJibHVlIikgKyANCiAgdGhlbWVfdm9pZCgpICsNCiAgbGFicyh0aXRsZSA9ICJOZXR3b3JrIHdhdmUgMTogbm8gaXNvbGF0ZXMsIG5vZGUgc2l6ZSBiYXNlZCBvbiBpbmRlZ3JlZXMgJiBjb2xvdXIgYmFzZWQgb24gSC1pbmRleCIpDQoNCg0KDQpgYGANCg0KYGBge3IgcHJldHR5IHBsb3Qgd2F2ZSAyLCBlY2hvPUZBTFNFfQ0KDQojIyMgd2F2ZSAyDQoNCmluZGVncl93MiA8LSBkZWdyZWUod2F2ZTIsIG1vZGUgPSAiaW4iKQ0KDQojIGFzc2lnbiBoLWluZGV4IHRvIHNjaG9sYXINClYod2F2ZTIpJGhfaW5kZXggPC0gZGZfZWdvJGhfaW5kZXgNClYod2F2ZTIpJGluZGVncmVlIDwtIGluZGVncl93Mg0KDQojcmVtb3ZlIGlzb2xhdGVzDQpub2lzb2xhdGVzX3cyIDwtIGRlbGV0ZS52ZXJ0aWNlcyh3YXZlMiwgVih3YXZlMilbZGVncmVlKHdhdmUyKSA9PSAwXSkNCg0KI3NldCBzaXplIG9mIHBsb3QNCm9wdGlvbnMocmVwci5wbG90LndpZHRoID0gMjAsIHJlcHIucGxvdC5oZWlnaHQgPSAyMCkNCg0KI3Bsb3Qgd2F2ZSAyDQpnZ3JhcGgobm9pc29sYXRlc193MiwNCiAgICAgICBsYXlvdXQgPSAiZnIiKSArDQogIGdlb21fZWRnZV9saW5rKGNvbG9yID0gImdyYXkiLCB3aWR0aCA9IDAuNSkgKw0KICBnZW9tX25vZGVfcG9pbnQoYWVzKHNpemUgPSBpbmRlZ3JlZSwgY29sb3IgPSBoX2luZGV4KSkgKyANCiAgc2NhbGVfc2l6ZShyYW5nZSA9IGMoMywgMTApKSArIA0KICBzY2FsZV9jb2xvcl9ncmFkaWVudChsb3cgPSAibGlnaHRibHVlIiwgaGlnaCA9ICJibHVlIikgKyANCiAgdGhlbWVfdm9pZCgpICsNCiAgbGFicyh0aXRsZSA9ICJOZXR3b3JrIHdhdmUgMjogbm8gaXNvbGF0ZXMsIG5vZGUgc2l6ZSBiYXNlZCBvbiBpbmRlZ3JlZXMgJiBjb2xvdXIgYmFzZWQgb24gSC1pbmRleCIpDQoNCmBgYA0K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("4-results-descriptives-concept.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

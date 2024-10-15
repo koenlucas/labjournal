@@ -229,17 +229,17 @@ df_ego <- do.call(rbind.data.frame, df$demographics)
 df_works <- do.call(rbind.data.frame, df$works)
 
 
-df_career_age <- df_works %>%
-  unnest(author) %>%
-  filter(au_id %in% df_ego$au_id == TRUE) %>%
-  group_by(au_id) %>%
-  mutate(first_year_pub = min(publication_year, na.rm = TRUE)) %>%
-  select(au_id, first_year_pub) %>%
-  distinct(au_id, first_year_pub, .keep_all = TRUE)
-
-# exclude first year, calculate mean, and then first publication with max 20 year different.
-
-df_ego <- merge(df_ego, df_career_age, by = "au_id", all.x = TRUE)
+# df_career_age <- df_works %>%
+#   unnest(author) %>%
+#   filter(au_id %in% df_ego$au_id == TRUE) %>%
+#   group_by(au_id) %>%
+#   mutate(first_year_pub = min(publication_year, na.rm = TRUE)) %>%
+#   select(au_id, first_year_pub) %>%
+#   distinct(au_id, first_year_pub, .keep_all = TRUE)
+# 
+# # exclude first year, calculate mean, and then first publication with max 20 year different.
+# 
+# df_ego <- merge(df_ego, df_career_age, by = "au_id", all.x = TRUE)
 
 ```
 

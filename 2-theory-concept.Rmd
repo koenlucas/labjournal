@@ -1,0 +1,40 @@
+---
+title: "Theory"
+author: "Koen Lucas"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Theory - very much a concept version
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+
+library(knitr)
+library(formatR)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=FALSE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+rgl::setupKnitr()
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+```
+
+The first hypothesis is based on the assumption that collaboration networks are often dominated by a small number of nodes with a disproportionately large number of connections, while most nodes only have a very few number of connections (ref.). This study presumes that these hubs form through a mechanism of preferential attachment, and thus, exhibit 'Matthew effect'. Scholars are inclined to co-author with scholars who are already prestigious, as these scholars tend to receive the most recognition for their publications. Due to scholars predominantly sending ties to high prestigious scholars, hubs are created that dominate the network. In other words, the network becomes centered around those who are more prestigious (as they are receiving most ties). Therefore, I formulate the following hypothesis:
+
+H1: *Collaboration networks in Dutch sociology departments are centered around a small number of prestigious scholars.*
+
+As mentioned before, scholars are incentivised to send ties to those scholars who are most prestigious. One way in which scholars can perceive another scholar as prestigious is by looking at the current amount co-authorship ties a scholar has. A scholar who receives more ties can be perceived as popular, there are more scholars who want to collaborate with them. This way, it is beneficial for scholars to also send ties to those who are already receiving a lot of ties.
+
+H2: *Scholars prefer to publish with scholars who receive more co-authorship ties.*
+
+Similarly, scholars who have a higher h-index may be perceived as more prestigious. Collaboration with these scholars is therefore beneficial due to their high visibility in the scientific community. In contrast to the preferential attachment through received ties, the h-index is a more outwardly visible measure of prestige. That is, the h-index is an often used metric to rank scholars. Therefore, a scholar with a higher h-index can be perceived as more prestigious to the whole scientific community. This is opposed to the number of receiving ties, as this might be more visible within the specific institution. I would therefore argue that h-index is similarly important for the preferential attachment mechanism.
+
+H3: *Scholars prefer to publish with scholars who have a higher h-index.*

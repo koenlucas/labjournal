@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Koen Lucas" />
+
+<meta name="date" content="2024-10-15" />
+
+<title>Theory</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="Week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
+    </li>
+    <li>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Concept
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-introduction-concept.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-concept.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-concept.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-concept.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-concept.html">Results - RSiena</a>
+    </li>
+    <li class="dropdown-header">Conclusion</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Final
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Introduction</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Theory</h1>
+<h4 class="author">Koen Lucas</h4>
+<h4 class="date">2024-10-15</h4>
+
+</div>
+
+
+<div id="theory---very-much-a-concept-version" class="section level1"
+number="1">
+<h1><span class="header-section-number">1</span> Theory - very much a
+concept version</h1>
+<style>
+body {
+text-align: justify}
+</style>
+<p>The first hypothesis is based on the assumption that collaboration
+networks are often dominated by a small number of nodes with a
+disproportionately large number of connections, while most nodes only
+have a very few number of connections (ref.). This study presumes that
+these hubs form through a mechanism of preferential attachment, and
+thus, exhibit ‘Matthew effect’. Scholars are inclined to co-author with
+scholars who are already prestigious, as these scholars tend to receive
+the most recognition for their publications. Due to scholars
+predominantly sending ties to high prestigious scholars, hubs are
+created that dominate the network. In other words, the network becomes
+centered around those who are more prestigious (as they are receiving
+most ties). Therefore, I formulate the following hypothesis:</p>
+<p>H1: <em>Collaboration networks in Dutch sociology departments are
+centered around a small number of prestigious scholars.</em></p>
+<p>As mentioned before, scholars are incentivised to send ties to those
+scholars who are most prestigious. One way in which scholars can
+perceive another scholar as prestigious is by looking at the current
+amount co-authorship ties a scholar has. A scholar who receives more
+ties can be perceived as popular, there are more scholars who want to
+collaborate with them. This way, it is beneficial for scholars to also
+send ties to those who are already receiving a lot of ties.</p>
+<p>H2: <em>Scholars prefer to publish with scholars who receive more
+co-authorship ties.</em></p>
+<p>Similarly, scholars who have a higher h-index may be perceived as
+more prestigious. Collaboration with these scholars is therefore
+beneficial due to their high visibility in the scientific community. In
+contrast to the preferential attachment through received ties, the
+h-index is a more outwardly visible measure of prestige. That is, the
+h-index is an often used metric to rank scholars. Therefore, a scholar
+with a higher h-index can be perceived as more prestigious to the whole
+scientific community. This is opposed to the number of receiving ties,
+as this might be more visible within the specific institution. I would
+therefore argue that h-index is similarly important for the preferential
+attachment mechanism.</p>
+<p>H3: <em>Scholars prefer to publish with scholars who have a higher
+h-index.</em></p>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRoZW9yeSINCmF1dGhvcjogIktvZW4gTHVjYXMiDQpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCi0tLQ0KDQojIFRoZW9yeSAtIHZlcnkgbXVjaCBhIGNvbmNlcHQgdmVyc2lvbg0KDQpgYGB7PWh0bWx9DQo8c3R5bGU+DQpib2R5IHsNCnRleHQtYWxpZ246IGp1c3RpZnl9DQo8L3N0eWxlPg0KYGBgDQpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShmb3JtYXRSKQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1GQUxTRSwgY2xhc3Muc291cmNlPWMoInRlc3QiKSwgY2xhc3Mub3V0cHV0PWMoInRlc3QyIikpDQpvcHRpb25zKHdpZHRoID0gMTAwKQ0KcmdsOjpzZXR1cEtuaXRyKCkNCg0KDQpjb2xvcml6ZSA8LSBmdW5jdGlvbih4LCBjb2xvcikge3NwcmludGYoIjxzcGFuIHN0eWxlPSdjb2xvcjogJXM7Jz4lczwvc3Bhbj4iLCBjb2xvciwgeCkgfQ0KYGBgDQoNClRoZSBmaXJzdCBoeXBvdGhlc2lzIGlzIGJhc2VkIG9uIHRoZSBhc3N1bXB0aW9uIHRoYXQgY29sbGFib3JhdGlvbiBuZXR3b3JrcyBhcmUgb2Z0ZW4gZG9taW5hdGVkIGJ5IGEgc21hbGwgbnVtYmVyIG9mIG5vZGVzIHdpdGggYSBkaXNwcm9wb3J0aW9uYXRlbHkgbGFyZ2UgbnVtYmVyIG9mIGNvbm5lY3Rpb25zLCB3aGlsZSBtb3N0IG5vZGVzIG9ubHkgaGF2ZSBhIHZlcnkgZmV3IG51bWJlciBvZiBjb25uZWN0aW9ucyAocmVmLikuIFRoaXMgc3R1ZHkgcHJlc3VtZXMgdGhhdCB0aGVzZSBodWJzIGZvcm0gdGhyb3VnaCBhIG1lY2hhbmlzbSBvZiBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCwgYW5kIHRodXMsIGV4aGliaXQgJ01hdHRoZXcgZWZmZWN0Jy4gU2Nob2xhcnMgYXJlIGluY2xpbmVkIHRvIGNvLWF1dGhvciB3aXRoIHNjaG9sYXJzIHdobyBhcmUgYWxyZWFkeSBwcmVzdGlnaW91cywgYXMgdGhlc2Ugc2Nob2xhcnMgdGVuZCB0byByZWNlaXZlIHRoZSBtb3N0IHJlY29nbml0aW9uIGZvciB0aGVpciBwdWJsaWNhdGlvbnMuIER1ZSB0byBzY2hvbGFycyBwcmVkb21pbmFudGx5IHNlbmRpbmcgdGllcyB0byBoaWdoIHByZXN0aWdpb3VzIHNjaG9sYXJzLCBodWJzIGFyZSBjcmVhdGVkIHRoYXQgZG9taW5hdGUgdGhlIG5ldHdvcmsuIEluIG90aGVyIHdvcmRzLCB0aGUgbmV0d29yayBiZWNvbWVzIGNlbnRlcmVkIGFyb3VuZCB0aG9zZSB3aG8gYXJlIG1vcmUgcHJlc3RpZ2lvdXMgKGFzIHRoZXkgYXJlIHJlY2VpdmluZyBtb3N0IHRpZXMpLiBUaGVyZWZvcmUsIEkgZm9ybXVsYXRlIHRoZSBmb2xsb3dpbmcgaHlwb3RoZXNpczoNCg0KSDE6ICpDb2xsYWJvcmF0aW9uIG5ldHdvcmtzIGluIER1dGNoIHNvY2lvbG9neSBkZXBhcnRtZW50cyBhcmUgY2VudGVyZWQgYXJvdW5kIGEgc21hbGwgbnVtYmVyIG9mIHByZXN0aWdpb3VzIHNjaG9sYXJzLioNCg0KQXMgbWVudGlvbmVkIGJlZm9yZSwgc2Nob2xhcnMgYXJlIGluY2VudGl2aXNlZCB0byBzZW5kIHRpZXMgdG8gdGhvc2Ugc2Nob2xhcnMgd2hvIGFyZSBtb3N0IHByZXN0aWdpb3VzLiBPbmUgd2F5IGluIHdoaWNoIHNjaG9sYXJzIGNhbiBwZXJjZWl2ZSBhbm90aGVyIHNjaG9sYXIgYXMgcHJlc3RpZ2lvdXMgaXMgYnkgbG9va2luZyBhdCB0aGUgY3VycmVudCBhbW91bnQgY28tYXV0aG9yc2hpcCB0aWVzIGEgc2Nob2xhciBoYXMuIEEgc2Nob2xhciB3aG8gcmVjZWl2ZXMgbW9yZSB0aWVzIGNhbiBiZSBwZXJjZWl2ZWQgYXMgcG9wdWxhciwgdGhlcmUgYXJlIG1vcmUgc2Nob2xhcnMgd2hvIHdhbnQgdG8gY29sbGFib3JhdGUgd2l0aCB0aGVtLiBUaGlzIHdheSwgaXQgaXMgYmVuZWZpY2lhbCBmb3Igc2Nob2xhcnMgdG8gYWxzbyBzZW5kIHRpZXMgdG8gdGhvc2Ugd2hvIGFyZSBhbHJlYWR5IHJlY2VpdmluZyBhIGxvdCBvZiB0aWVzLg0KDQpIMjogKlNjaG9sYXJzIHByZWZlciB0byBwdWJsaXNoIHdpdGggc2Nob2xhcnMgd2hvIHJlY2VpdmUgbW9yZSBjby1hdXRob3JzaGlwIHRpZXMuKg0KDQpTaW1pbGFybHksIHNjaG9sYXJzIHdobyBoYXZlIGEgaGlnaGVyIGgtaW5kZXggbWF5IGJlIHBlcmNlaXZlZCBhcyBtb3JlIHByZXN0aWdpb3VzLiBDb2xsYWJvcmF0aW9uIHdpdGggdGhlc2Ugc2Nob2xhcnMgaXMgdGhlcmVmb3JlIGJlbmVmaWNpYWwgZHVlIHRvIHRoZWlyIGhpZ2ggdmlzaWJpbGl0eSBpbiB0aGUgc2NpZW50aWZpYyBjb21tdW5pdHkuIEluIGNvbnRyYXN0IHRvIHRoZSBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCB0aHJvdWdoIHJlY2VpdmVkIHRpZXMsIHRoZSBoLWluZGV4IGlzIGEgbW9yZSBvdXR3YXJkbHkgdmlzaWJsZSBtZWFzdXJlIG9mIHByZXN0aWdlLiBUaGF0IGlzLCB0aGUgaC1pbmRleCBpcyBhbiBvZnRlbiB1c2VkIG1ldHJpYyB0byByYW5rIHNjaG9sYXJzLiBUaGVyZWZvcmUsIGEgc2Nob2xhciB3aXRoIGEgaGlnaGVyIGgtaW5kZXggY2FuIGJlIHBlcmNlaXZlZCBhcyBtb3JlIHByZXN0aWdpb3VzIHRvIHRoZSB3aG9sZSBzY2llbnRpZmljIGNvbW11bml0eS4gVGhpcyBpcyBvcHBvc2VkIHRvIHRoZSBudW1iZXIgb2YgcmVjZWl2aW5nIHRpZXMsIGFzIHRoaXMgbWlnaHQgYmUgbW9yZSB2aXNpYmxlIHdpdGhpbiB0aGUgc3BlY2lmaWMgaW5zdGl0dXRpb24uIEkgd291bGQgdGhlcmVmb3JlIGFyZ3VlIHRoYXQgaC1pbmRleCBpcyBzaW1pbGFybHkgaW1wb3J0YW50IGZvciB0aGUgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgbWVjaGFuaXNtLg0KDQpIMzogKlNjaG9sYXJzIHByZWZlciB0byBwdWJsaXNoIHdpdGggc2Nob2xhcnMgd2hvIGhhdmUgYSBoaWdoZXIgaC1pbmRleC4qDQo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("2-theory-concept.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

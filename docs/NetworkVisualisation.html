@@ -365,7 +365,32 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    My project
+    Project - Concept
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-introduction-concept.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-concept.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-concept.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-concept.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-concept.html">Results - RSiena</a>
+    </li>
+    <li class="dropdown-header">Conclusion</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Final
      
     <span class="caret"></span>
   </a>
@@ -2241,27 +2266,8 @@ soc_collabs_unique &lt;- unique(soc_collabs_unique)
 
 # so this is a very important step, we join the unique soc collaborators to the collaborators of
 # collaborators
-require(tidyverse)</code></pre>
-<pre><code>## Loading required package: tidyverse</code></pre>
-<pre><code>## ── Attaching core tidyverse packages ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
-## ── Conflicts ──────────────────────────
-## ✖ lubridate::%--%()      masks igraph::%--%()
-## ✖ ggplot2::%+%()         masks psych::%+%()
-## ✖ ggplot2::alpha()       masks psych::alpha()
-## ✖ dplyr::as_data_frame() masks tibble::as_data_frame(), igraph::as_data_frame()
-## ✖ purrr::compose()       masks igraph::compose()
-## ✖ tidyr::crossing()      masks igraph::crossing()
-## ✖ dplyr::filter()        masks stats::filter()
-## ✖ dplyr::lag()           masks stats::lag()
-## ✖ dplyr::select()        masks MASS::select()
-## ✖ purrr::simplify()      masks igraph::simplify()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<pre class="r"><code>onefivedegree &lt;- left_join(collabs_1deep, soc_collabs_unique, by = c(coauth_id = &quot;soc_collabs_unique&quot;))
+require(tidyverse)
+onefivedegree &lt;- left_join(collabs_1deep, soc_collabs_unique, by = c(coauth_id = &quot;soc_collabs_unique&quot;))
 
 # Then, we drop those that are not among sociology collaborators and who don&#39;t lsit coauthors
 # regardless
@@ -2408,7 +2414,7 @@ $(document).ready(function () {
 <script>
 $(document).ready(function () {
   window.initializeSourceEmbed("NetworkVisualisation.Rmd");
-  window.initializeCodeFolding("show" === "show");
+  window.initializeCodeFolding("hide" === "show");
 });
 </script>
 

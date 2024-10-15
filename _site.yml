@@ -25,7 +25,21 @@ navbar:
         href: Week4Visual.html
       - text: "Week 5 - first model"
         href: Week5-firstmodel.html
-    - text: "My project"
+    - text: "Project - Concept"
+      menu:
+      - text: "Introduction"
+        href: 1-introduction-concept.html
+      - text: "Theory"
+        href: 2-theory-concept.html
+      - text: "Data"
+        href: 3-data-concept.html
+      - text: "Results - descriptives"
+        href: 4-results-descriptives-concept.html 
+      - text: "Results - RSiena"
+        href: 4-results-rsiena-concept.html 
+      - text: "Conclusion"
+        href:  
+    - text: "Project - Final"
       menu: 
       - text: "Introduction"
         href: 
@@ -43,6 +57,6 @@ output:
     toc:  true
     toc_float: true
     number_sections: true
-    code_folding: show
+    code_folding: hide
     code_download: yes
     css: tweaks.css
