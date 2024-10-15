@@ -71,6 +71,29 @@ if (window.hljs) {
 }
 </style>
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="tweaks.css" type="text/css" />
 
@@ -441,21 +464,22 @@ text-align: justify}
 <p>It has often been argued that scientific achievement exhibits a
 ‘Matthew effect’, meaning that previous success is an indication of
 later success, furthering the increase in distinction <span
-class="citation">[@bol2018]</span>. First introduced by Merton (1968),
-the ‘Matthew effect’ can therefore be seen as a self-reinforcing
-mechanism turning past success into future success. For instance, if
-only one of two equally talented young scholars authored a successful
-publication, this scholar is predicted to have a more successful career.
-To clarify, a successful scholar can often accumulate more ‘credit’ over
-time than unknown researchers, even if their work is of similar quality.
-This mechanism, often synonymously called cumulative advantage <span
-class="citation">[@barabasi2002; @perc2010]</span>, is consequently
-causing inequality in the success of academics as it basically comes
-down to ‘winner takes all’ <span class="citation">[@diprete2006]</span>.
-As argued by Merton (1968), scientific contribution is more visible for
-a community when introduced by high-ranking scientist. Thus, when early
-success is a predictor for future success, inequality between these
-scholars continues to grow.</p>
+class="citation">(Bol, Vaan, and Rijt 2018)</span>. First introduced by
+Merton (1968), the ‘Matthew effect’ can therefore be seen as a
+self-reinforcing mechanism turning past success into future success. For
+instance, if only one of two equally talented young scholars authored a
+successful publication, this scholar is predicted to have a more
+successful career. To clarify, a successful scholar can often accumulate
+more ‘credit’ over time than unknown researchers, even if their work is
+of similar quality. This mechanism, often synonymously called cumulative
+advantage <span class="citation">(Barabâsi et al. 2002; Perc
+2010)</span>, is consequently causing inequality in the success of
+academics as it basically comes down to ‘winner takes all’ <span
+class="citation">(DiPrete and Eirich 2006)</span>. As argued by Merton
+(1968), scientific contribution is more visible for a community when
+introduced by high-ranking scientist. Thus, when early success is a
+predictor for future success, inequality between these scholars
+continues to grow.</p>
 <p>The ‘Matthew effect’ is often explained through preferential
 attachment. In the case of co-authorship this means that those who were
 successful before are a preferential collaboration partner to those
@@ -466,7 +490,7 @@ of becoming successful in the future. We can thus presume that
 collaboration networks hold a preference to connect with those who are
 already well-connected. Hence, it can expected that highly
 visible/already established researchers have more opportunities of
-co-authorship <span class="citation">[@hancean2016]</span>.
+co-authorship <span class="citation">(Hâncean and Perc 2016)</span>.
 Consequently, it can be argued that scholars who have higher prestige,
 have an increased network size compared to scholars with less
 prestige.</p>
@@ -483,36 +507,83 @@ departments centered around scholars with high prestige?</em></li>
 </ol>
 <p>Furthermore, ‘Matthew effects’ in science have been found in multiple
 aspects of the scientific domain such as institutional prestige <span
-class="citation">[@medoff2006]</span>, funding <span
-class="citation">[@bol2018]</span>, and citations <span
-class="citation">[@wang2014]</span>. Additionally, preferential
+class="citation">(Medoff 2006)</span>, funding <span
+class="citation">(Bol, Vaan, and Rijt 2018)</span>, and citations <span
+class="citation">(Wang 2014)</span>. Additionally, preferential
 attachment mechanisms in the growth of collaboration networks has been
-found in previous research <span class="citation">[@barabasi2002;
-@perc2010]</span>, however evidence concerning preferential attachment
+found in previous research <span class="citation">(Barabâsi et al. 2002;
+Perc 2010)</span>, however evidence concerning preferential attachment
 as the driving mechanism of co-authorship is mixed <span
-class="citation">[@ferligoj2015]</span>. Furthermore, little is known
-about the implications of the ‘Matthew effect’ in creating co-authorship
-ties considering the prestige of a scholar rather than only looking at
-the role of already existing co-authorship ties. This way it is possible
-to disentangle whether it is the existing collaboration network or the
-ego-focused prestige of a scientist that shapes co-authorship ties in
-future collaboration networks. Ergo, this study will look into this
-phenomenon by focusing on how the prestige (e.g. h-index) and the number
-of co-authorship ties of a scientist at one point accumulates into more
-co-authorship ties on a later timepoint. I therefore propose the
-following two research questions:</p>
+class="citation">(Ferligoj et al. 2015)</span>. Furthermore, little is
+known about the implications of the ‘Matthew effect’ in creating
+co-authorship ties considering the prestige of a scholar rather than
+only looking at the role of already existing co-authorship ties. This
+way it is possible to disentangle whether it is the existing
+collaboration network or the ego-focused prestige of a scientist that
+shapes co-authorship ties in future collaboration networks. Ergo, this
+study will look into this phenomenon by focusing on how the prestige
+(e.g. h-index) and the number of co-authorship ties of a scientist at
+one point accumulates into more co-authorship ties on a later timepoint.
+I therefore propose the following two research questions:</p>
 <ol start="2" style="list-style-type: decimal">
 <li><em>To what extent does an author’s number of co-authorship ties at
 T1 impact the increase in co- authorship ties at T2?</em></li>
 <li><em>To what extent does an author’s citation score at T1 impact the
 increase in in co-authorship ties at T2?</em></li>
 </ol>
-<div id="references" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> References</h2>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-barabasi2002" class="csl-entry">
+Barabâsi, Albert-Laszlo, Hawoong Jeong, Zoltan Néda, Erzsebet Ravasz,
+Andras Schubert, and Tamas Vicsek. 2002. <span>“Evolution of the Social
+Network of Scientific Collaborations.”</span> <em>Physica A: Statistical
+Mechanics and Its Applications</em> 311 (3-4): 590–614.
+</div>
+<div id="ref-bol2018" class="csl-entry">
+Bol, Thijs, Mathijs de Vaan, and Arnout van de Rijt. 2018. <span>“The
+Matthew Effect in Science Funding.”</span> <em>Proceedings of the
+National Academy of Sciences</em> 115 (19): 4887–90. <a
+href="https://doi.org/10.1073/pnas.1719557115">https://doi.org/10.1073/pnas.1719557115</a>.
+</div>
+<div id="ref-diprete2006" class="csl-entry">
+DiPrete, Thomas A, and Gregory M Eirich. 2006. <span>“Cumulative
+Advantage as a Mechanism for Inequality: A Review of Theoretical and
+Empirical Developments.”</span> <em>Annu. Rev. Sociol.</em> 32 (1):
+271–97.
+</div>
+<div id="ref-ferligoj2015" class="csl-entry">
+Ferligoj, Anuška, Luka Kronegger, Franc Mali, Tom AB Snijders, and
+Patrick Doreian. 2015. <span>“Scientific Collaboration Dynamics in a
+National Scientific System.”</span> <em>Scientometrics</em> 104:
+985–1012.
+</div>
+<div id="ref-hancean2016" class="csl-entry">
+Hâncean, Marian-Gabriel, and Matjaž Perc. 2016. <span>“Homophily in
+Coauthorship Networks of East European Sociologists.”</span>
+<em>Scientific Reports</em> 6 (1). <a
+href="https://doi.org/10.1038/srep36152">https://doi.org/10.1038/srep36152</a>.
+</div>
+<div id="ref-medoff2006" class="csl-entry">
+Medoff, Marshall H. 2006. <span>“Evidence of a Harvard and Chicago
+Matthew Effect.”</span> <em>Journal of Economic Methodology</em> 13 (4):
+485–506.
+</div>
+<div id="ref-perc2010" class="csl-entry">
+Perc, Matjaž. 2010. <span>“Growth and Structure of Slovenia’s Scientific
+Collaboration Network.”</span> <em>Journal of Informetrics</em> 4 (4):
+475–82.
+</div>
+<div id="ref-wang2014" class="csl-entry">
+Wang, Jian. 2014. <span>“Unpacking the Matthew Effect in
+Citations.”</span> <em>Journal of Informetrics</em> 8 (2): 329–39.
+</div>
+</div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkludHJvZHVjdGlvbiINCmF1dGhvcjogIktvZW4gTHVjYXMiDQpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCi0tLQ0KDQpgYGB7PWh0bWx9DQo8c3R5bGU+DQpib2R5IHsNCnRleHQtYWxpZ246IGp1c3RpZnl9DQo8L3N0eWxlPg0KYGBgDQpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShmb3JtYXRSKQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KDQoNCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9DQpgYGANCg0KIyBJbnRyb2R1Y3Rpb24NCg0KSXQgaGFzIG9mdGVuIGJlZW4gYXJndWVkIHRoYXQgc2NpZW50aWZpYyBhY2hpZXZlbWVudCBleGhpYml0cyBhIOKAmE1hdHRoZXcgZWZmZWN04oCZLCBtZWFuaW5nIHRoYXQgcHJldmlvdXMgc3VjY2VzcyBpcyBhbiBpbmRpY2F0aW9uIG9mIGxhdGVyIHN1Y2Nlc3MsIGZ1cnRoZXJpbmcgdGhlIGluY3JlYXNlIGluIGRpc3RpbmN0aW9uIFtAYm9sMjAxOF0uIEZpcnN0IGludHJvZHVjZWQgYnkgTWVydG9uICgxOTY4KSwgdGhlIOKAmE1hdHRoZXcgZWZmZWN04oCZIGNhbiB0aGVyZWZvcmUgYmUgc2VlbiBhcyBhIHNlbGYtcmVpbmZvcmNpbmcgbWVjaGFuaXNtIHR1cm5pbmcgcGFzdCBzdWNjZXNzIGludG8gZnV0dXJlIHN1Y2Nlc3MuIEZvciBpbnN0YW5jZSwgaWYgb25seSBvbmUgb2YgdHdvIGVxdWFsbHkgdGFsZW50ZWQgeW91bmcgc2Nob2xhcnMgYXV0aG9yZWQgYSBzdWNjZXNzZnVsIHB1YmxpY2F0aW9uLCB0aGlzIHNjaG9sYXIgaXMgcHJlZGljdGVkIHRvIGhhdmUgYSBtb3JlIHN1Y2Nlc3NmdWwgY2FyZWVyLiBUbyBjbGFyaWZ5LCBhIHN1Y2Nlc3NmdWwgc2Nob2xhciBjYW4gb2Z0ZW4gYWNjdW11bGF0ZSBtb3JlIOKAmGNyZWRpdOKAmSBvdmVyIHRpbWUgdGhhbiB1bmtub3duIHJlc2VhcmNoZXJzLCBldmVuIGlmIHRoZWlyIHdvcmsgaXMgb2Ygc2ltaWxhciBxdWFsaXR5LiBUaGlzIG1lY2hhbmlzbSwgb2Z0ZW4gc3lub255bW91c2x5IGNhbGxlZCBjdW11bGF0aXZlIGFkdmFudGFnZSBbQGJhcmFiYXNpMjAwMjsgQHBlcmMyMDEwXSwgaXMgY29uc2VxdWVudGx5IGNhdXNpbmcgaW5lcXVhbGl0eSBpbiB0aGUgc3VjY2VzcyBvZiBhY2FkZW1pY3MgYXMgaXQgYmFzaWNhbGx5IGNvbWVzIGRvd24gdG8g4oCYd2lubmVyIHRha2VzIGFsbOKAmSBbQGRpcHJldGUyMDA2XS4gQXMgYXJndWVkIGJ5IE1lcnRvbiAoMTk2OCksIHNjaWVudGlmaWMgY29udHJpYnV0aW9uIGlzIG1vcmUgdmlzaWJsZSBmb3IgYSBjb21tdW5pdHkgd2hlbiBpbnRyb2R1Y2VkIGJ5IGhpZ2gtcmFua2luZyBzY2llbnRpc3QuIFRodXMsIHdoZW4gZWFybHkgc3VjY2VzcyBpcyBhIHByZWRpY3RvciBmb3IgZnV0dXJlIHN1Y2Nlc3MsIGluZXF1YWxpdHkgYmV0d2VlbiB0aGVzZSBzY2hvbGFycyBjb250aW51ZXMgdG8gZ3Jvdy4NCg0KVGhlIOKAmE1hdHRoZXcgZWZmZWN04oCZIGlzIG9mdGVuIGV4cGxhaW5lZCB0aHJvdWdoIHByZWZlcmVudGlhbCBhdHRhY2htZW50LiBJbiB0aGUgY2FzZSBvZiBjby1hdXRob3JzaGlwIHRoaXMgbWVhbnMgdGhhdCB0aG9zZSB3aG8gd2VyZSBzdWNjZXNzZnVsIGJlZm9yZSBhcmUgYSBwcmVmZXJlbnRpYWwgY29sbGFib3JhdGlvbiBwYXJ0bmVyIHRvIHRob3NlIHdpdGhvdXQgdGhvc2UgZWFybHkgc3VjY2Vzc2VzLiBBcyBhIHJlc3VsdCwgcHJldmlvdXNseSBzdWNjZXNzZnVsIHNjaG9sYXJzIGF0dHJhY3QgbW9yZSBvcHBvcnR1bml0aWVzIGZvciBtb3JlIHN1Y2Nlc3MgaW4gdGhlIGZ1dHVyZSB3aGlsZSB1bnN1Y2Nlc3NmdWwgc2Nob2xhcnMgYXR0cmFjdCBsZXNzIHJlc291cmNlcywgZGVjcmVhc2luZyB0aGVpciBjaGFuY2VzIG9mIGJlY29taW5nIHN1Y2Nlc3NmdWwgaW4gdGhlIGZ1dHVyZS4gV2UgY2FuIHRodXMgcHJlc3VtZSB0aGF0IGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaG9sZCBhIHByZWZlcmVuY2UgdG8gY29ubmVjdCB3aXRoIHRob3NlIHdobyBhcmUgYWxyZWFkeSB3ZWxsLWNvbm5lY3RlZC4gSGVuY2UsIGl0IGNhbiBleHBlY3RlZCB0aGF0IGhpZ2hseSB2aXNpYmxlL2FscmVhZHkgZXN0YWJsaXNoZWQgcmVzZWFyY2hlcnMgaGF2ZSBtb3JlIG9wcG9ydHVuaXRpZXMgb2YgY28tYXV0aG9yc2hpcCBbQGhhbmNlYW4yMDE2XS4gQ29uc2VxdWVudGx5LCBpdCBjYW4gYmUgYXJndWVkIHRoYXQgc2Nob2xhcnMgd2hvIGhhdmUgaGlnaGVyIHByZXN0aWdlLCBoYXZlIGFuIGluY3JlYXNlZCBuZXR3b3JrIHNpemUgY29tcGFyZWQgdG8gc2Nob2xhcnMgd2l0aCBsZXNzIHByZXN0aWdlLg0KDQpUaGlzIGlzIGluIGxpbmUgd2l0aCB0aGUgaWRlYSB0aGF0IGNvbGxhYm9yYXRpb24gbmV0d29ya3MgZXhoaWJpdCBhIHNjYWxlLWZyZWUgbmV0d29yay4gVGhlIHN0cnVjdHVyZSBvZiBzdWNoIG5ldHdvcmtzIGlzIGNoYXJhY3RlcmlzZWQgYnkgYSBwb3dlci1sYXcgZGlzdHJpYnV0aW9uLCB3aGVyZSBhIGZldyBub2RlcyBkb21pbmF0ZSB0aGUgbmV0d29yaywgY3JlYXRpbmcgaHVicyAocmVmLikuIElmIHRoYXQgaXMgdGhlIGNhc2UsIHRoaXMgd291bGQgbWVhbiB0aGF0IGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaW4gc2NpZW5jZSB3b3VsZCBiZSBjZW50ZXJlZCBhcm91bmQgdGhvc2Ugc2Nob2xhcnMgd2l0aCB0aGUgaGlnaGVzdCBhbW91bnQgb2YgcHJlc3RpZ2UsIHRoaXMgd2F5IGlsbHVzdHJhdGluZyBhICdNYXR0aGV3IGVmZmVjdCcuIEZvciB0aGlzIHJlYXNvbiwgSSBwcm9wb3NlIHRoZSBmb2xsb3dpbmcgcmVzZWFyY2ggcXVlc3Rpb246DQoNCjEuICAqVG8gd2hhdCBleHRlbnQgYXJlIGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaW4gRHV0Y2ggc29jaW9sb2d5IGRlcGFydG1lbnRzIGNlbnRlcmVkIGFyb3VuZCBzY2hvbGFycyB3aXRoIGhpZ2ggcHJlc3RpZ2U/Kg0KDQpGdXJ0aGVybW9yZSwgJ01hdHRoZXcgZWZmZWN0cycgaW4gc2NpZW5jZSBoYXZlIGJlZW4gZm91bmQgaW4gbXVsdGlwbGUgYXNwZWN0cyBvZiB0aGUgc2NpZW50aWZpYyBkb21haW4gc3VjaCBhcyBpbnN0aXR1dGlvbmFsIHByZXN0aWdlIFtAbWVkb2ZmMjAwNl0sIGZ1bmRpbmcgW0Bib2wyMDE4XSwgYW5kIGNpdGF0aW9ucyBbQHdhbmcyMDE0XS4gQWRkaXRpb25hbGx5LCBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBtZWNoYW5pc21zIGluIHRoZSBncm93dGggb2YgY29sbGFib3JhdGlvbiBuZXR3b3JrcyBoYXMgYmVlbiBmb3VuZCBpbiBwcmV2aW91cyByZXNlYXJjaCBbQGJhcmFiYXNpMjAwMjsgQHBlcmMyMDEwXSwgaG93ZXZlciBldmlkZW5jZSBjb25jZXJuaW5nIHByZWZlcmVudGlhbCBhdHRhY2htZW50IGFzIHRoZSBkcml2aW5nIG1lY2hhbmlzbSBvZiBjby1hdXRob3JzaGlwIGlzIG1peGVkIFtAZmVybGlnb2oyMDE1XS4gRnVydGhlcm1vcmUsIGxpdHRsZSBpcyBrbm93biBhYm91dCB0aGUgaW1wbGljYXRpb25zIG9mIHRoZSDigJhNYXR0aGV3IGVmZmVjdOKAmSBpbiBjcmVhdGluZyBjby1hdXRob3JzaGlwIHRpZXMgY29uc2lkZXJpbmcgdGhlIHByZXN0aWdlIG9mIGEgc2Nob2xhciByYXRoZXIgdGhhbiBvbmx5IGxvb2tpbmcgYXQgdGhlIHJvbGUgb2YgYWxyZWFkeSBleGlzdGluZyBjby1hdXRob3JzaGlwIHRpZXMuIFRoaXMgd2F5IGl0IGlzIHBvc3NpYmxlIHRvIGRpc2VudGFuZ2xlIHdoZXRoZXIgaXQgaXMgdGhlIGV4aXN0aW5nIGNvbGxhYm9yYXRpb24gbmV0d29yayBvciB0aGUgZWdvLWZvY3VzZWQgcHJlc3RpZ2Ugb2YgYSBzY2llbnRpc3QgdGhhdCBzaGFwZXMgY28tYXV0aG9yc2hpcCB0aWVzIGluIGZ1dHVyZSBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzLiBFcmdvLCB0aGlzIHN0dWR5IHdpbGwgbG9vayBpbnRvIHRoaXMgcGhlbm9tZW5vbiBieSBmb2N1c2luZyBvbiBob3cgdGhlIHByZXN0aWdlIChlLmcuIGgtaW5kZXgpIGFuZCB0aGUgbnVtYmVyIG9mIGNvLWF1dGhvcnNoaXAgdGllcyBvZiBhIHNjaWVudGlzdCBhdCBvbmUgcG9pbnQgYWNjdW11bGF0ZXMgaW50byBtb3JlIGNvLWF1dGhvcnNoaXAgdGllcyBvbiBhIGxhdGVyIHRpbWVwb2ludC4gSSB0aGVyZWZvcmUgcHJvcG9zZSB0aGUgZm9sbG93aW5nIHR3byByZXNlYXJjaCBxdWVzdGlvbnM6DQoNCjIuICAqVG8gd2hhdCBleHRlbnQgZG9lcyBhbiBhdXRob3LigJlzIG51bWJlciBvZiBjby1hdXRob3JzaGlwIHRpZXMgYXQgVDEgaW1wYWN0IHRoZSBpbmNyZWFzZSBpbiBjby0gYXV0aG9yc2hpcCB0aWVzIGF0IFQyPyoNCjMuICAqVG8gd2hhdCBleHRlbnQgZG9lcyBhbiBhdXRob3LigJlzIGNpdGF0aW9uIHNjb3JlIGF0IFQxIGltcGFjdCB0aGUgaW5jcmVhc2UgaW4gaW4gY28tYXV0aG9yc2hpcCB0aWVzIGF0IFQyPyoNCg0KIyMgUmVmZXJlbmNlcw0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkludHJvZHVjdGlvbiINCmF1dGhvcjogIktvZW4gTHVjYXMiDQpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQpgYGB7PWh0bWx9DQo8c3R5bGU+DQpib2R5IHsNCnRleHQtYWxpZ246IGp1c3RpZnl9DQo8L3N0eWxlPg0KYGBgDQpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShmb3JtYXRSKQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KDQoNCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9DQpgYGANCg0KIyBJbnRyb2R1Y3Rpb24NCg0KSXQgaGFzIG9mdGVuIGJlZW4gYXJndWVkIHRoYXQgc2NpZW50aWZpYyBhY2hpZXZlbWVudCBleGhpYml0cyBhIOKAmE1hdHRoZXcgZWZmZWN04oCZLCBtZWFuaW5nIHRoYXQgcHJldmlvdXMgc3VjY2VzcyBpcyBhbiBpbmRpY2F0aW9uIG9mIGxhdGVyIHN1Y2Nlc3MsIGZ1cnRoZXJpbmcgdGhlIGluY3JlYXNlIGluIGRpc3RpbmN0aW9uIFtAYm9sMjAxOF0uIEZpcnN0IGludHJvZHVjZWQgYnkgTWVydG9uICgxOTY4KSwgdGhlIOKAmE1hdHRoZXcgZWZmZWN04oCZIGNhbiB0aGVyZWZvcmUgYmUgc2VlbiBhcyBhIHNlbGYtcmVpbmZvcmNpbmcgbWVjaGFuaXNtIHR1cm5pbmcgcGFzdCBzdWNjZXNzIGludG8gZnV0dXJlIHN1Y2Nlc3MuIEZvciBpbnN0YW5jZSwgaWYgb25seSBvbmUgb2YgdHdvIGVxdWFsbHkgdGFsZW50ZWQgeW91bmcgc2Nob2xhcnMgYXV0aG9yZWQgYSBzdWNjZXNzZnVsIHB1YmxpY2F0aW9uLCB0aGlzIHNjaG9sYXIgaXMgcHJlZGljdGVkIHRvIGhhdmUgYSBtb3JlIHN1Y2Nlc3NmdWwgY2FyZWVyLiBUbyBjbGFyaWZ5LCBhIHN1Y2Nlc3NmdWwgc2Nob2xhciBjYW4gb2Z0ZW4gYWNjdW11bGF0ZSBtb3JlIOKAmGNyZWRpdOKAmSBvdmVyIHRpbWUgdGhhbiB1bmtub3duIHJlc2VhcmNoZXJzLCBldmVuIGlmIHRoZWlyIHdvcmsgaXMgb2Ygc2ltaWxhciBxdWFsaXR5LiBUaGlzIG1lY2hhbmlzbSwgb2Z0ZW4gc3lub255bW91c2x5IGNhbGxlZCBjdW11bGF0aXZlIGFkdmFudGFnZSBbQGJhcmFiYXNpMjAwMjsgQHBlcmMyMDEwXSwgaXMgY29uc2VxdWVudGx5IGNhdXNpbmcgaW5lcXVhbGl0eSBpbiB0aGUgc3VjY2VzcyBvZiBhY2FkZW1pY3MgYXMgaXQgYmFzaWNhbGx5IGNvbWVzIGRvd24gdG8g4oCYd2lubmVyIHRha2VzIGFsbOKAmSBbQGRpcHJldGUyMDA2XS4gQXMgYXJndWVkIGJ5IE1lcnRvbiAoMTk2OCksIHNjaWVudGlmaWMgY29udHJpYnV0aW9uIGlzIG1vcmUgdmlzaWJsZSBmb3IgYSBjb21tdW5pdHkgd2hlbiBpbnRyb2R1Y2VkIGJ5IGhpZ2gtcmFua2luZyBzY2llbnRpc3QuIFRodXMsIHdoZW4gZWFybHkgc3VjY2VzcyBpcyBhIHByZWRpY3RvciBmb3IgZnV0dXJlIHN1Y2Nlc3MsIGluZXF1YWxpdHkgYmV0d2VlbiB0aGVzZSBzY2hvbGFycyBjb250aW51ZXMgdG8gZ3Jvdy4NCg0KVGhlIOKAmE1hdHRoZXcgZWZmZWN04oCZIGlzIG9mdGVuIGV4cGxhaW5lZCB0aHJvdWdoIHByZWZlcmVudGlhbCBhdHRhY2htZW50LiBJbiB0aGUgY2FzZSBvZiBjby1hdXRob3JzaGlwIHRoaXMgbWVhbnMgdGhhdCB0aG9zZSB3aG8gd2VyZSBzdWNjZXNzZnVsIGJlZm9yZSBhcmUgYSBwcmVmZXJlbnRpYWwgY29sbGFib3JhdGlvbiBwYXJ0bmVyIHRvIHRob3NlIHdpdGhvdXQgdGhvc2UgZWFybHkgc3VjY2Vzc2VzLiBBcyBhIHJlc3VsdCwgcHJldmlvdXNseSBzdWNjZXNzZnVsIHNjaG9sYXJzIGF0dHJhY3QgbW9yZSBvcHBvcnR1bml0aWVzIGZvciBtb3JlIHN1Y2Nlc3MgaW4gdGhlIGZ1dHVyZSB3aGlsZSB1bnN1Y2Nlc3NmdWwgc2Nob2xhcnMgYXR0cmFjdCBsZXNzIHJlc291cmNlcywgZGVjcmVhc2luZyB0aGVpciBjaGFuY2VzIG9mIGJlY29taW5nIHN1Y2Nlc3NmdWwgaW4gdGhlIGZ1dHVyZS4gV2UgY2FuIHRodXMgcHJlc3VtZSB0aGF0IGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaG9sZCBhIHByZWZlcmVuY2UgdG8gY29ubmVjdCB3aXRoIHRob3NlIHdobyBhcmUgYWxyZWFkeSB3ZWxsLWNvbm5lY3RlZC4gSGVuY2UsIGl0IGNhbiBleHBlY3RlZCB0aGF0IGhpZ2hseSB2aXNpYmxlL2FscmVhZHkgZXN0YWJsaXNoZWQgcmVzZWFyY2hlcnMgaGF2ZSBtb3JlIG9wcG9ydHVuaXRpZXMgb2YgY28tYXV0aG9yc2hpcCBbQGhhbmNlYW4yMDE2XS4gQ29uc2VxdWVudGx5LCBpdCBjYW4gYmUgYXJndWVkIHRoYXQgc2Nob2xhcnMgd2hvIGhhdmUgaGlnaGVyIHByZXN0aWdlLCBoYXZlIGFuIGluY3JlYXNlZCBuZXR3b3JrIHNpemUgY29tcGFyZWQgdG8gc2Nob2xhcnMgd2l0aCBsZXNzIHByZXN0aWdlLg0KDQpUaGlzIGlzIGluIGxpbmUgd2l0aCB0aGUgaWRlYSB0aGF0IGNvbGxhYm9yYXRpb24gbmV0d29ya3MgZXhoaWJpdCBhIHNjYWxlLWZyZWUgbmV0d29yay4gVGhlIHN0cnVjdHVyZSBvZiBzdWNoIG5ldHdvcmtzIGlzIGNoYXJhY3RlcmlzZWQgYnkgYSBwb3dlci1sYXcgZGlzdHJpYnV0aW9uLCB3aGVyZSBhIGZldyBub2RlcyBkb21pbmF0ZSB0aGUgbmV0d29yaywgY3JlYXRpbmcgaHVicyAocmVmLikuIElmIHRoYXQgaXMgdGhlIGNhc2UsIHRoaXMgd291bGQgbWVhbiB0aGF0IGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaW4gc2NpZW5jZSB3b3VsZCBiZSBjZW50ZXJlZCBhcm91bmQgdGhvc2Ugc2Nob2xhcnMgd2l0aCB0aGUgaGlnaGVzdCBhbW91bnQgb2YgcHJlc3RpZ2UsIHRoaXMgd2F5IGlsbHVzdHJhdGluZyBhICdNYXR0aGV3IGVmZmVjdCcuIEZvciB0aGlzIHJlYXNvbiwgSSBwcm9wb3NlIHRoZSBmb2xsb3dpbmcgcmVzZWFyY2ggcXVlc3Rpb246DQoNCjEuICAqVG8gd2hhdCBleHRlbnQgYXJlIGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaW4gRHV0Y2ggc29jaW9sb2d5IGRlcGFydG1lbnRzIGNlbnRlcmVkIGFyb3VuZCBzY2hvbGFycyB3aXRoIGhpZ2ggcHJlc3RpZ2U/Kg0KDQpGdXJ0aGVybW9yZSwgJ01hdHRoZXcgZWZmZWN0cycgaW4gc2NpZW5jZSBoYXZlIGJlZW4gZm91bmQgaW4gbXVsdGlwbGUgYXNwZWN0cyBvZiB0aGUgc2NpZW50aWZpYyBkb21haW4gc3VjaCBhcyBpbnN0aXR1dGlvbmFsIHByZXN0aWdlIFtAbWVkb2ZmMjAwNl0sIGZ1bmRpbmcgW0Bib2wyMDE4XSwgYW5kIGNpdGF0aW9ucyBbQHdhbmcyMDE0XS4gQWRkaXRpb25hbGx5LCBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBtZWNoYW5pc21zIGluIHRoZSBncm93dGggb2YgY29sbGFib3JhdGlvbiBuZXR3b3JrcyBoYXMgYmVlbiBmb3VuZCBpbiBwcmV2aW91cyByZXNlYXJjaCBbQGJhcmFiYXNpMjAwMjsgQHBlcmMyMDEwXSwgaG93ZXZlciBldmlkZW5jZSBjb25jZXJuaW5nIHByZWZlcmVudGlhbCBhdHRhY2htZW50IGFzIHRoZSBkcml2aW5nIG1lY2hhbmlzbSBvZiBjby1hdXRob3JzaGlwIGlzIG1peGVkIFtAZmVybGlnb2oyMDE1XS4gRnVydGhlcm1vcmUsIGxpdHRsZSBpcyBrbm93biBhYm91dCB0aGUgaW1wbGljYXRpb25zIG9mIHRoZSDigJhNYXR0aGV3IGVmZmVjdOKAmSBpbiBjcmVhdGluZyBjby1hdXRob3JzaGlwIHRpZXMgY29uc2lkZXJpbmcgdGhlIHByZXN0aWdlIG9mIGEgc2Nob2xhciByYXRoZXIgdGhhbiBvbmx5IGxvb2tpbmcgYXQgdGhlIHJvbGUgb2YgYWxyZWFkeSBleGlzdGluZyBjby1hdXRob3JzaGlwIHRpZXMuIFRoaXMgd2F5IGl0IGlzIHBvc3NpYmxlIHRvIGRpc2VudGFuZ2xlIHdoZXRoZXIgaXQgaXMgdGhlIGV4aXN0aW5nIGNvbGxhYm9yYXRpb24gbmV0d29yayBvciB0aGUgZWdvLWZvY3VzZWQgcHJlc3RpZ2Ugb2YgYSBzY2llbnRpc3QgdGhhdCBzaGFwZXMgY28tYXV0aG9yc2hpcCB0aWVzIGluIGZ1dHVyZSBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzLiBFcmdvLCB0aGlzIHN0dWR5IHdpbGwgbG9vayBpbnRvIHRoaXMgcGhlbm9tZW5vbiBieSBmb2N1c2luZyBvbiBob3cgdGhlIHByZXN0aWdlIChlLmcuIGgtaW5kZXgpIGFuZCB0aGUgbnVtYmVyIG9mIGNvLWF1dGhvcnNoaXAgdGllcyBvZiBhIHNjaWVudGlzdCBhdCBvbmUgcG9pbnQgYWNjdW11bGF0ZXMgaW50byBtb3JlIGNvLWF1dGhvcnNoaXAgdGllcyBvbiBhIGxhdGVyIHRpbWVwb2ludC4gSSB0aGVyZWZvcmUgcHJvcG9zZSB0aGUgZm9sbG93aW5nIHR3byByZXNlYXJjaCBxdWVzdGlvbnM6DQoNCjIuICAqVG8gd2hhdCBleHRlbnQgZG9lcyBhbiBhdXRob3LigJlzIG51bWJlciBvZiBjby1hdXRob3JzaGlwIHRpZXMgYXQgVDEgaW1wYWN0IHRoZSBpbmNyZWFzZSBpbiBjby0gYXV0aG9yc2hpcCB0aWVzIGF0IFQyPyoNCjMuICAqVG8gd2hhdCBleHRlbnQgZG9lcyBhbiBhdXRob3LigJlzIGNpdGF0aW9uIHNjb3JlIGF0IFQxIGltcGFjdCB0aGUgaW5jcmVhc2UgaW4gaW4gY28tYXV0aG9yc2hpcCB0aWVzIGF0IFQyPyoNCg0KIyMgUmVmZXJlbmNlcw0K</div>
 
 
 </div>
@@ -550,7 +621,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("1-Introduction-concept.Rmd");
+  window.initializeSourceEmbed("1-introduction-concept.Rmd");
   window.initializeCodeFolding("hide" === "show");
 });
 </script>
