@@ -46,7 +46,7 @@ But please note, we are not here to make a beautiful website, our intention is j
 
 Last compiled on `r format(Sys.time(), '%B, %Y')`
 
-*Describe lab journal here.*
+This lab journal provides an overview of the work I have done for the course Social Networks. In addition the final project can be found here.
 
 <br>
 
@@ -57,12 +57,10 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 Everyone can fork this repository. Use this example to journal your lab work and assignments.
 
 We, Jochem Tolsma and Bas Hofstra, use this repository for our Social Network Analysis For Social Scientists course [@SNASS]. <!--- this is a reference, stored in references.bib. It will be automatically added at the bottom of the page --->
-
-TEST TEST TEST
 :::
 
 ::: {.column width="50%"}
-![](images/cover.jpg)
+![](images/socialnetwork.jpg)
 :::
 :::
 

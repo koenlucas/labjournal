@@ -6,9 +6,9 @@ Filename is ./results/first_model.txt.
 
 This file contains primary output for SIENA project <<./results/first_model>>.
 
-Date and time: 15/10/2024 21:23:16 
+Date and time: 01/11/2024 19:34:30 
 
-RSiena version 1.4.7 (20 02 2024)
+RSiena version 1.3.14 (07 10 2022)
 
 
 @1
@@ -164,7 +164,7 @@ h_index         0 	( 0.0 %)
 Information about covariates:
               minimum  maximum	  mean  centered 
 career_age      0.0    49.0     15.560    Y 
-h_index         0.0   139.0     13.359    Y 
+h_index         0.0   139.0     13.308    Y 
 The mean values are subtracted from the covariates.
 
 
@@ -176,7 +176,7 @@ For the similarity variable calculated from each actor covariate,
 the mean is subtracted.
 These means are:
 Similarity career_age               :       0.7194 
-Similarity h_index                  :       0.8897 
+Similarity h_index                  :       0.8890 
 
 
 

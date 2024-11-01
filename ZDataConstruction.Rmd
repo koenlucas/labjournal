@@ -1,0 +1,350 @@
+---
+title: "Construction Data"
+author: "Koen Lucas"
+date: "2024-10-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+rm(list = ls())
+
+
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+    ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+    ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+    if (is.null(file))
+        file = deparse(substitute(x))
+    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+    totalname <- paste(location, file, "_", datename, ".rda", sep = "")
+    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload <- function(filename) {
+    load(filename)
+    get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+    knitr::kable(x, digits = 2, "html", ...) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+        kableExtra::scroll_box(width = "100%", height = "300px")
+}
+
+packages <- c("tidyverse", "scholar", "openalexR", "rvest", "jsonlite", "igraph")
+fpackage.check(packages)
+```
+
+```{r load data, include=FALSE}
+
+scholars <- fload("./data/scholars_20240924.rda")
+
+```
+
+
+```{r function, include = FALSE}
+fcolnet <- function(data = scholars, university = "RU", discipline = "sociology", waves = list(c(2015,
+    2018), c(2019, 2023)), type = c("first")) {
+
+    # step 1
+    demographics <- do.call(rbind.data.frame, data$demographics)
+    demographics <- demographics %>%
+        mutate(Universiteit1.22 = replace(Universiteit1.22, is.na(Universiteit1.22), ""), Universiteit2.22 = replace(Universiteit2.22,
+            is.na(Universiteit2.22), ""), Universiteit1.24 = replace(Universiteit1.24, is.na(Universiteit1.24),
+            ""), Universiteit2.24 = replace(Universiteit2.24, is.na(Universiteit2.24), ""), discipline.22 = replace(discipline.22,
+            is.na(discipline.22), ""), discipline.24 = replace(discipline.24, is.na(discipline.24), ""))
+
+    sample <- which((demographics$Universiteit1.22 %in% university | demographics$Universiteit2.22 %in%
+        university | demographics$Universiteit1.24 %in% university | demographics$Universiteit2.24 %in%
+        university) & (demographics$discipline.22 %in% discipline | demographics$discipline.24 %in% discipline))
+
+    demographics_soc <- demographics[sample, ]
+    scholars_sel <- lapply(scholars, "[", sample)
+
+    # step 2
+    ids <- demographics_soc$au_id
+    nwaves <- length(waves)
+    nets <- array(0, dim = c(nwaves, length(ids), length(ids)), dimnames = list(wave = 1:nwaves, ids,
+        ids))
+    dimnames(nets)
+
+    # step 3
+    df_works <- tibble(works_id = unlist(lapply(scholars_sel$work, function(l) l$id)), works_author = unlist(lapply(scholars_sel$work,
+        function(l) l$author), recursive = FALSE), works_year = unlist(lapply(scholars_sel$work, function(l) l$publication_year),
+        recursive = FALSE))
+
+    df_works <- df_works[!duplicated(df_works), ]
+
+    # step 4
+    if (type == "first") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- df_works_w$works_author[i][[1]]$au_id[1]
+                alters <- df_works_w$works_author[i][[1]]$au_id[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "last") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                ego <- rev(df_works_w$works_author[i][[1]]$au_id)[1]
+                alters <- rev(df_works_w$works_author[i][[1]]$au_id)[-1]
+                if (sum(ids %in% ego) > 0 & sum(ids %in% alters) > 0) {
+                  nets[j, which(ids %in% ego), which(ids %in% alters)] <- 1
+                }
+            }
+        }
+    }
+
+    if (type == "all") {
+        for (j in 1:nwaves) {
+            df_works_w <- df_works[df_works$works_year >= waves[[j]][1] & df_works$works_year <= waves[[j]][2],
+                ]
+            for (i in 1:nrow(df_works_w)) {
+                egos <- df_works_w$works_author[i][[1]]$au_id
+                if (sum(ids %in% egos) > 0) {
+                  nets[j, which(ids %in% egos), which(ids %in% egos)] <- 1
+                }
+            }
+        }
+    }
+    output <- list()
+    output$data <- scholars_sel
+    output$nets <- nets
+    return(output)
+}
+
+
+```
+
+# Construct dataset
+
+## use function
+
+```{r creating dataset, include = FALSE}
+
+data <- fcolnet(data = scholars,
+                university = c("RU", "UU", "RUG", "UvA"),
+                discipline = "sociology",
+                waves = list(c(2015, 2019), c(2020, 2024)),
+                type = c("first"))
+
+```
+
+## seperate dataframes
+```{r seperate frames}
+
+df <- data$data
+
+df_ego <- do.call(rbind.data.frame, df$demographics)
+df_works <- do.call(rbind.data.frame, df$works)
+
+
+```
+
+
+## Construct variables
+
+### career age
+```{r career age, warning=FALSE}
+# ### commented for build website reasons ####
+# df_career_age <- df_works %>%
+#   unnest(author) %>% # unnesting the tibble from the tibble
+#   filter(au_id %in% df_ego$au_id == TRUE) %>% # authors in df_works should match authors in df_ego
+#   group_by(au_id) %>%
+#   mutate(min_year_pub = min(publication_year, na.rm = TRUE), # initial calculation of minimum year
+#          count_pub = n()) %>%  # count number of publications
+#   mutate(first_year_pub = ifelse(count_pub == 1, min_year_pub, # if number of publications is 1, score is min_year_pub
+#                                  {
+#                                    filter_year = publication_year[publication_year != min_year_pub] # filter minimum year
+#                                    mean_pubyear = mean(filter_year, na.rm = TRUE) # calculate mean without min score
+#                                    valid_year = min(filter_year[filter_year >= (mean_pubyear - 25)], na.rm = TRUE) # minimum year -> range mean-25
+#                                    valid_year # if number of publications is not 1, than score minimum year with first year removed within range mean-25
+#                                  })) %>%
+# 
+#   # this line corrects for the warning of returning infinites that for some reason were not filtered through the first ifelse command
+#   mutate(first_year_pub = ifelse(is.infinite(first_year_pub), min_year_pub, first_year_pub)) %>% #adjusting infinite scores to minimum year
+# 
+#   select(au_id, first_year_pub) %>% # selecting variables
+#   distinct(au_id, first_year_pub, .keep_all = TRUE) # making sure only distinct authors are in data frame
+# 
+# df_career_age <- df_career_age %>% mutate(career_age = 2024 - first_year_pub)
+# 
+# # merge dataframes
+# df_ego <- merge(df_ego, df_career_age, by = "au_id", all.x = TRUE)
+
+
+```
+
+
+### h-index
+```{r H index}
+
+# Add h-index and i10-index columns to df_ego
+df_ego <- df_ego %>%
+  mutate(h_index = NA_real_, i10_index = NA_real_)
+
+# Get H-index and i10-index 
+get_openalex_metrics <- function(openalex_id) {
+  url <- paste0("https://api.openalex.org/authors/", openalex_id)
+  author_data <- tryCatch({
+    jsonlite::fromJSON(url)
+  }, error = function(e) {
+    message(paste("Error fetching data for OpenAlex ID:", openalex_id))
+    return(NULL)
+  })
+  
+  if (!is.null(author_data)) {
+    h_index <- author_data$summary_stats$h_index
+    i10_index <- author_data$summary_stats$i10_index
+    works_count <- author_data$works_count
+    cited_by_count <- author_data$cited_by_count
+    return(list(h_index = h_index, i10_index = i10_index, works_count = works_count, cited_by_count = cited_by_count))
+  } else {
+    return(list(h_index = NA, i10_index = NA, works_count = NA, cited_by_count = NA))
+  }
+}
+
+# Loop for each scholar 
+for (i in 1:nrow(df_ego)) {
+  openalex_id <- df_ego$au_id[i]  # assuming au_id is the OpenAlex ID in df_ego
+  metrics <- get_openalex_metrics(openalex_id)
+  df_ego$h_index[i] <- metrics$h_index
+  df_ego$i10_index[i] <- metrics$i10_index
+  df_ego$works_count[i] <- metrics$works_count
+  df_ego$cited_by_count[i] <- metrics$cited_by_count
+}
+
+
+# create 0-4 scale for h-index
+df_ego %>% count(h_index)
+df_ego <- df_ego %>% mutate(h_index_cat = case_when(h_index >= 0 & h_index <= 10 ~ 0,
+                                                    h_index >= 11 & h_index <= 20 ~ 1,
+                                                    h_index >= 21 & h_index <= 50 ~ 2,
+                                                    h_index >= 51 ~ 3))
+df_ego %>% count(h_index_cat)
+
+
+# df_ego <-  df_ego %>% mutate(h_index_norm = h_index/career_age)
+# df_ego <- df_ego %>% mutate(h_index_norm = ifelse(is.nan(h_index_norm) | is.infinite(h_index_norm), 0, h_index_norm ))
+
+```
+
+
+## Gender
+
+### Extract first names
+```{r}
+x <- data.frame(Naam = df_ego$Naam)
+
+first_name <- sapply(strsplit(x$Naam, " "), `[`, 1) # This code should work as a way to extract first names from the ego characteristics dataset
+
+
+df_names <- data.frame(x,first_name, male = NA, female = NA) # seem to have worked
+
+head(df_names)
+```
+
+
+```{r}
+# ## commmented for build website reasons ####
+# ## gender
+# 
+# i <- 1
+# df_names$first_name[i]
+# 
+# 
+# gender_scraper.NV <- function(names = "names element", web_page = "https://nvb.meertens.knaw.nl/naam/is/"){
+# 
+# 
+#   names$first_name <- sapply(strsplit(names$Naam, " "), `[`, 1) # This code should work as a way to extract first names from the ego characteristics dataset
+#   names$male <- NA
+#   names$female <- NA
+# 
+#   for(i in 1:nrow(names)){
+# 
+#     # print(names$first_name[i])
+# 
+#     web_page <- read_html(paste0("https://nvb.meertens.knaw.nl/naam/is/", names$first_name[i]))
+# 
+#     table <- web_page %>%
+#       rvest::html_elements("body") %>%
+#       rvest::html_elements("table") %>%
+#       rvest::html_table()
+# 
+#     if(length(table) == 0){
+# 
+#       print(length(table))
+# 
+#       names$male[i] <- NA
+#       names$female[i] <- NA
+# 
+#     } else{
+# 
+#       # print(table)
+#       # print(table[[1]][[2,3]]) # Check if values for male are coherent and accurate
+#       # print(table[[1]][[6,3]]) # Check if values for female are coherent and accurate
+# 
+#       names$male[i] <- as.numeric(ifelse(table[[1]][[2,3]] == "--", 0, table[[1]][[2,3]])) # Make sure non-occurences are not registered as "--"
+#       names$female[i] <- as.numeric(ifelse(table[[1]][[6,3]] == "--", 0, table[[1]][[6,3]])) # Make sure non-occurences are not registered as "--"
+# 
+# 
+#     }
+# 
+#   } # end forloop
+# 
+#   names <- names %>% mutate(perc_female = case_when(is.na(female == TRUE) & is.na(male) == TRUE ~ NA,
+#                                                     is.na(female) == TRUE ~ 0,
+#                                                     is.na(male == TRUE) ~ 1,
+#                                                     .default = round((female/(male + female)),2))) %>%
+#     select(!c(male,female, first_name))
+# 
+#   return(names)
+# 
+# 
+# } # end function
+# 
+# # ?mutate()
+# # ?case_when
+# df_ego <- gender_scraper.NV(names = df_ego, web_page = "https://nvb.meertens.knaw.nl/naam/is/")
+# 
+# df_ego <- df_ego %>% mutate(female = case_when(perc_female >= 0.51 ~ 1,
+#                                                perc_female <= 0.50 ~ 0,
+#                                                TRUE ~ NA))
+
+```
+
+
+# save dataset
+```{r}
+# save full data file
+save(data, file = "data/full_data.Rdata")
+
+# save df_ego
+save(df_ego, file = "data/df_ego.Rdata")
+
+# save df_works
+save(df_works, file = "data/df_works.Rdata")
+
+```
+

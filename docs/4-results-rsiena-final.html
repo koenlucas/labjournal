@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Koen Lucas" />
+
+<meta name="date" content="2024-11-01" />
+
+<title>Results - RSiena</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="Week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
+    </li>
+    <li>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
+    </li>
+    <li class="dropdown-header">Week 7 - RI</li>
+    <li>
+      <a href="Week7-RSiena.html"></a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Concept
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-Introduction-concept.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-concept.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-concept.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-concept.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-concept.html">Results - RSiena</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Final
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-introduction-final.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-final.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-final.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-final.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-final.html">Results - RSiena</a>
+    </li>
+    <li>
+      <a href="4-results-GOF.html">Results - Goodness of fit</a>
+    </li>
+    <li>
+      <a href="5-conclusion.html">Conclusion</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Results - RSiena</h1>
+<h4 class="author">Koen Lucas</h4>
+<h4 class="date">2024-11-01</h4>
+
+</div>
+
+
+<div id="results---rsiena" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Results - RSiena</h1>
+<style>
+body {
+text-align: justify}
+</style>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div id="jaccard-index" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Jaccard-index</h2>
+<p>The Jaccard-index gives an indication about the stability and change
+in a network over time. The Jaccard-index for these collaboration
+networks is 0,168. This is generally considered low <span
+class="citation">(Ripley et al. 2011)</span>, meaning that there is not
+a lot of change in the network between wave 1 and wave 2.</p>
+</div>
+<div id="model-0---null-model" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Model 0 - Null
+model</h2>
+<pre class="r test"><code>myeff0 &lt;- getEffects(data_siena)</code></pre>
+<pre class="r test"><code>myAlgorithm0 &lt;- sienaAlgorithmCreate(projname = &quot;null_model&quot;)
+(ansM0 &lt;- siena07(myAlgorithm0, data = data_siena, effects = myeff0, returnDeps = TRUE))
+(ansM0 &lt;- siena07(myAlgorithm0, data = data_siena, effects = myeff0, returnDeps = TRUE, prevAns = ansM0))</code></pre>
+<pre class="test2"><code>#&gt; Estimates, standard errors and convergence t-ratios
+#&gt; 
+#&gt;                               Estimate   Standard   Convergence 
+#&gt;                                            Error      t-ratio   
+#&gt; 
+#&gt; Rate parameters: 
+#&gt;   0       Rate parameter       3.3096  ( 0.3796   )             
+#&gt; 
+#&gt; Other parameters: 
+#&gt;   1. eval outdegree (density) -3.1535  ( 0.0731   )   0.0435    
+#&gt;   2. eval reciprocity          2.8678  ( 0.2149   )   0.0712    
+#&gt; 
+#&gt; Overall maximum convergence ratio:    0.0724 
+#&gt; 
+#&gt; 
+#&gt; Total of 1812 iteration steps.
+#&gt; 
+#&gt; Covariance matrix of estimates (correlations below diagonal)
+#&gt; 
+#&gt;        0.005       -0.005
+#&gt;       -0.326        0.046
+#&gt; 
+#&gt; Derivative matrix of expected statistics X by parameters:
+#&gt; 
+#&gt;      170.949       36.101
+#&gt;       28.417       42.819
+#&gt; 
+#&gt; Covariance matrix of X (correlations below diagonal):
+#&gt; 
+#&gt;      143.939       46.519
+#&gt;        0.445       75.859</code></pre>
+<p>In the null-model only a rate parameter and standard network effects
+are estimated. First, the outdegree (density) effect estimates to what
+extent nodes tend to form outgoing connections. It can thus be seen as a
+baseline for the likelihood of any given node creating an outgoing tie.
+In this study these outgoing ties refer to the instigation of a
+co-publication. The effect is significantly negative (b = -3,1535, SE =
+0,0731), meaning that the general tendency to for instigating
+collaboration is low. Furthermore, the estimate for reciprocity shows if
+there is a tendency for directed relationships to be mutual. In this
+study this would refer to if a node instigates a collaboration with an
+alter, this alter would likely also instigate a collaboration with this
+node. This effect is significant and positive (b = 2,8678, SE = 0,2149),
+indicating that this is the case.</p>
+</div>
+<div id="model-1---only-structural-effects" class="section level2"
+number="1.3">
+<h2><span class="header-section-number">1.3</span> Model 1 - only
+structural effects</h2>
+<pre class="r test"><code>myAlgorithm1 &lt;- sienaAlgorithmCreate(projname = &quot;first_model&quot;)
+(ansM1 &lt;- siena07(myAlgorithm1, data = data_siena, effects = myeff1, returnDeps = TRUE))
+(ansM1 &lt;- siena07(myAlgorithm1, data = data_siena, effects = myeff1, returnDeps = TRUE, prevAns = ansM1))</code></pre>
+<pre class="test2"><code>#&gt; Estimates, standard errors and convergence t-ratios
+#&gt; 
+#&gt;                                        Estimate   Standard   Convergence 
+#&gt;                                                     Error      t-ratio   
+#&gt; 
+#&gt; Rate parameters: 
+#&gt;   0       Rate parameter                4.5714  ( 0.5703   )             
+#&gt; 
+#&gt; Other parameters: 
+#&gt;   1. eval outdegree (density)          -3.1185  ( 0.5292   )    0.0166   
+#&gt;   2. eval reciprocity                   3.1213  ( 0.3793   )   -0.0116   
+#&gt;   3. eval transitive triplets           1.3440  ( 0.2139   )    0.0736   
+#&gt;   4. eval indegree - popularity (sqrt)  0.9338  ( 0.1169   )    0.0631   
+#&gt;   5. eval outdegree - activity         -0.1676  ( 0.0785   )    0.0302   
+#&gt;   6. eval indegree - activity          -0.4920  ( 0.1505   )    0.0553   
+#&gt;   7. eval network-isolate               4.2535  ( 0.6766   )    0.0017   
+#&gt; 
+#&gt; Overall maximum convergence ratio:    0.1405 
+#&gt; 
+#&gt; 
+#&gt; Total of 2021 iteration steps.
+#&gt; 
+#&gt; Covariance matrix of estimates (correlations below diagonal)
+#&gt; 
+#&gt;        0.280       -0.026        0.026       -0.031       -0.035       -0.035        0.313
+#&gt;       -0.132        0.144        0.021        0.020        0.001       -0.035       -0.050
+#&gt;        0.230        0.258        0.046        0.002       -0.006       -0.018        0.006
+#&gt;       -0.503        0.447        0.063        0.014        0.001       -0.003       -0.026
+#&gt;       -0.835        0.032       -0.334        0.098        0.006        0.004       -0.039
+#&gt;       -0.440       -0.615       -0.550       -0.149        0.355        0.023       -0.033
+#&gt;        0.873       -0.196        0.043       -0.334       -0.729       -0.328        0.458
+#&gt; 
+#&gt; Derivative matrix of expected statistics X by parameters:
+#&gt; 
+#&gt;      187.271       16.253       53.321      524.235      664.302      411.822      -51.896
+#&gt;       31.446       45.452       56.322       65.675      125.467      187.577       -1.756
+#&gt;       80.444       44.675      260.410      290.986      503.017      491.125        5.581
+#&gt;      386.765      -14.452      161.932     1729.106     1508.090      715.774      -69.826
+#&gt;      724.082      100.931      464.037     2199.485     3288.876     1941.419     -120.848
+#&gt;      278.636      129.630      413.897      924.392     1208.858     1298.734      -24.691
+#&gt;      -25.728        9.706       33.390      -44.584      -10.655       13.178       24.688
+#&gt; 
+#&gt; Covariance matrix of X (correlations below diagonal):
+#&gt; 
+#&gt;      296.282       52.726      317.086     1351.860     1240.469      855.496      -47.099
+#&gt;        0.274      124.656      257.827        3.324      313.017      609.663        6.592
+#&gt;        0.465        0.583     1568.101     1654.200     2286.220     2761.182       60.975
+#&gt;        0.788        0.003        0.419     9922.664     6096.331     3110.308      -93.305
+#&gt;        0.885        0.344        0.709        0.752     6630.010     4868.178      -29.633
+#&gt;        0.625        0.687        0.877        0.393        0.752     6319.903       28.840
+#&gt;       -0.397        0.086        0.223       -0.136       -0.053        0.053       47.507</code></pre>
+<p>In model 1, structural network effects are added. First, I added a
+parameter for indegree popularity, which indicates that those who have
+more indegrees are more popular to form a new tie with. Due to the fact
+that the degree distribution is right-skewed, and the observation that
+the network evolves in a a network with scale-free characteristics in
+wave 2, The parameter is added as squared. This means that it is
+expected that the parameter is not linear, but that this parameter is
+estimated exponentially. The more indegrees someone has, the bigger the
+effect of indegree popularity becomes. I find a positive estimate for
+this parameter and is significant (b = 0,9334, SE = 0,1169). This means
+that those with more indegrees are more likely to receive ties.
+Therefore, hypothesis 3 does not have to be rejected.</p>
+<p>Second, an effect for transitive triplets is added to this model.
+This parameter estimates how many transitive relationships are formed.
+The estimate of this parameter is positive and significant (b = 1,344,
+SE = 0,2139), meaning that there is a preference for forming transitive
+relationships. Third, both an outdegree and indegree activity parameter
+is added. This estimates whether those with more in- or outdegrees are
+more active in sending ties. I find a negative and significant effect
+for outdegree activity (b = -0,1676, SE = 0,0785), meaning that those
+with more outdegrees are less likely to send ties. Similarly, a negative
+and significant effect was found for indegree activity (b = -0,492, SE =
+0,1505), meaning that those who have more indegrees are less likely to
+send ties. Last, a network isolate parameter is added to control for the
+many isolates in the data. This parameter estimates whether isolates
+tend to stay isolates. This estimate is positive and significant (b =
+4,2535, SE = 0,6766), indicating if a node is isolate, they tend to stay
+isolate.</p>
+</div>
+<div id="model-2---include-h-index" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Model 2 - Include
+h-index</h2>
+<pre class="r test"><code>myAlgorithm2 &lt;- sienaAlgorithmCreate(projname = &quot;second_model&quot;)
+(ansM2 &lt;- siena07(myAlgorithm2, data = data_siena, effects = myeff2, returnDeps = TRUE))
+(ansM2 &lt;- siena07(myAlgorithm2, data = data_siena, effects = myeff2, returnDeps = TRUE, prevAns = ansM2))</code></pre>
+<pre class="test2"><code>#&gt; Estimates, standard errors and convergence t-ratios
+#&gt; 
+#&gt;                                        Estimate   Standard   Convergence 
+#&gt;                                                     Error      t-ratio   
+#&gt; 
+#&gt; Rate parameters: 
+#&gt;   0       Rate parameter                4.5586  ( 0.5526   )             
+#&gt; 
+#&gt; Other parameters: 
+#&gt;   1. eval outdegree (density)          -3.0712  ( 0.4924   )    0.0223   
+#&gt;   2. eval reciprocity                   3.1442  ( 0.3205   )   -0.0191   
+#&gt;   3. eval transitive triplets           1.3410  ( 0.2063   )    0.0644   
+#&gt;   4. eval indegree - popularity (sqrt)  0.8891  ( 0.0931   )    0.0892   
+#&gt;   5. eval outdegree - activity         -0.1686  ( 0.0887   )    0.0451   
+#&gt;   6. eval indegree - activity          -0.4937  ( 0.1349   )    0.0405   
+#&gt;   7. eval network-isolate               4.2568  ( 0.6214   )    0.0801   
+#&gt;   8. eval h_index alter                 0.1343  ( 0.0614   )   -0.0097   
+#&gt; 
+#&gt; Overall maximum convergence ratio:    0.1591 
+#&gt; 
+#&gt; 
+#&gt; Total of 2110 iteration steps.
+#&gt; 
+#&gt; Covariance matrix of estimates (correlations below diagonal)
+#&gt; 
+#&gt;        0.242       -0.010        0.019       -0.017       -0.039       -0.026        0.254        0.005
+#&gt;       -0.062        0.103        0.016        0.009        0.001       -0.026       -0.035       -0.001
+#&gt;        0.184        0.236        0.043       -0.001       -0.003       -0.015       -0.009        0.001
+#&gt;       -0.361        0.286       -0.043        0.009        0.001       -0.001       -0.007       -0.002
+#&gt;       -0.892        0.038       -0.190        0.061        0.008        0.003       -0.043       -0.001
+#&gt;       -0.392       -0.610       -0.526       -0.089        0.246        0.018       -0.019        0.000
+#&gt;        0.830       -0.177       -0.069       -0.115       -0.771       -0.224        0.386        0.003
+#&gt;        0.169       -0.070        0.113       -0.275       -0.120       -0.020        0.072        0.004
+#&gt; 
+#&gt; Derivative matrix of expected statistics X by parameters:
+#&gt; 
+#&gt;      160.790       15.393       40.517      437.857      581.066      324.926      -45.166       28.033
+#&gt;       33.375       48.824       45.828       67.606      128.037      178.440       -1.219        6.785
+#&gt;       66.379       42.307      240.221      253.596      430.727      435.628       10.613       21.009
+#&gt;      330.343      -21.161      146.856     1597.790     1323.799      566.150      -54.421      172.300
+#&gt;      587.426       98.040      327.712     1641.759     2735.334     1512.544      -80.628      139.998
+#&gt;      239.721      129.731      366.184      764.996     1038.031     1174.703      -18.062       56.320
+#&gt;      -22.846       11.056       24.743      -65.074       -9.908       24.708       24.641       -2.616
+#&gt;       61.803      -19.292       31.289      496.446      306.812       75.010        6.307      446.121
+#&gt; 
+#&gt; Covariance matrix of X (correlations below diagonal):
+#&gt; 
+#&gt;      262.511       52.617      300.664     1161.710     1093.002      778.094      -42.062      153.741
+#&gt;        0.295      121.345      210.361       15.977      262.817      542.632        4.923      -15.419
+#&gt;        0.493        0.507     1417.273     1651.316     2057.089     2483.794       51.530      230.533
+#&gt;        0.789        0.016        0.483     8261.864     5390.931     3149.676      -54.780     1224.274
+#&gt;        0.880        0.311        0.713        0.774     5878.374     4286.643       -9.686      791.954
+#&gt;        0.636        0.653        0.874        0.459        0.741     5698.517       40.306      378.921
+#&gt;       -0.370        0.064        0.195       -0.086       -0.018        0.076       49.213        9.929
+#&gt;        0.355       -0.052        0.229        0.503        0.386        0.188        0.053      716.148</code></pre>
+<p>In the second model, an ego-level effect is added for h-index. The
+h-index alter effect indicates that nodes are more or less likely to
+send ties to alters with a higher h-index. This effect is found to be
+positive (b = 0,1343, SE = 0,0614) which entails that nodes have a
+preference to send ties to alters with a higher h-index. This effect is
+also found to be significant. Thus, hypothesis 4 does not have to be
+rejected.</p>
+</div>
+<div id="model-3---full-model" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Model 3 - Full
+model</h2>
+<pre class="r test"><code>myAlgorithm3 &lt;- sienaAlgorithmCreate(projname = &quot;third_model&quot;)
+(ansM3 &lt;- siena07(myAlgorithm3, data = data_siena, effects = myeff3, returnDeps = TRUE))
+(ansM3 &lt;- siena07(myAlgorithm3, data = data_siena, effects = myeff3, returnDeps = TRUE, prevAns = ansM3))</code></pre>
+<pre class="test2"><code>#&gt; Estimates, standard errors and convergence t-ratios
+#&gt; 
+#&gt;                                         Estimate   Standard   Convergence 
+#&gt;                                                      Error      t-ratio   
+#&gt; 
+#&gt; Rate parameters: 
+#&gt;   0        Rate parameter                4.4881  ( 0.5088   )             
+#&gt; 
+#&gt; Other parameters: 
+#&gt;    1. eval outdegree (density)          -2.9999  ( 0.5677   )   -0.0106   
+#&gt;    2. eval reciprocity                   3.1626  ( 0.3196   )    0.0150   
+#&gt;    3. eval transitive triplets           1.3674  ( 0.1905   )    0.0061   
+#&gt;    4. eval indegree - popularity (sqrt)  0.8431  ( 0.0908   )   -0.0306   
+#&gt;    5. eval outdegree - activity         -0.1945  ( 0.0970   )   -0.0280   
+#&gt;    6. eval indegree - activity          -0.5030  ( 0.1610   )    0.0042   
+#&gt;    7. eval network-isolate               4.3054  ( 0.8242   )    0.0096   
+#&gt;    8. eval career_age alter             -0.0189  ( 0.0094   )    0.0757   
+#&gt;    9. eval career_age ego               -0.0053  ( 0.0079   )    0.0344   
+#&gt;   10. eval h_index alter                 0.3094  ( 0.1029   )    0.0166   
+#&gt;   11. eval gender ego                   -0.4962  ( 0.1903   )    0.0153   
+#&gt;   12. eval same gender                   0.1187  ( 0.1176   )    0.0407   
+#&gt; 
+#&gt; Overall maximum convergence ratio:    0.1458 
+#&gt; 
+#&gt; 
+#&gt; Total of 2957 iteration steps.
+#&gt; 
+#&gt; Covariance matrix of estimates (correlations below diagonal)
+#&gt; 
+#&gt;        0.322       -0.008        0.009       -0.020       -0.049       -0.036        0.419        0.000        0.000        0.010       -0.038       -0.007
+#&gt;       -0.046        0.102        0.011        0.006        0.004       -0.033       -0.013        0.000        0.000       -0.001        0.000        0.005
+#&gt;        0.081        0.179        0.036       -0.003       -0.001       -0.011       -0.012        0.000        0.000       -0.001       -0.001        0.002
+#&gt;       -0.393        0.221       -0.173        0.008        0.001       -0.001       -0.013        0.000        0.000       -0.002        0.001        0.000
+#&gt;       -0.884        0.130       -0.063        0.163        0.009        0.002       -0.067        0.000        0.000       -0.003        0.007        0.000
+#&gt;       -0.395       -0.641       -0.371       -0.037        0.148        0.026       -0.044        0.000        0.000        0.002        0.002       -0.002
+#&gt;        0.896       -0.050       -0.076       -0.175       -0.832       -0.328        0.679       -0.001        0.001        0.015       -0.061        0.000
+#&gt;       -0.046        0.129        0.174       -0.025        0.206       -0.290       -0.098        0.000        0.000       -0.001        0.000        0.000
+#&gt;        0.096       -0.028        0.044        0.004       -0.041       -0.114        0.131       -0.095        0.000        0.000        0.000        0.000
+#&gt;        0.174       -0.033       -0.069       -0.162       -0.264        0.132        0.173       -0.798        0.046        0.011       -0.002        0.000
+#&gt;       -0.355        0.007       -0.029        0.061        0.384        0.066       -0.388        0.116        0.286       -0.107        0.036        0.002
+#&gt;       -0.106        0.131        0.089        0.024        0.037       -0.114       -0.001        0.043        0.056       -0.041        0.107        0.014
+#&gt; 
+#&gt; Derivative matrix of expected statistics X by parameters:
+#&gt; 
+#&gt;      146.310       15.450       38.013      374.456      505.346      287.459      -42.372      222.524     -217.060       42.079       -1.827       64.914
+#&gt;       36.106       50.807       58.464       84.963      145.304      203.656       -1.166       80.095       90.529        3.976        0.241       13.131
+#&gt;       71.179       30.033      233.310      301.644      460.862      401.544       11.457      212.027      -46.331       32.512       -0.996       30.576
+#&gt;      292.138      -27.728      139.393     1377.841     1151.907      505.309      -43.488      982.661     -415.397      204.246       -3.202      131.700
+#&gt;      517.022       50.521      279.906     1454.751     2404.512     1290.232      -81.214      681.901    -1140.094      194.968       -8.071      217.545
+#&gt;      219.422      106.245      306.635      681.154      948.664     1017.432      -20.079      965.107      165.375       84.808       -3.662       97.266
+#&gt;      -22.999        3.269       20.764      -44.942       -7.018       17.481       21.302      -39.949      -39.715       -7.505        4.371      -12.061
+#&gt;      123.298     -168.116      424.203     2030.117      813.473      875.547      126.116    48321.384     5992.733     3376.568     -136.735       83.797
+#&gt;       -4.308       90.059      -22.737       53.571     -274.642      108.504       -6.958     5607.590    27203.887      313.774     -413.221       -0.533
+#&gt;       62.129      -35.044       36.980      482.634      283.120      112.213        5.821     3352.084      184.477      412.413       -8.745       27.901
+#&gt;       -6.190        4.211        5.242      -30.215      -42.927        1.582        1.552     -230.476     -346.276      -18.890       48.722      -10.406
+#&gt;       73.998        2.340       18.222      195.737      261.598      160.995      -21.440       85.545      -50.898       19.873      -12.000      106.304
+#&gt; 
+#&gt; Covariance matrix of X (correlations below diagonal):
+#&gt; 
+#&gt;      234.909       61.850      295.116      929.689      993.821      780.457      -36.107      469.777       30.844      136.956      -12.356      111.405
+#&gt;        0.352      131.486      228.815       46.749      306.360      580.299        2.819       94.802      281.799      -21.030       -2.550       25.551
+#&gt;        0.516        0.535     1392.819     1477.388     2051.161     2428.026       55.634     1934.774      851.353      209.888      -33.980      152.907
+#&gt;        0.769        0.052        0.502     6219.565     4476.831     2972.672       -9.055     2815.203      511.112     1070.697      -66.034      451.155
+#&gt;        0.874        0.360        0.741        0.765     5505.355     4283.871        5.259     3175.775      369.560      690.940      -98.279      487.524
+#&gt;        0.679        0.675        0.868        0.503        0.770     5620.543       31.224     3385.534     1759.180      407.830      -64.596      394.029
+#&gt;       -0.343        0.036        0.217       -0.017        0.010        0.061       47.227      145.615       87.114       11.021       -3.856      -15.597
+#&gt;        0.123        0.033        0.208        0.143        0.172        0.181        0.085    61977.883     7112.913     4134.938     -239.627      194.641
+#&gt;        0.010        0.127        0.117        0.033        0.026        0.121        0.065        0.147    37694.821      395.597     -468.147       75.699
+#&gt;        0.368       -0.076        0.232        0.559        0.384        0.224        0.066        0.684        0.084      588.938      -22.890       57.541
+#&gt;       -0.103       -0.028       -0.116       -0.107       -0.168       -0.110       -0.071       -0.122       -0.307       -0.120       61.800      -19.204
+#&gt;        0.650        0.199        0.366        0.512        0.588        0.470       -0.203        0.070        0.035        0.212       -0.218      125.051</code></pre>
+</div>
+<div id="model-4---full-model-with-inpop-instead-of-inpopsqrt"
+class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Model 4 - Full model
+with InPop instead of InPopSqrt</h2>
+<pre class="r test"><code>myAlgorithm4 &lt;- sienaAlgorithmCreate(projname = &quot;fourth_model&quot;)
+(ansM4 &lt;- siena07(myAlgorithm4, data = data_siena, effects = myeff4, returnDeps = TRUE))
+(ansM4 &lt;- siena07(myAlgorithm4, data = data_siena, effects = myeff4, returnDeps = TRUE, prevAns = ansM4))</code></pre>
+<pre class="test2"><code>#&gt; Estimates, standard errors and convergence t-ratios
+#&gt; 
+#&gt;                                  Estimate   Standard   Convergence 
+#&gt;                                               Error      t-ratio   
+#&gt; 
+#&gt; Rate parameters: 
+#&gt;   0        Rate parameter         4.4810  ( 0.5167   )             
+#&gt; 
+#&gt; Other parameters: 
+#&gt;    1. eval outdegree (density)   -1.6159  ( 0.7565   )   -0.0444   
+#&gt;    2. eval reciprocity            2.9351  ( 0.3221   )   -0.0579   
+#&gt;    3. eval transitive triplets    1.5536  ( 0.2902   )   -0.0542   
+#&gt;    4. eval indegree - popularity  0.1519  ( 0.0495   )   -0.0310   
+#&gt;    5. eval outdegree - activity  -0.2612  ( 0.1095   )   -0.0621   
+#&gt;    6. eval indegree - activity   -0.6052  ( 0.2389   )   -0.0692   
+#&gt;    7. eval network-isolate        5.3402  ( 0.9506   )    0.0103   
+#&gt;    8. eval career_age alter      -0.0226  ( 0.0094   )    0.0082   
+#&gt;    9. eval career_age ego        -0.0055  ( 0.0082   )    0.0248   
+#&gt;   10. eval h_index alter          0.3910  ( 0.1244   )   -0.0117   
+#&gt;   11. eval gender ego            -0.5621  ( 0.2198   )    0.0158   
+#&gt;   12. eval same gender            0.1206  ( 0.1255   )   -0.0475   
+#&gt; 
+#&gt; Overall maximum convergence ratio:    0.1134 
+#&gt; 
+#&gt; 
+#&gt; Total of 3010 iteration steps.
+#&gt; 
+#&gt; Covariance matrix of estimates (correlations below diagonal)
+#&gt; 
+#&gt;        0.572        0.048        0.151       -0.023       -0.075       -0.150        0.631        0.000       -0.001        0.038       -0.035       -0.007
+#&gt;        0.195        0.104        0.017        0.002       -0.006       -0.039        0.008        0.001        0.000       -0.002       -0.004       -0.006
+#&gt;        0.690        0.180        0.084       -0.009       -0.018       -0.051        0.140        0.000        0.000        0.010       -0.007        0.000
+#&gt;       -0.618        0.132       -0.594        0.002        0.002        0.005       -0.027        0.000        0.000       -0.003        0.001       -0.001
+#&gt;       -0.903       -0.171       -0.572        0.389        0.012        0.017       -0.082        0.000        0.000       -0.005        0.005        0.000
+#&gt;       -0.827       -0.504       -0.741        0.450        0.641        0.057       -0.151        0.000        0.000       -0.009        0.009        0.002
+#&gt;        0.877        0.027        0.506       -0.570       -0.786       -0.664        0.904       -0.002       -0.001        0.057       -0.063        0.014
+#&gt;       -0.066        0.214        0.002        0.275        0.057       -0.038       -0.213        0.000        0.000       -0.001        0.000        0.000
+#&gt;       -0.171       -0.103       -0.157        0.144        0.124        0.190       -0.117       -0.026        0.000        0.000        0.001        0.000
+#&gt;        0.405       -0.053        0.282       -0.527       -0.334       -0.318        0.484       -0.771       -0.085        0.015       -0.003        0.003
+#&gt;       -0.210       -0.060       -0.105        0.074        0.223        0.172       -0.301        0.071        0.328       -0.123        0.048       -0.001
+#&gt;       -0.078       -0.143        0.004       -0.084       -0.003        0.073        0.114       -0.239       -0.004        0.176       -0.046        0.016
+#&gt; 
+#&gt; Derivative matrix of expected statistics X by parameters:
+#&gt; 
+#&gt;      144.949       24.444       77.105      610.864      557.086      359.991      -26.027      250.771       29.374       67.692       -1.460       65.844
+#&gt;       31.804       52.401       62.793      119.162      134.218      187.536        3.493       70.138       -3.638       10.813        0.507       14.453
+#&gt;       62.827       44.246      243.713     1201.252      409.900      395.009       13.447      295.169       37.179       49.619        0.508       24.912
+#&gt;      672.852      -10.531      674.787    29138.185     2986.473     1485.262      -15.810     1275.811      -25.698      738.048       20.286      293.755
+#&gt;      504.007      110.651      410.294     1801.861     2416.790     1429.703      -46.696     1342.493      -95.151      252.465        0.844      218.743
+#&gt;      204.748      119.954      337.107     1072.289      910.044      991.127        5.887     1012.830      -74.750      128.545        4.770       84.710
+#&gt;      -22.673        5.264        8.149     -343.794      -38.469      -12.134       16.377       14.652      -60.959      -16.083        4.233      -13.734
+#&gt;       49.073      -88.015      440.562     4582.406      740.261      890.490       46.827    44804.944     4906.957     3000.393      -21.171      156.409
+#&gt;       99.795      158.705      296.170   -11734.012      466.165      789.245      -49.513     3601.466    25686.280      193.293     -283.096       47.018
+#&gt;       62.319      -10.853       83.225     3081.548      314.294      160.786        4.682     3116.470      251.416      391.619       -4.061       30.267
+#&gt;      -12.378       -2.357      -17.870      202.011      -76.796      -57.665        1.534     -163.649     -334.149      -10.235       37.913       -8.227
+#&gt;       68.186        9.528       11.596       44.533      246.101      143.707      -14.720      216.394      192.713       25.419       -8.068       99.730
+#&gt; 
+#&gt; Covariance matrix of X (correlations below diagonal):
+#&gt; 
+#&gt;      250.410       52.070      293.481    10167.667      991.794      701.974      -40.479      101.798       84.457      198.403       -2.263      107.018
+#&gt;        0.275      142.848      257.293    -1952.133      297.008      568.547       13.356      280.174      199.826      -22.464       -4.860       24.046
+#&gt;        0.501        0.582     1369.866     9672.864     1930.001     2200.544       51.919     1724.791      779.417      272.340      -22.232      121.594
+#&gt;        0.542       -0.138        0.220  1406432.809    35523.651    16845.990    -1594.000   -27774.939     3303.256    19442.358      728.718     4515.213
+#&gt;        0.873        0.346        0.726        0.417     5152.899     3715.622      -25.304     1983.001      518.815      837.215      -61.858      427.454
+#&gt;        0.638        0.684        0.854        0.204        0.744     4841.596       46.277     2971.023     1244.941      436.924      -38.671      306.528
+#&gt;       -0.386        0.168        0.211       -0.203       -0.053        0.100       44.011      180.980      -19.132      -10.438       -4.168      -17.203
+#&gt;        0.027        0.099        0.196       -0.099        0.116        0.180        0.115    56315.486     6917.701     3406.543     -177.487      109.779
+#&gt;        0.027        0.085        0.107        0.014        0.037        0.091       -0.015        0.148    38713.345      471.916     -416.304      162.406
+#&gt;        0.469       -0.070        0.275        0.613        0.436        0.235       -0.059        0.537        0.090      714.792       -6.386       85.949
+#&gt;       -0.019       -0.054       -0.080        0.082       -0.115       -0.074       -0.084       -0.100       -0.282       -0.032       56.451      -11.484
+#&gt;        0.635        0.189        0.309        0.358        0.559        0.414       -0.244        0.043        0.078        0.302       -0.144      113.393</code></pre>
+<p>In Model 4, I changed the InPopSqrt parameter for a non-quadratic
+indegree popularity parameter as a way to check whether this would
+significantly impact the results. However, the indegree distribution
+does not fit the data well (<a
+href="https://koenlucas.github.io/labjournal/4-results-GOF.html">See
+GOF</a>), meaning that the estimated model does not represent the
+observed data of the indegrees. This means that the estimates cannot be
+interpreted.</p>
+</div>
+</div>
+<div id="relative-influence" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Relative influence</h1>
+<p>The relative influence of a model refers to the underlying strength
+of each parameter. In other words, the relative influence shows what
+parameters have to most impact on the tie formation of nodes <span
+class="citation">(Indlekofer and Brandes 2013)</span>. The relative
+influence of Model 3 is shown below, first for each scholar individually
+and second with only the first five scholars and an aggregated relative
+influence of all scholars presented in a pie chart.</p>
+<p>The network isolate estimate seems to most important for scholars in
+wave 1. This is not unsurprising, as there are a lot of isolates in the
+network at time point 1. In wave 2 the network isolate estimate is still
+relatively important, but the relative is influence is weaker compared
+to wave 1. At time point 2 the squared effect of indegree popularity
+seems to be most important. This means that the network change is mainly
+influence by this effect of indegree popularity, the more indegrees an
+actor has the more likely they are to receive ties. Regarding the third
+hypothesis, this means that the “Matthew effect” found for indegrees is
+seemingly a very present mechanism for tie creation. On the other hand,
+regarding hypothesis 4, the h-index is only moderately important for the
+changes in the network, indicating that a “Matthew effect” for h-index
+is only slightly present in this collaboration network.</p>
+<pre class="r test"><code>RI &lt;- sienaRI(data = data_siena, ans = ansM3)
+
+
+plot(RI, addPieChart = FALSE, radius = 1, legendColumns = 3)</code></pre>
+<p><img src="4-results-rsiena-final_files/figure-html/relative%20influence-1.png" width="672" /></p>
+<pre class="r test"><code>plot(RI, actors = 1:5, addPieChart = TRUE, radius = 1, legendColumns = 3)</code></pre>
+<p><img src="4-results-rsiena-final_files/figure-html/relative%20influence-2.png" width="672" /></p>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-indlekofer2013" class="csl-entry">
+Indlekofer, Natalie, and Ulrik Brandes. 2013. <span>“Relative Importance
+of Effects in Stochastic Actor-Oriented Models.”</span> <em>Network
+Science</em> 1 (3): 278–304.
+</div>
+<div id="ref-ripley2011" class="csl-entry">
+Ripley, Ruth M, Tom AB Snijders, Zsófia Boda, András Vörös, and Paulina
+Preciado. 2011. <span>“Manual for RSIENA.”</span> <em>University of
+Oxford, Department of Statistics, Nuffield College</em> 1: 2011.
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlJlc3VsdHMgLSBSU2llbmEiDQphdXRob3I6ICJLb2VuIEx1Y2FzIg0KZGF0ZTogImByIFN5cy5EYXRlKClgIg0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQotLS0NCg0KIyBSZXN1bHRzIC0gUlNpZW5hDQoNCmBgYHs9aHRtbH0NCjxzdHlsZT4NCmJvZHkgew0KdGV4dC1hbGlnbjoganVzdGlmeX0NCjwvc3R5bGU+DQpgYGANCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9DQoNCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KGZvcm1hdFIpDQoNCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkNCm9wdHNfY2h1bmskc2V0KHRpZHkub3B0cz1saXN0KHdpZHRoLmN1dG9mZj0xMDApLHRpZHk9VFJVRSwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UsY29tbWVudCA9ICIjPiIsIGNhY2hlPUZBTFNFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KDQoNCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9DQpgYGANCg0KYGBge3Iga2xpcHB5LCBlY2hvPUZBTFNFLCBpbmNsdWRlPVRSVUV9DQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQ0KYGBgDQoNCmBgYHtyIGNsZWFuIHdvcmtzcGFjZSwgaW5jbHVkZSA9IEZBTFNFfQ0KDQpybShsaXN0ID0gbHMoKSkNCg0KYGBgDQoNCmBgYHtyIGxvYWQgZnVuY3Rpb25zLCBpbmNsdWRlPUZBTFNFfQ0KDQpmcGFja2FnZS5jaGVjayA8LSBmdW5jdGlvbihwYWNrYWdlcykgew0KICAgIGxhcHBseShwYWNrYWdlcywgRlVOID0gZnVuY3Rpb24oeCkgew0KICAgICAgICBpZiAoIXJlcXVpcmUoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKSkgew0KICAgICAgICAgICAgaW5zdGFsbC5wYWNrYWdlcyh4LCBkZXBlbmRlbmNpZXMgPSBUUlVFKQ0KICAgICAgICAgICAgbGlicmFyeSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpDQogICAgICAgIH0NCiAgICB9KQ0KfQ0KDQpmc2F2ZSA8LSBmdW5jdGlvbih4LCBmaWxlID0gTlVMTCwgbG9jYXRpb24gPSAiLi9kYXRhL3Byb2Nlc3NlZC8iKSB7DQogICAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhIiksIGRpci5jcmVhdGUoImRhdGEiKSwgRkFMU0UpDQogICAgaWZlbHNlKCFkaXIuZXhpc3RzKCJkYXRhL3Byb2Nlc3NlZCIpLCBkaXIuY3JlYXRlKCJkYXRhL3Byb2Nlc3NlZCIpLCBGQUxTRSkNCiAgICBpZiAoaXMubnVsbChmaWxlKSkNCiAgICAgICAgZmlsZSA9IGRlcGFyc2Uoc3Vic3RpdHV0ZSh4KSkNCiAgICBkYXRlbmFtZSA8LSBzdWJzdHIoZ3N1YigiWzotXSIsICIiLCBTeXMudGltZSgpKSwgMSwgOCkNCiAgICB0b3RhbG5hbWUgPC0gcGFzdGUobG9jYXRpb24sIGZpbGUsICJfIiwgZGF0ZW5hbWUsICIucmRhIiwgc2VwID0gIiIpDQogICAgc2F2ZSh4LCBmaWxlID0gdG90YWxuYW1lKSAgI25lZWQgdG8gZml4IGlmIGZpbGUgaXMgcmVsb2FkZWQgYXMgaW5wdXQgbmFtZSwgbm90IGFzIHguIA0KfQ0KDQpmbG9hZCA8LSBmdW5jdGlvbihmaWxlbmFtZSkgew0KICAgIGxvYWQoZmlsZW5hbWUpDQogICAgZ2V0KGxzKClbbHMoKSAhPSAiZmlsZW5hbWUiXSkNCn0NCg0KZnNob3dkZiA8LSBmdW5jdGlvbih4LCAuLi4pIHsNCiAgICBrbml0cjo6a2FibGUoeCwgZGlnaXRzID0gMiwgImh0bWwiLCAuLi4pICU+JQ0KICAgICAgICBrYWJsZUV4dHJhOjprYWJsZV9zdHlsaW5nKGJvb3RzdHJhcF9vcHRpb25zID0gYygic3RyaXBlZCIsICJob3ZlciIpKSAlPiUNCiAgICAgICAga2FibGVFeHRyYTo6c2Nyb2xsX2JveCh3aWR0aCA9ICIxMDAlIiwgaGVpZ2h0ID0gIjMwMHB4IikNCn0NCg0KDQpgYGANCg0KYGBge3IgbG9hZCBwYWNrYWdlcywgaW5jbHVkZT1GQUxTRX0NCg0KcGFja2FnZXMgPC0gYygidGlkeXZlcnNlIiwgDQogICAgICAgICAgICAgICJzY2hvbGFyIiwgDQogICAgICAgICAgICAgICJSU2llbmEiLCANCiAgICAgICAgICAgICAgIlJzaWVuYVR3b1N0ZXAiLCANCiAgICAgICAgICAgICAgImlncmFwaCIpDQoNCmZwYWNrYWdlLmNoZWNrKHBhY2thZ2VzKQ0KYGBgDQoNCmBgYHtyIGxvYWQgZGF0YSwgaW5jbHVkZT1GQUxTRX0NCg0KZnVsbGRhdGEgPC0gZmxvYWQoIi4vRGF0YS9mdWxsX2RhdGEuUmRhdGEiKQ0KDQpkZl9lZ28gPC0gZmxvYWQoIi4vRGF0YS9kZl9lZ28uUmRhdGEiKQ0KICANCmRmX3dvcmtzIDwtIGZsb2FkKCIuL0RhdGEvZGZfd29ya3MuUmRhdGEiKQ0KDQpgYGANCg0KYGBge3Igc3RlcCAxIGRlZmluZSBkYXRhLCBpbmNsdWRlPUZBTFNFfQ0KDQpkZl9uZXRzIDwtIGZ1bGxkYXRhJG5ldHMNCg0KbGVuZ3RoKGRmX25ldHMpDQpkaW0oZGZfbmV0cylbMV0NCg0Kd2F2ZTEgPC0gZGZfbmV0c1sxLCxdDQp3YXZlMiA8LSBkZl9uZXRzWzIsLF0NCg0KIyBwdXQgZGlhZ29uYWwgdG8gemVybw0KZGlhZyh3YXZlMSkgPC0gMA0KZGlhZyh3YXZlMikgPC0gMA0KDQojIGJpbmFyeSB0aWVzDQp3YXZlMVt3YXZlMSA+IDFdIDwtIDENCndhdmUyW3dhdmUyID4gMl0gPC0gMQ0KDQojIHB1dCBuZXR3b3JrcyBpbiBhcnJheSAtLT4gcmlnaHQgZm9ybWF0IGZvciBSc2llbmENCm5ldF9zb2NfYXJyYXkgPC0gYXJyYXkoZGF0YSA9IGMod2F2ZTEsIHdhdmUyKSwgZGltID0gYyhkaW0od2F2ZTEpLCAyKSkNCmRpbShuZXRfc29jX2FycmF5KQ0KDQpgYGANCg0KYGBge3IgdmFyaWFibGVzLCBpbmNsdWRlPUZBTFNFfQ0KDQpuZXQgPC0gc2llbmFEZXBlbmRlbnQobmV0X3NvY19hcnJheSkNCg0KY2FyZWVyX2FnZSA8LSBhcy5udW1lcmljKGRmX2VnbyRjYXJlZXJfYWdlKQ0KY2FyZWVyX2FnZSA8LSBjb0NvdmFyKGNhcmVlcl9hZ2UpDQoNCg0KaF9pbmRleCA8LSBhcy5udW1lcmljKGRmX2VnbyRoX2luZGV4X2NhdCkNCmhfaW5kZXggPC0gY29Db3ZhcihoX2luZGV4KQ0KDQpnZW5kZXIgPC0gY29Db3ZhcihkZl9lZ28kZmVtYWxlKQ0KDQpkYXRhX3NpZW5hIDwtIHNpZW5hRGF0YUNyZWF0ZShuZXQsIGNhcmVlcl9hZ2UsIGhfaW5kZXgsIGdlbmRlcikNCg0KYGBgDQoNCmBgYHtyIHN0ZXAgMiBjcmVhdGUgZWZmZWN0IHN0cnVjdHVyZSwgaW5jbHVkZT1GQUxTRX0NCg0KbXllZmYgPC0gZ2V0RWZmZWN0cyhkYXRhX3NpZW5hKQ0KDQpgYGANCg0KYGBge3Igc3RlcCAzIGluaXRpYWwgZGVzY3JpcHRpb24sIGluY2x1ZGU9RkFMU0V9DQoNCnByaW50MDFSZXBvcnQoZGF0YV9zaWVuYSwgbW9kZWxuYW1lID0gIi4vcmVzdWx0cy9maXJzdF9tb2RlbCIpDQoNCmBgYA0KDQojIyBKYWNjYXJkLWluZGV4DQoNClRoZSBKYWNjYXJkLWluZGV4IGdpdmVzIGFuIGluZGljYXRpb24gYWJvdXQgdGhlIHN0YWJpbGl0eSBhbmQgY2hhbmdlIGluIGEgbmV0d29yayBvdmVyIHRpbWUuIFRoZSBKYWNjYXJkLWluZGV4IGZvciB0aGVzZSBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzIGlzIDAsMTY4LiBUaGlzIGlzIGdlbmVyYWxseSBjb25zaWRlcmVkIGxvdyBbQHJpcGxleTIwMTFdLCBtZWFuaW5nIHRoYXQgdGhlcmUgaXMgbm90IGEgbG90IG9mIGNoYW5nZSBpbiB0aGUgbmV0d29yayBiZXR3ZWVuIHdhdmUgMSBhbmQgd2F2ZSAyLg0KDQojIyBNb2RlbCAwIC0gTnVsbCBtb2RlbA0KDQpgYGB7cn0NCm15ZWZmMCA8LSBnZXRFZmZlY3RzKGRhdGFfc2llbmEpDQoNCmBgYA0KDQpgYGB7ciwgZXZhbD1GQUxTRX0NCm15QWxnb3JpdGhtMCA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJudWxsX21vZGVsIikNCihhbnNNMCA8LSBzaWVuYTA3KG15QWxnb3JpdGhtMCwgZGF0YSA9IGRhdGFfc2llbmEsIGVmZmVjdHMgPSBteWVmZjAsIHJldHVybkRlcHMgPSBUUlVFKSkNCihhbnNNMCA8LSBzaWVuYTA3KG15QWxnb3JpdGhtMCwgZGF0YSA9IGRhdGFfc2llbmEsIGVmZmVjdHMgPSBteWVmZjAsIHJldHVybkRlcHMgPSBUUlVFLCBwcmV2QW5zID0gYW5zTTApKQ0KDQpgYGANCg0KYGBge3IsIGV2YWw9RkFMU0UsIGVjaG89RkFMU0V9DQojU2F2ZSBtb2RlbCB3aXRoIGxvd2VzdCBjb252ZXJnZW5jZQ0Kc2F2ZShhbnNNMCwgZmlsZT0iLi9yZXN1bHRzL2Fuc00wIikNCg0KYGBgDQoNCmBgYHtyLCBlY2hvPUZBTFNFfQ0KDQpsb2FkKCIuL3Jlc3VsdHMvYW5zTTAiKQ0Kc3VtbWFyeShhbnNNMCkNCg0KYGBgDQoNCkluIHRoZSBudWxsLW1vZGVsIG9ubHkgYSByYXRlIHBhcmFtZXRlciBhbmQgc3RhbmRhcmQgbmV0d29yayBlZmZlY3RzIGFyZSBlc3RpbWF0ZWQuIEZpcnN0LCB0aGUgb3V0ZGVncmVlIChkZW5zaXR5KSBlZmZlY3QgZXN0aW1hdGVzIHRvIHdoYXQgZXh0ZW50IG5vZGVzIHRlbmQgdG8gZm9ybSBvdXRnb2luZyBjb25uZWN0aW9ucy4gSXQgY2FuIHRodXMgYmUgc2VlbiBhcyBhIGJhc2VsaW5lIGZvciB0aGUgbGlrZWxpaG9vZCBvZiBhbnkgZ2l2ZW4gbm9kZSBjcmVhdGluZyBhbiBvdXRnb2luZyB0aWUuIEluIHRoaXMgc3R1ZHkgdGhlc2Ugb3V0Z29pbmcgdGllcyByZWZlciB0byB0aGUgaW5zdGlnYXRpb24gb2YgYSBjby1wdWJsaWNhdGlvbi4gVGhlIGVmZmVjdCBpcyBzaWduaWZpY2FudGx5IG5lZ2F0aXZlIChiID0gLTMsMTUzNSwgU0UgPSAwLDA3MzEpLCBtZWFuaW5nIHRoYXQgdGhlIGdlbmVyYWwgdGVuZGVuY3kgdG8gZm9yIGluc3RpZ2F0aW5nIGNvbGxhYm9yYXRpb24gaXMgbG93LiBGdXJ0aGVybW9yZSwgdGhlIGVzdGltYXRlIGZvciByZWNpcHJvY2l0eSBzaG93cyBpZiB0aGVyZSBpcyBhIHRlbmRlbmN5IGZvciBkaXJlY3RlZCByZWxhdGlvbnNoaXBzIHRvIGJlIG11dHVhbC4gSW4gdGhpcyBzdHVkeSB0aGlzIHdvdWxkIHJlZmVyIHRvIGlmIGEgbm9kZSBpbnN0aWdhdGVzIGEgY29sbGFib3JhdGlvbiB3aXRoIGFuIGFsdGVyLCB0aGlzIGFsdGVyIHdvdWxkIGxpa2VseSBhbHNvIGluc3RpZ2F0ZSBhIGNvbGxhYm9yYXRpb24gd2l0aCB0aGlzIG5vZGUuIFRoaXMgZWZmZWN0IGlzIHNpZ25pZmljYW50IGFuZCBwb3NpdGl2ZSAoYiA9IDIsODY3OCwgU0UgPSAwLDIxNDkpLCBpbmRpY2F0aW5nIHRoYXQgdGhpcyBpcyB0aGUgY2FzZS4NCg0KIyMgTW9kZWwgMSAtIG9ubHkgc3RydWN0dXJhbCBlZmZlY3RzDQoNCmBgYHtyIHNwZWNpZnkgbW9kZWwxIG9ubHkgbmV0d29ya3N0cnVjdHVyZXMsIGluY2x1ZGU9RkFMU0V9DQoNCm15ZWZmMSA8LSBnZXRFZmZlY3RzKGRhdGFfc2llbmEpDQoNCm15ZWZmMSA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjEsIGlzb2xhdGVOZXQpICMgdG8gY29udHJvbCBmb3IgaXNvbGF0ZXMNCm15ZWZmMSA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjEsIGluUG9wU3FydCkgIyBub2RlcyBhcmUgYXR0cmFjdGVkIHRvIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmMSA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjEsIG91dEFjdCkgIyBjb250cm9sIGZvciBtb3JlIGFjdGl2ZSBub2RlcyBvdXRkZWdyZWVzICAgICAgICAgICAgICAgICAgICAgIA0KbXllZmYxIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmMSwgaW5BY3QpICMgY29udHJvbCBmb3IgYmVoYXZpb3VyIG9mIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmMSA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjEsIHRyYW5zVHJpcCkgIyBjb250cm9scyBmb3IgdHJpYWRpYyByZWxhdGlvbnNoaXBzDQpteWVmZjEgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYxLCByZWNpcCkgIyBjb250cm9sIGZvciByZWNpcHJvY2l0eQ0KDQoNCg0KYGBgDQoNCmBgYHtyIGVzdGltYXRlIG1vZGVsMSwgZXZhbD1GQUxTRX0NCg0KbXlBbGdvcml0aG0xIDwtIHNpZW5hQWxnb3JpdGhtQ3JlYXRlKHByb2puYW1lID0gImZpcnN0X21vZGVsIikNCihhbnNNMSA8LSBzaWVuYTA3KG15QWxnb3JpdGhtMSwgZGF0YSA9IGRhdGFfc2llbmEsIGVmZmVjdHMgPSBteWVmZjEsIHJldHVybkRlcHMgPSBUUlVFKSkNCihhbnNNMSA8LSBzaWVuYTA3KG15QWxnb3JpdGhtMSwgZGF0YSA9IGRhdGFfc2llbmEsIGVmZmVjdHMgPSBteWVmZjEsIHJldHVybkRlcHMgPSBUUlVFLCBwcmV2QW5zID0gYW5zTTEpKQ0KDQpgYGANCg0KYGBge3IsIGV2YWw9RkFMU0UsIGVjaG89RkFMU0V9DQojU2F2ZSBtb2RlbCB3aXRoIGxvd2VzdCBjb252ZXJnZW5jZQ0Kc2F2ZShhbnNNMSwgZmlsZT0iLi9yZXN1bHRzL2Fuc00xIikNCmBgYA0KDQpgYGB7ciwgZWNobz1GQUxTRX0NCmxvYWQoIi4vcmVzdWx0cy9hbnNNMSIpDQpzdW1tYXJ5KGFuc00xKQ0KYGBgDQoNCkluIG1vZGVsIDEsIHN0cnVjdHVyYWwgbmV0d29yayBlZmZlY3RzIGFyZSBhZGRlZC4gRmlyc3QsIEkgYWRkZWQgYSBwYXJhbWV0ZXIgZm9yIGluZGVncmVlIHBvcHVsYXJpdHksIHdoaWNoIGluZGljYXRlcyB0aGF0IHRob3NlIHdobyBoYXZlIG1vcmUgaW5kZWdyZWVzIGFyZSBtb3JlIHBvcHVsYXIgdG8gZm9ybSBhIG5ldyB0aWUgd2l0aC4gRHVlIHRvIHRoZSBmYWN0IHRoYXQgdGhlIGRlZ3JlZSBkaXN0cmlidXRpb24gaXMgcmlnaHQtc2tld2VkLCBhbmQgdGhlIG9ic2VydmF0aW9uIHRoYXQgdGhlIG5ldHdvcmsgZXZvbHZlcyBpbiBhIGEgbmV0d29yayB3aXRoIHNjYWxlLWZyZWUgY2hhcmFjdGVyaXN0aWNzIGluIHdhdmUgMiwgVGhlIHBhcmFtZXRlciBpcyBhZGRlZCBhcyBzcXVhcmVkLiBUaGlzIG1lYW5zIHRoYXQgaXQgaXMgZXhwZWN0ZWQgdGhhdCB0aGUgcGFyYW1ldGVyIGlzIG5vdCBsaW5lYXIsIGJ1dCB0aGF0IHRoaXMgcGFyYW1ldGVyIGlzIGVzdGltYXRlZCBleHBvbmVudGlhbGx5LiBUaGUgbW9yZSBpbmRlZ3JlZXMgc29tZW9uZSBoYXMsIHRoZSBiaWdnZXIgdGhlIGVmZmVjdCBvZiBpbmRlZ3JlZSBwb3B1bGFyaXR5IGJlY29tZXMuIEkgZmluZCBhIHBvc2l0aXZlIGVzdGltYXRlIGZvciB0aGlzIHBhcmFtZXRlciBhbmQgaXMgc2lnbmlmaWNhbnQgKGIgPSAwLDkzMzQsIFNFID0gMCwxMTY5KS4gVGhpcyBtZWFucyB0aGF0IHRob3NlIHdpdGggbW9yZSBpbmRlZ3JlZXMgYXJlIG1vcmUgbGlrZWx5IHRvIHJlY2VpdmUgdGllcy4gVGhlcmVmb3JlLCBoeXBvdGhlc2lzIDMgZG9lcyBub3QgaGF2ZSB0byBiZSByZWplY3RlZC4NCg0KU2Vjb25kLCBhbiBlZmZlY3QgZm9yIHRyYW5zaXRpdmUgdHJpcGxldHMgaXMgYWRkZWQgdG8gdGhpcyBtb2RlbC4gVGhpcyBwYXJhbWV0ZXIgZXN0aW1hdGVzIGhvdyBtYW55IHRyYW5zaXRpdmUgcmVsYXRpb25zaGlwcyBhcmUgZm9ybWVkLiBUaGUgZXN0aW1hdGUgb2YgdGhpcyBwYXJhbWV0ZXIgaXMgcG9zaXRpdmUgYW5kIHNpZ25pZmljYW50IChiID0gMSwzNDQsIFNFID0gMCwyMTM5KSwgbWVhbmluZyB0aGF0IHRoZXJlIGlzIGEgcHJlZmVyZW5jZSBmb3IgZm9ybWluZyB0cmFuc2l0aXZlIHJlbGF0aW9uc2hpcHMuIFRoaXJkLCBib3RoIGFuIG91dGRlZ3JlZSBhbmQgaW5kZWdyZWUgYWN0aXZpdHkgcGFyYW1ldGVyIGlzIGFkZGVkLiBUaGlzIGVzdGltYXRlcyB3aGV0aGVyIHRob3NlIHdpdGggbW9yZSBpbi0gb3Igb3V0ZGVncmVlcyBhcmUgbW9yZSBhY3RpdmUgaW4gc2VuZGluZyB0aWVzLiBJIGZpbmQgYSBuZWdhdGl2ZSBhbmQgc2lnbmlmaWNhbnQgZWZmZWN0IGZvciBvdXRkZWdyZWUgYWN0aXZpdHkgKGIgPSAtMCwxNjc2LCBTRSA9IDAsMDc4NSksIG1lYW5pbmcgdGhhdCB0aG9zZSB3aXRoIG1vcmUgb3V0ZGVncmVlcyBhcmUgbGVzcyBsaWtlbHkgdG8gc2VuZCB0aWVzLiBTaW1pbGFybHksIGEgbmVnYXRpdmUgYW5kIHNpZ25pZmljYW50IGVmZmVjdCB3YXMgZm91bmQgZm9yIGluZGVncmVlIGFjdGl2aXR5IChiID0gLTAsNDkyLCBTRSA9IDAsMTUwNSksIG1lYW5pbmcgdGhhdCB0aG9zZSB3aG8gaGF2ZSBtb3JlIGluZGVncmVlcyBhcmUgbGVzcyBsaWtlbHkgdG8gc2VuZCB0aWVzLiBMYXN0LCBhIG5ldHdvcmsgaXNvbGF0ZSBwYXJhbWV0ZXIgaXMgYWRkZWQgdG8gY29udHJvbCBmb3IgdGhlIG1hbnkgaXNvbGF0ZXMgaW4gdGhlIGRhdGEuIFRoaXMgcGFyYW1ldGVyIGVzdGltYXRlcyB3aGV0aGVyIGlzb2xhdGVzIHRlbmQgdG8gc3RheSBpc29sYXRlcy4gVGhpcyBlc3RpbWF0ZSBpcyBwb3NpdGl2ZSBhbmQgc2lnbmlmaWNhbnQgKGIgPSA0LDI1MzUsIFNFID0gMCw2NzY2KSwgaW5kaWNhdGluZyBpZiBhIG5vZGUgaXMgaXNvbGF0ZSwgdGhleSB0ZW5kIHRvIHN0YXkgaXNvbGF0ZS4NCg0KIyMgTW9kZWwgMiAtIEluY2x1ZGUgaC1pbmRleA0KDQpgYGB7ciBzcGVjaWZ5IG1vZGVsMiBpbmNsdWRlIGgtaW5kZXgsIGluY2x1ZGU9RkFMU0V9DQoNCm15ZWZmMiA8LSBnZXRFZmZlY3RzKGRhdGFfc2llbmEpDQoNCm15ZWZmMiA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjIsIGlzb2xhdGVOZXQpICMgdG8gY29udHJvbCBmb3IgaXNvbGF0ZXMNCm15ZWZmMiA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjIsIGluUG9wU3FydCkgIyBub2RlcyBhcmUgYXR0cmFjdGVkIHRvIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmMiA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjIsIG91dEFjdCkgIyBjb250cm9sIGZvciBtb3JlIGFjdGl2ZSBub2RlcyBvdXRkZWdyZWVzICAgICAgICAgICAgICAgICAgICAgIA0KbXllZmYyIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmMiwgaW5BY3QpICMgY29udHJvbCBmb3IgYmVoYXZpb3VyIG9mIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmMiA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjIsIHRyYW5zVHJpcCkgIyBjb250cm9scyBmb3IgdHJpYWRpYyByZWxhdGlvbnNoaXBzDQpteWVmZjIgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYyLCByZWNpcCkgIyBjb250cm9sIGZvciByZWNpcHJvY2l0eQ0KDQoNCm15ZWZmMiA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjIsIGFsdFgsIGludGVyYWN0aW9uMSA9ICJoX2luZGV4IikgIyBhYnNvbHV0ZSBkaWZmZXJlbmNlIHRvIGhfaW5kZXgNCg0KYGBgDQoNCmBgYHtyIGVzdGltYXRlIG1vZGVsMiwgZXZhbD1GQUxTRX0NCg0KbXlBbGdvcml0aG0yIDwtIHNpZW5hQWxnb3JpdGhtQ3JlYXRlKHByb2puYW1lID0gInNlY29uZF9tb2RlbCIpDQooYW5zTTIgPC0gc2llbmEwNyhteUFsZ29yaXRobTIsIGRhdGEgPSBkYXRhX3NpZW5hLCBlZmZlY3RzID0gbXllZmYyLCByZXR1cm5EZXBzID0gVFJVRSkpDQooYW5zTTIgPC0gc2llbmEwNyhteUFsZ29yaXRobTIsIGRhdGEgPSBkYXRhX3NpZW5hLCBlZmZlY3RzID0gbXllZmYyLCByZXR1cm5EZXBzID0gVFJVRSwgcHJldkFucyA9IGFuc00yKSkNCg0KYGBgDQoNCmBgYHtyLCBldmFsPUZBTFNFLCBlY2hvPUZBTFNFfQ0KI1NhdmUgdGhlIGxhc3QgbW9kZWwgc2luY2UgaXQgaGFzIHRoZSBsb3dlc3QgbWF4aW11bSBjb252ZXJnZW5jZSByYXRpby4gDQpzYXZlKGFuc00yLCBmaWxlPSIuL3Jlc3VsdHMvYW5zTTIiKQ0KYGBgDQoNCmBgYHtyLCBlY2hvPUZBTFNFfQ0KbG9hZCgiLi9yZXN1bHRzL2Fuc00yIikNCnN1bW1hcnkoYW5zTTIpDQpgYGANCg0KSW4gdGhlIHNlY29uZCBtb2RlbCwgYW4gZWdvLWxldmVsIGVmZmVjdCBpcyBhZGRlZCBmb3IgaC1pbmRleC4gVGhlIGgtaW5kZXggYWx0ZXIgZWZmZWN0IGluZGljYXRlcyB0aGF0IG5vZGVzIGFyZSBtb3JlIG9yIGxlc3MgbGlrZWx5IHRvIHNlbmQgdGllcyB0byBhbHRlcnMgd2l0aCBhIGhpZ2hlciBoLWluZGV4LiBUaGlzIGVmZmVjdCBpcyBmb3VuZCB0byBiZSBwb3NpdGl2ZSAoYiA9IDAsMTM0MywgU0UgPSAwLDA2MTQpIHdoaWNoIGVudGFpbHMgdGhhdCBub2RlcyBoYXZlIGEgcHJlZmVyZW5jZSB0byBzZW5kIHRpZXMgdG8gYWx0ZXJzIHdpdGggYSBoaWdoZXIgaC1pbmRleC4gVGhpcyBlZmZlY3QgaXMgYWxzbyBmb3VuZCB0byBiZSBzaWduaWZpY2FudC4gVGh1cywgaHlwb3RoZXNpcyA0IGRvZXMgbm90IGhhdmUgdG8gYmUgcmVqZWN0ZWQuDQoNCiMjIE1vZGVsIDMgLSBGdWxsIG1vZGVsDQoNCmBgYHtyIHNwZWNpZnkgbW9kZWwzIHdpdGggZWdvIGVmZmVjdHMsIGluY2x1ZGU9RkFMU0V9DQoNCm15ZWZmMyA8LSBnZXRFZmZlY3RzKGRhdGFfc2llbmEpDQoNCm15ZWZmMyA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjMsIGlzb2xhdGVOZXQpICMgdG8gY29udHJvbCBmb3IgaXNvbGF0ZXMNCm15ZWZmMyA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjMsIGluUG9wU3FydCkgIyBub2RlcyBhcmUgYXR0cmFjdGVkIHRvIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmMyA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjMsIG91dEFjdCkgIyBjb250cm9sIGZvciBtb3JlIGFjdGl2ZSBub2RlcyBvdXRkZWdyZWVzICAgICAgICAgICAgICAgICAgICAgIA0KbXllZmYzIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmMywgaW5BY3QpICMgY29udHJvbCBmb3IgYmVoYXZpb3VyIG9mIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmMyA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjMsIHRyYW5zVHJpcCkgIyBjb250cm9scyBmb3IgdHJpYWRpYyByZWxhdGlvbnNoaXBzDQpteWVmZjMgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYzLCByZWNpcCkgIyBjb250cm9sIGZvciByZWNpcHJvY2l0eQ0KbXllZmYzIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmMywgaW5Qb3BTcXJ0KQ0KDQoNCm15ZWZmMyA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjMsIGFsdFgsIGludGVyYWN0aW9uMSA9ICJoX2luZGV4IikgIyBhYnNvbHV0ZSBkaWZmZXJlbmNlIHRvIGhfaW5kZXgNCm15ZWZmMyA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjMsIGVnb1gsIGludGVyYWN0aW9uMSA9ICJjYXJlZXJfYWdlIikgIyBlZ28ncyBhcmUgbW9yZSBsaWtlbHkgcmVjZWl2ZSB0aWVzIGZyb20geW91bmdlciBzY2hvbGFycw0KbXllZmYzIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmMywgYWx0WCwgaW50ZXJhY3Rpb24xID0gImNhcmVlcl9hZ2UiKSAjIGVnbydzIGFyZSBtb3JlIGxpa2VseSB0byBzZW5kIHRpZXMgdG8gb2xkZXIgc2Nob2xhcnMNCm15ZWZmMyA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjMsIHNhbWVYLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIikgIyBlZ28ncyBhcmUgbW9yZSBsaWtlbHkgdG8gc2VuZCB0aWVzIHRvIHRob3NlIHdobyBhcmUgc2ltaWxhcg0KbXllZmYzIDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmMywgZWdvWCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIpDQoNCmBgYA0KDQpgYGB7ciBlc3RpbWF0ZSBtb2RlbDMsIGV2YWw9RkFMU0V9DQoNCm15QWxnb3JpdGhtMyA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJ0aGlyZF9tb2RlbCIpDQooYW5zTTMgPC0gc2llbmEwNyhteUFsZ29yaXRobTMsIGRhdGEgPSBkYXRhX3NpZW5hLCBlZmZlY3RzID0gbXllZmYzLCByZXR1cm5EZXBzID0gVFJVRSkpDQooYW5zTTMgPC0gc2llbmEwNyhteUFsZ29yaXRobTMsIGRhdGEgPSBkYXRhX3NpZW5hLCBlZmZlY3RzID0gbXllZmYzLCByZXR1cm5EZXBzID0gVFJVRSwgcHJldkFucyA9IGFuc00zKSkNCg0KYGBgDQoNCmBgYHtyLCBldmFsPUZBTFNFLCBlY2hvPUZBTFNFfQ0KI1NhdmUgdGhlIGxhc3QgbW9kZWwgc2luY2UgaXQgaGFzIHRoZSBsb3dlc3QgbWF4aW11bSBjb252ZXJnZW5jZSByYXRpby4gDQpzYXZlKGFuc00zLCBmaWxlPSIuL3Jlc3VsdHMvYW5zTTMiKQ0KYGBgDQoNCmBgYHtyLCBlY2hvPUZBTFNFfQ0KbG9hZCgiLi9yZXN1bHRzL2Fuc00zIikNCnN1bW1hcnkoYW5zTTMpDQpgYGANCg0KIyMgTW9kZWwgNCAtIEZ1bGwgbW9kZWwgd2l0aCBJblBvcCBpbnN0ZWFkIG9mIEluUG9wU3FydA0KDQpgYGB7ciBzcGVjaWZ5IG1vZGVsNCB3aXRoIEluUG9wLCBpbmNsdWRlPUZBTFNFfQ0KDQpteWVmZjQgPC0gZ2V0RWZmZWN0cyhkYXRhX3NpZW5hKQ0KDQpteWVmZjQgPC0gaW5jbHVkZUVmZmVjdHMobXllZmY0LCBpc29sYXRlTmV0KSAjIHRvIGNvbnRyb2wgZm9yIGlzb2xhdGVzDQpteWVmZjQgPC0gaW5jbHVkZUVmZmVjdHMobXllZmY0LCBpblBvcCkgIyBub2RlcyBhcmUgYXR0cmFjdGVkIHRvIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmNCA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjQsIG91dEFjdCkgIyBjb250cm9sIGZvciBtb3JlIGFjdGl2ZSBub2RlcyBvdXRkZWdyZWVzICAgICAgICAgICAgICAgICAgICAgIA0KbXllZmY0IDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmNCwgaW5BY3QpICMgY29udHJvbCBmb3IgYmVoYXZpb3VyIG9mIG5vZGVzIHdpdGggbW9yZSBpbmRlZ3JlZXMNCm15ZWZmNCA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjQsIHRyYW5zVHJpcCkgIyBjb250cm9scyBmb3IgdHJpYWRpYyByZWxhdGlvbnNoaXBzDQpteWVmZjQgPC0gaW5jbHVkZUVmZmVjdHMobXllZmY0LCByZWNpcCkgIyBjb250cm9sIGZvciByZWNpcHJvY2l0eQ0KDQoNCm15ZWZmNCA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjQsIGFsdFgsIGludGVyYWN0aW9uMSA9ICJoX2luZGV4IikgIyBhYnNvbHV0ZSBkaWZmZXJlbmNlIHRvIGhfaW5kZXgNCm15ZWZmNCA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjQsIGVnb1gsIGludGVyYWN0aW9uMSA9ICJjYXJlZXJfYWdlIikgIyBlZ28ncyBhcmUgbW9yZSBsaWtlbHkgcmVjZWl2ZSB0aWVzIGZyb20geW91bmdlciBzY2hvbGFycw0KbXllZmY0IDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmNCwgYWx0WCwgaW50ZXJhY3Rpb24xID0gImNhcmVlcl9hZ2UiKSAjIGVnbydzIGFyZSBtb3JlIGxpa2VseSB0byBzZW5kIHRpZXMgdG8gb2xkZXIgc2Nob2xhcnMNCm15ZWZmNCA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZjQsIHNhbWVYLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIikgIyBlZ28ncyBhcmUgbW9yZSBsaWtlbHkgdG8gc2VuZCB0aWVzIHRvIHRob3NlIHdobyBhcmUgc2ltaWxhcg0KbXllZmY0IDwtIGluY2x1ZGVFZmZlY3RzKG15ZWZmNCwgZWdvWCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIpDQoNCmBgYA0KDQpgYGB7ciBlc3RpbWF0ZSBtb2RlbDQsIGV2YWw9RkFMU0V9DQoNCm15QWxnb3JpdGhtNCA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShwcm9qbmFtZSA9ICJmb3VydGhfbW9kZWwiKQ0KKGFuc000IDwtIHNpZW5hMDcobXlBbGdvcml0aG00LCBkYXRhID0gZGF0YV9zaWVuYSwgZWZmZWN0cyA9IG15ZWZmNCwgcmV0dXJuRGVwcyA9IFRSVUUpKQ0KKGFuc000IDwtIHNpZW5hMDcobXlBbGdvcml0aG00LCBkYXRhID0gZGF0YV9zaWVuYSwgZWZmZWN0cyA9IG15ZWZmNCwgcmV0dXJuRGVwcyA9IFRSVUUsIHByZXZBbnMgPSBhbnNNNCkpDQoNCmBgYA0KDQpgYGB7ciwgZXZhbD1GQUxTRSwgZWNobz1GQUxTRX0NCiNTYXZlIHRoZSBsYXN0IG1vZGVsIHNpbmNlIGl0IGhhcyB0aGUgbG93ZXN0IG1heGltdW0gY29udmVyZ2VuY2UgcmF0aW8uIA0Kc2F2ZShhbnNNNCwgZmlsZT0iLi9yZXN1bHRzL2Fuc000IikNCmBgYA0KDQpgYGB7ciwgZWNobz1GQUxTRX0NCmxvYWQoIi4vcmVzdWx0cy9hbnNNNCIpDQpzdW1tYXJ5KGFuc000KQ0KYGBgDQoNCkluIE1vZGVsIDQsIEkgY2hhbmdlZCB0aGUgSW5Qb3BTcXJ0IHBhcmFtZXRlciBmb3IgYSBub24tcXVhZHJhdGljIGluZGVncmVlIHBvcHVsYXJpdHkgcGFyYW1ldGVyIGFzIGEgd2F5IHRvIGNoZWNrIHdoZXRoZXIgdGhpcyB3b3VsZCBzaWduaWZpY2FudGx5IGltcGFjdCB0aGUgcmVzdWx0cy4gSG93ZXZlciwgdGhlIGluZGVncmVlIGRpc3RyaWJ1dGlvbiBkb2VzIG5vdCBmaXQgdGhlIGRhdGEgd2VsbCAoW1NlZSBHT0ZdKGh0dHBzOi8va29lbmx1Y2FzLmdpdGh1Yi5pby9sYWJqb3VybmFsLzQtcmVzdWx0cy1HT0YuaHRtbCkpLCBtZWFuaW5nIHRoYXQgdGhlIGVzdGltYXRlZCBtb2RlbCBkb2VzIG5vdCByZXByZXNlbnQgdGhlIG9ic2VydmVkIGRhdGEgb2YgdGhlIGluZGVncmVlcy4gVGhpcyBtZWFucyB0aGF0IHRoZSBlc3RpbWF0ZXMgY2Fubm90IGJlIGludGVycHJldGVkLg0KDQojIFJlbGF0aXZlIGluZmx1ZW5jZQ0KDQpUaGUgcmVsYXRpdmUgaW5mbHVlbmNlIG9mIGEgbW9kZWwgcmVmZXJzIHRvIHRoZSB1bmRlcmx5aW5nIHN0cmVuZ3RoIG9mIGVhY2ggcGFyYW1ldGVyLiBJbiBvdGhlciB3b3JkcywgdGhlIHJlbGF0aXZlIGluZmx1ZW5jZSBzaG93cyB3aGF0IHBhcmFtZXRlcnMgaGF2ZSB0byBtb3N0IGltcGFjdCBvbiB0aGUgdGllIGZvcm1hdGlvbiBvZiBub2RlcyBbQGluZGxla29mZXIyMDEzXS4gVGhlIHJlbGF0aXZlIGluZmx1ZW5jZSBvZiBNb2RlbCAzIGlzIHNob3duIGJlbG93LCBmaXJzdCBmb3IgZWFjaCBzY2hvbGFyIGluZGl2aWR1YWxseSBhbmQgc2Vjb25kIHdpdGggb25seSB0aGUgZmlyc3QgZml2ZSBzY2hvbGFycyBhbmQgYW4gYWdncmVnYXRlZCByZWxhdGl2ZSBpbmZsdWVuY2Ugb2YgYWxsIHNjaG9sYXJzIHByZXNlbnRlZCBpbiBhIHBpZSBjaGFydC4NCg0KVGhlIG5ldHdvcmsgaXNvbGF0ZSBlc3RpbWF0ZSBzZWVtcyB0byBtb3N0IGltcG9ydGFudCBmb3Igc2Nob2xhcnMgaW4gd2F2ZSAxLiBUaGlzIGlzIG5vdCB1bnN1cnByaXNpbmcsIGFzIHRoZXJlIGFyZSBhIGxvdCBvZiBpc29sYXRlcyBpbiB0aGUgbmV0d29yayBhdCB0aW1lIHBvaW50IDEuIEluIHdhdmUgMiB0aGUgbmV0d29yayBpc29sYXRlIGVzdGltYXRlIGlzIHN0aWxsIHJlbGF0aXZlbHkgaW1wb3J0YW50LCBidXQgdGhlIHJlbGF0aXZlIGlzIGluZmx1ZW5jZSBpcyB3ZWFrZXIgY29tcGFyZWQgdG8gd2F2ZSAxLiBBdCB0aW1lIHBvaW50IDIgdGhlIHNxdWFyZWQgZWZmZWN0IG9mIGluZGVncmVlIHBvcHVsYXJpdHkgc2VlbXMgdG8gYmUgbW9zdCBpbXBvcnRhbnQuIFRoaXMgbWVhbnMgdGhhdCB0aGUgbmV0d29yayBjaGFuZ2UgaXMgbWFpbmx5IGluZmx1ZW5jZSBieSB0aGlzIGVmZmVjdCBvZiBpbmRlZ3JlZSBwb3B1bGFyaXR5LCB0aGUgbW9yZSBpbmRlZ3JlZXMgYW4gYWN0b3IgaGFzIHRoZSBtb3JlIGxpa2VseSB0aGV5IGFyZSB0byByZWNlaXZlIHRpZXMuIFJlZ2FyZGluZyB0aGUgdGhpcmQgaHlwb3RoZXNpcywgdGhpcyBtZWFucyB0aGF0IHRoZSAiTWF0dGhldyBlZmZlY3QiIGZvdW5kIGZvciBpbmRlZ3JlZXMgaXMgc2VlbWluZ2x5IGEgdmVyeSBwcmVzZW50IG1lY2hhbmlzbSBmb3IgdGllIGNyZWF0aW9uLiBPbiB0aGUgb3RoZXIgaGFuZCwgcmVnYXJkaW5nIGh5cG90aGVzaXMgNCwgdGhlIGgtaW5kZXggaXMgb25seSBtb2RlcmF0ZWx5IGltcG9ydGFudCBmb3IgdGhlIGNoYW5nZXMgaW4gdGhlIG5ldHdvcmssIGluZGljYXRpbmcgdGhhdCBhICJNYXR0aGV3IGVmZmVjdCIgZm9yIGgtaW5kZXggaXMgb25seSBzbGlnaHRseSBwcmVzZW50IGluIHRoaXMgY29sbGFib3JhdGlvbiBuZXR3b3JrLg0KDQpgYGB7ciByZWxhdGl2ZSBpbmZsdWVuY2V9DQoNClJJIDwtIHNpZW5hUkkoZGF0YSA9IGRhdGFfc2llbmEsIGFucyA9IGFuc00zKQ0KDQoNCnBsb3QoUkksIGFkZFBpZUNoYXJ0ID0gRkFMU0UsIHJhZGl1cyA9IDEsIGxlZ2VuZENvbHVtbnMgPSAzKSANCnBsb3QoUkksIGFjdG9ycz0xOjUsIGFkZFBpZUNoYXJ0ID0gVFJVRSwgcmFkaXVzID0gMSwgbGVnZW5kQ29sdW1ucyA9IDMpDQoNCmBgYA0K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("4-results-rsiena-final.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

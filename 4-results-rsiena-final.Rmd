@@ -1,0 +1,357 @@
+---
+title: "Results - RSiena"
+author: "Koen Lucas"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: references.bib
+---
+
+# Results - RSiena
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+
+library(knitr)
+library(formatR)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=FALSE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+rgl::setupKnitr()
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+```
+
+```{r clean workspace, include = FALSE}
+
+rm(list = ls())
+
+```
+
+```{r load functions, include=FALSE}
+
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+    ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+    ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+    if (is.null(file))
+        file = deparse(substitute(x))
+    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+    totalname <- paste(location, file, "_", datename, ".rda", sep = "")
+    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload <- function(filename) {
+    load(filename)
+    get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+    knitr::kable(x, digits = 2, "html", ...) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+        kableExtra::scroll_box(width = "100%", height = "300px")
+}
+
+
+```
+
+```{r load packages, include=FALSE}
+
+packages <- c("tidyverse", 
+              "scholar", 
+              "RSiena", 
+              "RsienaTwoStep", 
+              "igraph")
+
+fpackage.check(packages)
+```
+
+```{r load data, include=FALSE}
+
+fulldata <- fload("./Data/full_data.Rdata")
+
+df_ego <- fload("./Data/df_ego.Rdata")
+  
+df_works <- fload("./Data/df_works.Rdata")
+
+```
+
+```{r step 1 define data, include=FALSE}
+
+df_nets <- fulldata$nets
+
+length(df_nets)
+dim(df_nets)[1]
+
+wave1 <- df_nets[1,,]
+wave2 <- df_nets[2,,]
+
+# put diagonal to zero
+diag(wave1) <- 0
+diag(wave2) <- 0
+
+# binary ties
+wave1[wave1 > 1] <- 1
+wave2[wave2 > 2] <- 1
+
+# put networks in array --> right format for Rsiena
+net_soc_array <- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
+dim(net_soc_array)
+
+```
+
+```{r variables, include=FALSE}
+
+net <- sienaDependent(net_soc_array)
+
+career_age <- as.numeric(df_ego$career_age)
+career_age <- coCovar(career_age)
+
+
+h_index <- as.numeric(df_ego$h_index_cat)
+h_index <- coCovar(h_index)
+
+gender <- coCovar(df_ego$female)
+
+data_siena <- sienaDataCreate(net, career_age, h_index, gender)
+
+```
+
+```{r step 2 create effect structure, include=FALSE}
+
+myeff <- getEffects(data_siena)
+
+```
+
+```{r step 3 initial description, include=FALSE}
+
+print01Report(data_siena, modelname = "./results/first_model")
+
+```
+
+## Jaccard-index
+
+The Jaccard-index gives an indication about the stability and change in a network over time. The Jaccard-index for these collaboration networks is 0,168. This is generally considered low [@ripley2011], meaning that there is not a lot of change in the network between wave 1 and wave 2.
+
+## Model 0 - Null model
+
+```{r}
+myeff0 <- getEffects(data_siena)
+
+```
+
+```{r, eval=FALSE}
+myAlgorithm0 <- sienaAlgorithmCreate(projname = "null_model")
+(ansM0 <- siena07(myAlgorithm0, data = data_siena, effects = myeff0, returnDeps = TRUE))
+(ansM0 <- siena07(myAlgorithm0, data = data_siena, effects = myeff0, returnDeps = TRUE, prevAns = ansM0))
+
+```
+
+```{r, eval=FALSE, echo=FALSE}
+#Save model with lowest convergence
+save(ansM0, file="./results/ansM0")
+
+```
+
+```{r, echo=FALSE}
+
+load("./results/ansM0")
+summary(ansM0)
+
+```
+
+In the null-model only a rate parameter and standard network effects are estimated. First, the outdegree (density) effect estimates to what extent nodes tend to form outgoing connections. It can thus be seen as a baseline for the likelihood of any given node creating an outgoing tie. In this study these outgoing ties refer to the instigation of a co-publication. The effect is significantly negative (b = -3,1535, SE = 0,0731), meaning that the general tendency to for instigating collaboration is low. Furthermore, the estimate for reciprocity shows if there is a tendency for directed relationships to be mutual. In this study this would refer to if a node instigates a collaboration with an alter, this alter would likely also instigate a collaboration with this node. This effect is significant and positive (b = 2,8678, SE = 0,2149), indicating that this is the case.
+
+## Model 1 - only structural effects
+
+```{r specify model1 only networkstructures, include=FALSE}
+
+myeff1 <- getEffects(data_siena)
+
+myeff1 <- includeEffects(myeff1, isolateNet) # to control for isolates
+myeff1 <- includeEffects(myeff1, inPopSqrt) # nodes are attracted to nodes with more indegrees
+myeff1 <- includeEffects(myeff1, outAct) # control for more active nodes outdegrees                      
+myeff1 <- includeEffects(myeff1, inAct) # control for behaviour of nodes with more indegrees
+myeff1 <- includeEffects(myeff1, transTrip) # controls for triadic relationships
+myeff1 <- includeEffects(myeff1, recip) # control for reciprocity
+
+
+
+```
+
+```{r estimate model1, eval=FALSE}
+
+myAlgorithm1 <- sienaAlgorithmCreate(projname = "first_model")
+(ansM1 <- siena07(myAlgorithm1, data = data_siena, effects = myeff1, returnDeps = TRUE))
+(ansM1 <- siena07(myAlgorithm1, data = data_siena, effects = myeff1, returnDeps = TRUE, prevAns = ansM1))
+
+```
+
+```{r, eval=FALSE, echo=FALSE}
+#Save model with lowest convergence
+save(ansM1, file="./results/ansM1")
+```
+
+```{r, echo=FALSE}
+load("./results/ansM1")
+summary(ansM1)
+```
+
+In model 1, structural network effects are added. First, I added a parameter for indegree popularity, which indicates that those who have more indegrees are more popular to form a new tie with. Due to the fact that the degree distribution is right-skewed, and the observation that the network evolves in a a network with scale-free characteristics in wave 2, The parameter is added as squared. This means that it is expected that the parameter is not linear, but that this parameter is estimated exponentially. The more indegrees someone has, the bigger the effect of indegree popularity becomes. I find a positive estimate for this parameter and is significant (b = 0,9334, SE = 0,1169). This means that those with more indegrees are more likely to receive ties. Therefore, hypothesis 3 does not have to be rejected.
+
+Second, an effect for transitive triplets is added to this model. This parameter estimates how many transitive relationships are formed. The estimate of this parameter is positive and significant (b = 1,344, SE = 0,2139), meaning that there is a preference for forming transitive relationships. Third, both an outdegree and indegree activity parameter is added. This estimates whether those with more in- or outdegrees are more active in sending ties. I find a negative and significant effect for outdegree activity (b = -0,1676, SE = 0,0785), meaning that those with more outdegrees are less likely to send ties. Similarly, a negative and significant effect was found for indegree activity (b = -0,492, SE = 0,1505), meaning that those who have more indegrees are less likely to send ties. Last, a network isolate parameter is added to control for the many isolates in the data. This parameter estimates whether isolates tend to stay isolates. This estimate is positive and significant (b = 4,2535, SE = 0,6766), indicating if a node is isolate, they tend to stay isolate.
+
+## Model 2 - Include h-index
+
+```{r specify model2 include h-index, include=FALSE}
+
+myeff2 <- getEffects(data_siena)
+
+myeff2 <- includeEffects(myeff2, isolateNet) # to control for isolates
+myeff2 <- includeEffects(myeff2, inPopSqrt) # nodes are attracted to nodes with more indegrees
+myeff2 <- includeEffects(myeff2, outAct) # control for more active nodes outdegrees                      
+myeff2 <- includeEffects(myeff2, inAct) # control for behaviour of nodes with more indegrees
+myeff2 <- includeEffects(myeff2, transTrip) # controls for triadic relationships
+myeff2 <- includeEffects(myeff2, recip) # control for reciprocity
+
+
+myeff2 <- includeEffects(myeff2, altX, interaction1 = "h_index") # absolute difference to h_index
+
+```
+
+```{r estimate model2, eval=FALSE}
+
+myAlgorithm2 <- sienaAlgorithmCreate(projname = "second_model")
+(ansM2 <- siena07(myAlgorithm2, data = data_siena, effects = myeff2, returnDeps = TRUE))
+(ansM2 <- siena07(myAlgorithm2, data = data_siena, effects = myeff2, returnDeps = TRUE, prevAns = ansM2))
+
+```
+
+```{r, eval=FALSE, echo=FALSE}
+#Save the last model since it has the lowest maximum convergence ratio. 
+save(ansM2, file="./results/ansM2")
+```
+
+```{r, echo=FALSE}
+load("./results/ansM2")
+summary(ansM2)
+```
+
+In the second model, an ego-level effect is added for h-index. The h-index alter effect indicates that nodes are more or less likely to send ties to alters with a higher h-index. This effect is found to be positive (b = 0,1343, SE = 0,0614) which entails that nodes have a preference to send ties to alters with a higher h-index. This effect is also found to be significant. Thus, hypothesis 4 does not have to be rejected.
+
+## Model 3 - Full model
+
+```{r specify model3 with ego effects, include=FALSE}
+
+myeff3 <- getEffects(data_siena)
+
+myeff3 <- includeEffects(myeff3, isolateNet) # to control for isolates
+myeff3 <- includeEffects(myeff3, inPopSqrt) # nodes are attracted to nodes with more indegrees
+myeff3 <- includeEffects(myeff3, outAct) # control for more active nodes outdegrees                      
+myeff3 <- includeEffects(myeff3, inAct) # control for behaviour of nodes with more indegrees
+myeff3 <- includeEffects(myeff3, transTrip) # controls for triadic relationships
+myeff3 <- includeEffects(myeff3, recip) # control for reciprocity
+myeff3 <- includeEffects(myeff3, inPopSqrt)
+
+
+myeff3 <- includeEffects(myeff3, altX, interaction1 = "h_index") # absolute difference to h_index
+myeff3 <- includeEffects(myeff3, egoX, interaction1 = "career_age") # ego's are more likely receive ties from younger scholars
+myeff3 <- includeEffects(myeff3, altX, interaction1 = "career_age") # ego's are more likely to send ties to older scholars
+myeff3 <- includeEffects(myeff3, sameX, interaction1 = "gender") # ego's are more likely to send ties to those who are similar
+myeff3 <- includeEffects(myeff3, egoX, interaction1 = "gender")
+
+```
+
+```{r estimate model3, eval=FALSE}
+
+myAlgorithm3 <- sienaAlgorithmCreate(projname = "third_model")
+(ansM3 <- siena07(myAlgorithm3, data = data_siena, effects = myeff3, returnDeps = TRUE))
+(ansM3 <- siena07(myAlgorithm3, data = data_siena, effects = myeff3, returnDeps = TRUE, prevAns = ansM3))
+
+```
+
+```{r, eval=FALSE, echo=FALSE}
+#Save the last model since it has the lowest maximum convergence ratio. 
+save(ansM3, file="./results/ansM3")
+```
+
+```{r, echo=FALSE}
+load("./results/ansM3")
+summary(ansM3)
+```
+
+## Model 4 - Full model with InPop instead of InPopSqrt
+
+```{r specify model4 with InPop, include=FALSE}
+
+myeff4 <- getEffects(data_siena)
+
+myeff4 <- includeEffects(myeff4, isolateNet) # to control for isolates
+myeff4 <- includeEffects(myeff4, inPop) # nodes are attracted to nodes with more indegrees
+myeff4 <- includeEffects(myeff4, outAct) # control for more active nodes outdegrees                      
+myeff4 <- includeEffects(myeff4, inAct) # control for behaviour of nodes with more indegrees
+myeff4 <- includeEffects(myeff4, transTrip) # controls for triadic relationships
+myeff4 <- includeEffects(myeff4, recip) # control for reciprocity
+
+
+myeff4 <- includeEffects(myeff4, altX, interaction1 = "h_index") # absolute difference to h_index
+myeff4 <- includeEffects(myeff4, egoX, interaction1 = "career_age") # ego's are more likely receive ties from younger scholars
+myeff4 <- includeEffects(myeff4, altX, interaction1 = "career_age") # ego's are more likely to send ties to older scholars
+myeff4 <- includeEffects(myeff4, sameX, interaction1 = "gender") # ego's are more likely to send ties to those who are similar
+myeff4 <- includeEffects(myeff4, egoX, interaction1 = "gender")
+
+```
+
+```{r estimate model4, eval=FALSE}
+
+myAlgorithm4 <- sienaAlgorithmCreate(projname = "fourth_model")
+(ansM4 <- siena07(myAlgorithm4, data = data_siena, effects = myeff4, returnDeps = TRUE))
+(ansM4 <- siena07(myAlgorithm4, data = data_siena, effects = myeff4, returnDeps = TRUE, prevAns = ansM4))
+
+```
+
+```{r, eval=FALSE, echo=FALSE}
+#Save the last model since it has the lowest maximum convergence ratio. 
+save(ansM4, file="./results/ansM4")
+```
+
+```{r, echo=FALSE}
+load("./results/ansM4")
+summary(ansM4)
+```
+
+In Model 4, I changed the InPopSqrt parameter for a non-quadratic indegree popularity parameter as a way to check whether this would significantly impact the results. However, the indegree distribution does not fit the data well ([See GOF](https://koenlucas.github.io/labjournal/4-results-GOF.html)), meaning that the estimated model does not represent the observed data of the indegrees. This means that the estimates cannot be interpreted.
+
+# Relative influence
+
+The relative influence of a model refers to the underlying strength of each parameter. In other words, the relative influence shows what parameters have to most impact on the tie formation of nodes [@indlekofer2013]. The relative influence of Model 3 is shown below, first for each scholar individually and second with only the first five scholars and an aggregated relative influence of all scholars presented in a pie chart.
+
+The network isolate estimate seems to most important for scholars in wave 1. This is not unsurprising, as there are a lot of isolates in the network at time point 1. In wave 2 the network isolate estimate is still relatively important, but the relative is influence is weaker compared to wave 1. At time point 2 the squared effect of indegree popularity seems to be most important. This means that the network change is mainly influence by this effect of indegree popularity, the more indegrees an actor has the more likely they are to receive ties. Regarding the third hypothesis, this means that the "Matthew effect" found for indegrees is seemingly a very present mechanism for tie creation. On the other hand, regarding hypothesis 4, the h-index is only moderately important for the changes in the network, indicating that a "Matthew effect" for h-index is only slightly present in this collaboration network.
+
+```{r relative influence}
+
+RI <- sienaRI(data = data_siena, ans = ansM3)
+
+
+plot(RI, addPieChart = FALSE, radius = 1, legendColumns = 3) 
+plot(RI, actors=1:5, addPieChart = TRUE, radius = 1, legendColumns = 3)
+
+```

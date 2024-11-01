@@ -1,0 +1,140 @@
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 28/10/2024 11:49:10
+New results follow.
+-----------------------------------
+
+RSiena version 1.3.14 (07 okt 22)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 581124.
+Effects object used: myeff0 
+Model Type:
+ Standard actor-oriented model
+Estimation method: conditional moment estimation
+.
+Conditioning variable is the total number of observed changes ("distance") 
+in the network variable.
+Distance for simulations is  287 .
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  0. Rate parameter                           2.4643
+  1. eval:  outdegree (density)                            -1.7006
+  2. eval:  reciprocity                                     0.0000
+
+
+Observed values of target statistics are
+  1. Number of ties                                                     258.0000
+  2. Number of reciprocated ties                                         60.0000
+
+ 2 parameters, 2 statistics
+
+Estimation of derivatives by the LR method (type 1).
+
+
+@2
+End of stochastic approximation algorithm, phase 3.
+---------------------------------------------------
+
+Total of 1812 iterations.
+Parameter estimates based on 812 iterations,
+basic rate parameter as well as 
+convergence diagnostics, covariance and derivative matrices based on 1000 iterations.
+
+Information for convergence diagnosis.
+Averages, standard deviations, and t-ratios for deviations from targets:
+  1.   0.5220  11.9975   0.0435 
+  2.   0.6200   8.7097   0.0712 
+
+Good convergence is indicated by the t-ratios being close to zero.
+
+Overall maximum convergence ratio =  0.0724 .
+
+
+
+@2
+Estimation Results.
+-------------------
+
+Regular end of estimation algorithm.
+Total of 1812 iteration steps.
+
+
+@3
+Estimates and standard errors
+                             
+Rate parameters:
+ 0. Rate parameter                            3.3096  (   0.3796)
+
+Other parameters:
+ 1. eval:  outdegree (density)                                    -3.1535  (   0.0731)
+ 2. eval:  reciprocity                                             2.8678  (   0.2149)
+
+
+@3
+Covariance matrices
+                   
+Covariance matrix of estimates (correlations below diagonal):
+     0.005     -0.005
+    -0.326      0.046
+
+Derivative matrix of expected statistics X by parameters and
+covariance/correlation matrix of X can be found using
+summary(ans) within R, or by using the 'verbose' option in Siena07.
+ 
+Total computation time 76.91 seconds.
+
+
+-----------------------------------
+New Analysis started.
+Date and time: 28/10/2024 11:50:27
+New results follow.
+-----------------------------------
+
+RSiena version 1.3.14 (07 okt 22)
+
+
+@1
+Estimation by stochastic approximation algorithm.
+=================================================
+
+Random initialization of random number stream.
+Current random number seed is 341801.
+Effects object used: myeff0 
+Model Type:
+ Standard actor-oriented model
+Estimation method: conditional moment estimation
+.
+Conditioning variable is the total number of observed changes ("distance") 
+in the network variable.
+Distance for simulations is  287 .
+Standard errors are estimated with the likelihood ratio method.
+Dolby method (regression on scores) is used.
+Initial value of gain parameter is  0.2000000.
+Reduction factor for gain parameter is  0.5000000.
+Number of subphases in Phase 2 is 4.
+
+Initial parameter values are 
+  0. Rate parameter                           3.3096
+  1. eval:  outdegree (density)                            -3.1535
+  2. eval:  reciprocity                                     2.8678
+
+
+Observed values of target statistics are
+  1. Number of ties                                                     258.0000
+  2. Number of reciprocated ties                                         60.0000
+
+ 2 parameters, 2 statistics
+

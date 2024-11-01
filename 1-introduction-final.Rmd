@@ -1,0 +1,46 @@
+---
+title: "Introduction"
+author: "Koen Lucas"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: references.bib
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+
+library(knitr)
+library(formatR)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+rgl::setupKnitr()
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+```
+
+# Introduction
+
+The increase in collaboration in science has contributed to the increasing publication productivity and quality [@ferligoj2015]. However, the growth in collaboration networks has also produced an unequal playing field for scientist to accomplish a ‘successful’ career [@diprete2006]. It has often been argued that scientific achievement exhibits a ‘Matthew effect’, meaning that previous success is an indication of later success, furthering the increase in distinction [@bol2018]. First introduced by @merton1968, the ‘Matthew effect’ can therefore be seen as a self-reinforcing mechanism turning past success into future success. For instance, if only one of two equally talented young scholars authored a successful publication, this scholar is predicted to have a more successful career. To clarify, a successful scholar can often accumulate more ‘credit’ over time than unknown researchers, even if their work is of similar quality. This mechanism, often synonymously called cumulative advantage [@barabasi2002; @perc2010], is consequently causing inequality in the success of academics as it basically comes down to ‘winner takes all’ [@diprete2006]. As argued by @merton1968, scientific contribution is more visible for a community when introduced by high-ranking scientist. Thus, when early success is a predictor for future success, inequality between these scholars continues to grow.
+
+One way in which the ‘Matthew effect’ is manifested in collaboration networks is through the idea that these networks exhibit scale-free characteristics [@fox2005]. The structure of such scale-free networks is characterised by a power-law distribution, where a few nodes dominate the network, creating hubs [@kim2019]. In essence, a network can be considered scale-free when a lot of nodes have only a few collaboration ties, while a small number of nodes have a lot of collaboration ties, thus creating hubs surrounding these nodes. However, literature on scale-free networks is unanimous about to what extent these scale-free networks occur in the real world [@broido2019]. Nevertheless, it has been argued that scientific collaboration networks do in fact exhibit scale-free-ness [@kim2019]. In this paper, I will investigate whether the collaboration network of four sociology departments in the Netherlands can be considered scale-free, proposing the following research question:
+
+1.  *To what extent do collaboration networks in Dutch sociology departments exhibit a scale-free network, in which hubs are formed surrounding a small number of nodes?*
+
+If it is the case that a small number of nodes dominate a network, and hubs are created around them, this could indicate a ‘Matthew effect’. This is often explained through the mechanism of preferential attachment, in which those who were successful before are a preferential collaboration partner to those without those early successes [@hancean2016; @kim2019]. This mechanism of preferential attachment is an interdependent process as scholars are influence in choosing their collaboration partners by already existing ties. The tie formation does not happen in isolation. If those nodes who dominate the network are in fact the most prestigious scholars, this would clearly illustrate a ‘Matthew effect’, in which prestigious scholars have the most collaborators. In this paper, a scholar’s prestige is defined by a scholar’s h-index, a popular bibliometric indicator [@bornmann2020]. Therefore, I propose the following research question:
+
+2.  *To what extent do collaboration networks in Dutch sociology departments form hubs surrounding the* *scholars with the highest h-index?*
+
+Furthermore, 'Matthew effects' in science have been found in multiple aspects of the scientific domain such as institutional prestige [@medoff2006], funding [@bol2018], and citations [@wang2014]. Additionally, preferential attachment mechanisms in the growth of collaboration networks have been found in previous research [@barabasi2002; @perc2010], however evidence concerning preferential attachment as the driving mechanism of co-authorship is mixed [@ferligoj2015]. Furthermore, little is known about the implications of the ‘Matthew effect’ in creating co-authorship ties considering the prestige of a scholar rather than only looking at the role of already existing co-authorship ties. This paper will therefore look into the effect of prestige defined as the h-index as characteristic that attracts collaboration ties. This way it is possible to disentangle whether it is the existing collaboration network or the ego-focused prestige of a scientist that shapes co-authorship ties in future collaboration networks. Ergo, this study will look into this phenomenon by focusing on how the prestige (i.e. h-index) and the number of co-authorship ties of a scientist at one point accumulates into more co-authorship ties on a later timepoint. I therefore propose the following two research questions:
+
+3.  *To what extent does an author’s number of co-authorship ties at T1 impact the increase in co- authorship ties at T2?*
+4.  *To what extent does an author’s citation score at T1 impact the increase in in co-authorship ties at T2?*
+
+## References

@@ -1,0 +1,47 @@
+---
+title: "Theory"
+author: "Koen Lucas"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: references.bib
+---
+
+# Theory
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+
+library(knitr)
+library(formatR)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=FALSE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+rgl::setupKnitr()
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+```
+
+The reason why it is often argued that networks become scale-free is the mechanism of preferential attachment [@broido2019]. In the case of co-authorship this means that scholars who already have a lot of collaboration ties will be more attractive to collaborate with. As a result, previously successful scholars attract more opportunities for more success in the future while unsuccessful scholars attract less resources, decreasing their chances of becoming successful in the future. We can thus presume that collaboration networks hold a preference to connect with those who are already well-connected. Hence, it can be expected that highly visible/already established researchers have more opportunities of co-authorship [@hancean2016]. Consequently, it can be argued that these scholars will dominate the network as collaboration hubs are formed surrounding these scholars. Other scholars will only have a small number of ties, thus exhibiting scale-free characteristics. From this follows the following hypothesis:
+
+H1: *Collaboration networks in Dutch sociology departments exhibit a scale-free network.*
+
+The second hypothesis is also based on the assumption that collaboration networks are often dominated by a small number of nodes with a disproportionately large number of connections, while most nodes only have a very few connections [@kim2019]. This study presumes that these hubs are formed through a mechanism of preferential attachment, and thus, exhibit a 'Matthew effect' [@fox2005]. Scholars are inclined to co-author with scholars who are already prestigious, as these scholars tend to receive the most recognition for their publications. Due to scholars predominantly sending ties to high prestigious scholars (i.e. a higher h-index), hubs are created that dominate the network [@kim2019]. In other words, the network becomes concentrated around those who are more prestigious (i.e. those who have a higher h-index). Thus, the higher one’s h-index, the more likely that a hub is created surrounding this individual. Therefore, I formulate the following hypothesis:
+
+H2: *In collaboration networks in Dutch sociology departments hubs are formed surrounding those scholars with the highest h-index.*
+
+As mentioned before, scholars are incentivised to send ties to those scholars who are most prestigious [@hancean2016]. One way in which scholars can perceive another scholar as prestigious is by looking at the current amount co-authorship ties a scholar has. A scholar who receives more ties can be perceived as popular. This can influence other scholars to instigate a collaboration with these scholars, as publications with popular scholars are more visible in the scientific community [@merton1968]. This way, it is beneficial for scholars to send ties to those who are already receiving a lot of ties.
+
+H3: *Scholars from Dutch sociology departments are more likely to publish with scholars who receive more co-authorship ties.*
+
+Similarly, scholars who have a higher h-index may be perceived as more prestigious [@bornmann2020]. Collaboration with these scholars is therefore beneficial due to their high visibility in the scientific community, as these papers will be more likely to reach a larger audience within this scientific community [@merton1968]. In contrast to the preferential attachment mechanism arguing that already received ties lead to more received ties in the future, the h-index is a more outwardly visible measure of prestige. That is, the h-index is an often-used metric to rank scholars [@bornmann2020]. Therefore, a scholar with a higher h-index can be perceived as more prestigious to the whole scientific community, allowing them to reach more scholars. This is opposed to the number of receiving ties, as this might be more visible within the specific institution. Another influence effect of forming ties with scholars with higher prestige could therefore be in place, as the higher visibility might influence the tie formation differently. I would therefore argue that h-index as a measurement of prestige is similarly important mechanism as the preferential attachment mechanism.
+
+H4: *Scholars from Dutch sociology departments are more likely to publish with scholars who have a higher h-index.*
+
+## References

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Koen Lucas" />
+
+<meta name="date" content="2024-11-01" />
+
+<title>Introduction</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="Week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
+    </li>
+    <li>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
+    </li>
+    <li class="dropdown-header">Week 7 - RI</li>
+    <li>
+      <a href="Week7-RSiena.html"></a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Concept
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-Introduction-concept.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-concept.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-concept.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-concept.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-concept.html">Results - RSiena</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Final
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-introduction-final.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-final.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-final.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-final.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-final.html">Results - RSiena</a>
+    </li>
+    <li>
+      <a href="4-results-GOF.html">Results - Goodness of fit</a>
+    </li>
+    <li>
+      <a href="5-conclusion.html">Conclusion</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Introduction</h1>
+<h4 class="author">Koen Lucas</h4>
+<h4 class="date">2024-11-01</h4>
+
+</div>
+
+
+<style>
+body {
+text-align: justify}
+</style>
+<div id="introduction" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>The increase in collaboration in science has contributed to the
+increasing publication productivity and quality <span
+class="citation">(Ferligoj et al. 2015)</span>. However, the growth in
+collaboration networks has also produced an unequal playing field for
+scientist to accomplish a ‘successful’ career <span
+class="citation">(DiPrete and Eirich 2006)</span>. It has often been
+argued that scientific achievement exhibits a ‘Matthew effect’, meaning
+that previous success is an indication of later success, furthering the
+increase in distinction <span class="citation">(Bol, Vaan, and Rijt
+2018)</span>. First introduced by <span class="citation">Merton
+(1968)</span>, the ‘Matthew effect’ can therefore be seen as a
+self-reinforcing mechanism turning past success into future success. For
+instance, if only one of two equally talented young scholars authored a
+successful publication, this scholar is predicted to have a more
+successful career. To clarify, a successful scholar can often accumulate
+more ‘credit’ over time than unknown researchers, even if their work is
+of similar quality. This mechanism, often synonymously called cumulative
+advantage <span class="citation">(Barabâsi et al. 2002; Perc
+2010)</span>, is consequently causing inequality in the success of
+academics as it basically comes down to ‘winner takes all’ <span
+class="citation">(DiPrete and Eirich 2006)</span>. As argued by <span
+class="citation">Merton (1968)</span>, scientific contribution is more
+visible for a community when introduced by high-ranking scientist. Thus,
+when early success is a predictor for future success, inequality between
+these scholars continues to grow.</p>
+<p>One way in which the ‘Matthew effect’ is manifested in collaboration
+networks is through the idea that these networks exhibit scale-free
+characteristics <span class="citation">(Fox Keller 2005)</span>. The
+structure of such scale-free networks is characterised by a power-law
+distribution, where a few nodes dominate the network, creating hubs
+<span class="citation">(Kim 2019)</span>. In essence, a network can be
+considered scale-free when a lot of nodes have only a few collaboration
+ties, while a small number of nodes have a lot of collaboration ties,
+thus creating hubs surrounding these nodes. However, literature on
+scale-free networks is unanimous about to what extent these scale-free
+networks occur in the real world <span class="citation">(Broido and
+Clauset 2019)</span>. Nevertheless, it has been argued that scientific
+collaboration networks do in fact exhibit scale-free-ness <span
+class="citation">(Kim 2019)</span>. In this paper, I will investigate
+whether the collaboration network of four sociology departments in the
+Netherlands can be considered scale-free, proposing the following
+research question:</p>
+<ol style="list-style-type: decimal">
+<li><em>To what extent do collaboration networks in Dutch sociology
+departments exhibit a scale-free network, in which hubs are formed
+surrounding a small number of nodes?</em></li>
+</ol>
+<p>If it is the case that a small number of nodes dominate a network,
+and hubs are created around them, this could indicate a ‘Matthew
+effect’. This is often explained through the mechanism of preferential
+attachment, in which those who were successful before are a preferential
+collaboration partner to those without those early successes <span
+class="citation">(Hâncean and Perc 2016; Kim 2019)</span>. This
+mechanism of preferential attachment is an interdependent process as
+scholars are influence in choosing their collaboration partners by
+already existing ties. The tie formation does not happen in isolation.
+If those nodes who dominate the network are in fact the most prestigious
+scholars, this would clearly illustrate a ‘Matthew effect’, in which
+prestigious scholars have the most collaborators. In this paper, a
+scholar’s prestige is defined by a scholar’s h-index, a popular
+bibliometric indicator <span class="citation">(Bornmann et al.
+2020)</span>. Therefore, I propose the following research question:</p>
+<ol start="2" style="list-style-type: decimal">
+<li><em>To what extent do collaboration networks in Dutch sociology
+departments form hubs surrounding the</em> <em>scholars with the highest
+h-index?</em></li>
+</ol>
+<p>Furthermore, ‘Matthew effects’ in science have been found in multiple
+aspects of the scientific domain such as institutional prestige <span
+class="citation">(Medoff 2006)</span>, funding <span
+class="citation">(Bol, Vaan, and Rijt 2018)</span>, and citations <span
+class="citation">(Wang 2014)</span>. Additionally, preferential
+attachment mechanisms in the growth of collaboration networks have been
+found in previous research <span class="citation">(Barabâsi et al. 2002;
+Perc 2010)</span>, however evidence concerning preferential attachment
+as the driving mechanism of co-authorship is mixed <span
+class="citation">(Ferligoj et al. 2015)</span>. Furthermore, little is
+known about the implications of the ‘Matthew effect’ in creating
+co-authorship ties considering the prestige of a scholar rather than
+only looking at the role of already existing co-authorship ties. This
+paper will therefore look into the effect of prestige defined as the
+h-index as characteristic that attracts collaboration ties. This way it
+is possible to disentangle whether it is the existing collaboration
+network or the ego-focused prestige of a scientist that shapes
+co-authorship ties in future collaboration networks. Ergo, this study
+will look into this phenomenon by focusing on how the prestige
+(i.e. h-index) and the number of co-authorship ties of a scientist at
+one point accumulates into more co-authorship ties on a later timepoint.
+I therefore propose the following two research questions:</p>
+<ol start="3" style="list-style-type: decimal">
+<li><em>To what extent does an author’s number of co-authorship ties at
+T1 impact the increase in co- authorship ties at T2?</em></li>
+<li><em>To what extent does an author’s citation score at T1 impact the
+increase in in co-authorship ties at T2?</em></li>
+</ol>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-barabasi2002" class="csl-entry">
+Barabâsi, Albert-Laszlo, Hawoong Jeong, Zoltan Néda, Erzsebet Ravasz,
+Andras Schubert, and Tamas Vicsek. 2002. <span>“Evolution of the Social
+Network of Scientific Collaborations.”</span> <em>Physica A: Statistical
+Mechanics and Its Applications</em> 311 (3-4): 590–614.
+</div>
+<div id="ref-bol2018" class="csl-entry">
+Bol, Thijs, Mathijs de Vaan, and Arnout van de Rijt. 2018. <span>“The
+Matthew Effect in Science Funding.”</span> <em>Proceedings of the
+National Academy of Sciences</em> 115 (19): 4887–90. <a
+href="https://doi.org/10.1073/pnas.1719557115">https://doi.org/10.1073/pnas.1719557115</a>.
+</div>
+<div id="ref-bornmann2020" class="csl-entry">
+Bornmann, Lutz, Christian Ganser, Alexander Tekles, and Loet
+Leydesdorff. 2020. <span>“Does the h <span
+class="math inline">\(\alpha\)</span>-Index Reinforce the Matthew Effect
+in Science? The Introduction of Agent-Based Simulations into
+Scientometrics.”</span> <em>Quantitative Science Studies</em> 1 (1):
+331–46.
+</div>
+<div id="ref-broido2019" class="csl-entry">
+Broido, Anna D, and Aaron Clauset. 2019. <span>“Scale-Free Networks Are
+Rare.”</span> <em>Nature Communications</em> 10 (1): 1017.
+</div>
+<div id="ref-diprete2006" class="csl-entry">
+DiPrete, Thomas A, and Gregory M Eirich. 2006. <span>“Cumulative
+Advantage as a Mechanism for Inequality: A Review of Theoretical and
+Empirical Developments.”</span> <em>Annu. Rev. Sociol.</em> 32 (1):
+271–97.
+</div>
+<div id="ref-ferligoj2015" class="csl-entry">
+Ferligoj, Anuška, Luka Kronegger, Franc Mali, Tom AB Snijders, and
+Patrick Doreian. 2015. <span>“Scientific Collaboration Dynamics in a
+National Scientific System.”</span> <em>Scientometrics</em> 104:
+985–1012.
+</div>
+<div id="ref-fox2005" class="csl-entry">
+Fox Keller, Evelyn. 2005. <span>“Revisiting <span>‘Scale-Free’</span>
+Networks.”</span> <em>BioEssays</em> 27 (10): 1060–68.
+</div>
+<div id="ref-hancean2016" class="csl-entry">
+Hâncean, Marian-Gabriel, and Matjaž Perc. 2016. <span>“Homophily in
+Coauthorship Networks of East European Sociologists.”</span>
+<em>Scientific Reports</em> 6 (1). <a
+href="https://doi.org/10.1038/srep36152">https://doi.org/10.1038/srep36152</a>.
+</div>
+<div id="ref-kim2019" class="csl-entry">
+Kim, Jinseok. 2019. <span>“Scale-Free Collaboration Networks: An Author
+Name Disambiguation Perspective.”</span> <em>Journal of the Association
+for Information Science and Technology</em> 70 (7): 685–700.
+</div>
+<div id="ref-medoff2006" class="csl-entry">
+Medoff, Marshall H. 2006. <span>“Evidence of a Harvard and Chicago
+Matthew Effect.”</span> <em>Journal of Economic Methodology</em> 13 (4):
+485–506.
+</div>
+<div id="ref-merton1968" class="csl-entry">
+Merton, Robert K. 1968. <span>“The Matthew Effect in Science: The Reward
+and Communication Systems of Science Are Considered.”</span>
+<em>Science</em> 159 (3810): 56–63.
+</div>
+<div id="ref-perc2010" class="csl-entry">
+Perc, Matjaž. 2010. <span>“Growth and Structure of Slovenia’s Scientific
+Collaboration Network.”</span> <em>Journal of Informetrics</em> 4 (4):
+475–82.
+</div>
+<div id="ref-wang2014" class="csl-entry">
+Wang, Jian. 2014. <span>“Unpacking the Matthew Effect in
+Citations.”</span> <em>Journal of Informetrics</em> 8 (2): 329–39.
+</div>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkludHJvZHVjdGlvbiINCmF1dGhvcjogIktvZW4gTHVjYXMiDQpkYXRlOiAiYHIgU3lzLkRhdGUoKWAiDQpvdXRwdXQ6IGh0bWxfZG9jdW1lbnQNCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCi0tLQ0KDQpgYGB7PWh0bWx9DQo8c3R5bGU+DQpib2R5IHsNCnRleHQtYWxpZ246IGp1c3RpZnl9DQo8L3N0eWxlPg0KYGBgDQpgYGB7ciwgZ2xvYmFsc2V0dGluZ3MsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KDQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShmb3JtYXRSKQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KDQoNCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9DQpgYGANCg0KIyBJbnRyb2R1Y3Rpb24NCg0KVGhlIGluY3JlYXNlIGluIGNvbGxhYm9yYXRpb24gaW4gc2NpZW5jZSBoYXMgY29udHJpYnV0ZWQgdG8gdGhlIGluY3JlYXNpbmcgcHVibGljYXRpb24gcHJvZHVjdGl2aXR5IGFuZCBxdWFsaXR5IFtAZmVybGlnb2oyMDE1XS4gSG93ZXZlciwgdGhlIGdyb3d0aCBpbiBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzIGhhcyBhbHNvIHByb2R1Y2VkIGFuIHVuZXF1YWwgcGxheWluZyBmaWVsZCBmb3Igc2NpZW50aXN0IHRvIGFjY29tcGxpc2ggYSDigJhzdWNjZXNzZnVs4oCZIGNhcmVlciBbQGRpcHJldGUyMDA2XS4gSXQgaGFzIG9mdGVuIGJlZW4gYXJndWVkIHRoYXQgc2NpZW50aWZpYyBhY2hpZXZlbWVudCBleGhpYml0cyBhIOKAmE1hdHRoZXcgZWZmZWN04oCZLCBtZWFuaW5nIHRoYXQgcHJldmlvdXMgc3VjY2VzcyBpcyBhbiBpbmRpY2F0aW9uIG9mIGxhdGVyIHN1Y2Nlc3MsIGZ1cnRoZXJpbmcgdGhlIGluY3JlYXNlIGluIGRpc3RpbmN0aW9uIFtAYm9sMjAxOF0uIEZpcnN0IGludHJvZHVjZWQgYnkgQG1lcnRvbjE5NjgsIHRoZSDigJhNYXR0aGV3IGVmZmVjdOKAmSBjYW4gdGhlcmVmb3JlIGJlIHNlZW4gYXMgYSBzZWxmLXJlaW5mb3JjaW5nIG1lY2hhbmlzbSB0dXJuaW5nIHBhc3Qgc3VjY2VzcyBpbnRvIGZ1dHVyZSBzdWNjZXNzLiBGb3IgaW5zdGFuY2UsIGlmIG9ubHkgb25lIG9mIHR3byBlcXVhbGx5IHRhbGVudGVkIHlvdW5nIHNjaG9sYXJzIGF1dGhvcmVkIGEgc3VjY2Vzc2Z1bCBwdWJsaWNhdGlvbiwgdGhpcyBzY2hvbGFyIGlzIHByZWRpY3RlZCB0byBoYXZlIGEgbW9yZSBzdWNjZXNzZnVsIGNhcmVlci4gVG8gY2xhcmlmeSwgYSBzdWNjZXNzZnVsIHNjaG9sYXIgY2FuIG9mdGVuIGFjY3VtdWxhdGUgbW9yZSDigJhjcmVkaXTigJkgb3ZlciB0aW1lIHRoYW4gdW5rbm93biByZXNlYXJjaGVycywgZXZlbiBpZiB0aGVpciB3b3JrIGlzIG9mIHNpbWlsYXIgcXVhbGl0eS4gVGhpcyBtZWNoYW5pc20sIG9mdGVuIHN5bm9ueW1vdXNseSBjYWxsZWQgY3VtdWxhdGl2ZSBhZHZhbnRhZ2UgW0BiYXJhYmFzaTIwMDI7IEBwZXJjMjAxMF0sIGlzIGNvbnNlcXVlbnRseSBjYXVzaW5nIGluZXF1YWxpdHkgaW4gdGhlIHN1Y2Nlc3Mgb2YgYWNhZGVtaWNzIGFzIGl0IGJhc2ljYWxseSBjb21lcyBkb3duIHRvIOKAmHdpbm5lciB0YWtlcyBhbGzigJkgW0BkaXByZXRlMjAwNl0uIEFzIGFyZ3VlZCBieSBAbWVydG9uMTk2OCwgc2NpZW50aWZpYyBjb250cmlidXRpb24gaXMgbW9yZSB2aXNpYmxlIGZvciBhIGNvbW11bml0eSB3aGVuIGludHJvZHVjZWQgYnkgaGlnaC1yYW5raW5nIHNjaWVudGlzdC4gVGh1cywgd2hlbiBlYXJseSBzdWNjZXNzIGlzIGEgcHJlZGljdG9yIGZvciBmdXR1cmUgc3VjY2VzcywgaW5lcXVhbGl0eSBiZXR3ZWVuIHRoZXNlIHNjaG9sYXJzIGNvbnRpbnVlcyB0byBncm93Lg0KDQpPbmUgd2F5IGluIHdoaWNoIHRoZSDigJhNYXR0aGV3IGVmZmVjdOKAmSBpcyBtYW5pZmVzdGVkIGluIGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaXMgdGhyb3VnaCB0aGUgaWRlYSB0aGF0IHRoZXNlIG5ldHdvcmtzIGV4aGliaXQgc2NhbGUtZnJlZSBjaGFyYWN0ZXJpc3RpY3MgW0Bmb3gyMDA1XS4gVGhlIHN0cnVjdHVyZSBvZiBzdWNoIHNjYWxlLWZyZWUgbmV0d29ya3MgaXMgY2hhcmFjdGVyaXNlZCBieSBhIHBvd2VyLWxhdyBkaXN0cmlidXRpb24sIHdoZXJlIGEgZmV3IG5vZGVzIGRvbWluYXRlIHRoZSBuZXR3b3JrLCBjcmVhdGluZyBodWJzIFtAa2ltMjAxOV0uIEluIGVzc2VuY2UsIGEgbmV0d29yayBjYW4gYmUgY29uc2lkZXJlZCBzY2FsZS1mcmVlIHdoZW4gYSBsb3Qgb2Ygbm9kZXMgaGF2ZSBvbmx5IGEgZmV3IGNvbGxhYm9yYXRpb24gdGllcywgd2hpbGUgYSBzbWFsbCBudW1iZXIgb2Ygbm9kZXMgaGF2ZSBhIGxvdCBvZiBjb2xsYWJvcmF0aW9uIHRpZXMsIHRodXMgY3JlYXRpbmcgaHVicyBzdXJyb3VuZGluZyB0aGVzZSBub2Rlcy4gSG93ZXZlciwgbGl0ZXJhdHVyZSBvbiBzY2FsZS1mcmVlIG5ldHdvcmtzIGlzIHVuYW5pbW91cyBhYm91dCB0byB3aGF0IGV4dGVudCB0aGVzZSBzY2FsZS1mcmVlIG5ldHdvcmtzIG9jY3VyIGluIHRoZSByZWFsIHdvcmxkIFtAYnJvaWRvMjAxOV0uIE5ldmVydGhlbGVzcywgaXQgaGFzIGJlZW4gYXJndWVkIHRoYXQgc2NpZW50aWZpYyBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzIGRvIGluIGZhY3QgZXhoaWJpdCBzY2FsZS1mcmVlLW5lc3MgW0BraW0yMDE5XS4gSW4gdGhpcyBwYXBlciwgSSB3aWxsIGludmVzdGlnYXRlIHdoZXRoZXIgdGhlIGNvbGxhYm9yYXRpb24gbmV0d29yayBvZiBmb3VyIHNvY2lvbG9neSBkZXBhcnRtZW50cyBpbiB0aGUgTmV0aGVybGFuZHMgY2FuIGJlIGNvbnNpZGVyZWQgc2NhbGUtZnJlZSwgcHJvcG9zaW5nIHRoZSBmb2xsb3dpbmcgcmVzZWFyY2ggcXVlc3Rpb246DQoNCjEuICAqVG8gd2hhdCBleHRlbnQgZG8gY29sbGFib3JhdGlvbiBuZXR3b3JrcyBpbiBEdXRjaCBzb2Npb2xvZ3kgZGVwYXJ0bWVudHMgZXhoaWJpdCBhIHNjYWxlLWZyZWUgbmV0d29yaywgaW4gd2hpY2ggaHVicyBhcmUgZm9ybWVkIHN1cnJvdW5kaW5nIGEgc21hbGwgbnVtYmVyIG9mIG5vZGVzPyoNCg0KSWYgaXQgaXMgdGhlIGNhc2UgdGhhdCBhIHNtYWxsIG51bWJlciBvZiBub2RlcyBkb21pbmF0ZSBhIG5ldHdvcmssIGFuZCBodWJzIGFyZSBjcmVhdGVkIGFyb3VuZCB0aGVtLCB0aGlzIGNvdWxkIGluZGljYXRlIGEg4oCYTWF0dGhldyBlZmZlY3TigJkuIFRoaXMgaXMgb2Z0ZW4gZXhwbGFpbmVkIHRocm91Z2ggdGhlIG1lY2hhbmlzbSBvZiBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCwgaW4gd2hpY2ggdGhvc2Ugd2hvIHdlcmUgc3VjY2Vzc2Z1bCBiZWZvcmUgYXJlIGEgcHJlZmVyZW50aWFsIGNvbGxhYm9yYXRpb24gcGFydG5lciB0byB0aG9zZSB3aXRob3V0IHRob3NlIGVhcmx5IHN1Y2Nlc3NlcyBbQGhhbmNlYW4yMDE2OyBAa2ltMjAxOV0uIFRoaXMgbWVjaGFuaXNtIG9mIHByZWZlcmVudGlhbCBhdHRhY2htZW50IGlzIGFuIGludGVyZGVwZW5kZW50IHByb2Nlc3MgYXMgc2Nob2xhcnMgYXJlIGluZmx1ZW5jZSBpbiBjaG9vc2luZyB0aGVpciBjb2xsYWJvcmF0aW9uIHBhcnRuZXJzIGJ5IGFscmVhZHkgZXhpc3RpbmcgdGllcy4gVGhlIHRpZSBmb3JtYXRpb24gZG9lcyBub3QgaGFwcGVuIGluIGlzb2xhdGlvbi4gSWYgdGhvc2Ugbm9kZXMgd2hvIGRvbWluYXRlIHRoZSBuZXR3b3JrIGFyZSBpbiBmYWN0IHRoZSBtb3N0IHByZXN0aWdpb3VzIHNjaG9sYXJzLCB0aGlzIHdvdWxkIGNsZWFybHkgaWxsdXN0cmF0ZSBhIOKAmE1hdHRoZXcgZWZmZWN04oCZLCBpbiB3aGljaCBwcmVzdGlnaW91cyBzY2hvbGFycyBoYXZlIHRoZSBtb3N0IGNvbGxhYm9yYXRvcnMuIEluIHRoaXMgcGFwZXIsIGEgc2Nob2xhcuKAmXMgcHJlc3RpZ2UgaXMgZGVmaW5lZCBieSBhIHNjaG9sYXLigJlzIGgtaW5kZXgsIGEgcG9wdWxhciBiaWJsaW9tZXRyaWMgaW5kaWNhdG9yIFtAYm9ybm1hbm4yMDIwXS4gVGhlcmVmb3JlLCBJIHByb3Bvc2UgdGhlIGZvbGxvd2luZyByZXNlYXJjaCBxdWVzdGlvbjoNCg0KMi4gICpUbyB3aGF0IGV4dGVudCBkbyBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzIGluIER1dGNoIHNvY2lvbG9neSBkZXBhcnRtZW50cyBmb3JtIGh1YnMgc3Vycm91bmRpbmcgdGhlKiAqc2Nob2xhcnMgd2l0aCB0aGUgaGlnaGVzdCBoLWluZGV4PyoNCg0KRnVydGhlcm1vcmUsICdNYXR0aGV3IGVmZmVjdHMnIGluIHNjaWVuY2UgaGF2ZSBiZWVuIGZvdW5kIGluIG11bHRpcGxlIGFzcGVjdHMgb2YgdGhlIHNjaWVudGlmaWMgZG9tYWluIHN1Y2ggYXMgaW5zdGl0dXRpb25hbCBwcmVzdGlnZSBbQG1lZG9mZjIwMDZdLCBmdW5kaW5nIFtAYm9sMjAxOF0sIGFuZCBjaXRhdGlvbnMgW0B3YW5nMjAxNF0uIEFkZGl0aW9uYWxseSwgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgbWVjaGFuaXNtcyBpbiB0aGUgZ3Jvd3RoIG9mIGNvbGxhYm9yYXRpb24gbmV0d29ya3MgaGF2ZSBiZWVuIGZvdW5kIGluIHByZXZpb3VzIHJlc2VhcmNoIFtAYmFyYWJhc2kyMDAyOyBAcGVyYzIwMTBdLCBob3dldmVyIGV2aWRlbmNlIGNvbmNlcm5pbmcgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgYXMgdGhlIGRyaXZpbmcgbWVjaGFuaXNtIG9mIGNvLWF1dGhvcnNoaXAgaXMgbWl4ZWQgW0BmZXJsaWdvajIwMTVdLiBGdXJ0aGVybW9yZSwgbGl0dGxlIGlzIGtub3duIGFib3V0IHRoZSBpbXBsaWNhdGlvbnMgb2YgdGhlIOKAmE1hdHRoZXcgZWZmZWN04oCZIGluIGNyZWF0aW5nIGNvLWF1dGhvcnNoaXAgdGllcyBjb25zaWRlcmluZyB0aGUgcHJlc3RpZ2Ugb2YgYSBzY2hvbGFyIHJhdGhlciB0aGFuIG9ubHkgbG9va2luZyBhdCB0aGUgcm9sZSBvZiBhbHJlYWR5IGV4aXN0aW5nIGNvLWF1dGhvcnNoaXAgdGllcy4gVGhpcyBwYXBlciB3aWxsIHRoZXJlZm9yZSBsb29rIGludG8gdGhlIGVmZmVjdCBvZiBwcmVzdGlnZSBkZWZpbmVkIGFzIHRoZSBoLWluZGV4IGFzIGNoYXJhY3RlcmlzdGljIHRoYXQgYXR0cmFjdHMgY29sbGFib3JhdGlvbiB0aWVzLiBUaGlzIHdheSBpdCBpcyBwb3NzaWJsZSB0byBkaXNlbnRhbmdsZSB3aGV0aGVyIGl0IGlzIHRoZSBleGlzdGluZyBjb2xsYWJvcmF0aW9uIG5ldHdvcmsgb3IgdGhlIGVnby1mb2N1c2VkIHByZXN0aWdlIG9mIGEgc2NpZW50aXN0IHRoYXQgc2hhcGVzIGNvLWF1dGhvcnNoaXAgdGllcyBpbiBmdXR1cmUgY29sbGFib3JhdGlvbiBuZXR3b3Jrcy4gRXJnbywgdGhpcyBzdHVkeSB3aWxsIGxvb2sgaW50byB0aGlzIHBoZW5vbWVub24gYnkgZm9jdXNpbmcgb24gaG93IHRoZSBwcmVzdGlnZSAoaS5lLiBoLWluZGV4KSBhbmQgdGhlIG51bWJlciBvZiBjby1hdXRob3JzaGlwIHRpZXMgb2YgYSBzY2llbnRpc3QgYXQgb25lIHBvaW50IGFjY3VtdWxhdGVzIGludG8gbW9yZSBjby1hdXRob3JzaGlwIHRpZXMgb24gYSBsYXRlciB0aW1lcG9pbnQuIEkgdGhlcmVmb3JlIHByb3Bvc2UgdGhlIGZvbGxvd2luZyB0d28gcmVzZWFyY2ggcXVlc3Rpb25zOg0KDQozLiAgKlRvIHdoYXQgZXh0ZW50IGRvZXMgYW4gYXV0aG9y4oCZcyBudW1iZXIgb2YgY28tYXV0aG9yc2hpcCB0aWVzIGF0IFQxIGltcGFjdCB0aGUgaW5jcmVhc2UgaW4gY28tIGF1dGhvcnNoaXAgdGllcyBhdCBUMj8qDQo0LiAgKlRvIHdoYXQgZXh0ZW50IGRvZXMgYW4gYXV0aG9y4oCZcyBjaXRhdGlvbiBzY29yZSBhdCBUMSBpbXBhY3QgdGhlIGluY3JlYXNlIGluIGluIGNvLWF1dGhvcnNoaXAgdGllcyBhdCBUMj8qDQoNCiMjIFJlZmVyZW5jZXMNCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("1-introduction-final.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

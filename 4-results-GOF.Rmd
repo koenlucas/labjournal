@@ -1,0 +1,135 @@
+---
+title: "Results - Goodness of fit"
+author: "Koen Lucas"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+
+library(knitr)
+library(formatR)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+rgl::setupKnitr()
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+```
+
+```{r clean workspace, include = FALSE}
+
+rm(list = ls())
+
+```
+
+```{r load packages, include=FALSE}
+
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+packages <- c("tidyverse", 
+              "scholar", 
+              "RSiena", 
+              "RsienaTwoStep", 
+              "igraph",
+              "poweRlaw",
+              "ggraph")
+
+fpackage.check(packages)
+
+```
+
+
+# Goodness of fit
+
+The goodness of fit of a model indicates whether an estimated model represents the observed data. This is important as `RSiena` uses simulation to estimate the changes in the network. The goodness of fit checks whether the simulation matches the changes in the observed network. Due to the nature of the research questions, which focus on the tie formation dependent on indegrees, I tested the goodness of fit for the indegree distribution for each model.  
+
+For model 1, 2, and 3, which all included a quadratic effect of indegree popularity, there is a good fit of the data with a p-value between 0,332 and 0,367. This means that the fit only slightly increases when adding ego-level effects on top of the structural network effects. Additionally, this means that the estimates for these models can be interpreted. For model 4, which replaces the squared estimate of indegree popularity for a non-quadratic effect, there is a significant difference in the observed and expected indegree distribution (p = 0,03), indicating the the squared estimate is a better fit for the data. This is also in line with the theoretical explanation that the more indegree someone has the the stronger this popularity effect will be. The estimates in Model 4 can thus not be interpreted reliably. 
+
+## Model 1
+
+
+```{r}
+load("./results/ansM1")
+```
+
+
+```{r model 1 GOF}
+gofM1_in <- sienaGOF(ansM1, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net")
+
+plot(gofM1_in, main = "Goodness of fit indegrees model 1")
+
+```
+
+
+## Model 2
+
+
+```{r}
+load("./results/ansM2")
+```
+
+
+```{r GOF model 2}
+
+gofM2_in <- sienaGOF(ansM2, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net")
+
+plot(gofM2_in, main = "Goodness of fit indegrees model 2")
+
+```
+
+
+
+## Model 3
+
+
+```{r}
+load("./results/ansM3")
+```
+
+
+```{r GOF model 3}
+
+gofM3_in <- sienaGOF(ansM3, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net")
+
+plot(gofM3_in, main = "Goodness of fit indegrees model 3")
+
+```
+
+
+## Model 4
+
+
+```{r}
+load("./results/ansM4")
+```
+
+
+
+```{r GOF model 4}
+
+gofM4_in <- sienaGOF(ansM4, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net")
+
+plot(gofM4_in, main = "Goodness of fit indegrees model 4")
+
+```
+

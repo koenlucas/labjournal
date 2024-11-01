@@ -1,0 +1,641 @@
+---
+title: "Results - descriptives"
+author: "Koen Lucas"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: references.bib
+---
+
+# Results - descriptives
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+
+library(knitr)
+library(formatR)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+rgl::setupKnitr()
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+```
+
+```{r clean workspace, include = FALSE}
+
+rm(list = ls())
+
+```
+
+```{r load functions, include=FALSE}
+
+fpackage.check <- function(packages) {
+    lapply(packages, FUN = function(x) {
+        if (!require(x, character.only = TRUE)) {
+            install.packages(x, dependencies = TRUE)
+            library(x, character.only = TRUE)
+        }
+    })
+}
+
+fsave <- function(x, file = NULL, location = "./data/processed/") {
+    ifelse(!dir.exists("data"), dir.create("data"), FALSE)
+    ifelse(!dir.exists("data/processed"), dir.create("data/processed"), FALSE)
+    if (is.null(file))
+        file = deparse(substitute(x))
+    datename <- substr(gsub("[:-]", "", Sys.time()), 1, 8)
+    totalname <- paste(location, file, "_", datename, ".rda", sep = "")
+    save(x, file = totalname)  #need to fix if file is reloaded as input name, not as x. 
+}
+
+fload <- function(filename) {
+    load(filename)
+    get(ls()[ls() != "filename"])
+}
+
+fshowdf <- function(x, ...) {
+    knitr::kable(x, digits = 2, "html", ...) %>%
+        kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+        kableExtra::scroll_box(width = "100%", height = "300px")
+}
+
+
+```
+
+```{r load packages, include=FALSE}
+
+packages <- c("tidyverse", 
+              "scholar", 
+              "RSiena", 
+              "RsienaTwoStep", 
+              "igraph",
+              "poweRlaw",
+              "ggraph")
+
+fpackage.check(packages)
+
+```
+
+```{r load data, include=FALSE}
+
+fulldata <- fload("./Data/full_data.Rdata")
+
+df_ego <- fload("./Data/df_ego.Rdata")
+  
+df_works <- fload("./Data/df_works.Rdata")
+
+```
+
+```{r create graph objects, include=FALSE}
+
+# wave 1
+network_w1 <- igraph::graph_from_adjacency_matrix(
+  fulldata$nets[1,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave1 <- simplify(network_w1)
+
+# wave 2
+network_w2 <- igraph::graph_from_adjacency_matrix(
+  fulldata$nets[2,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave2 <- simplify(network_w2)
+
+                  
+```
+
+## descriptive statistics
+
+First, some descriptive statistics are calculated and presented below, in order to give more insight in what the networks look like.
+
+### Wave 1
+
+```{r descriptive stats wave 1}
+# number of nodes
+# vcount(network_w1) # 234
+
+# number of edges
+ecount(network_w1)
+
+### wave 1
+# dyad-census
+igraph::dyad_census(network_w1)
+
+# triad-census
+igraph::triad_census(network_w1)
+
+# edge density
+igraph::edge_density(network_w1)
+
+```
+
+The networks consist of 234 scholars. In wave 1 there are 145 edges, consisting of 19 reciprocated ties and 107 asymmetric ties. The edge density is 0,003, indicating that the total number of edges can be interpreted as relatively low compared to the total possible number of edges. Looking at the triadic relations, there is only one complete triad. A triad with no relations between each other (003) appears the most in this network. This means that in wave 1 the network mostly consists of isolates.
+
+### Wave 2
+
+```{r descriptive stats wave 2}
+
+### wave 2
+
+#number of edges
+ecount(network_w2) 
+# dyad-census
+igraph::dyad_census(network_w2)
+
+# triad-census
+igraph::triad_census(network_w2)
+
+# edge density
+igraph::edge_density(network_w2)
+
+```
+
+In wave 2 there are 258, which is a relatively steep increase compared to wave 1. The network consists of 30 reciprocated ties and 198 assymetric ties. The edge density is 0,005 and is only slightly higher than in wave 1, thus meaning that the number of edges is low compared to all posible edges within the network. Furthermore, inspecting the triadic relations, the number of complete triads increased from 1 to 2. The 003 triad (no relations between the three nodes) still occurs the most, meaning that most scholars can still be considered isolates.
+
+### Transitivity
+
+```{r transitivity}
+# wave 1
+igraph::transitivity(network_w1)
+# wave 2
+igraph::transitivity(network_w2)
+
+```
+
+The transitivity effect illustrates whether different co-authors of a scholar become co-authors. In wave 1 this index is 0,182. This means that a scholar who co-authors with two other scholars, the probability that these two scholars also become co-authors is 0,182. In wave 2 the transitivity index is 0,172, which is a slight (and probably insignificant) decrease compared to wave 1.
+
+## Scale-free network - Wave 1
+
+A network can be considered scale-free when the network's degree distribution follows a power-law [@kim2019]:
+
+$$
+P(k) \sim k^{-\gamma}
+$$
+
+Where $P(k)$ is the probability, $k$ the degrees, and $\gamma$ is the scaling exponent. A distribution is considered scale-free when $\gamma$ is between 2 and 3.
+
+In the case of preferential attachment in co-authorship this can be explained as the probability of a node having a certain number of co-authors decreases as the number of co-authors increases. In other words, when a node has a lot of co-authorship ties, it is less likely to find nodes with a similar high number of co-authorship ties. On the other hand, the probability of a node having only a small number of co-authorship ties is relatively high. Determining whether the networks exhibit a scale-free distribution is interesting when investigating a 'Matthew effect' in science. As preferential attachment can be seen as a mechanism driving scale-free networks, it shows that new connections are more likely to be formed with those who are already well-connected. This parallels an effect of cumulative advantage based on the indegrees of a node.
+
+### Degree distribution wave 1 - including isolates
+
+```{r wave 1 indegree distribution}
+# wave 1
+indegr_w1 <- degree(network_w1, mode = "in") # calculate indegrees
+
+# create dataframe for indegrees
+degree_table_w1 <- as.data.frame(table(indegr_w1))
+colnames(degree_table_w1) <- c("Indegree", "Frequency")
+degree_table_w1$Indegree <- as.numeric(as.character(degree_table_w1$Indegree))
+# Create a complete indegree range
+complete_indegree <- data.frame(Indegree = 0:max(degree_table_w1$Indegree))
+degree_table_w1 <- merge(complete_indegree, degree_table_w1, by = "Indegree", all.x = TRUE)
+# Calculate percentage for each indegree
+degree_table_w1$Frequency[is.na(degree_table_w1$Frequency)] <- 0
+degree_table_w1$Percentage <- (degree_table_w1$Frequency / sum(degree_table_w1$Frequency)) * 100
+
+
+# indegree distribution - including isolates
+ggplot(degree_table_w1, aes(x = Indegree, y = Percentage)) +
+  geom_bar(stat = "identity", fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Distribution of indegrees - Wave 1 (percentage)", 
+       x = "Indegrees", 
+       y = "Percentage") +
+  scale_x_continuous(breaks = seq(0, 15, 1)) + 
+  scale_y_continuous(limits = c(0, max(degree_table_w1$Percentage) + 5)) +
+  theme_minimal()
+
+```
+
+The indegree distribution presented above shows a right-skewed distribution, which would be expected in a scale-free network. A lot of nodes of have no or only a few indegrees, while a small number of nodes have a lot of indegrees.
+
+### Indegree distribution wave 1 - excluding isolates
+
+```{r wave 1 degree distribution excluding isolates}
+# filter out isolates
+degree_table_w1_x <- degree_table_w1[degree_table_w1$Indegree > 0, ]
+degree_table_w1_x$Percentage <- (degree_table_w1_x$Frequency / sum(degree_table_w1_x$Frequency)) * 100
+
+# indegree distribution - excluding isolates
+ggplot(degree_table_w1_x, aes(x = Indegree, y = Percentage)) +
+  geom_bar(stat = "identity", fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Distribution of indegrees - Wave 1 (percentage)", 
+       x = "Indegrees", 
+       y = "Percentage") +
+  scale_x_continuous(breaks = seq(1, 15, 1)) + 
+  scale_y_continuous(limits = c(0, max(degree_table_w1$Percentage) + 5)) +
+  theme_minimal()
+```
+
+### Estimating the scaling exponent $\gamma$
+
+To estimate the $\gamma$ parameter isolates have to be disregarded. The indegree distribution excluding isolates shown above still shows a right-skewed distribution. The distribution is still in line with what is expected for a scale-free network. The $\gamma$ can be estimated using the R-package `poweRlaw`. The $\gamma$ is estimated at roughly 4,82 (see below). As this value is not between 2 and 3, the network does not exhibits scale-free characteristics and, thus, can likely not be interpreted as such. Another property of a power-law distribution is that it looks like a straight line when plotted in a log-log plot (a plot in which both the x-axis and y-axis is represented using a logarithmic scale). This plot can be observed below and does actually present a straight line. However, this is due to the nature of plotting the powerlaw (or essentially the scale parameter) in a log-log plot. It can, however, be observed that the steeper slope of this line indicates a more uniform indegree distribution, as well as the more disperse placement of the dots in the scatter plot. Altogether, in wave 1 there is likely not yet a preferential attachment mechanism in place. This is, however, likely to be the case due to the large amount of isolates in wave 1 due to a lot of the scholars not being active (meaning they are not yet publishing) in wave 1, making it hard to distinguish any distinct 'hubs' of co-authorship in this timepoint.
+
+```{r estimate powerlaw}
+
+degree_df_w1 <- as.data.frame(table(indegr_w1))
+degree_df_w1$indegr_w1 <- as.numeric(as.character(degree_df_w1$indegr_w1))
+
+degree_df_w1 <- degree_df_w1[degree_df_w1$indegr_w1 > 0, ] # exclude isolates
+
+pl <- displ$new(degree_df_w1$indegr_w1) # fit power law to distribution
+
+estimate_w1 <- estimate_xmin(pl)
+pl$setXmin(estimate_w1)
+
+estimate <- estimate_xmin(pl)
+pl$setXmin(estimate)
+
+gamma <- pl$pars
+gamma
+
+```
+
+```{r log log graph}
+
+clean_data_w1 <- degree_table_w1_x %>% 
+  filter(Frequency > 0)
+
+log_fit <- lm(log(Frequency) ~ log(Indegree), data = clean_data_w1)
+
+ggplot(clean_data_w1, aes(x = Indegree, y = Frequency)) +
+  geom_point(color= "blue", size = 2) + 
+  labs(title = "Log-Log plot of indegree distribution - Wave 1", 
+       x = "Indegrees (log-scale)", 
+       y = "Frequencies (log-scale") +
+  geom_smooth(method = "lm", color =  "blue", se = FALSE) + 
+  scale_x_log10() + 
+  scale_y_log10() +
+  geom_curve(x = 7, y = 19, xend = 5, yend = 13,
+             arrow = arrow(length = unit(0.5, "inches")), size = 1,
+             color = "black", curvature = 0.0) +
+     annotate("text", x = 6, y = 20, label = "the steeper slope \n suggests a more uniform \n degree distribution", size = 4) +
+  theme_minimal()
+
+
+
+```
+
+## Scale-free network - Wave 2
+
+### Degree distribution wave 2 - including isolates
+
+```{r wave 2 indegree distribution}
+# wave 2
+indegr_w2 <- degree(network_w2, mode = "in") # calculate indegrees
+
+# create dataframe for indegrees
+degree_table_w2 <- as.data.frame(table(indegr_w2))
+colnames(degree_table_w2) <- c("Indegree", "Frequency")
+degree_table_w2$Indegree <- as.numeric(as.character(degree_table_w2$Indegree))
+# Create a complete indegree range
+complete_indegree <- data.frame(Indegree = 0:max(degree_table_w2$Indegree))
+degree_table_w2 <- merge(complete_indegree, degree_table_w2, by = "Indegree", all.x = TRUE)
+# Calculate percentage for each indegree
+degree_table_w2$Frequency[is.na(degree_table_w2$Frequency)] <- 0
+degree_table_w2$Percentage <- (degree_table_w2$Frequency / sum(degree_table_w2$Frequency)) * 100
+
+
+# indegree distribution - including isolates
+ggplot(degree_table_w2, aes(x = Indegree, y = Percentage)) +
+  geom_bar(stat = "identity", fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Distribution of indegrees - Wave 2 (percentage)", 
+       x = "Indegrees", 
+       y = "Percentage") +
+  scale_x_continuous(breaks = seq(0, 15, 1)) + 
+  scale_y_continuous(limits = c(0, max(degree_table_w2$Percentage) + 5)) +
+  theme_minimal()
+
+```
+
+The indegree distribution of wave 2 presented above shows a right-skewed distribution, which would be expected in a scale-free network. A lot of nodes have either no or only a few indegrees, while a small number of nodes have a lot of indegrees.
+
+### Indegree distribution wave 2 - excluding isolates
+
+```{r wave 2 degree distribution excluding isolates}
+# filter out isolates
+degree_table_w2_x <- degree_table_w2[degree_table_w2$Indegree > 0, ]
+degree_table_w2_x$Percentage <- (degree_table_w2_x$Frequency / sum(degree_table_w2_x$Frequency)) * 100
+
+# indegree distribution - excluding isolates
+ggplot(degree_table_w2_x, aes(x = Indegree, y = Percentage)) +
+  geom_bar(stat = "identity", fill = "blue", color = "black", alpha = 0.7) +
+  labs(title = "Distribution of indegrees - Wave 2 (percentage)", 
+       x = "Indegrees", 
+       y = "Percentage") +
+  scale_x_continuous(breaks = seq(1, 15, 1)) + 
+  scale_y_continuous(limits = c(0, max(degree_table_w2$Percentage) + 5)) +
+  theme_minimal()
+```
+
+### Estimating the scaling exponent $\gamma$
+
+The indegree distribution excluding isolates shown above still shows a right-skewed distribution. The distribution is still in line with what is expected for a scale-free network. The $\gamma$ is again estimated using the R-package `poweRlaw`. The $\gamma$ is estimated at roughly 2,75 (see below). As this value is between 2 and 3 the network exhibits scale-free characteristics and can likely be interpreted as such. Below, in the log-log plot a straight line can be observed, in line with the characteristics of a power law distribution. The slope of this line more evidently indicates the presence of hubs, as one would expect in a scale-free network. Additionally, the dots in the scattor plot are more aligned with the plotted line of the scale parameter. Altogether, this would likely suggest a preferential attachment mechanism at play in the network at timepoint 2, meaning that already established authors with a lot of indegrees are more attractive to other authors than authors with less indegrees. Hypothesis 1 is therefore not rejected, the collaboration network of Dutch sociology departments seems to exhibit a scale-free network .
+
+```{r estimate powerlaw wave 2}
+
+degree_df_w2 <- as.data.frame(table(indegr_w2))
+degree_df_w2$indegr_w2 <- as.numeric(as.character(degree_df_w2$indegr_w2))
+
+degree_df_w2 <- degree_df_w2[degree_df_w2$indegr_w2 > 0, ] # exclude isolates
+
+pl <- displ$new(degree_df_w2$indegr_w2) # fit power law to distribution
+
+estimate_w2 <- estimate_xmin(pl)
+pl$setXmin(estimate_w2)
+
+estimate <- estimate_xmin(pl)
+pl$setXmin(estimate)
+
+gamma <- pl$pars
+gamma
+
+```
+
+```{r log log graph wave 2}
+
+clean_data_w2 <- degree_table_w2_x %>% 
+  filter(Frequency > 0)
+
+log_fit <- lm(log(Frequency) ~ log(Indegree), data = clean_data_w2)
+
+ggplot(clean_data_w2, aes(x = Indegree, y = Frequency)) +
+  geom_point(color= "blue", size = 2) + 
+  labs(title = "Log-Log plot of indegree distribution - Wave 2", 
+       x = "Indegrees (log-scale)", 
+       y = "Frequencies (log-scale)") +
+  geom_smooth(method = "lm", color =  "blue", se = FALSE) + 
+  scale_x_log10() + 
+  scale_y_log10() +
+  geom_curve(x = 7, y = 19, xend = 5, yend = 13,
+             arrow = arrow(length = unit(0.5, "inches")), size = 1,
+             color = "black", curvature = 0.0) +
+     annotate("text", x = 7, y = 24, label = "the more gradual slope \n suggests the existence of \n a few hubs in the network", size = 4) +
+  theme_minimal()
+
+
+```
+
+### Centrality
+
+To test hypothesis 2, I calculated three different centrality measures for each node; degree centrality, closeness centrality, and eigenvector centrality. Subsequently I calculated to what extent this is correlated with a scholar's h-index. Spearman rank correlation was used to determine correlated relationships, as the degrees are not normally distributed.
+
+#### degree centrality
+
+```{r centrality wave 1}
+
+degrees_w1 <- degree(network_w1, 
+       mode = c("in"),
+       normalized = FALSE)# calculation degree
+
+degrees_w1 <- (degrees_w1-min(degrees_w1))/(max(degrees_w1)-min(degrees_w1)) #normalised degree centrality
+
+cor.test(degrees_w1, df_ego$h_index, method = "spearman")
+
+```
+
+```{r centrality wave 2, warning=FALSE}
+
+degrees_w2 <- degree(network_w2, 
+       mode = c("in"),
+       normalized = FALSE)# calculation degree
+
+degrees_w2 <- (degrees_w2-min(degrees_w2))/(max(degrees_w2)-min(degrees_w2)) #normalised degree centrality
+
+cor.test(degrees_w2, df_ego$h_index, method = "spearman")
+
+
+```
+
+The degree centrality refers to the direct connections of a node. In this study this is indicated with the number of indegrees a node has (minus the minimum amount of indegrees, which would be 0 in this study). The degree centrality has been normalized by dividing the number of indegrees of a node with the difference between the maximum and the minimum number of observed degrees. Looking at the Spearman correlation for wave 1, we observe $\rho$ = 0,039 which is considered very low correlation. The statistic is also not found significant at $\alpha$ \< 0,05. For wave 2, $\rho$ = 0,144 and is significant. This means that there is a (very) low correlation between degree centrality and h-index, indicating that the hubs are not necessarily formed around those with the highest h-index.
+
+#### Closeness centrality
+
+```{r closeness wave 1, warning=FALSE}
+
+close_w1 <- closeness(network_w1)
+
+cor.test(close_w1, df_ego$h_index, method = "spearman")
+
+```
+
+```{r closeness wave 2, warning=FALSE}
+
+close_w2 <- closeness(network_w2)
+
+cor.test(close_w2, df_ego$h_index, method = "spearman")
+
+```
+
+Regarding closeness centrality, which indicates how close nodes are to other nodes, we see for both wave 1 ($\rho$ = 0,164) and wave 2 ($\rho$ = 0,031) no significant correlation. This means that there is no significant correlation between nodes who have shorter paths between other nodes and and a higher h-index.
+
+#### Eigenvector centrality
+
+```{r eigen wave 1}
+
+eigen_w1 <- eigen_centrality(network_w1)$vector
+
+
+cor.test(eigen_w1, df_ego$h_index, method = "spearman")
+
+```
+
+```{r eigen wave 2}
+
+eigen_w2 <- eigen_centrality(network_w2)$vector
+
+
+cor.test(eigen_w2, df_ego$h_index, method = "spearman")
+```
+
+Last, eigenvector centrality has been calculated. This measure is similar to degree centrality, but takes into account the indegrees of the nodes someone is connected to. In other words, if a node is connected to a node with more indegrees this weighs more towards the eigenvector centrality than connection with less connected nodes. Regarding the eigenvector centrality, in wave 1 there is no significant correlation ($\rho$ = 0,068). There is a signifcant correlation between eigenvector centrality and h-index in wave 2. However, this correlation is (very) weak ($\rho$ = 0,116).
+
+All in all, only for wave 2 there has been found a significant correlation between both eigenvector and degree centrality. However, because this correlation can be considered (very) weak, it provides inconclusive evidence that the hubs in the network are concentrated around those with a higher h-index. Thus, hypothesis 2 has to be rejected.
+
+## Network visualisation
+
+```{r clean workspace 2, include=FALSE}
+
+rm(list = setdiff(ls(), c("fulldata", "df_ego", "df_works")))
+
+```
+
+```{r creating network objects, include=FALSE}
+
+# wave 1
+network_w1 <- igraph::graph_from_adjacency_matrix(
+  fulldata$nets[1,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave1 <- simplify(network_w1)
+
+
+# wave 2
+network_w2 <- igraph::graph_from_adjacency_matrix(
+  fulldata$nets[2,,],
+  mode = c("directed"),
+  weighted = NULL,
+  diag = FALSE,
+  add.colnames = NULL,
+  add.rownames = NULL)
+
+wave2 <- simplify(network_w2)
+
+```
+
+```{r initial plots, warning=FALSE, fig.show="hold", out.width="50%"}
+
+plot(wave1,
+     vertex.label = NA,
+     vertex.size = 7,
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1,
+     main = "Network at wave 1")
+
+plot(wave2,
+     vertex.label = NA,
+     vertex.size = 7,
+     edge.curved = 0.2,
+     edge.arrow.size = 0.1,
+     main = "Network at wave 2")
+
+indegr_w1 <- degree(wave1, mode = "in")
+indegr_w2 <- degree(wave2, mode = "in")
+
+isolates_w1 <- V(wave1)[degree(wave1, mode = "all") == 0]
+
+noisolates_w1 <- delete_vertices(wave1, isolates_w1)
+
+plot(noisolates_w1,
+     vertex.label = NA,
+     vertex.size = 10,
+     vertex.color = "blue",
+     vertex.frame.color = "black",
+     edge.curved = 0.2,
+     edge.arrow.size = 0.4,
+     edge.color = "gray",
+     edge.width = 0.3,
+     main = "Network at wave 1 without isolates")
+
+
+isolates_w2 <- V(wave2)[degree(wave2, mode = "all") == 0]
+
+noisolates_w2 <- delete_vertices(wave2, isolates_w2)
+
+plot(noisolates_w1,
+     vertex.label = NA,
+     vertex.size = 10,
+     vertex.color = "blue",
+     vertex.frame.color = "black",
+     edge.curved = 0.2,
+     edge.arrow.size = 0.4,
+     edge.color = "gray",
+     edge.width = 0.3,
+     main = "Network at wave 2 without isolates")
+
+```
+
+Above, plots of both waves are presented, both with and without isolates. These plots show the networks before tampering with shape, size and position of the nodes. Furthermore, the plots show that the number of co-authorship ties has increased between timepoint 1 and timepoint 2.
+
+### Plots by H-index and indegrees
+
+```{r pretty plot wave 1, warning=FALSE}
+
+### wave 1
+
+indegr_w1 <- degree(wave1, mode = "in")
+
+# assign h-index to scholar
+V(wave1)$h_index <- df_ego$h_index
+V(wave1)$indegree <- indegr_w1
+
+#remove isolates
+noisolates_w1 <- delete.vertices(wave1, V(wave1)[degree(wave1) == 0])
+
+#set size of plot
+options(repr.plot.width = 20, repr.plot.height = 20)
+
+# create layout wave 1
+layout1 <- create_layout(noisolates_w1, layout = "fr")
+
+#plot wave 1
+ggraph(layout1) +
+  geom_edge_link(
+    color = "gray", 
+    width = 0.5, 
+    arrow = arrow(length = unit(3, "mm"), type = "closed")
+  ) +
+  geom_edge_link(color = "gray", width = 0.5) +
+  geom_node_point(aes(size = indegree, color = h_index)) + 
+  scale_size(range = c(3, 10)) + 
+  scale_color_gradient(low = "lightblue", high = "blue") + 
+  theme_void() +
+  labs(title = "Network wave 1: no isolates, node size based on indegrees & colour based on H-index")
+
+layout_position <- layout1[, c("x", "y", "name")]
+
+
+```
+
+```{r pretty plot wave 2}
+
+### wave 2
+
+indegr_w2 <- degree(wave2, mode = "in")
+
+# assign h-index to scholar
+V(wave2)$h_index <- df_ego$h_index
+V(wave2)$indegree <- indegr_w2
+
+#remove isolates
+noisolates_w2 <- delete.vertices(wave2, V(wave2)[degree(wave2) == 0])
+
+#set size of plot
+options(repr.plot.width = 20, repr.plot.height = 20)
+
+#layout wave 2
+layout2 <- layout_position
+
+#plot wave 2
+ggraph(noisolates_w2, layout = "fr") +
+  geom_edge_link(
+    color = "gray", 
+    width = 0.3, 
+    arrow = arrow(length = unit(3, "mm"), type = "closed")
+  ) +
+  geom_edge_link(color = "gray", width = 0.5) +
+  geom_node_point(aes(size = indegree, color = h_index)) + 
+  scale_size(range = c(3, 10)) + 
+  scale_color_gradient(low = "lightblue", high = "blue") + 
+  theme_void() +
+  labs(title = "Network wave 2: no isolates, node size based on indegrees & colour based on H-index")
+
+```
+
+In the graphs presented above, the nodes with more degrees are bigger and are darker blue when they have a higher h-index. It can be observed that indeed only a couple of nodes have a lot of indegrees, compared to most nodes who only have a few indegrees. This means that there are only a few nodes who are popular to work with (i.e. to initiate a tie with). This is especially visible in Wave 2 as at this time point more collaborators are in the data set. This observation is in line with the earlier established scale-free characteristics of this network. For both Wave 1 and Wave 2, it can not be observed that those nodes who have a higher number of indegrees are also the nodes who have the highest h-index. This observation is in line with only the weak correlation that has been found between degree centrality and h-index.  
+
+
+## References

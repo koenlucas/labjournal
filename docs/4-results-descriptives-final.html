@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Koen Lucas" />
+
+<meta name="date" content="2024-11-01" />
+
+<title>Results - descriptives</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Week1.html">Week 1</a>
+    </li>
+    <li>
+      <a href="Week2.html">Week 2</a>
+    </li>
+    <li>
+      <a href="tutorialWebScraping.html">Week 3 - web scraping</a>
+    </li>
+    <li>
+      <a href="Week4Visual.html">Week 4 - data visualisation</a>
+    </li>
+    <li>
+      <a href="Week5-firstmodel.html">Week 5 - first model</a>
+    </li>
+    <li class="dropdown-header">Week 7 - RI</li>
+    <li>
+      <a href="Week7-RSiena.html"></a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Concept
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-Introduction-concept.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-concept.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-concept.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-concept.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-concept.html">Results - RSiena</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Project - Final
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="1-introduction-final.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-final.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-final.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-final.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-final.html">Results - RSiena</a>
+    </li>
+    <li>
+      <a href="4-results-GOF.html">Results - Goodness of fit</a>
+    </li>
+    <li>
+      <a href="5-conclusion.html">Conclusion</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/JochemTolsma/labjournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Results - descriptives</h1>
+<h4 class="author">Koen Lucas</h4>
+<h4 class="date">2024-11-01</h4>
+
+</div>
+
+
+<div id="results---descriptives" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Results -
+descriptives</h1>
+<style>
+body {
+text-align: justify}
+</style>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div id="descriptive-statistics" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> descriptive
+statistics</h2>
+<p>First, some descriptive statistics are calculated and presented
+below, in order to give more insight in what the networks look like.</p>
+<div id="wave-1" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Wave 1</h3>
+<pre class="r test"><code># number of nodes vcount(network_w1) # 234
+
+# number of edges
+ecount(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; [1] 145</code></pre>
+<pre class="r test"><code>### wave 1 dyad-census
+igraph::dyad_census(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; $mut
+#&gt; [1] 19
+#&gt; 
+#&gt; $asym
+#&gt; [1] 107
+#&gt; 
+#&gt; $null
+#&gt; [1] 27135</code></pre>
+<pre class="r test"><code># triad-census
+igraph::triad_census(network_w1)</code></pre>
+<pre class="test2"><code>#&gt;  [1] 2079308   24231    4312      50     120      63      47      26      12       0       4       4
+#&gt; [13]       1       3       2       1</code></pre>
+<pre class="r test"><code># edge density
+igraph::edge_density(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.002659477</code></pre>
+<p>The networks consist of 234 scholars. In wave 1 there are 145 edges,
+consisting of 19 reciprocated ties and 107 asymmetric ties. The edge
+density is 0,003, indicating that the total number of edges can be
+interpreted as relatively low compared to the total possible number of
+edges. Looking at the triadic relations, there is only one complete
+triad. A triad with no relations between each other (003) appears the
+most in this network. This means that in wave 1 the network mostly
+consists of isolates.</p>
+</div>
+<div id="wave-2" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Wave 2</h3>
+<pre class="r test"><code>### wave 2
+
+# number of edges
+ecount(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; [1] 258</code></pre>
+<pre class="r test"><code># dyad-census
+igraph::dyad_census(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; $mut
+#&gt; [1] 30
+#&gt; 
+#&gt; $asym
+#&gt; [1] 198
+#&gt; 
+#&gt; $null
+#&gt; [1] 27033</code></pre>
+<pre class="r test"><code># triad-census
+igraph::triad_census(network_w2)</code></pre>
+<pre class="test2"><code>#&gt;  [1] 2056059   44637    6764      93     326      96     123      34      26       0       5       9
+#&gt; [13]       5       1       4       2</code></pre>
+<pre class="r test"><code># edge density
+igraph::edge_density(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.004732035</code></pre>
+<p>In wave 2 there are 258, which is a relatively steep increase
+compared to wave 1. The network consists of 30 reciprocated ties and 198
+assymetric ties. The edge density is 0,005 and is only slightly higher
+than in wave 1, thus meaning that the number of edges is low compared to
+all posible edges within the network. Furthermore, inspecting the
+triadic relations, the number of complete triads increased from 1 to 2.
+The 003 triad (no relations between the three nodes) still occurs the
+most, meaning that most scholars can still be considered isolates.</p>
+</div>
+<div id="transitivity" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Transitivity</h3>
+<pre class="r test"><code># wave 1
+igraph::transitivity(network_w1)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.182058</code></pre>
+<pre class="r test"><code># wave 2
+igraph::transitivity(network_w2)</code></pre>
+<pre class="test2"><code>#&gt; [1] 0.1723716</code></pre>
+<p>The transitivity effect illustrates whether different co-authors of a
+scholar become co-authors. In wave 1 this index is 0,182. This means
+that a scholar who co-authors with two other scholars, the probability
+that these two scholars also become co-authors is 0,182. In wave 2 the
+transitivity index is 0,172, which is a slight (and probably
+insignificant) decrease compared to wave 1.</p>
+</div>
+</div>
+<div id="scale-free-network---wave-1" class="section level2"
+number="1.2">
+<h2><span class="header-section-number">1.2</span> Scale-free network -
+Wave 1</h2>
+<p>A network can be considered scale-free when the network’s degree
+distribution follows a power-law <span class="citation">(Kim
+2019)</span>:</p>
+<p><span class="math display">\[
+P(k) \sim k^{-\gamma}
+\]</span></p>
+<p>Where <span class="math inline">\(P(k)\)</span> is the probability,
+<span class="math inline">\(k\)</span> the degrees, and <span
+class="math inline">\(\gamma\)</span> is the scaling exponent. A
+distribution is considered scale-free when <span
+class="math inline">\(\gamma\)</span> is between 2 and 3.</p>
+<p>In the case of preferential attachment in co-authorship this can be
+explained as the probability of a node having a certain number of
+co-authors decreases as the number of co-authors increases. In other
+words, when a node has a lot of co-authorship ties, it is less likely to
+find nodes with a similar high number of co-authorship ties. On the
+other hand, the probability of a node having only a small number of
+co-authorship ties is relatively high. Determining whether the networks
+exhibit a scale-free distribution is interesting when investigating a
+‘Matthew effect’ in science. As preferential attachment can be seen as a
+mechanism driving scale-free networks, it shows that new connections are
+more likely to be formed with those who are already well-connected. This
+parallels an effect of cumulative advantage based on the indegrees of a
+node.</p>
+<div id="degree-distribution-wave-1---including-isolates"
+class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Degree distribution
+wave 1 - including isolates</h3>
+<pre class="r test"><code># wave 1
+indegr_w1 &lt;- degree(network_w1, mode = &quot;in&quot;)  # calculate indegrees
+
+# create dataframe for indegrees
+degree_table_w1 &lt;- as.data.frame(table(indegr_w1))
+colnames(degree_table_w1) &lt;- c(&quot;Indegree&quot;, &quot;Frequency&quot;)
+degree_table_w1$Indegree &lt;- as.numeric(as.character(degree_table_w1$Indegree))
+# Create a complete indegree range
+complete_indegree &lt;- data.frame(Indegree = 0:max(degree_table_w1$Indegree))
+degree_table_w1 &lt;- merge(complete_indegree, degree_table_w1, by = &quot;Indegree&quot;, all.x = TRUE)
+# Calculate percentage for each indegree
+degree_table_w1$Frequency[is.na(degree_table_w1$Frequency)] &lt;- 0
+degree_table_w1$Percentage &lt;- (degree_table_w1$Frequency/sum(degree_table_w1$Frequency)) * 100
+
+
+# indegree distribution - including isolates
+ggplot(degree_table_w1, aes(x = Indegree, y = Percentage)) + geom_bar(stat = &quot;identity&quot;, fill = &quot;blue&quot;,
+    color = &quot;black&quot;, alpha = 0.7) + labs(title = &quot;Distribution of indegrees - Wave 1 (percentage)&quot;, x = &quot;Indegrees&quot;,
+    y = &quot;Percentage&quot;) + scale_x_continuous(breaks = seq(0, 15, 1)) + scale_y_continuous(limits = c(0,
+    max(degree_table_w1$Percentage) + 5)) + theme_minimal()</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/wave%201%20indegree%20distribution-1.png" width="672" /></p>
+<p>The indegree distribution presented above shows a right-skewed
+distribution, which would be expected in a scale-free network. A lot of
+nodes of have no or only a few indegrees, while a small number of nodes
+have a lot of indegrees.</p>
+</div>
+<div id="indegree-distribution-wave-1---excluding-isolates"
+class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Indegree
+distribution wave 1 - excluding isolates</h3>
+<pre class="r test"><code># filter out isolates
+degree_table_w1_x &lt;- degree_table_w1[degree_table_w1$Indegree &gt; 0, ]
+degree_table_w1_x$Percentage &lt;- (degree_table_w1_x$Frequency/sum(degree_table_w1_x$Frequency)) * 100
+
+# indegree distribution - excluding isolates
+ggplot(degree_table_w1_x, aes(x = Indegree, y = Percentage)) + geom_bar(stat = &quot;identity&quot;, fill = &quot;blue&quot;,
+    color = &quot;black&quot;, alpha = 0.7) + labs(title = &quot;Distribution of indegrees - Wave 1 (percentage)&quot;, x = &quot;Indegrees&quot;,
+    y = &quot;Percentage&quot;) + scale_x_continuous(breaks = seq(1, 15, 1)) + scale_y_continuous(limits = c(0,
+    max(degree_table_w1$Percentage) + 5)) + theme_minimal()</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/wave%201%20degree%20distribution%20excluding%20isolates-1.png" width="672" /></p>
+</div>
+<div id="estimating-the-scaling-exponent-gamma" class="section level3"
+number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Estimating the
+scaling exponent <span class="math inline">\(\gamma\)</span></h3>
+<p>To estimate the <span class="math inline">\(\gamma\)</span> parameter
+isolates have to be disregarded. The indegree distribution excluding
+isolates shown above still shows a right-skewed distribution. The
+distribution is still in line with what is expected for a scale-free
+network. The <span class="math inline">\(\gamma\)</span> can be
+estimated using the R-package <code>poweRlaw</code>. The <span
+class="math inline">\(\gamma\)</span> is estimated at roughly 4,82 (see
+below). As this value is not between 2 and 3, the network does not
+exhibits scale-free characteristics and, thus, can likely not be
+interpreted as such. Another property of a power-law distribution is
+that it looks like a straight line when plotted in a log-log plot (a
+plot in which both the x-axis and y-axis is represented using a
+logarithmic scale). This plot can be observed below and does actually
+present a straight line. However, this is due to the nature of plotting
+the powerlaw (or essentially the scale parameter) in a log-log plot. It
+can, however, be observed that the steeper slope of this line indicates
+a more uniform indegree distribution, as well as the more disperse
+placement of the dots in the scatter plot. Altogether, in wave 1 there
+is likely not yet a preferential attachment mechanism in place. This is,
+however, likely to be the case due to the large amount of isolates in
+wave 1 due to a lot of the scholars not being active (meaning they are
+not yet publishing) in wave 1, making it hard to distinguish any
+distinct ‘hubs’ of co-authorship in this timepoint.</p>
+<pre class="r test"><code>degree_df_w1 &lt;- as.data.frame(table(indegr_w1))
+degree_df_w1$indegr_w1 &lt;- as.numeric(as.character(degree_df_w1$indegr_w1))
+
+degree_df_w1 &lt;- degree_df_w1[degree_df_w1$indegr_w1 &gt; 0, ]  # exclude isolates
+
+pl &lt;- displ$new(degree_df_w1$indegr_w1)  # fit power law to distribution
+
+estimate_w1 &lt;- estimate_xmin(pl)
+pl$setXmin(estimate_w1)
+
+estimate &lt;- estimate_xmin(pl)
+pl$setXmin(estimate)
+
+gamma &lt;- pl$pars
+gamma</code></pre>
+<pre class="test2"><code>#&gt; [1] 4.815477</code></pre>
+<pre class="r test"><code>clean_data_w1 &lt;- degree_table_w1_x %&gt;%
+    filter(Frequency &gt; 0)
+
+log_fit &lt;- lm(log(Frequency) ~ log(Indegree), data = clean_data_w1)
+
+ggplot(clean_data_w1, aes(x = Indegree, y = Frequency)) + geom_point(color = &quot;blue&quot;, size = 2) + labs(title = &quot;Log-Log plot of indegree distribution - Wave 1&quot;,
+    x = &quot;Indegrees (log-scale)&quot;, y = &quot;Frequencies (log-scale&quot;) + geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;,
+    se = FALSE) + scale_x_log10() + scale_y_log10() + geom_curve(x = 7, y = 19, xend = 5, yend = 13,
+    arrow = arrow(length = unit(0.5, &quot;inches&quot;)), size = 1, color = &quot;black&quot;, curvature = 0) + annotate(&quot;text&quot;,
+    x = 6, y = 20, label = &quot;the steeper slope \n suggests a more uniform \n degree distribution&quot;, size = 4) +
+    theme_minimal()</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/log%20log%20graph-1.png" width="672" /></p>
+</div>
+</div>
+<div id="scale-free-network---wave-2" class="section level2"
+number="1.3">
+<h2><span class="header-section-number">1.3</span> Scale-free network -
+Wave 2</h2>
+<div id="degree-distribution-wave-2---including-isolates"
+class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Degree distribution
+wave 2 - including isolates</h3>
+<pre class="r test"><code># wave 2
+indegr_w2 &lt;- degree(network_w2, mode = &quot;in&quot;)  # calculate indegrees
+
+# create dataframe for indegrees
+degree_table_w2 &lt;- as.data.frame(table(indegr_w2))
+colnames(degree_table_w2) &lt;- c(&quot;Indegree&quot;, &quot;Frequency&quot;)
+degree_table_w2$Indegree &lt;- as.numeric(as.character(degree_table_w2$Indegree))
+# Create a complete indegree range
+complete_indegree &lt;- data.frame(Indegree = 0:max(degree_table_w2$Indegree))
+degree_table_w2 &lt;- merge(complete_indegree, degree_table_w2, by = &quot;Indegree&quot;, all.x = TRUE)
+# Calculate percentage for each indegree
+degree_table_w2$Frequency[is.na(degree_table_w2$Frequency)] &lt;- 0
+degree_table_w2$Percentage &lt;- (degree_table_w2$Frequency/sum(degree_table_w2$Frequency)) * 100
+
+
+# indegree distribution - including isolates
+ggplot(degree_table_w2, aes(x = Indegree, y = Percentage)) + geom_bar(stat = &quot;identity&quot;, fill = &quot;blue&quot;,
+    color = &quot;black&quot;, alpha = 0.7) + labs(title = &quot;Distribution of indegrees - Wave 2 (percentage)&quot;, x = &quot;Indegrees&quot;,
+    y = &quot;Percentage&quot;) + scale_x_continuous(breaks = seq(0, 15, 1)) + scale_y_continuous(limits = c(0,
+    max(degree_table_w2$Percentage) + 5)) + theme_minimal()</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/wave%202%20indegree%20distribution-1.png" width="672" /></p>
+<p>The indegree distribution of wave 2 presented above shows a
+right-skewed distribution, which would be expected in a scale-free
+network. A lot of nodes have either no or only a few indegrees, while a
+small number of nodes have a lot of indegrees.</p>
+</div>
+<div id="indegree-distribution-wave-2---excluding-isolates"
+class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Indegree
+distribution wave 2 - excluding isolates</h3>
+<pre class="r test"><code># filter out isolates
+degree_table_w2_x &lt;- degree_table_w2[degree_table_w2$Indegree &gt; 0, ]
+degree_table_w2_x$Percentage &lt;- (degree_table_w2_x$Frequency/sum(degree_table_w2_x$Frequency)) * 100
+
+# indegree distribution - excluding isolates
+ggplot(degree_table_w2_x, aes(x = Indegree, y = Percentage)) + geom_bar(stat = &quot;identity&quot;, fill = &quot;blue&quot;,
+    color = &quot;black&quot;, alpha = 0.7) + labs(title = &quot;Distribution of indegrees - Wave 2 (percentage)&quot;, x = &quot;Indegrees&quot;,
+    y = &quot;Percentage&quot;) + scale_x_continuous(breaks = seq(1, 15, 1)) + scale_y_continuous(limits = c(0,
+    max(degree_table_w2$Percentage) + 5)) + theme_minimal()</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/wave%202%20degree%20distribution%20excluding%20isolates-1.png" width="672" /></p>
+</div>
+<div id="estimating-the-scaling-exponent-gamma-1" class="section level3"
+number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Estimating the
+scaling exponent <span class="math inline">\(\gamma\)</span></h3>
+<p>The indegree distribution excluding isolates shown above still shows
+a right-skewed distribution. The distribution is still in line with what
+is expected for a scale-free network. The <span
+class="math inline">\(\gamma\)</span> is again estimated using the
+R-package <code>poweRlaw</code>. The <span
+class="math inline">\(\gamma\)</span> is estimated at roughly 2,75 (see
+below). As this value is between 2 and 3 the network exhibits scale-free
+characteristics and can likely be interpreted as such. Below, in the
+log-log plot a straight line can be observed, in line with the
+characteristics of a power law distribution. The slope of this line more
+evidently indicates the presence of hubs, as one would expect in a
+scale-free network. Additionally, the dots in the scattor plot are more
+aligned with the plotted line of the scale parameter. Altogether, this
+would likely suggest a preferential attachment mechanism at play in the
+network at timepoint 2, meaning that already established authors with a
+lot of indegrees are more attractive to other authors than authors with
+less indegrees. Hypothesis 1 is therefore not rejected, the
+collaboration network of Dutch sociology departments seems to exhibit a
+scale-free network .</p>
+<pre class="r test"><code>degree_df_w2 &lt;- as.data.frame(table(indegr_w2))
+degree_df_w2$indegr_w2 &lt;- as.numeric(as.character(degree_df_w2$indegr_w2))
+
+degree_df_w2 &lt;- degree_df_w2[degree_df_w2$indegr_w2 &gt; 0, ]  # exclude isolates
+
+pl &lt;- displ$new(degree_df_w2$indegr_w2)  # fit power law to distribution
+
+estimate_w2 &lt;- estimate_xmin(pl)
+pl$setXmin(estimate_w2)
+
+estimate &lt;- estimate_xmin(pl)
+pl$setXmin(estimate)
+
+gamma &lt;- pl$pars
+gamma</code></pre>
+<pre class="test2"><code>#&gt; [1] 2.749952</code></pre>
+<pre class="r test"><code>clean_data_w2 &lt;- degree_table_w2_x %&gt;%
+    filter(Frequency &gt; 0)
+
+log_fit &lt;- lm(log(Frequency) ~ log(Indegree), data = clean_data_w2)
+
+ggplot(clean_data_w2, aes(x = Indegree, y = Frequency)) + geom_point(color = &quot;blue&quot;, size = 2) + labs(title = &quot;Log-Log plot of indegree distribution - Wave 2&quot;,
+    x = &quot;Indegrees (log-scale)&quot;, y = &quot;Frequencies (log-scale)&quot;) + geom_smooth(method = &quot;lm&quot;, color = &quot;blue&quot;,
+    se = FALSE) + scale_x_log10() + scale_y_log10() + geom_curve(x = 7, y = 19, xend = 5, yend = 13,
+    arrow = arrow(length = unit(0.5, &quot;inches&quot;)), size = 1, color = &quot;black&quot;, curvature = 0) + annotate(&quot;text&quot;,
+    x = 7, y = 24, label = &quot;the more gradual slope \n suggests the existence of \n a few hubs in the network&quot;,
+    size = 4) + theme_minimal()</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/log%20log%20graph%20wave%202-1.png" width="672" /></p>
+</div>
+<div id="centrality" class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Centrality</h3>
+<p>To test hypothesis 2, I calculated three different centrality
+measures for each node; degree centrality, closeness centrality, and
+eigenvector centrality. Subsequently I calculated to what extent this is
+correlated with a scholar’s h-index. Spearman rank correlation was used
+to determine correlated relationships, as the degrees are not normally
+distributed.</p>
+<div id="degree-centrality" class="section level4" number="1.3.4.1">
+<h4><span class="header-section-number">1.3.4.1</span> degree
+centrality</h4>
+<pre class="r test"><code>degrees_w1 &lt;- degree(network_w1, mode = c(&quot;in&quot;), normalized = FALSE)  # calculation degree
+
+degrees_w1 &lt;- (degrees_w1 - min(degrees_w1))/(max(degrees_w1) - min(degrees_w1))  #normalised degree centrality
+
+cor.test(degrees_w1, df_ego$h_index, method = &quot;spearman&quot;)</code></pre>
+<pre class="test2"><code>#&gt; 
+#&gt;  Spearman&#39;s rank correlation rho
+#&gt; 
+#&gt; data:  degrees_w1 and df_ego$h_index
+#&gt; S = 2052719, p-value = 0.5554
+#&gt; alternative hypothesis: true rho is not equal to 0
+#&gt; sample estimates:
+#&gt;        rho 
+#&gt; 0.03873925</code></pre>
+<pre class="r test"><code>degrees_w2 &lt;- degree(network_w2, mode = c(&quot;in&quot;), normalized = FALSE)  # calculation degree
+
+degrees_w2 &lt;- (degrees_w2 - min(degrees_w2))/(max(degrees_w2) - min(degrees_w2))  #normalised degree centrality
+
+cor.test(degrees_w2, df_ego$h_index, method = &quot;spearman&quot;)</code></pre>
+<pre class="test2"><code>#&gt; 
+#&gt;  Spearman&#39;s rank correlation rho
+#&gt; 
+#&gt; data:  degrees_w2 and df_ego$h_index
+#&gt; S = 1827580, p-value = 0.02745
+#&gt; alternative hypothesis: true rho is not equal to 0
+#&gt; sample estimates:
+#&gt;       rho 
+#&gt; 0.1441691</code></pre>
+<p>The degree centrality refers to the direct connections of a node. In
+this study this is indicated with the number of indegrees a node has
+(minus the minimum amount of indegrees, which would be 0 in this study).
+The degree centrality has been normalized by dividing the number of
+indegrees of a node with the difference between the maximum and the
+minimum number of observed degrees. Looking at the Spearman correlation
+for wave 1, we observe <span class="math inline">\(\rho\)</span> = 0,039
+which is considered very low correlation. The statistic is also not
+found significant at <span class="math inline">\(\alpha\)</span> &lt;
+0,05. For wave 2, <span class="math inline">\(\rho\)</span> = 0,144 and
+is significant. This means that there is a (very) low correlation
+between degree centrality and h-index, indicating that the hubs are not
+necessarily formed around those with the highest h-index.</p>
+</div>
+<div id="closeness-centrality" class="section level4" number="1.3.4.2">
+<h4><span class="header-section-number">1.3.4.2</span> Closeness
+centrality</h4>
+<pre class="r test"><code>close_w1 &lt;- closeness(network_w1)
+
+cor.test(close_w1, df_ego$h_index, method = &quot;spearman&quot;)</code></pre>
+<pre class="test2"><code>#&gt; 
+#&gt;  Spearman&#39;s rank correlation rho
+#&gt; 
+#&gt; data:  close_w1 and df_ego$h_index
+#&gt; S = 51978, p-value = 0.1679
+#&gt; alternative hypothesis: true rho is not equal to 0
+#&gt; sample estimates:
+#&gt;       rho 
+#&gt; 0.1642944</code></pre>
+<pre class="r test"><code>close_w2 &lt;- closeness(network_w2)
+
+cor.test(close_w2, df_ego$h_index, method = &quot;spearman&quot;)</code></pre>
+<pre class="test2"><code>#&gt; 
+#&gt;  Spearman&#39;s rank correlation rho
+#&gt; 
+#&gt; data:  close_w2 and df_ego$h_index
+#&gt; S = 322931, p-value = 0.7277
+#&gt; alternative hypothesis: true rho is not equal to 0
+#&gt; sample estimates:
+#&gt;        rho 
+#&gt; 0.03132662</code></pre>
+<p>Regarding closeness centrality, which indicates how close nodes are
+to other nodes, we see for both wave 1 (<span
+class="math inline">\(\rho\)</span> = 0,164) and wave 2 (<span
+class="math inline">\(\rho\)</span> = 0,031) no significant correlation.
+This means that there is no significant correlation between nodes who
+have shorter paths between other nodes and and a higher h-index.</p>
+</div>
+<div id="eigenvector-centrality" class="section level4"
+number="1.3.4.3">
+<h4><span class="header-section-number">1.3.4.3</span> Eigenvector
+centrality</h4>
+<pre class="r test"><code>eigen_w1 &lt;- eigen_centrality(network_w1)$vector
+
+
+cor.test(eigen_w1, df_ego$h_index, method = &quot;spearman&quot;)</code></pre>
+<pre class="test2"><code>#&gt; 
+#&gt;  Spearman&#39;s rank correlation rho
+#&gt; 
+#&gt; data:  eigen_w1 and df_ego$h_index
+#&gt; S = 1990581, p-value = 0.3014
+#&gt; alternative hypothesis: true rho is not equal to 0
+#&gt; sample estimates:
+#&gt;        rho 
+#&gt; 0.06783773</code></pre>
+<pre class="r test"><code>eigen_w2 &lt;- eigen_centrality(network_w2)$vector
+
+
+cor.test(eigen_w2, df_ego$h_index, method = &quot;spearman&quot;)</code></pre>
+<pre class="test2"><code>#&gt; 
+#&gt;  Spearman&#39;s rank correlation rho
+#&gt; 
+#&gt; data:  eigen_w2 and df_ego$h_index
+#&gt; S = 1813557, p-value = 0.02107
+#&gt; alternative hypothesis: true rho is not equal to 0
+#&gt; sample estimates:
+#&gt;      rho 
+#&gt; 0.150736</code></pre>
+<p>Last, eigenvector centrality has been calculated. This measure is
+similar to degree centrality, but takes into account the indegrees of
+the nodes someone is connected to. In other words, if a node is
+connected to a node with more indegrees this weighs more towards the
+eigenvector centrality than connection with less connected nodes.
+Regarding the eigenvector centrality, in wave 1 there is no significant
+correlation (<span class="math inline">\(\rho\)</span> = 0,068). There
+is a signifcant correlation between eigenvector centrality and h-index
+in wave 2. However, this correlation is (very) weak (<span
+class="math inline">\(\rho\)</span> = 0,116).</p>
+<p>All in all, only for wave 2 there has been found a significant
+correlation between both eigenvector and degree centrality. However,
+because this correlation can be considered (very) weak, it provides
+inconclusive evidence that the hubs in the network are concentrated
+around those with a higher h-index. Thus, hypothesis 2 has to be
+rejected.</p>
+</div>
+</div>
+</div>
+<div id="network-visualisation" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Network
+visualisation</h2>
+<pre class="r test"><code>plot(wave1, vertex.label = NA, vertex.size = 7, edge.curved = 0.2, edge.arrow.size = 0.1, main = &quot;Network at wave 1&quot;)
+
+plot(wave2, vertex.label = NA, vertex.size = 7, edge.curved = 0.2, edge.arrow.size = 0.1, main = &quot;Network at wave 2&quot;)
+
+indegr_w1 &lt;- degree(wave1, mode = &quot;in&quot;)
+indegr_w2 &lt;- degree(wave2, mode = &quot;in&quot;)
+
+isolates_w1 &lt;- V(wave1)[degree(wave1, mode = &quot;all&quot;) == 0]
+
+noisolates_w1 &lt;- delete_vertices(wave1, isolates_w1)
+
+plot(noisolates_w1, vertex.label = NA, vertex.size = 10, vertex.color = &quot;blue&quot;, vertex.frame.color = &quot;black&quot;,
+    edge.curved = 0.2, edge.arrow.size = 0.4, edge.color = &quot;gray&quot;, edge.width = 0.3, main = &quot;Network at wave 1 without isolates&quot;)
+
+
+isolates_w2 &lt;- V(wave2)[degree(wave2, mode = &quot;all&quot;) == 0]
+
+noisolates_w2 &lt;- delete_vertices(wave2, isolates_w2)
+
+plot(noisolates_w1, vertex.label = NA, vertex.size = 10, vertex.color = &quot;blue&quot;, vertex.frame.color = &quot;black&quot;,
+    edge.curved = 0.2, edge.arrow.size = 0.4, edge.color = &quot;gray&quot;, edge.width = 0.3, main = &quot;Network at wave 2 without isolates&quot;)</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/initial%20plots-1.png" width="50%" /><img src="4-results-descriptives-final_files/figure-html/initial%20plots-2.png" width="50%" /><img src="4-results-descriptives-final_files/figure-html/initial%20plots-3.png" width="50%" /><img src="4-results-descriptives-final_files/figure-html/initial%20plots-4.png" width="50%" /></p>
+<p>Above, plots of both waves are presented, both with and without
+isolates. These plots show the networks before tampering with shape,
+size and position of the nodes. Furthermore, the plots show that the
+number of co-authorship ties has increased between timepoint 1 and
+timepoint 2.</p>
+<div id="plots-by-h-index-and-indegrees" class="section level3"
+number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Plots by H-index
+and indegrees</h3>
+<pre class="r test"><code>### wave 1
+
+indegr_w1 &lt;- degree(wave1, mode = &quot;in&quot;)
+
+# assign h-index to scholar
+V(wave1)$h_index &lt;- df_ego$h_index
+V(wave1)$indegree &lt;- indegr_w1
+
+# remove isolates
+noisolates_w1 &lt;- delete.vertices(wave1, V(wave1)[degree(wave1) == 0])
+
+# set size of plot
+options(repr.plot.width = 20, repr.plot.height = 20)
+
+# create layout wave 1
+layout1 &lt;- create_layout(noisolates_w1, layout = &quot;fr&quot;)
+
+# plot wave 1
+ggraph(layout1) + geom_edge_link(color = &quot;gray&quot;, width = 0.5, arrow = arrow(length = unit(3, &quot;mm&quot;), type = &quot;closed&quot;)) +
+    geom_edge_link(color = &quot;gray&quot;, width = 0.5) + geom_node_point(aes(size = indegree, color = h_index)) +
+    scale_size(range = c(3, 10)) + scale_color_gradient(low = &quot;lightblue&quot;, high = &quot;blue&quot;) + theme_void() +
+    labs(title = &quot;Network wave 1: no isolates, node size based on indegrees &amp; colour based on H-index&quot;)</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/pretty%20plot%20wave%201-1.png" width="672" /></p>
+<pre class="r test"><code>layout_position &lt;- layout1[, c(&quot;x&quot;, &quot;y&quot;, &quot;name&quot;)]</code></pre>
+<pre class="r test"><code>### wave 2
+
+indegr_w2 &lt;- degree(wave2, mode = &quot;in&quot;)
+
+# assign h-index to scholar
+V(wave2)$h_index &lt;- df_ego$h_index
+V(wave2)$indegree &lt;- indegr_w2
+
+# remove isolates
+noisolates_w2 &lt;- delete.vertices(wave2, V(wave2)[degree(wave2) == 0])
+
+# set size of plot
+options(repr.plot.width = 20, repr.plot.height = 20)
+
+# layout wave 2
+layout2 &lt;- layout_position
+
+# plot wave 2
+ggraph(noisolates_w2, layout = &quot;fr&quot;) + geom_edge_link(color = &quot;gray&quot;, width = 0.3, arrow = arrow(length = unit(3,
+    &quot;mm&quot;), type = &quot;closed&quot;)) + geom_edge_link(color = &quot;gray&quot;, width = 0.5) + geom_node_point(aes(size = indegree,
+    color = h_index)) + scale_size(range = c(3, 10)) + scale_color_gradient(low = &quot;lightblue&quot;, high = &quot;blue&quot;) +
+    theme_void() + labs(title = &quot;Network wave 2: no isolates, node size based on indegrees &amp; colour based on H-index&quot;)</code></pre>
+<p><img src="4-results-descriptives-final_files/figure-html/pretty%20plot%20wave%202-1.png" width="672" /></p>
+<p>In the graphs presented above, the nodes with more degrees are bigger
+and are darker blue when they have a higher h-index. It can be observed
+that indeed only a couple of nodes have a lot of indegrees, compared to
+most nodes who only have a few indegrees. This means that there are only
+a few nodes who are popular to work with (i.e. to initiate a tie with).
+This is especially visible in Wave 2 as at this time point more
+collaborators are in the data set. This observation is in line with the
+earlier established scale-free characteristics of this network. For both
+Wave 1 and Wave 2, it can not be observed that those nodes who have a
+higher number of indegrees are also the nodes who have the highest
+h-index. This observation is in line with only the weak correlation that
+has been found between degree centrality and h-index.</p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-kim2019" class="csl-entry">
+Kim, Jinseok. 2019. <span>“Scale-Free Collaboration Networks: An Author
+Name Disambiguation Perspective.”</span> <em>Journal of the Association
+for Information Science and Technology</em> 70 (7): 685–700.
+</div>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlJlc3VsdHMgLSBkZXNjcmlwdGl2ZXMiDQphdXRob3I6ICJLb2VuIEx1Y2FzIg0KZGF0ZTogImByIFN5cy5EYXRlKClgIg0Kb3V0cHV0OiBodG1sX2RvY3VtZW50DQpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQotLS0NCg0KIyBSZXN1bHRzIC0gZGVzY3JpcHRpdmVzDQoNCmBgYHs9aHRtbH0NCjxzdHlsZT4NCmJvZHkgew0KdGV4dC1hbGlnbjoganVzdGlmeX0NCjwvc3R5bGU+DQpgYGANCmBgYHtyLCBnbG9iYWxzZXR0aW5ncywgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9DQoNCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KGZvcm1hdFIpDQoNCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkNCm9wdHNfY2h1bmskc2V0KHRpZHkub3B0cz1saXN0KHdpZHRoLmN1dG9mZj0xMDApLHRpZHk9VFJVRSwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UsY29tbWVudCA9ICIjPiIsIGNhY2hlPVRSVUUsIGNsYXNzLnNvdXJjZT1jKCJ0ZXN0IiksIGNsYXNzLm91dHB1dD1jKCJ0ZXN0MiIpKQ0Kb3B0aW9ucyh3aWR0aCA9IDEwMCkNCnJnbDo6c2V0dXBLbml0cigpDQoNCg0KY29sb3JpemUgPC0gZnVuY3Rpb24oeCwgY29sb3IpIHtzcHJpbnRmKCI8c3BhbiBzdHlsZT0nY29sb3I6ICVzOyc+JXM8L3NwYW4+IiwgY29sb3IsIHgpIH0NCmBgYA0KDQpgYGB7ciBrbGlwcHksIGVjaG89RkFMU0UsIGluY2x1ZGU9VFJVRX0NCmtsaXBweTo6a2xpcHB5KHBvc2l0aW9uID0gYygndG9wJywgJ3JpZ2h0JykpDQpgYGANCg0KYGBge3IgY2xlYW4gd29ya3NwYWNlLCBpbmNsdWRlID0gRkFMU0V9DQoNCnJtKGxpc3QgPSBscygpKQ0KDQpgYGANCg0KYGBge3IgbG9hZCBmdW5jdGlvbnMsIGluY2x1ZGU9RkFMU0V9DQoNCmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7DQogICAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7DQogICAgICAgIGlmICghcmVxdWlyZSh4LCBjaGFyYWN0ZXIub25seSA9IFRSVUUpKSB7DQogICAgICAgICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpDQogICAgICAgICAgICBsaWJyYXJ5KHgsIGNoYXJhY3Rlci5vbmx5ID0gVFJVRSkNCiAgICAgICAgfQ0KICAgIH0pDQp9DQoNCmZzYXZlIDwtIGZ1bmN0aW9uKHgsIGZpbGUgPSBOVUxMLCBsb2NhdGlvbiA9ICIuL2RhdGEvcHJvY2Vzc2VkLyIpIHsNCiAgICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEiKSwgZGlyLmNyZWF0ZSgiZGF0YSIpLCBGQUxTRSkNCiAgICBpZmVsc2UoIWRpci5leGlzdHMoImRhdGEvcHJvY2Vzc2VkIiksIGRpci5jcmVhdGUoImRhdGEvcHJvY2Vzc2VkIiksIEZBTFNFKQ0KICAgIGlmIChpcy5udWxsKGZpbGUpKQ0KICAgICAgICBmaWxlID0gZGVwYXJzZShzdWJzdGl0dXRlKHgpKQ0KICAgIGRhdGVuYW1lIDwtIHN1YnN0cihnc3ViKCJbOi1dIiwgIiIsIFN5cy50aW1lKCkpLCAxLCA4KQ0KICAgIHRvdGFsbmFtZSA8LSBwYXN0ZShsb2NhdGlvbiwgZmlsZSwgIl8iLCBkYXRlbmFtZSwgIi5yZGEiLCBzZXAgPSAiIikNCiAgICBzYXZlKHgsIGZpbGUgPSB0b3RhbG5hbWUpICAjbmVlZCB0byBmaXggaWYgZmlsZSBpcyByZWxvYWRlZCBhcyBpbnB1dCBuYW1lLCBub3QgYXMgeC4gDQp9DQoNCmZsb2FkIDwtIGZ1bmN0aW9uKGZpbGVuYW1lKSB7DQogICAgbG9hZChmaWxlbmFtZSkNCiAgICBnZXQobHMoKVtscygpICE9ICJmaWxlbmFtZSJdKQ0KfQ0KDQpmc2hvd2RmIDwtIGZ1bmN0aW9uKHgsIC4uLikgew0KICAgIGtuaXRyOjprYWJsZSh4LCBkaWdpdHMgPSAyLCAiaHRtbCIsIC4uLikgJT4lDQogICAgICAgIGthYmxlRXh0cmE6OmthYmxlX3N0eWxpbmcoYm9vdHN0cmFwX29wdGlvbnMgPSBjKCJzdHJpcGVkIiwgImhvdmVyIikpICU+JQ0KICAgICAgICBrYWJsZUV4dHJhOjpzY3JvbGxfYm94KHdpZHRoID0gIjEwMCUiLCBoZWlnaHQgPSAiMzAwcHgiKQ0KfQ0KDQoNCmBgYA0KDQpgYGB7ciBsb2FkIHBhY2thZ2VzLCBpbmNsdWRlPUZBTFNFfQ0KDQpwYWNrYWdlcyA8LSBjKCJ0aWR5dmVyc2UiLCANCiAgICAgICAgICAgICAgInNjaG9sYXIiLCANCiAgICAgICAgICAgICAgIlJTaWVuYSIsIA0KICAgICAgICAgICAgICAiUnNpZW5hVHdvU3RlcCIsIA0KICAgICAgICAgICAgICAiaWdyYXBoIiwNCiAgICAgICAgICAgICAgInBvd2VSbGF3IiwNCiAgICAgICAgICAgICAgImdncmFwaCIpDQoNCmZwYWNrYWdlLmNoZWNrKHBhY2thZ2VzKQ0KDQpgYGANCg0KYGBge3IgbG9hZCBkYXRhLCBpbmNsdWRlPUZBTFNFfQ0KDQpmdWxsZGF0YSA8LSBmbG9hZCgiLi9EYXRhL2Z1bGxfZGF0YS5SZGF0YSIpDQoNCmRmX2VnbyA8LSBmbG9hZCgiLi9EYXRhL2RmX2Vnby5SZGF0YSIpDQogIA0KZGZfd29ya3MgPC0gZmxvYWQoIi4vRGF0YS9kZl93b3Jrcy5SZGF0YSIpDQoNCmBgYA0KDQpgYGB7ciBjcmVhdGUgZ3JhcGggb2JqZWN0cywgaW5jbHVkZT1GQUxTRX0NCg0KIyB3YXZlIDENCm5ldHdvcmtfdzEgPC0gaWdyYXBoOjpncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoDQogIGZ1bGxkYXRhJG5ldHNbMSwsXSwNCiAgbW9kZSA9IGMoImRpcmVjdGVkIiksDQogIHdlaWdodGVkID0gTlVMTCwNCiAgZGlhZyA9IEZBTFNFLA0KICBhZGQuY29sbmFtZXMgPSBOVUxMLA0KICBhZGQucm93bmFtZXMgPSBOVUxMKQ0KDQp3YXZlMSA8LSBzaW1wbGlmeShuZXR3b3JrX3cxKQ0KDQojIHdhdmUgMg0KbmV0d29ya193MiA8LSBpZ3JhcGg6OmdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeCgNCiAgZnVsbGRhdGEkbmV0c1syLCxdLA0KICBtb2RlID0gYygiZGlyZWN0ZWQiKSwNCiAgd2VpZ2h0ZWQgPSBOVUxMLA0KICBkaWFnID0gRkFMU0UsDQogIGFkZC5jb2xuYW1lcyA9IE5VTEwsDQogIGFkZC5yb3duYW1lcyA9IE5VTEwpDQoNCndhdmUyIDwtIHNpbXBsaWZ5KG5ldHdvcmtfdzIpDQoNCiAgICAgICAgICAgICAgICAgIA0KYGBgDQoNCiMjIGRlc2NyaXB0aXZlIHN0YXRpc3RpY3MNCg0KRmlyc3QsIHNvbWUgZGVzY3JpcHRpdmUgc3RhdGlzdGljcyBhcmUgY2FsY3VsYXRlZCBhbmQgcHJlc2VudGVkIGJlbG93LCBpbiBvcmRlciB0byBnaXZlIG1vcmUgaW5zaWdodCBpbiB3aGF0IHRoZSBuZXR3b3JrcyBsb29rIGxpa2UuDQoNCiMjIyBXYXZlIDENCg0KYGBge3IgZGVzY3JpcHRpdmUgc3RhdHMgd2F2ZSAxfQ0KIyBudW1iZXIgb2Ygbm9kZXMNCiMgdmNvdW50KG5ldHdvcmtfdzEpICMgMjM0DQoNCiMgbnVtYmVyIG9mIGVkZ2VzDQplY291bnQobmV0d29ya193MSkNCg0KIyMjIHdhdmUgMQ0KIyBkeWFkLWNlbnN1cw0KaWdyYXBoOjpkeWFkX2NlbnN1cyhuZXR3b3JrX3cxKQ0KDQojIHRyaWFkLWNlbnN1cw0KaWdyYXBoOjp0cmlhZF9jZW5zdXMobmV0d29ya193MSkNCg0KIyBlZGdlIGRlbnNpdHkNCmlncmFwaDo6ZWRnZV9kZW5zaXR5KG5ldHdvcmtfdzEpDQoNCmBgYA0KDQpUaGUgbmV0d29ya3MgY29uc2lzdCBvZiAyMzQgc2Nob2xhcnMuIEluIHdhdmUgMSB0aGVyZSBhcmUgMTQ1IGVkZ2VzLCBjb25zaXN0aW5nIG9mIDE5IHJlY2lwcm9jYXRlZCB0aWVzIGFuZCAxMDcgYXN5bW1ldHJpYyB0aWVzLiBUaGUgZWRnZSBkZW5zaXR5IGlzIDAsMDAzLCBpbmRpY2F0aW5nIHRoYXQgdGhlIHRvdGFsIG51bWJlciBvZiBlZGdlcyBjYW4gYmUgaW50ZXJwcmV0ZWQgYXMgcmVsYXRpdmVseSBsb3cgY29tcGFyZWQgdG8gdGhlIHRvdGFsIHBvc3NpYmxlIG51bWJlciBvZiBlZGdlcy4gTG9va2luZyBhdCB0aGUgdHJpYWRpYyByZWxhdGlvbnMsIHRoZXJlIGlzIG9ubHkgb25lIGNvbXBsZXRlIHRyaWFkLiBBIHRyaWFkIHdpdGggbm8gcmVsYXRpb25zIGJldHdlZW4gZWFjaCBvdGhlciAoMDAzKSBhcHBlYXJzIHRoZSBtb3N0IGluIHRoaXMgbmV0d29yay4gVGhpcyBtZWFucyB0aGF0IGluIHdhdmUgMSB0aGUgbmV0d29yayBtb3N0bHkgY29uc2lzdHMgb2YgaXNvbGF0ZXMuDQoNCiMjIyBXYXZlIDINCg0KYGBge3IgZGVzY3JpcHRpdmUgc3RhdHMgd2F2ZSAyfQ0KDQojIyMgd2F2ZSAyDQoNCiNudW1iZXIgb2YgZWRnZXMNCmVjb3VudChuZXR3b3JrX3cyKSANCiMgZHlhZC1jZW5zdXMNCmlncmFwaDo6ZHlhZF9jZW5zdXMobmV0d29ya193MikNCg0KIyB0cmlhZC1jZW5zdXMNCmlncmFwaDo6dHJpYWRfY2Vuc3VzKG5ldHdvcmtfdzIpDQoNCiMgZWRnZSBkZW5zaXR5DQppZ3JhcGg6OmVkZ2VfZGVuc2l0eShuZXR3b3JrX3cyKQ0KDQpgYGANCg0KSW4gd2F2ZSAyIHRoZXJlIGFyZSAyNTgsIHdoaWNoIGlzIGEgcmVsYXRpdmVseSBzdGVlcCBpbmNyZWFzZSBjb21wYXJlZCB0byB3YXZlIDEuIFRoZSBuZXR3b3JrIGNvbnNpc3RzIG9mIDMwIHJlY2lwcm9jYXRlZCB0aWVzIGFuZCAxOTggYXNzeW1ldHJpYyB0aWVzLiBUaGUgZWRnZSBkZW5zaXR5IGlzIDAsMDA1IGFuZCBpcyBvbmx5IHNsaWdodGx5IGhpZ2hlciB0aGFuIGluIHdhdmUgMSwgdGh1cyBtZWFuaW5nIHRoYXQgdGhlIG51bWJlciBvZiBlZGdlcyBpcyBsb3cgY29tcGFyZWQgdG8gYWxsIHBvc2libGUgZWRnZXMgd2l0aGluIHRoZSBuZXR3b3JrLiBGdXJ0aGVybW9yZSwgaW5zcGVjdGluZyB0aGUgdHJpYWRpYyByZWxhdGlvbnMsIHRoZSBudW1iZXIgb2YgY29tcGxldGUgdHJpYWRzIGluY3JlYXNlZCBmcm9tIDEgdG8gMi4gVGhlIDAwMyB0cmlhZCAobm8gcmVsYXRpb25zIGJldHdlZW4gdGhlIHRocmVlIG5vZGVzKSBzdGlsbCBvY2N1cnMgdGhlIG1vc3QsIG1lYW5pbmcgdGhhdCBtb3N0IHNjaG9sYXJzIGNhbiBzdGlsbCBiZSBjb25zaWRlcmVkIGlzb2xhdGVzLg0KDQojIyMgVHJhbnNpdGl2aXR5DQoNCmBgYHtyIHRyYW5zaXRpdml0eX0NCiMgd2F2ZSAxDQppZ3JhcGg6OnRyYW5zaXRpdml0eShuZXR3b3JrX3cxKQ0KIyB3YXZlIDINCmlncmFwaDo6dHJhbnNpdGl2aXR5KG5ldHdvcmtfdzIpDQoNCmBgYA0KDQpUaGUgdHJhbnNpdGl2aXR5IGVmZmVjdCBpbGx1c3RyYXRlcyB3aGV0aGVyIGRpZmZlcmVudCBjby1hdXRob3JzIG9mIGEgc2Nob2xhciBiZWNvbWUgY28tYXV0aG9ycy4gSW4gd2F2ZSAxIHRoaXMgaW5kZXggaXMgMCwxODIuIFRoaXMgbWVhbnMgdGhhdCBhIHNjaG9sYXIgd2hvIGNvLWF1dGhvcnMgd2l0aCB0d28gb3RoZXIgc2Nob2xhcnMsIHRoZSBwcm9iYWJpbGl0eSB0aGF0IHRoZXNlIHR3byBzY2hvbGFycyBhbHNvIGJlY29tZSBjby1hdXRob3JzIGlzIDAsMTgyLiBJbiB3YXZlIDIgdGhlIHRyYW5zaXRpdml0eSBpbmRleCBpcyAwLDE3Miwgd2hpY2ggaXMgYSBzbGlnaHQgKGFuZCBwcm9iYWJseSBpbnNpZ25pZmljYW50KSBkZWNyZWFzZSBjb21wYXJlZCB0byB3YXZlIDEuDQoNCiMjIFNjYWxlLWZyZWUgbmV0d29yayAtIFdhdmUgMQ0KDQpBIG5ldHdvcmsgY2FuIGJlIGNvbnNpZGVyZWQgc2NhbGUtZnJlZSB3aGVuIHRoZSBuZXR3b3JrJ3MgZGVncmVlIGRpc3RyaWJ1dGlvbiBmb2xsb3dzIGEgcG93ZXItbGF3IFtAa2ltMjAxOV06DQoNCiQkDQpQKGspIFxzaW0ga157LVxnYW1tYX0NCiQkDQoNCldoZXJlICRQKGspJCBpcyB0aGUgcHJvYmFiaWxpdHksICRrJCB0aGUgZGVncmVlcywgYW5kICRcZ2FtbWEkIGlzIHRoZSBzY2FsaW5nIGV4cG9uZW50LiBBIGRpc3RyaWJ1dGlvbiBpcyBjb25zaWRlcmVkIHNjYWxlLWZyZWUgd2hlbiAkXGdhbW1hJCBpcyBiZXR3ZWVuIDIgYW5kIDMuDQoNCkluIHRoZSBjYXNlIG9mIHByZWZlcmVudGlhbCBhdHRhY2htZW50IGluIGNvLWF1dGhvcnNoaXAgdGhpcyBjYW4gYmUgZXhwbGFpbmVkIGFzIHRoZSBwcm9iYWJpbGl0eSBvZiBhIG5vZGUgaGF2aW5nIGEgY2VydGFpbiBudW1iZXIgb2YgY28tYXV0aG9ycyBkZWNyZWFzZXMgYXMgdGhlIG51bWJlciBvZiBjby1hdXRob3JzIGluY3JlYXNlcy4gSW4gb3RoZXIgd29yZHMsIHdoZW4gYSBub2RlIGhhcyBhIGxvdCBvZiBjby1hdXRob3JzaGlwIHRpZXMsIGl0IGlzIGxlc3MgbGlrZWx5IHRvIGZpbmQgbm9kZXMgd2l0aCBhIHNpbWlsYXIgaGlnaCBudW1iZXIgb2YgY28tYXV0aG9yc2hpcCB0aWVzLiBPbiB0aGUgb3RoZXIgaGFuZCwgdGhlIHByb2JhYmlsaXR5IG9mIGEgbm9kZSBoYXZpbmcgb25seSBhIHNtYWxsIG51bWJlciBvZiBjby1hdXRob3JzaGlwIHRpZXMgaXMgcmVsYXRpdmVseSBoaWdoLiBEZXRlcm1pbmluZyB3aGV0aGVyIHRoZSBuZXR3b3JrcyBleGhpYml0IGEgc2NhbGUtZnJlZSBkaXN0cmlidXRpb24gaXMgaW50ZXJlc3Rpbmcgd2hlbiBpbnZlc3RpZ2F0aW5nIGEgJ01hdHRoZXcgZWZmZWN0JyBpbiBzY2llbmNlLiBBcyBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBjYW4gYmUgc2VlbiBhcyBhIG1lY2hhbmlzbSBkcml2aW5nIHNjYWxlLWZyZWUgbmV0d29ya3MsIGl0IHNob3dzIHRoYXQgbmV3IGNvbm5lY3Rpb25zIGFyZSBtb3JlIGxpa2VseSB0byBiZSBmb3JtZWQgd2l0aCB0aG9zZSB3aG8gYXJlIGFscmVhZHkgd2VsbC1jb25uZWN0ZWQuIFRoaXMgcGFyYWxsZWxzIGFuIGVmZmVjdCBvZiBjdW11bGF0aXZlIGFkdmFudGFnZSBiYXNlZCBvbiB0aGUgaW5kZWdyZWVzIG9mIGEgbm9kZS4NCg0KIyMjIERlZ3JlZSBkaXN0cmlidXRpb24gd2F2ZSAxIC0gaW5jbHVkaW5nIGlzb2xhdGVzDQoNCmBgYHtyIHdhdmUgMSBpbmRlZ3JlZSBkaXN0cmlidXRpb259DQojIHdhdmUgMQ0KaW5kZWdyX3cxIDwtIGRlZ3JlZShuZXR3b3JrX3cxLCBtb2RlID0gImluIikgIyBjYWxjdWxhdGUgaW5kZWdyZWVzDQoNCiMgY3JlYXRlIGRhdGFmcmFtZSBmb3IgaW5kZWdyZWVzDQpkZWdyZWVfdGFibGVfdzEgPC0gYXMuZGF0YS5mcmFtZSh0YWJsZShpbmRlZ3JfdzEpKQ0KY29sbmFtZXMoZGVncmVlX3RhYmxlX3cxKSA8LSBjKCJJbmRlZ3JlZSIsICJGcmVxdWVuY3kiKQ0KZGVncmVlX3RhYmxlX3cxJEluZGVncmVlIDwtIGFzLm51bWVyaWMoYXMuY2hhcmFjdGVyKGRlZ3JlZV90YWJsZV93MSRJbmRlZ3JlZSkpDQojIENyZWF0ZSBhIGNvbXBsZXRlIGluZGVncmVlIHJhbmdlDQpjb21wbGV0ZV9pbmRlZ3JlZSA8LSBkYXRhLmZyYW1lKEluZGVncmVlID0gMDptYXgoZGVncmVlX3RhYmxlX3cxJEluZGVncmVlKSkNCmRlZ3JlZV90YWJsZV93MSA8LSBtZXJnZShjb21wbGV0ZV9pbmRlZ3JlZSwgZGVncmVlX3RhYmxlX3cxLCBieSA9ICJJbmRlZ3JlZSIsIGFsbC54ID0gVFJVRSkNCiMgQ2FsY3VsYXRlIHBlcmNlbnRhZ2UgZm9yIGVhY2ggaW5kZWdyZWUNCmRlZ3JlZV90YWJsZV93MSRGcmVxdWVuY3lbaXMubmEoZGVncmVlX3RhYmxlX3cxJEZyZXF1ZW5jeSldIDwtIDANCmRlZ3JlZV90YWJsZV93MSRQZXJjZW50YWdlIDwtIChkZWdyZWVfdGFibGVfdzEkRnJlcXVlbmN5IC8gc3VtKGRlZ3JlZV90YWJsZV93MSRGcmVxdWVuY3kpKSAqIDEwMA0KDQoNCiMgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIC0gaW5jbHVkaW5nIGlzb2xhdGVzDQpnZ3Bsb3QoZGVncmVlX3RhYmxlX3cxLCBhZXMoeCA9IEluZGVncmVlLCB5ID0gUGVyY2VudGFnZSkpICsNCiAgZ2VvbV9iYXIoc3RhdCA9ICJpZGVudGl0eSIsIGZpbGwgPSAiYmx1ZSIsIGNvbG9yID0gImJsYWNrIiwgYWxwaGEgPSAwLjcpICsNCiAgbGFicyh0aXRsZSA9ICJEaXN0cmlidXRpb24gb2YgaW5kZWdyZWVzIC0gV2F2ZSAxIChwZXJjZW50YWdlKSIsIA0KICAgICAgIHggPSAiSW5kZWdyZWVzIiwgDQogICAgICAgeSA9ICJQZXJjZW50YWdlIikgKw0KICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzID0gc2VxKDAsIDE1LCAxKSkgKyANCiAgc2NhbGVfeV9jb250aW51b3VzKGxpbWl0cyA9IGMoMCwgbWF4KGRlZ3JlZV90YWJsZV93MSRQZXJjZW50YWdlKSArIDUpKSArDQogIHRoZW1lX21pbmltYWwoKQ0KDQpgYGANCg0KVGhlIGluZGVncmVlIGRpc3RyaWJ1dGlvbiBwcmVzZW50ZWQgYWJvdmUgc2hvd3MgYSByaWdodC1za2V3ZWQgZGlzdHJpYnV0aW9uLCB3aGljaCB3b3VsZCBiZSBleHBlY3RlZCBpbiBhIHNjYWxlLWZyZWUgbmV0d29yay4gQSBsb3Qgb2Ygbm9kZXMgb2YgaGF2ZSBubyBvciBvbmx5IGEgZmV3IGluZGVncmVlcywgd2hpbGUgYSBzbWFsbCBudW1iZXIgb2Ygbm9kZXMgaGF2ZSBhIGxvdCBvZiBpbmRlZ3JlZXMuDQoNCiMjIyBJbmRlZ3JlZSBkaXN0cmlidXRpb24gd2F2ZSAxIC0gZXhjbHVkaW5nIGlzb2xhdGVzDQoNCmBgYHtyIHdhdmUgMSBkZWdyZWUgZGlzdHJpYnV0aW9uIGV4Y2x1ZGluZyBpc29sYXRlc30NCiMgZmlsdGVyIG91dCBpc29sYXRlcw0KZGVncmVlX3RhYmxlX3cxX3ggPC0gZGVncmVlX3RhYmxlX3cxW2RlZ3JlZV90YWJsZV93MSRJbmRlZ3JlZSA+IDAsIF0NCmRlZ3JlZV90YWJsZV93MV94JFBlcmNlbnRhZ2UgPC0gKGRlZ3JlZV90YWJsZV93MV94JEZyZXF1ZW5jeSAvIHN1bShkZWdyZWVfdGFibGVfdzFfeCRGcmVxdWVuY3kpKSAqIDEwMA0KDQojIGluZGVncmVlIGRpc3RyaWJ1dGlvbiAtIGV4Y2x1ZGluZyBpc29sYXRlcw0KZ2dwbG90KGRlZ3JlZV90YWJsZV93MV94LCBhZXMoeCA9IEluZGVncmVlLCB5ID0gUGVyY2VudGFnZSkpICsNCiAgZ2VvbV9iYXIoc3RhdCA9ICJpZGVudGl0eSIsIGZpbGwgPSAiYmx1ZSIsIGNvbG9yID0gImJsYWNrIiwgYWxwaGEgPSAwLjcpICsNCiAgbGFicyh0aXRsZSA9ICJEaXN0cmlidXRpb24gb2YgaW5kZWdyZWVzIC0gV2F2ZSAxIChwZXJjZW50YWdlKSIsIA0KICAgICAgIHggPSAiSW5kZWdyZWVzIiwgDQogICAgICAgeSA9ICJQZXJjZW50YWdlIikgKw0KICBzY2FsZV94X2NvbnRpbnVvdXMoYnJlYWtzID0gc2VxKDEsIDE1LCAxKSkgKyANCiAgc2NhbGVfeV9jb250aW51b3VzKGxpbWl0cyA9IGMoMCwgbWF4KGRlZ3JlZV90YWJsZV93MSRQZXJjZW50YWdlKSArIDUpKSArDQogIHRoZW1lX21pbmltYWwoKQ0KYGBgDQoNCiMjIyBFc3RpbWF0aW5nIHRoZSBzY2FsaW5nIGV4cG9uZW50ICRcZ2FtbWEkDQoNClRvIGVzdGltYXRlIHRoZSAkXGdhbW1hJCBwYXJhbWV0ZXIgaXNvbGF0ZXMgaGF2ZSB0byBiZSBkaXNyZWdhcmRlZC4gVGhlIGluZGVncmVlIGRpc3RyaWJ1dGlvbiBleGNsdWRpbmcgaXNvbGF0ZXMgc2hvd24gYWJvdmUgc3RpbGwgc2hvd3MgYSByaWdodC1za2V3ZWQgZGlzdHJpYnV0aW9uLiBUaGUgZGlzdHJpYnV0aW9uIGlzIHN0aWxsIGluIGxpbmUgd2l0aCB3aGF0IGlzIGV4cGVjdGVkIGZvciBhIHNjYWxlLWZyZWUgbmV0d29yay4gVGhlICRcZ2FtbWEkIGNhbiBiZSBlc3RpbWF0ZWQgdXNpbmcgdGhlIFItcGFja2FnZSBgcG93ZVJsYXdgLiBUaGUgJFxnYW1tYSQgaXMgZXN0aW1hdGVkIGF0IHJvdWdobHkgNCw4MiAoc2VlIGJlbG93KS4gQXMgdGhpcyB2YWx1ZSBpcyBub3QgYmV0d2VlbiAyIGFuZCAzLCB0aGUgbmV0d29yayBkb2VzIG5vdCBleGhpYml0cyBzY2FsZS1mcmVlIGNoYXJhY3RlcmlzdGljcyBhbmQsIHRodXMsIGNhbiBsaWtlbHkgbm90IGJlIGludGVycHJldGVkIGFzIHN1Y2guIEFub3RoZXIgcHJvcGVydHkgb2YgYSBwb3dlci1sYXcgZGlzdHJpYnV0aW9uIGlzIHRoYXQgaXQgbG9va3MgbGlrZSBhIHN0cmFpZ2h0IGxpbmUgd2hlbiBwbG90dGVkIGluIGEgbG9nLWxvZyBwbG90IChhIHBsb3QgaW4gd2hpY2ggYm90aCB0aGUgeC1heGlzIGFuZCB5LWF4aXMgaXMgcmVwcmVzZW50ZWQgdXNpbmcgYSBsb2dhcml0aG1pYyBzY2FsZSkuIFRoaXMgcGxvdCBjYW4gYmUgb2JzZXJ2ZWQgYmVsb3cgYW5kIGRvZXMgYWN0dWFsbHkgcHJlc2VudCBhIHN0cmFpZ2h0IGxpbmUuIEhvd2V2ZXIsIHRoaXMgaXMgZHVlIHRvIHRoZSBuYXR1cmUgb2YgcGxvdHRpbmcgdGhlIHBvd2VybGF3IChvciBlc3NlbnRpYWxseSB0aGUgc2NhbGUgcGFyYW1ldGVyKSBpbiBhIGxvZy1sb2cgcGxvdC4gSXQgY2FuLCBob3dldmVyLCBiZSBvYnNlcnZlZCB0aGF0IHRoZSBzdGVlcGVyIHNsb3BlIG9mIHRoaXMgbGluZSBpbmRpY2F0ZXMgYSBtb3JlIHVuaWZvcm0gaW5kZWdyZWUgZGlzdHJpYnV0aW9uLCBhcyB3ZWxsIGFzIHRoZSBtb3JlIGRpc3BlcnNlIHBsYWNlbWVudCBvZiB0aGUgZG90cyBpbiB0aGUgc2NhdHRlciBwbG90LiBBbHRvZ2V0aGVyLCBpbiB3YXZlIDEgdGhlcmUgaXMgbGlrZWx5IG5vdCB5ZXQgYSBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBtZWNoYW5pc20gaW4gcGxhY2UuIFRoaXMgaXMsIGhvd2V2ZXIsIGxpa2VseSB0byBiZSB0aGUgY2FzZSBkdWUgdG8gdGhlIGxhcmdlIGFtb3VudCBvZiBpc29sYXRlcyBpbiB3YXZlIDEgZHVlIHRvIGEgbG90IG9mIHRoZSBzY2hvbGFycyBub3QgYmVpbmcgYWN0aXZlIChtZWFuaW5nIHRoZXkgYXJlIG5vdCB5ZXQgcHVibGlzaGluZykgaW4gd2F2ZSAxLCBtYWtpbmcgaXQgaGFyZCB0byBkaXN0aW5ndWlzaCBhbnkgZGlzdGluY3QgJ2h1YnMnIG9mIGNvLWF1dGhvcnNoaXAgaW4gdGhpcyB0aW1lcG9pbnQuDQoNCmBgYHtyIGVzdGltYXRlIHBvd2VybGF3fQ0KDQpkZWdyZWVfZGZfdzEgPC0gYXMuZGF0YS5mcmFtZSh0YWJsZShpbmRlZ3JfdzEpKQ0KZGVncmVlX2RmX3cxJGluZGVncl93MSA8LSBhcy5udW1lcmljKGFzLmNoYXJhY3RlcihkZWdyZWVfZGZfdzEkaW5kZWdyX3cxKSkNCg0KZGVncmVlX2RmX3cxIDwtIGRlZ3JlZV9kZl93MVtkZWdyZWVfZGZfdzEkaW5kZWdyX3cxID4gMCwgXSAjIGV4Y2x1ZGUgaXNvbGF0ZXMNCg0KcGwgPC0gZGlzcGwkbmV3KGRlZ3JlZV9kZl93MSRpbmRlZ3JfdzEpICMgZml0IHBvd2VyIGxhdyB0byBkaXN0cmlidXRpb24NCg0KZXN0aW1hdGVfdzEgPC0gZXN0aW1hdGVfeG1pbihwbCkNCnBsJHNldFhtaW4oZXN0aW1hdGVfdzEpDQoNCmVzdGltYXRlIDwtIGVzdGltYXRlX3htaW4ocGwpDQpwbCRzZXRYbWluKGVzdGltYXRlKQ0KDQpnYW1tYSA8LSBwbCRwYXJzDQpnYW1tYQ0KDQpgYGANCg0KYGBge3IgbG9nIGxvZyBncmFwaH0NCg0KY2xlYW5fZGF0YV93MSA8LSBkZWdyZWVfdGFibGVfdzFfeCAlPiUgDQogIGZpbHRlcihGcmVxdWVuY3kgPiAwKQ0KDQpsb2dfZml0IDwtIGxtKGxvZyhGcmVxdWVuY3kpIH4gbG9nKEluZGVncmVlKSwgZGF0YSA9IGNsZWFuX2RhdGFfdzEpDQoNCmdncGxvdChjbGVhbl9kYXRhX3cxLCBhZXMoeCA9IEluZGVncmVlLCB5ID0gRnJlcXVlbmN5KSkgKw0KICBnZW9tX3BvaW50KGNvbG9yPSAiYmx1ZSIsIHNpemUgPSAyKSArIA0KICBsYWJzKHRpdGxlID0gIkxvZy1Mb2cgcGxvdCBvZiBpbmRlZ3JlZSBkaXN0cmlidXRpb24gLSBXYXZlIDEiLCANCiAgICAgICB4ID0gIkluZGVncmVlcyAobG9nLXNjYWxlKSIsIA0KICAgICAgIHkgPSAiRnJlcXVlbmNpZXMgKGxvZy1zY2FsZSIpICsNCiAgZ2VvbV9zbW9vdGgobWV0aG9kID0gImxtIiwgY29sb3IgPSAgImJsdWUiLCBzZSA9IEZBTFNFKSArIA0KICBzY2FsZV94X2xvZzEwKCkgKyANCiAgc2NhbGVfeV9sb2cxMCgpICsNCiAgZ2VvbV9jdXJ2ZSh4ID0gNywgeSA9IDE5LCB4ZW5kID0gNSwgeWVuZCA9IDEzLA0KICAgICAgICAgICAgIGFycm93ID0gYXJyb3cobGVuZ3RoID0gdW5pdCgwLjUsICJpbmNoZXMiKSksIHNpemUgPSAxLA0KICAgICAgICAgICAgIGNvbG9yID0gImJsYWNrIiwgY3VydmF0dXJlID0gMC4wKSArDQogICAgIGFubm90YXRlKCJ0ZXh0IiwgeCA9IDYsIHkgPSAyMCwgbGFiZWwgPSAidGhlIHN0ZWVwZXIgc2xvcGUgXG4gc3VnZ2VzdHMgYSBtb3JlIHVuaWZvcm0gXG4gZGVncmVlIGRpc3RyaWJ1dGlvbiIsIHNpemUgPSA0KSArDQogIHRoZW1lX21pbmltYWwoKQ0KDQoNCg0KYGBgDQoNCiMjIFNjYWxlLWZyZWUgbmV0d29yayAtIFdhdmUgMg0KDQojIyMgRGVncmVlIGRpc3RyaWJ1dGlvbiB3YXZlIDIgLSBpbmNsdWRpbmcgaXNvbGF0ZXMNCg0KYGBge3Igd2F2ZSAyIGluZGVncmVlIGRpc3RyaWJ1dGlvbn0NCiMgd2F2ZSAyDQppbmRlZ3JfdzIgPC0gZGVncmVlKG5ldHdvcmtfdzIsIG1vZGUgPSAiaW4iKSAjIGNhbGN1bGF0ZSBpbmRlZ3JlZXMNCg0KIyBjcmVhdGUgZGF0YWZyYW1lIGZvciBpbmRlZ3JlZXMNCmRlZ3JlZV90YWJsZV93MiA8LSBhcy5kYXRhLmZyYW1lKHRhYmxlKGluZGVncl93MikpDQpjb2xuYW1lcyhkZWdyZWVfdGFibGVfdzIpIDwtIGMoIkluZGVncmVlIiwgIkZyZXF1ZW5jeSIpDQpkZWdyZWVfdGFibGVfdzIkSW5kZWdyZWUgPC0gYXMubnVtZXJpYyhhcy5jaGFyYWN0ZXIoZGVncmVlX3RhYmxlX3cyJEluZGVncmVlKSkNCiMgQ3JlYXRlIGEgY29tcGxldGUgaW5kZWdyZWUgcmFuZ2UNCmNvbXBsZXRlX2luZGVncmVlIDwtIGRhdGEuZnJhbWUoSW5kZWdyZWUgPSAwOm1heChkZWdyZWVfdGFibGVfdzIkSW5kZWdyZWUpKQ0KZGVncmVlX3RhYmxlX3cyIDwtIG1lcmdlKGNvbXBsZXRlX2luZGVncmVlLCBkZWdyZWVfdGFibGVfdzIsIGJ5ID0gIkluZGVncmVlIiwgYWxsLnggPSBUUlVFKQ0KIyBDYWxjdWxhdGUgcGVyY2VudGFnZSBmb3IgZWFjaCBpbmRlZ3JlZQ0KZGVncmVlX3RhYmxlX3cyJEZyZXF1ZW5jeVtpcy5uYShkZWdyZWVfdGFibGVfdzIkRnJlcXVlbmN5KV0gPC0gMA0KZGVncmVlX3RhYmxlX3cyJFBlcmNlbnRhZ2UgPC0gKGRlZ3JlZV90YWJsZV93MiRGcmVxdWVuY3kgLyBzdW0oZGVncmVlX3RhYmxlX3cyJEZyZXF1ZW5jeSkpICogMTAwDQoNCg0KIyBpbmRlZ3JlZSBkaXN0cmlidXRpb24gLSBpbmNsdWRpbmcgaXNvbGF0ZXMNCmdncGxvdChkZWdyZWVfdGFibGVfdzIsIGFlcyh4ID0gSW5kZWdyZWUsIHkgPSBQZXJjZW50YWdlKSkgKw0KICBnZW9tX2JhcihzdGF0ID0gImlkZW50aXR5IiwgZmlsbCA9ICJibHVlIiwgY29sb3IgPSAiYmxhY2siLCBhbHBoYSA9IDAuNykgKw0KICBsYWJzKHRpdGxlID0gIkRpc3RyaWJ1dGlvbiBvZiBpbmRlZ3JlZXMgLSBXYXZlIDIgKHBlcmNlbnRhZ2UpIiwgDQogICAgICAgeCA9ICJJbmRlZ3JlZXMiLCANCiAgICAgICB5ID0gIlBlcmNlbnRhZ2UiKSArDQogIHNjYWxlX3hfY29udGludW91cyhicmVha3MgPSBzZXEoMCwgMTUsIDEpKSArIA0KICBzY2FsZV95X2NvbnRpbnVvdXMobGltaXRzID0gYygwLCBtYXgoZGVncmVlX3RhYmxlX3cyJFBlcmNlbnRhZ2UpICsgNSkpICsNCiAgdGhlbWVfbWluaW1hbCgpDQoNCmBgYA0KDQpUaGUgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIG9mIHdhdmUgMiBwcmVzZW50ZWQgYWJvdmUgc2hvd3MgYSByaWdodC1za2V3ZWQgZGlzdHJpYnV0aW9uLCB3aGljaCB3b3VsZCBiZSBleHBlY3RlZCBpbiBhIHNjYWxlLWZyZWUgbmV0d29yay4gQSBsb3Qgb2Ygbm9kZXMgaGF2ZSBlaXRoZXIgbm8gb3Igb25seSBhIGZldyBpbmRlZ3JlZXMsIHdoaWxlIGEgc21hbGwgbnVtYmVyIG9mIG5vZGVzIGhhdmUgYSBsb3Qgb2YgaW5kZWdyZWVzLg0KDQojIyMgSW5kZWdyZWUgZGlzdHJpYnV0aW9uIHdhdmUgMiAtIGV4Y2x1ZGluZyBpc29sYXRlcw0KDQpgYGB7ciB3YXZlIDIgZGVncmVlIGRpc3RyaWJ1dGlvbiBleGNsdWRpbmcgaXNvbGF0ZXN9DQojIGZpbHRlciBvdXQgaXNvbGF0ZXMNCmRlZ3JlZV90YWJsZV93Ml94IDwtIGRlZ3JlZV90YWJsZV93MltkZWdyZWVfdGFibGVfdzIkSW5kZWdyZWUgPiAwLCBdDQpkZWdyZWVfdGFibGVfdzJfeCRQZXJjZW50YWdlIDwtIChkZWdyZWVfdGFibGVfdzJfeCRGcmVxdWVuY3kgLyBzdW0oZGVncmVlX3RhYmxlX3cyX3gkRnJlcXVlbmN5KSkgKiAxMDANCg0KIyBpbmRlZ3JlZSBkaXN0cmlidXRpb24gLSBleGNsdWRpbmcgaXNvbGF0ZXMNCmdncGxvdChkZWdyZWVfdGFibGVfdzJfeCwgYWVzKHggPSBJbmRlZ3JlZSwgeSA9IFBlcmNlbnRhZ2UpKSArDQogIGdlb21fYmFyKHN0YXQgPSAiaWRlbnRpdHkiLCBmaWxsID0gImJsdWUiLCBjb2xvciA9ICJibGFjayIsIGFscGhhID0gMC43KSArDQogIGxhYnModGl0bGUgPSAiRGlzdHJpYnV0aW9uIG9mIGluZGVncmVlcyAtIFdhdmUgMiAocGVyY2VudGFnZSkiLCANCiAgICAgICB4ID0gIkluZGVncmVlcyIsIA0KICAgICAgIHkgPSAiUGVyY2VudGFnZSIpICsNCiAgc2NhbGVfeF9jb250aW51b3VzKGJyZWFrcyA9IHNlcSgxLCAxNSwgMSkpICsgDQogIHNjYWxlX3lfY29udGludW91cyhsaW1pdHMgPSBjKDAsIG1heChkZWdyZWVfdGFibGVfdzIkUGVyY2VudGFnZSkgKyA1KSkgKw0KICB0aGVtZV9taW5pbWFsKCkNCmBgYA0KDQojIyMgRXN0aW1hdGluZyB0aGUgc2NhbGluZyBleHBvbmVudCAkXGdhbW1hJA0KDQpUaGUgaW5kZWdyZWUgZGlzdHJpYnV0aW9uIGV4Y2x1ZGluZyBpc29sYXRlcyBzaG93biBhYm92ZSBzdGlsbCBzaG93cyBhIHJpZ2h0LXNrZXdlZCBkaXN0cmlidXRpb24uIFRoZSBkaXN0cmlidXRpb24gaXMgc3RpbGwgaW4gbGluZSB3aXRoIHdoYXQgaXMgZXhwZWN0ZWQgZm9yIGEgc2NhbGUtZnJlZSBuZXR3b3JrLiBUaGUgJFxnYW1tYSQgaXMgYWdhaW4gZXN0aW1hdGVkIHVzaW5nIHRoZSBSLXBhY2thZ2UgYHBvd2VSbGF3YC4gVGhlICRcZ2FtbWEkIGlzIGVzdGltYXRlZCBhdCByb3VnaGx5IDIsNzUgKHNlZSBiZWxvdykuIEFzIHRoaXMgdmFsdWUgaXMgYmV0d2VlbiAyIGFuZCAzIHRoZSBuZXR3b3JrIGV4aGliaXRzIHNjYWxlLWZyZWUgY2hhcmFjdGVyaXN0aWNzIGFuZCBjYW4gbGlrZWx5IGJlIGludGVycHJldGVkIGFzIHN1Y2guIEJlbG93LCBpbiB0aGUgbG9nLWxvZyBwbG90IGEgc3RyYWlnaHQgbGluZSBjYW4gYmUgb2JzZXJ2ZWQsIGluIGxpbmUgd2l0aCB0aGUgY2hhcmFjdGVyaXN0aWNzIG9mIGEgcG93ZXIgbGF3IGRpc3RyaWJ1dGlvbi4gVGhlIHNsb3BlIG9mIHRoaXMgbGluZSBtb3JlIGV2aWRlbnRseSBpbmRpY2F0ZXMgdGhlIHByZXNlbmNlIG9mIGh1YnMsIGFzIG9uZSB3b3VsZCBleHBlY3QgaW4gYSBzY2FsZS1mcmVlIG5ldHdvcmsuIEFkZGl0aW9uYWxseSwgdGhlIGRvdHMgaW4gdGhlIHNjYXR0b3IgcGxvdCBhcmUgbW9yZSBhbGlnbmVkIHdpdGggdGhlIHBsb3R0ZWQgbGluZSBvZiB0aGUgc2NhbGUgcGFyYW1ldGVyLiBBbHRvZ2V0aGVyLCB0aGlzIHdvdWxkIGxpa2VseSBzdWdnZXN0IGEgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgbWVjaGFuaXNtIGF0IHBsYXkgaW4gdGhlIG5ldHdvcmsgYXQgdGltZXBvaW50IDIsIG1lYW5pbmcgdGhhdCBhbHJlYWR5IGVzdGFibGlzaGVkIGF1dGhvcnMgd2l0aCBhIGxvdCBvZiBpbmRlZ3JlZXMgYXJlIG1vcmUgYXR0cmFjdGl2ZSB0byBvdGhlciBhdXRob3JzIHRoYW4gYXV0aG9ycyB3aXRoIGxlc3MgaW5kZWdyZWVzLiBIeXBvdGhlc2lzIDEgaXMgdGhlcmVmb3JlIG5vdCByZWplY3RlZCwgdGhlIGNvbGxhYm9yYXRpb24gbmV0d29yayBvZiBEdXRjaCBzb2Npb2xvZ3kgZGVwYXJ0bWVudHMgc2VlbXMgdG8gZXhoaWJpdCBhIHNjYWxlLWZyZWUgbmV0d29yayAuDQoNCmBgYHtyIGVzdGltYXRlIHBvd2VybGF3IHdhdmUgMn0NCg0KZGVncmVlX2RmX3cyIDwtIGFzLmRhdGEuZnJhbWUodGFibGUoaW5kZWdyX3cyKSkNCmRlZ3JlZV9kZl93MiRpbmRlZ3JfdzIgPC0gYXMubnVtZXJpYyhhcy5jaGFyYWN0ZXIoZGVncmVlX2RmX3cyJGluZGVncl93MikpDQoNCmRlZ3JlZV9kZl93MiA8LSBkZWdyZWVfZGZfdzJbZGVncmVlX2RmX3cyJGluZGVncl93MiA+IDAsIF0gIyBleGNsdWRlIGlzb2xhdGVzDQoNCnBsIDwtIGRpc3BsJG5ldyhkZWdyZWVfZGZfdzIkaW5kZWdyX3cyKSAjIGZpdCBwb3dlciBsYXcgdG8gZGlzdHJpYnV0aW9uDQoNCmVzdGltYXRlX3cyIDwtIGVzdGltYXRlX3htaW4ocGwpDQpwbCRzZXRYbWluKGVzdGltYXRlX3cyKQ0KDQplc3RpbWF0ZSA8LSBlc3RpbWF0ZV94bWluKHBsKQ0KcGwkc2V0WG1pbihlc3RpbWF0ZSkNCg0KZ2FtbWEgPC0gcGwkcGFycw0KZ2FtbWENCg0KYGBgDQoNCmBgYHtyIGxvZyBsb2cgZ3JhcGggd2F2ZSAyfQ0KDQpjbGVhbl9kYXRhX3cyIDwtIGRlZ3JlZV90YWJsZV93Ml94ICU+JSANCiAgZmlsdGVyKEZyZXF1ZW5jeSA+IDApDQoNCmxvZ19maXQgPC0gbG0obG9nKEZyZXF1ZW5jeSkgfiBsb2coSW5kZWdyZWUpLCBkYXRhID0gY2xlYW5fZGF0YV93MikNCg0KZ2dwbG90KGNsZWFuX2RhdGFfdzIsIGFlcyh4ID0gSW5kZWdyZWUsIHkgPSBGcmVxdWVuY3kpKSArDQogIGdlb21fcG9pbnQoY29sb3I9ICJibHVlIiwgc2l6ZSA9IDIpICsgDQogIGxhYnModGl0bGUgPSAiTG9nLUxvZyBwbG90IG9mIGluZGVncmVlIGRpc3RyaWJ1dGlvbiAtIFdhdmUgMiIsIA0KICAgICAgIHggPSAiSW5kZWdyZWVzIChsb2ctc2NhbGUpIiwgDQogICAgICAgeSA9ICJGcmVxdWVuY2llcyAobG9nLXNjYWxlKSIpICsNCiAgZ2VvbV9zbW9vdGgobWV0aG9kID0gImxtIiwgY29sb3IgPSAgImJsdWUiLCBzZSA9IEZBTFNFKSArIA0KICBzY2FsZV94X2xvZzEwKCkgKyANCiAgc2NhbGVfeV9sb2cxMCgpICsNCiAgZ2VvbV9jdXJ2ZSh4ID0gNywgeSA9IDE5LCB4ZW5kID0gNSwgeWVuZCA9IDEzLA0KICAgICAgICAgICAgIGFycm93ID0gYXJyb3cobGVuZ3RoID0gdW5pdCgwLjUsICJpbmNoZXMiKSksIHNpemUgPSAxLA0KICAgICAgICAgICAgIGNvbG9yID0gImJsYWNrIiwgY3VydmF0dXJlID0gMC4wKSArDQogICAgIGFubm90YXRlKCJ0ZXh0IiwgeCA9IDcsIHkgPSAyNCwgbGFiZWwgPSAidGhlIG1vcmUgZ3JhZHVhbCBzbG9wZSBcbiBzdWdnZXN0cyB0aGUgZXhpc3RlbmNlIG9mIFxuIGEgZmV3IGh1YnMgaW4gdGhlIG5ldHdvcmsiLCBzaXplID0gNCkgKw0KICB0aGVtZV9taW5pbWFsKCkNCg0KDQpgYGANCg0KIyMjIENlbnRyYWxpdHkNCg0KVG8gdGVzdCBoeXBvdGhlc2lzIDIsIEkgY2FsY3VsYXRlZCB0aHJlZSBkaWZmZXJlbnQgY2VudHJhbGl0eSBtZWFzdXJlcyBmb3IgZWFjaCBub2RlOyBkZWdyZWUgY2VudHJhbGl0eSwgY2xvc2VuZXNzIGNlbnRyYWxpdHksIGFuZCBlaWdlbnZlY3RvciBjZW50cmFsaXR5LiBTdWJzZXF1ZW50bHkgSSBjYWxjdWxhdGVkIHRvIHdoYXQgZXh0ZW50IHRoaXMgaXMgY29ycmVsYXRlZCB3aXRoIGEgc2Nob2xhcidzIGgtaW5kZXguIFNwZWFybWFuIHJhbmsgY29ycmVsYXRpb24gd2FzIHVzZWQgdG8gZGV0ZXJtaW5lIGNvcnJlbGF0ZWQgcmVsYXRpb25zaGlwcywgYXMgdGhlIGRlZ3JlZXMgYXJlIG5vdCBub3JtYWxseSBkaXN0cmlidXRlZC4NCg0KIyMjIyBkZWdyZWUgY2VudHJhbGl0eQ0KDQpgYGB7ciBjZW50cmFsaXR5IHdhdmUgMX0NCg0KZGVncmVlc193MSA8LSBkZWdyZWUobmV0d29ya193MSwgDQogICAgICAgbW9kZSA9IGMoImluIiksDQogICAgICAgbm9ybWFsaXplZCA9IEZBTFNFKSMgY2FsY3VsYXRpb24gZGVncmVlDQoNCmRlZ3JlZXNfdzEgPC0gKGRlZ3JlZXNfdzEtbWluKGRlZ3JlZXNfdzEpKS8obWF4KGRlZ3JlZXNfdzEpLW1pbihkZWdyZWVzX3cxKSkgI25vcm1hbGlzZWQgZGVncmVlIGNlbnRyYWxpdHkNCg0KY29yLnRlc3QoZGVncmVlc193MSwgZGZfZWdvJGhfaW5kZXgsIG1ldGhvZCA9ICJzcGVhcm1hbiIpDQoNCmBgYA0KDQpgYGB7ciBjZW50cmFsaXR5IHdhdmUgMiwgd2FybmluZz1GQUxTRX0NCg0KZGVncmVlc193MiA8LSBkZWdyZWUobmV0d29ya193MiwgDQogICAgICAgbW9kZSA9IGMoImluIiksDQogICAgICAgbm9ybWFsaXplZCA9IEZBTFNFKSMgY2FsY3VsYXRpb24gZGVncmVlDQoNCmRlZ3JlZXNfdzIgPC0gKGRlZ3JlZXNfdzItbWluKGRlZ3JlZXNfdzIpKS8obWF4KGRlZ3JlZXNfdzIpLW1pbihkZWdyZWVzX3cyKSkgI25vcm1hbGlzZWQgZGVncmVlIGNlbnRyYWxpdHkNCg0KY29yLnRlc3QoZGVncmVlc193MiwgZGZfZWdvJGhfaW5kZXgsIG1ldGhvZCA9ICJzcGVhcm1hbiIpDQoNCg0KYGBgDQoNClRoZSBkZWdyZWUgY2VudHJhbGl0eSByZWZlcnMgdG8gdGhlIGRpcmVjdCBjb25uZWN0aW9ucyBvZiBhIG5vZGUuIEluIHRoaXMgc3R1ZHkgdGhpcyBpcyBpbmRpY2F0ZWQgd2l0aCB0aGUgbnVtYmVyIG9mIGluZGVncmVlcyBhIG5vZGUgaGFzIChtaW51cyB0aGUgbWluaW11bSBhbW91bnQgb2YgaW5kZWdyZWVzLCB3aGljaCB3b3VsZCBiZSAwIGluIHRoaXMgc3R1ZHkpLiBUaGUgZGVncmVlIGNlbnRyYWxpdHkgaGFzIGJlZW4gbm9ybWFsaXplZCBieSBkaXZpZGluZyB0aGUgbnVtYmVyIG9mIGluZGVncmVlcyBvZiBhIG5vZGUgd2l0aCB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSBtYXhpbXVtIGFuZCB0aGUgbWluaW11bSBudW1iZXIgb2Ygb2JzZXJ2ZWQgZGVncmVlcy4gTG9va2luZyBhdCB0aGUgU3BlYXJtYW4gY29ycmVsYXRpb24gZm9yIHdhdmUgMSwgd2Ugb2JzZXJ2ZSAkXHJobyQgPSAwLDAzOSB3aGljaCBpcyBjb25zaWRlcmVkIHZlcnkgbG93IGNvcnJlbGF0aW9uLiBUaGUgc3RhdGlzdGljIGlzIGFsc28gbm90IGZvdW5kIHNpZ25pZmljYW50IGF0ICRcYWxwaGEkIFw8IDAsMDUuIEZvciB3YXZlIDIsICRccmhvJCA9IDAsMTQ0IGFuZCBpcyBzaWduaWZpY2FudC4gVGhpcyBtZWFucyB0aGF0IHRoZXJlIGlzIGEgKHZlcnkpIGxvdyBjb3JyZWxhdGlvbiBiZXR3ZWVuIGRlZ3JlZSBjZW50cmFsaXR5IGFuZCBoLWluZGV4LCBpbmRpY2F0aW5nIHRoYXQgdGhlIGh1YnMgYXJlIG5vdCBuZWNlc3NhcmlseSBmb3JtZWQgYXJvdW5kIHRob3NlIHdpdGggdGhlIGhpZ2hlc3QgaC1pbmRleC4NCg0KIyMjIyBDbG9zZW5lc3MgY2VudHJhbGl0eQ0KDQpgYGB7ciBjbG9zZW5lc3Mgd2F2ZSAxLCB3YXJuaW5nPUZBTFNFfQ0KDQpjbG9zZV93MSA8LSBjbG9zZW5lc3MobmV0d29ya193MSkNCg0KY29yLnRlc3QoY2xvc2VfdzEsIGRmX2VnbyRoX2luZGV4LCBtZXRob2QgPSAic3BlYXJtYW4iKQ0KDQpgYGANCg0KYGBge3IgY2xvc2VuZXNzIHdhdmUgMiwgd2FybmluZz1GQUxTRX0NCg0KY2xvc2VfdzIgPC0gY2xvc2VuZXNzKG5ldHdvcmtfdzIpDQoNCmNvci50ZXN0KGNsb3NlX3cyLCBkZl9lZ28kaF9pbmRleCwgbWV0aG9kID0gInNwZWFybWFuIikNCg0KYGBgDQoNClJlZ2FyZGluZyBjbG9zZW5lc3MgY2VudHJhbGl0eSwgd2hpY2ggaW5kaWNhdGVzIGhvdyBjbG9zZSBub2RlcyBhcmUgdG8gb3RoZXIgbm9kZXMsIHdlIHNlZSBmb3IgYm90aCB3YXZlIDEgKCRccmhvJCA9IDAsMTY0KSBhbmQgd2F2ZSAyICgkXHJobyQgPSAwLDAzMSkgbm8gc2lnbmlmaWNhbnQgY29ycmVsYXRpb24uIFRoaXMgbWVhbnMgdGhhdCB0aGVyZSBpcyBubyBzaWduaWZpY2FudCBjb3JyZWxhdGlvbiBiZXR3ZWVuIG5vZGVzIHdobyBoYXZlIHNob3J0ZXIgcGF0aHMgYmV0d2VlbiBvdGhlciBub2RlcyBhbmQgYW5kIGEgaGlnaGVyIGgtaW5kZXguDQoNCiMjIyMgRWlnZW52ZWN0b3IgY2VudHJhbGl0eQ0KDQpgYGB7ciBlaWdlbiB3YXZlIDF9DQoNCmVpZ2VuX3cxIDwtIGVpZ2VuX2NlbnRyYWxpdHkobmV0d29ya193MSkkdmVjdG9yDQoNCg0KY29yLnRlc3QoZWlnZW5fdzEsIGRmX2VnbyRoX2luZGV4LCBtZXRob2QgPSAic3BlYXJtYW4iKQ0KDQpgYGANCg0KYGBge3IgZWlnZW4gd2F2ZSAyfQ0KDQplaWdlbl93MiA8LSBlaWdlbl9jZW50cmFsaXR5KG5ldHdvcmtfdzIpJHZlY3Rvcg0KDQoNCmNvci50ZXN0KGVpZ2VuX3cyLCBkZl9lZ28kaF9pbmRleCwgbWV0aG9kID0gInNwZWFybWFuIikNCmBgYA0KDQpMYXN0LCBlaWdlbnZlY3RvciBjZW50cmFsaXR5IGhhcyBiZWVuIGNhbGN1bGF0ZWQuIFRoaXMgbWVhc3VyZSBpcyBzaW1pbGFyIHRvIGRlZ3JlZSBjZW50cmFsaXR5LCBidXQgdGFrZXMgaW50byBhY2NvdW50IHRoZSBpbmRlZ3JlZXMgb2YgdGhlIG5vZGVzIHNvbWVvbmUgaXMgY29ubmVjdGVkIHRvLiBJbiBvdGhlciB3b3JkcywgaWYgYSBub2RlIGlzIGNvbm5lY3RlZCB0byBhIG5vZGUgd2l0aCBtb3JlIGluZGVncmVlcyB0aGlzIHdlaWdocyBtb3JlIHRvd2FyZHMgdGhlIGVpZ2VudmVjdG9yIGNlbnRyYWxpdHkgdGhhbiBjb25uZWN0aW9uIHdpdGggbGVzcyBjb25uZWN0ZWQgbm9kZXMuIFJlZ2FyZGluZyB0aGUgZWlnZW52ZWN0b3IgY2VudHJhbGl0eSwgaW4gd2F2ZSAxIHRoZXJlIGlzIG5vIHNpZ25pZmljYW50IGNvcnJlbGF0aW9uICgkXHJobyQgPSAwLDA2OCkuIFRoZXJlIGlzIGEgc2lnbmlmY2FudCBjb3JyZWxhdGlvbiBiZXR3ZWVuIGVpZ2VudmVjdG9yIGNlbnRyYWxpdHkgYW5kIGgtaW5kZXggaW4gd2F2ZSAyLiBIb3dldmVyLCB0aGlzIGNvcnJlbGF0aW9uIGlzICh2ZXJ5KSB3ZWFrICgkXHJobyQgPSAwLDExNikuDQoNCkFsbCBpbiBhbGwsIG9ubHkgZm9yIHdhdmUgMiB0aGVyZSBoYXMgYmVlbiBmb3VuZCBhIHNpZ25pZmljYW50IGNvcnJlbGF0aW9uIGJldHdlZW4gYm90aCBlaWdlbnZlY3RvciBhbmQgZGVncmVlIGNlbnRyYWxpdHkuIEhvd2V2ZXIsIGJlY2F1c2UgdGhpcyBjb3JyZWxhdGlvbiBjYW4gYmUgY29uc2lkZXJlZCAodmVyeSkgd2VhaywgaXQgcHJvdmlkZXMgaW5jb25jbHVzaXZlIGV2aWRlbmNlIHRoYXQgdGhlIGh1YnMgaW4gdGhlIG5ldHdvcmsgYXJlIGNvbmNlbnRyYXRlZCBhcm91bmQgdGhvc2Ugd2l0aCBhIGhpZ2hlciBoLWluZGV4LiBUaHVzLCBoeXBvdGhlc2lzIDIgaGFzIHRvIGJlIHJlamVjdGVkLg0KDQojIyBOZXR3b3JrIHZpc3VhbGlzYXRpb24NCg0KYGBge3IgY2xlYW4gd29ya3NwYWNlIDIsIGluY2x1ZGU9RkFMU0V9DQoNCnJtKGxpc3QgPSBzZXRkaWZmKGxzKCksIGMoImZ1bGxkYXRhIiwgImRmX2VnbyIsICJkZl93b3JrcyIpKSkNCg0KYGBgDQoNCmBgYHtyIGNyZWF0aW5nIG5ldHdvcmsgb2JqZWN0cywgaW5jbHVkZT1GQUxTRX0NCg0KIyB3YXZlIDENCm5ldHdvcmtfdzEgPC0gaWdyYXBoOjpncmFwaF9mcm9tX2FkamFjZW5jeV9tYXRyaXgoDQogIGZ1bGxkYXRhJG5ldHNbMSwsXSwNCiAgbW9kZSA9IGMoImRpcmVjdGVkIiksDQogIHdlaWdodGVkID0gTlVMTCwNCiAgZGlhZyA9IEZBTFNFLA0KICBhZGQuY29sbmFtZXMgPSBOVUxMLA0KICBhZGQucm93bmFtZXMgPSBOVUxMKQ0KDQp3YXZlMSA8LSBzaW1wbGlmeShuZXR3b3JrX3cxKQ0KDQoNCiMgd2F2ZSAyDQpuZXR3b3JrX3cyIDwtIGlncmFwaDo6Z3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KA0KICBmdWxsZGF0YSRuZXRzWzIsLF0sDQogIG1vZGUgPSBjKCJkaXJlY3RlZCIpLA0KICB3ZWlnaHRlZCA9IE5VTEwsDQogIGRpYWcgPSBGQUxTRSwNCiAgYWRkLmNvbG5hbWVzID0gTlVMTCwNCiAgYWRkLnJvd25hbWVzID0gTlVMTCkNCg0Kd2F2ZTIgPC0gc2ltcGxpZnkobmV0d29ya193MikNCg0KYGBgDQoNCmBgYHtyIGluaXRpYWwgcGxvdHMsIHdhcm5pbmc9RkFMU0UsIGZpZy5zaG93PSJob2xkIiwgb3V0LndpZHRoPSI1MCUifQ0KDQpwbG90KHdhdmUxLA0KICAgICB2ZXJ0ZXgubGFiZWwgPSBOQSwNCiAgICAgdmVydGV4LnNpemUgPSA3LA0KICAgICBlZGdlLmN1cnZlZCA9IDAuMiwNCiAgICAgZWRnZS5hcnJvdy5zaXplID0gMC4xLA0KICAgICBtYWluID0gIk5ldHdvcmsgYXQgd2F2ZSAxIikNCg0KcGxvdCh3YXZlMiwNCiAgICAgdmVydGV4LmxhYmVsID0gTkEsDQogICAgIHZlcnRleC5zaXplID0gNywNCiAgICAgZWRnZS5jdXJ2ZWQgPSAwLjIsDQogICAgIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuMSwNCiAgICAgbWFpbiA9ICJOZXR3b3JrIGF0IHdhdmUgMiIpDQoNCmluZGVncl93MSA8LSBkZWdyZWUod2F2ZTEsIG1vZGUgPSAiaW4iKQ0KaW5kZWdyX3cyIDwtIGRlZ3JlZSh3YXZlMiwgbW9kZSA9ICJpbiIpDQoNCmlzb2xhdGVzX3cxIDwtIFYod2F2ZTEpW2RlZ3JlZSh3YXZlMSwgbW9kZSA9ICJhbGwiKSA9PSAwXQ0KDQpub2lzb2xhdGVzX3cxIDwtIGRlbGV0ZV92ZXJ0aWNlcyh3YXZlMSwgaXNvbGF0ZXNfdzEpDQoNCnBsb3Qobm9pc29sYXRlc193MSwNCiAgICAgdmVydGV4LmxhYmVsID0gTkEsDQogICAgIHZlcnRleC5zaXplID0gMTAsDQogICAgIHZlcnRleC5jb2xvciA9ICJibHVlIiwNCiAgICAgdmVydGV4LmZyYW1lLmNvbG9yID0gImJsYWNrIiwNCiAgICAgZWRnZS5jdXJ2ZWQgPSAwLjIsDQogICAgIGVkZ2UuYXJyb3cuc2l6ZSA9IDAuNCwNCiAgICAgZWRnZS5jb2xvciA9ICJncmF5IiwNCiAgICAgZWRnZS53aWR0aCA9IDAuMywNCiAgICAgbWFpbiA9ICJOZXR3b3JrIGF0IHdhdmUgMSB3aXRob3V0IGlzb2xhdGVzIikNCg0KDQppc29sYXRlc193MiA8LSBWKHdhdmUyKVtkZWdyZWUod2F2ZTIsIG1vZGUgPSAiYWxsIikgPT0gMF0NCg0Kbm9pc29sYXRlc193MiA8LSBkZWxldGVfdmVydGljZXMod2F2ZTIsIGlzb2xhdGVzX3cyKQ0KDQpwbG90KG5vaXNvbGF0ZXNfdzEsDQogICAgIHZlcnRleC5sYWJlbCA9IE5BLA0KICAgICB2ZXJ0ZXguc2l6ZSA9IDEwLA0KICAgICB2ZXJ0ZXguY29sb3IgPSAiYmx1ZSIsDQogICAgIHZlcnRleC5mcmFtZS5jb2xvciA9ICJibGFjayIsDQogICAgIGVkZ2UuY3VydmVkID0gMC4yLA0KICAgICBlZGdlLmFycm93LnNpemUgPSAwLjQsDQogICAgIGVkZ2UuY29sb3IgPSAiZ3JheSIsDQogICAgIGVkZ2Uud2lkdGggPSAwLjMsDQogICAgIG1haW4gPSAiTmV0d29yayBhdCB3YXZlIDIgd2l0aG91dCBpc29sYXRlcyIpDQoNCmBgYA0KDQpBYm92ZSwgcGxvdHMgb2YgYm90aCB3YXZlcyBhcmUgcHJlc2VudGVkLCBib3RoIHdpdGggYW5kIHdpdGhvdXQgaXNvbGF0ZXMuIFRoZXNlIHBsb3RzIHNob3cgdGhlIG5ldHdvcmtzIGJlZm9yZSB0YW1wZXJpbmcgd2l0aCBzaGFwZSwgc2l6ZSBhbmQgcG9zaXRpb24gb2YgdGhlIG5vZGVzLiBGdXJ0aGVybW9yZSwgdGhlIHBsb3RzIHNob3cgdGhhdCB0aGUgbnVtYmVyIG9mIGNvLWF1dGhvcnNoaXAgdGllcyBoYXMgaW5jcmVhc2VkIGJldHdlZW4gdGltZXBvaW50IDEgYW5kIHRpbWVwb2ludCAyLg0KDQojIyMgUGxvdHMgYnkgSC1pbmRleCBhbmQgaW5kZWdyZWVzDQoNCmBgYHtyIHByZXR0eSBwbG90IHdhdmUgMSwgd2FybmluZz1GQUxTRX0NCg0KIyMjIHdhdmUgMQ0KDQppbmRlZ3JfdzEgPC0gZGVncmVlKHdhdmUxLCBtb2RlID0gImluIikNCg0KIyBhc3NpZ24gaC1pbmRleCB0byBzY2hvbGFyDQpWKHdhdmUxKSRoX2luZGV4IDwtIGRmX2VnbyRoX2luZGV4DQpWKHdhdmUxKSRpbmRlZ3JlZSA8LSBpbmRlZ3JfdzENCg0KI3JlbW92ZSBpc29sYXRlcw0Kbm9pc29sYXRlc193MSA8LSBkZWxldGUudmVydGljZXMod2F2ZTEsIFYod2F2ZTEpW2RlZ3JlZSh3YXZlMSkgPT0gMF0pDQoNCiNzZXQgc2l6ZSBvZiBwbG90DQpvcHRpb25zKHJlcHIucGxvdC53aWR0aCA9IDIwLCByZXByLnBsb3QuaGVpZ2h0ID0gMjApDQoNCiMgY3JlYXRlIGxheW91dCB3YXZlIDENCmxheW91dDEgPC0gY3JlYXRlX2xheW91dChub2lzb2xhdGVzX3cxLCBsYXlvdXQgPSAiZnIiKQ0KDQojcGxvdCB3YXZlIDENCmdncmFwaChsYXlvdXQxKSArDQogIGdlb21fZWRnZV9saW5rKA0KICAgIGNvbG9yID0gImdyYXkiLCANCiAgICB3aWR0aCA9IDAuNSwgDQogICAgYXJyb3cgPSBhcnJvdyhsZW5ndGggPSB1bml0KDMsICJtbSIpLCB0eXBlID0gImNsb3NlZCIpDQogICkgKw0KICBnZW9tX2VkZ2VfbGluayhjb2xvciA9ICJncmF5Iiwgd2lkdGggPSAwLjUpICsNCiAgZ2VvbV9ub2RlX3BvaW50KGFlcyhzaXplID0gaW5kZWdyZWUsIGNvbG9yID0gaF9pbmRleCkpICsgDQogIHNjYWxlX3NpemUocmFuZ2UgPSBjKDMsIDEwKSkgKyANCiAgc2NhbGVfY29sb3JfZ3JhZGllbnQobG93ID0gImxpZ2h0Ymx1ZSIsIGhpZ2ggPSAiYmx1ZSIpICsgDQogIHRoZW1lX3ZvaWQoKSArDQogIGxhYnModGl0bGUgPSAiTmV0d29yayB3YXZlIDE6IG5vIGlzb2xhdGVzLCBub2RlIHNpemUgYmFzZWQgb24gaW5kZWdyZWVzICYgY29sb3VyIGJhc2VkIG9uIEgtaW5kZXgiKQ0KDQpsYXlvdXRfcG9zaXRpb24gPC0gbGF5b3V0MVssIGMoIngiLCAieSIsICJuYW1lIildDQoNCg0KYGBgDQoNCmBgYHtyIHByZXR0eSBwbG90IHdhdmUgMn0NCg0KIyMjIHdhdmUgMg0KDQppbmRlZ3JfdzIgPC0gZGVncmVlKHdhdmUyLCBtb2RlID0gImluIikNCg0KIyBhc3NpZ24gaC1pbmRleCB0byBzY2hvbGFyDQpWKHdhdmUyKSRoX2luZGV4IDwtIGRmX2VnbyRoX2luZGV4DQpWKHdhdmUyKSRpbmRlZ3JlZSA8LSBpbmRlZ3JfdzINCg0KI3JlbW92ZSBpc29sYXRlcw0Kbm9pc29sYXRlc193MiA8LSBkZWxldGUudmVydGljZXMod2F2ZTIsIFYod2F2ZTIpW2RlZ3JlZSh3YXZlMikgPT0gMF0pDQoNCiNzZXQgc2l6ZSBvZiBwbG90DQpvcHRpb25zKHJlcHIucGxvdC53aWR0aCA9IDIwLCByZXByLnBsb3QuaGVpZ2h0ID0gMjApDQoNCiNsYXlvdXQgd2F2ZSAyDQpsYXlvdXQyIDwtIGxheW91dF9wb3NpdGlvbg0KDQojcGxvdCB3YXZlIDINCmdncmFwaChub2lzb2xhdGVzX3cyLCBsYXlvdXQgPSAiZnIiKSArDQogIGdlb21fZWRnZV9saW5rKA0KICAgIGNvbG9yID0gImdyYXkiLCANCiAgICB3aWR0aCA9IDAuMywgDQogICAgYXJyb3cgPSBhcnJvdyhsZW5ndGggPSB1bml0KDMsICJtbSIpLCB0eXBlID0gImNsb3NlZCIpDQogICkgKw0KICBnZW9tX2VkZ2VfbGluayhjb2xvciA9ICJncmF5Iiwgd2lkdGggPSAwLjUpICsNCiAgZ2VvbV9ub2RlX3BvaW50KGFlcyhzaXplID0gaW5kZWdyZWUsIGNvbG9yID0gaF9pbmRleCkpICsgDQogIHNjYWxlX3NpemUocmFuZ2UgPSBjKDMsIDEwKSkgKyANCiAgc2NhbGVfY29sb3JfZ3JhZGllbnQobG93ID0gImxpZ2h0Ymx1ZSIsIGhpZ2ggPSAiYmx1ZSIpICsgDQogIHRoZW1lX3ZvaWQoKSArDQogIGxhYnModGl0bGUgPSAiTmV0d29yayB3YXZlIDI6IG5vIGlzb2xhdGVzLCBub2RlIHNpemUgYmFzZWQgb24gaW5kZWdyZWVzICYgY29sb3VyIGJhc2VkIG9uIEgtaW5kZXgiKQ0KDQpgYGANCg0KSW4gdGhlIGdyYXBocyBwcmVzZW50ZWQgYWJvdmUsIHRoZSBub2RlcyB3aXRoIG1vcmUgZGVncmVlcyBhcmUgYmlnZ2VyIGFuZCBhcmUgZGFya2VyIGJsdWUgd2hlbiB0aGV5IGhhdmUgYSBoaWdoZXIgaC1pbmRleC4gSXQgY2FuIGJlIG9ic2VydmVkIHRoYXQgaW5kZWVkIG9ubHkgYSBjb3VwbGUgb2Ygbm9kZXMgaGF2ZSBhIGxvdCBvZiBpbmRlZ3JlZXMsIGNvbXBhcmVkIHRvIG1vc3Qgbm9kZXMgd2hvIG9ubHkgaGF2ZSBhIGZldyBpbmRlZ3JlZXMuIFRoaXMgbWVhbnMgdGhhdCB0aGVyZSBhcmUgb25seSBhIGZldyBub2RlcyB3aG8gYXJlIHBvcHVsYXIgdG8gd29yayB3aXRoIChpLmUuIHRvIGluaXRpYXRlIGEgdGllIHdpdGgpLiBUaGlzIGlzIGVzcGVjaWFsbHkgdmlzaWJsZSBpbiBXYXZlIDIgYXMgYXQgdGhpcyB0aW1lIHBvaW50IG1vcmUgY29sbGFib3JhdG9ycyBhcmUgaW4gdGhlIGRhdGEgc2V0LiBUaGlzIG9ic2VydmF0aW9uIGlzIGluIGxpbmUgd2l0aCB0aGUgZWFybGllciBlc3RhYmxpc2hlZCBzY2FsZS1mcmVlIGNoYXJhY3RlcmlzdGljcyBvZiB0aGlzIG5ldHdvcmsuIEZvciBib3RoIFdhdmUgMSBhbmQgV2F2ZSAyLCBpdCBjYW4gbm90IGJlIG9ic2VydmVkIHRoYXQgdGhvc2Ugbm9kZXMgd2hvIGhhdmUgYSBoaWdoZXIgbnVtYmVyIG9mIGluZGVncmVlcyBhcmUgYWxzbyB0aGUgbm9kZXMgd2hvIGhhdmUgdGhlIGhpZ2hlc3QgaC1pbmRleC4gVGhpcyBvYnNlcnZhdGlvbiBpcyBpbiBsaW5lIHdpdGggb25seSB0aGUgd2VhayBjb3JyZWxhdGlvbiB0aGF0IGhhcyBiZWVuIGZvdW5kIGJldHdlZW4gZGVncmVlIGNlbnRyYWxpdHkgYW5kIGgtaW5kZXguICANCg0KDQojIyBSZWZlcmVuY2Vz</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("4-results-descriptives-final.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

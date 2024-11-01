@@ -361,6 +361,10 @@ div.tocify {
     <li>
       <a href="Week5-firstmodel.html">Week 5 - first model</a>
     </li>
+    <li class="dropdown-header">Week 7 - RI</li>
+    <li>
+      <a href="Week7-RSiena.html"></a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -385,7 +389,6 @@ div.tocify {
     <li>
       <a href="4-results-rsiena-concept.html">Results - RSiena</a>
     </li>
-    <li class="dropdown-header">Conclusion</li>
   </ul>
 </li>
 <li class="dropdown">
@@ -395,7 +398,27 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Introduction</li>
+    <li>
+      <a href="1-introduction-final.html">Introduction</a>
+    </li>
+    <li>
+      <a href="2-theory-final.html">Theory</a>
+    </li>
+    <li>
+      <a href="3-data-final.html">Data</a>
+    </li>
+    <li>
+      <a href="4-results-descriptives-final.html">Results - descriptives</a>
+    </li>
+    <li>
+      <a href="4-results-rsiena-final.html">Results - RSiena</a>
+    </li>
+    <li>
+      <a href="4-results-GOF.html">Results - Goodness of fit</a>
+    </li>
+    <li>
+      <a href="5-conclusion.html">Conclusion</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -572,15 +595,11 @@ igraph::betweenness(g, directed = FALSE)</code></pre>
 ## [33]  76.6904762 160.5515873</code></pre>
 <pre class="r"><code># dyad-census
 igraph::dyad.census(g)</code></pre>
-<pre><code>## Warning: `dyad.census()` was deprecated in
-## igraph 2.0.0.
+<pre><code>## Warning: `dyad.census()` was deprecated in igraph 2.0.0.
 ## ℹ Please use `dyad_census()` instead.
-## This warning is displayed once every 8
-## hours.
-## Call
-## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was
-## generated.</code></pre>
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see
+## where this warning was generated.</code></pre>
 <pre><code>## Warning: `dyad_census()` requires a directed graph.</code></pre>
 <pre><code>## $mut
 ## [1] 78
@@ -592,15 +611,11 @@ igraph::dyad.census(g)</code></pre>
 ## [1] 483</code></pre>
 <pre class="r"><code># triad-census
 igraph::triad.census(g)</code></pre>
-<pre><code>## Warning: `triad.census()` was deprecated in
-## igraph 2.0.0.
+<pre><code>## Warning: `triad.census()` was deprecated in igraph 2.0.0.
 ## ℹ Please use `triad_census()` instead.
-## This warning is displayed once every 8
-## hours.
-## Call
-## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was
-## generated.</code></pre>
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see
+## where this warning was generated.</code></pre>
 <pre><code>## Warning in triad_census(graph = graph): At vendor/cigraph/src/misc/motifs.c:1140 : Triad census
 ## called on an undirected graph. All connections will be treated as mutual.</code></pre>
 <pre><code>##  [1] 3971    0 1575    0    0    0    0    0    0    0  393    0    0    0    0   45</code></pre>
@@ -2184,16 +2199,11 @@ plot.igraph(G_w, mode = &quot;undirected&quot;, layout = owncoords, rescale = F,
 # red if between parties
 
 edges &lt;- get.adjacency(G_w)</code></pre>
-<pre><code>## Warning: `get.adjacency()` was deprecated in
-## igraph 2.0.0.
-## ℹ Please use `as_adjacency_matrix()`
-##   instead.
-## This warning is displayed once every 8
-## hours.
-## Call
-## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was
-## generated.</code></pre>
+<pre><code>## Warning: `get.adjacency()` was deprecated in igraph 2.0.0.
+## ℹ Please use `as_adjacency_matrix()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see
+## where this warning was generated.</code></pre>
 <pre class="r"><code>edges_mat &lt;- matrix(as.numeric(edges), nrow = nrow(edges))
 # edges_mat
 
@@ -2358,16 +2368,11 @@ net1_un &lt;- (net1_mat + t(net1_mat)) &gt; 0
 net1_un &lt;- graph_from_adjacency_matrix(net1_un, mode = &quot;undirected&quot;)
 
 net_sel &lt;- induced.subgraph(net1_un, vids = (in_network$vcol == &quot;#56B4E9&quot;))</code></pre>
-<pre><code>## Warning: `induced.subgraph()` was deprecated in
-## igraph 2.0.0.
-## ℹ Please use `induced_subgraph()`
-##   instead.
-## This warning is displayed once every 8
-## hours.
-## Call
-## `lifecycle::last_lifecycle_warnings()`
-## to see where this warning was
-## generated.</code></pre>
+<pre><code>## Warning: `induced.subgraph()` was deprecated in igraph 2.0.0.
+## ℹ Please use `induced_subgraph()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see
+## where this warning was generated.</code></pre>
 <pre class="r"><code>plot(net_sel)</code></pre>
 <p><img src="NetworkVisualisation_files/figure-html/only%20soc%20RU-1.png" width="672" /></p>
 <pre class="r"><code>clp &lt;- cluster_optimal(net_sel)

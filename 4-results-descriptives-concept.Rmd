@@ -148,7 +148,6 @@ igraph::edge_density(network_w1)
 
 The networks consist of 234 scholars. In wave 1 there are 145 edges, consisting of 19 reciprocated ties and 107 asymmetric ties. The edge density is 0,003, indicating that the total number of edges can be interpreted as relatively low compared to the total possible number of edges. Looking at the triadic relations, there is only one complete triad. A triad with no relations between each other (003) appears the most in this network.
 
-
 ### Wave 2
 
 ```{r descriptive stats wave 2}
@@ -168,7 +167,7 @@ igraph::edge_density(network_w2)
 
 ```
 
-In wave 2 there are 258, which is a relatively steep increase compared to wave 1. The network consists of 30 reciprocated ties and 198 assymetric ties. The edge density is 0,005 and is only slightly higher than in wave 1, thus meaning that the number of edges is low compared to all posible edges within the network. Furthermore, inspecting the triadic relations, the number of complete triads increased from 1 to 2. The 003 triad (no relations between the three nodes) still occurs the most. 
+In wave 2 there are 258, which is a relatively steep increase compared to wave 1. The network consists of 30 reciprocated ties and 198 assymetric ties. The edge density is 0,005 and is only slightly higher than in wave 1, thus meaning that the number of edges is low compared to all posible edges within the network. Furthermore, inspecting the triadic relations, the number of complete triads increased from 1 to 2. The 003 triad (no relations between the three nodes) still occurs the most.
 
 ### Transitivity
 
@@ -389,7 +388,6 @@ ggplot(clean_data, aes(x = Indegree, y = Frequency)) +
 
 
 ```
-
 
 ## Network visualisation
 

@@ -25,6 +25,8 @@ navbar:
         href: Week4Visual.html
       - text: "Week 5 - first model"
         href: Week5-firstmodel.html
+      - text: "Week 7 - RI"
+      - href: Week7-RSiena.html
     - text: "Project - Concept"
       menu:
       - text: "Introduction"
@@ -37,12 +39,22 @@ navbar:
         href: 4-results-descriptives-concept.html 
       - text: "Results - RSiena"
         href: 4-results-rsiena-concept.html 
-      - text: "Conclusion"
-        href:  
     - text: "Project - Final"
       menu: 
       - text: "Introduction"
-        href: 
+        href: 1-introduction-final.html
+      - text: "Theory"
+        href: 2-theory-final.html
+      - text: "Data"
+        href: 3-data-final.html
+      - text: "Results - descriptives"
+        href: 4-results-descriptives-final.html 
+      - text: "Results - RSiena"
+        href: 4-results-rsiena-final.html 
+      - text: "Results - Goodness of fit"
+        href: 4-results-GOF.html  
+      - text: "Conclusion"
+        href: 5-conclusion.html
         
         # here, other .Rmds can be added
 

@@ -38,8 +38,6 @@ rm(list = ls())
 ```
 
 ```{r load functions, include=FALSE}
-rm(list = ls())
-
 
 fpackage.check <- function(packages) {
     lapply(packages, FUN = function(x) {
@@ -131,7 +129,7 @@ career_age <- as.numeric(df_ego$career_age)
 career_age <- coCovar(career_age)
 
 
-h_index <- as.numeric(df_ego$h_index)
+h_index <- as.numeric(df_ego$h_index_cat)
 h_index <- coCovar(h_index)
 
 data_siena <- sienaDataCreate(net, career_age, h_index)
@@ -152,7 +150,9 @@ print01Report(data_siena, modelname = "./results/first_model")
 
 ```
 
+
 ## Model 1
+
 ```{r specify model1 only networkstructures, include=FALSE}
 
 myeff1 <- getEffects(data_siena)
@@ -163,6 +163,8 @@ myeff1 <- includeEffects(myeff1, outAct) # control for more active nodes outdegr
 myeff1 <- includeEffects(myeff1, inAct) # control for behaviour of nodes with more indegrees
 myeff1 <- includeEffects(myeff1, transTrip) # controls for triadic relationships
 myeff1 <- includeEffects(myeff1, recip) # control for reciprocity
+
+
 
 ```
 
@@ -175,8 +177,9 @@ ansM1
 
 ```
 
+
 ## Model 2
-```{r specify model2 with ego effects, include=FALSE}
+```{r specify model2 only networkstructures, include=FALSE}
 
 myeff2 <- getEffects(data_siena)
 
@@ -189,11 +192,8 @@ myeff2 <- includeEffects(myeff2, recip) # control for reciprocity
 
 
 myeff2 <- includeEffects(myeff2, altX, interaction1 = "h_index") # absolute difference to h_index
-myeff2 <- includeEffects(myeff2, egoX, interaction1 = "career_age") # ego's are more likely receive ties from younger scholars
-myeff2 <- includeEffects(myeff2, altX, interaction1 = "career_age") # ego's are more likely to send ties to older scholars
 
 ```
-
 
 ```{r estimate model2, echo=FALSE}
 
@@ -206,7 +206,33 @@ ansM2
 
 
 
-```{r} 
+## Model 3
+```{r specify model3 with ego effects, include=FALSE}
+
+myeff3 <- getEffects(data_siena)
+
+myeff3 <- includeEffects(myeff3, isolateNet) # to control for isolates
+myeff3 <- includeEffects(myeff3, inPop) # nodes are attracted to nodes with more indegrees
+myeff3 <- includeEffects(myeff3, outAct) # control for more active nodes outdegrees                      
+myeff3 <- includeEffects(myeff3, inAct) # control for behaviour of nodes with more indegrees
+myeff3 <- includeEffects(myeff3, transTrip) # controls for triadic relationships
+myeff3 <- includeEffects(myeff3, recip) # control for reciprocity
+
+
+myeff3 <- includeEffects(myeff3, altX, interaction1 = "h_index") # absolute difference to h_index
+myeff3 <- includeEffects(myeff3, egoX, interaction1 = "career_age") # ego's are more likely receive ties from younger scholars
+myeff3 <- includeEffects(myeff3, altX, interaction1 = "career_age") # ego's are more likely to send ties to older scholars
 
 ```
+
+
+```{r estimate model3, echo=FALSE}
+
+myAlgorithm3 <- sienaAlgorithmCreate(projname = "third_model")
+ansM3 <- siena07(myAlgorithm3, data = data_siena, effects = myeff3, returnDeps = TRUE)
+
+ansM3
+
+```
+
 

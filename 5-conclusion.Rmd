@@ -1,0 +1,45 @@
+---
+title: "Conclusion"
+author: "Koen Lucas"
+date: "`r Sys.Date()`"
+output: html_document
+bibliography: references.bib
+---
+
+```{=html}
+<style>
+body {
+text-align: justify}
+</style>
+```
+```{r, globalsettings, echo=FALSE, warning=FALSE, results='hide'}
+
+library(knitr)
+library(formatR)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=FALSE, class.source=c("test"), class.output=c("test2"))
+options(width = 100)
+rgl::setupKnitr()
+
+
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+```
+
+```{r klippy, echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+```
+
+# Conclusion
+
+The aim of this study was to investigate the "Matthew effect" in the co-publication networks of Dutch sociology departments. In doing so, this paper first tried to establish whether or not these networks exhibit scale-free characteristics, and subsequently investigated whether the hubs related to this were concentrated around those scholars with higher prestige (i.e. h-index). Furthermore, to get a clear picture of the "Matthew effect" in these networks, this study used RSiena models to investigate whether initiating co-publications are contingent by alters' h-index and indegrees. The hypotheses were tested using webscraped data from OpenAlex on scholars of Dutch sociology departments (Utrecht University, Radboud University, Groningen University, University of Amsterdam), including publication networks at two time points; 2015 to 2019, and 2020 to 2024.
+
+First, it was tested whether the network has scale-free characteristics. To consider a network scale-free, the network has to be dominated by only a few nodes with a lot of indegrees creating hubs, while most nodes only have a few indegrees [@kim2019]. Using the `poweRlaw` package in R, this study established the network at time point 2 can indeed be considered a scale-free network. However, as I was unable to test the significance of the calculated scaling-parameter, these results should be taken with some consideration. Especially since some authors dispute the existence of scale-free networks in reality [@fox2005; @broido2019]. Future research could look into the reality of these scale-free aspects in collaboration networks more in-depth. Second, it was expected that the hubs in the network were concentrated or dominated by those who have the highest prestige (i.e. h-index), as these scholars would be the most favourable to collaborate with. However, no relationship was found between the centrality of nodes and their h-index.
+
+Third, investigating how the networks evolved over time, it was hypothesised that scholars follow a principle of preferential attachment in which they are more likely to create ties with nodes who have more indegrees [@hancean2016; @kim2019]. This study found that indeed scholars prefer to inniate ties with alters who have more indegrees. It was furthermore found that this mechanism is one of the strongest predictors for sending ties in the estimated models. Last, it was similarly hypothesised that scholars prefer to send ties to those with the highest h-index, as these scholars would be more visible and thus more favourable collaboration partners [@merton1968]. While this study ultimately did find this relationship, it was a relatively weak mechanism driving the change in the networks.
+
+This study is also not without its limitations. First of all, the data used in this study might have distorted the results. Especially the many isolates in the network at time point 1 influenced the density of the network. These isolates did not necessarily represent the reality of the network, as most of these scholars were not active scholars at the time. These scholars are likely PhD researchers in wave 2, but are by default included at time point 1. Furthermore, as the data have been webscraped using the database OpenAlex, not all information on scholars is correct. I have tried to circumvent problems that arose from this issue as much as possible. For instance, the construction of career age was adjusted to prevent anomalies in this variable. Nevertheless, it should be taken into account that, for example, the h-index of scholars in this data set can deviate from the real h-index, possibly distorting the results of this study. Future research can enhance the validity of this data by finding a way to more accurately assess the h-index of scholars.
+
+In conclusion, this study provides new insights in the phenomenon that has been called the "Matthew effect" in science [@merton1968]. It was found that collaboration networks of Dutch sociology departments likely exhibit scale-free network characteristics, but these hubs are not concentrated around those with a high h-index. Furthermore, especially scholars prefer to send ties to those who have a lot of indegrees, while the preference to send ties to those with a higher h-index is only moderate.
+
+## References

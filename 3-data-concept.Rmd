@@ -45,7 +45,6 @@ Another way in which the prestige of scholars is measured is through the h-index
 
 The author's career age has been calculated by determining the first year author's have published. Again, due to anomalies in the OpenAlex database some very unlikely outliers presented themselves in the data. To counter this, the first publication of an author was omitted in the calculation of career age and than a mean score of all publication years was calculated. The first publication year was than determined by looking at the minimum year within the range of the mean score - 25 years. This way the first publication years are not necessary correctly estimated, however these differences are small enough that they will likely not impact the results. Ultimately, the career age has been calculated by subtracting the first publication year from 2024. This way the higher the career age, the longer a scholar is publishing.
 
-
 ## descriptives
 
 ```{r clean workspace, include = FALSE}
@@ -91,7 +90,6 @@ fshowdf <- function(x, ...) {
 
 ```
 
-
 ```{r load packages, include=FALSE}
 
 packages <- c("tidyverse", 
@@ -103,7 +101,6 @@ packages <- c("tidyverse",
 fpackage.check(packages)
 ```
 
-
 ```{r load data, include=FALSE}
 
 fulldata <- fload("./Data/full_data.Rdata")
@@ -114,7 +111,6 @@ df_works <- fload("./Data/df_works.Rdata")
 
 ```
 
-
 ```{r}
 
 summary(df_ego$h_index)
@@ -122,4 +118,3 @@ summary(df_ego$h_index)
 summary(df_ego$career_age)
 
 ```
-
